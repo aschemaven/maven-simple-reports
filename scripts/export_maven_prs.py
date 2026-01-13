@@ -178,13 +178,24 @@ def get_build_status(pr):
 
     # Check for combined status across all contexts
     for context in rollup:
-        context_state = context.get('state', context.get('conclusion', 'UNKNOWN'))
+        # GitHub API returns different structures:
+        # - CheckRun: status (COMPLETED, IN_PROGRESS, etc.) + conclusion (SUCCESS, FAILURE, etc.)
+        # - StatusContext: state (SUCCESS, FAILURE, PENDING, etc.)
+        # We need to check conclusion when status is COMPLETED
+        status = context.get('state', context.get('status', ''))
+        conclusion = context.get('conclusion', '')
 
-        if context_state in ['FAILURE', 'FAILED', 'ERROR']:
+        # For completed checks, use conclusion to determine actual result
+        if status and status.upper() == 'COMPLETED':
+            context_state = conclusion.upper() if conclusion else 'UNKNOWN'
+        else:
+            context_state = (status or conclusion or 'UNKNOWN').upper()
+
+        if context_state in ['FAILURE', 'FAILED', 'ERROR', 'CANCELLED', 'TIMED_OUT', 'STARTUP_FAILURE']:
             has_failure = True
         elif context_state in ['PENDING', 'IN_PROGRESS', 'WAITING', 'QUEUED']:
             has_pending = True
-        elif context_state in ['SUCCESS', 'SUCCESSFUL', 'COMPLETED']:
+        elif context_state in ['SUCCESS', 'SUCCESSFUL']:
             has_success = True
 
     # Determine overall state (failure takes precedence, then pending, then success)
