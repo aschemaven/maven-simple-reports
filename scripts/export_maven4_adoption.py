@@ -1,0 +1,579 @@
+#!/usr/bin/env python3
+#
+# Copyright 2025 The Apache Software Foundation
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+"""
+Export Maven 4 adoption data from GitHub repositories (excluding known Maven components).
+
+Searches all of GitHub for Maven 4 usage, including Apache projects that are not
+Maven components themselves. Known Maven component repos (from .gh-configuration.yaml)
+are excluded.
+
+Detects three signals:
+- POM model version 4.1.0
+- Maven 4 wrapper (distributionUrl referencing apache-maven-4)
+- GitHub Actions installing/using Maven 4
+"""
+import subprocess
+import json
+import csv
+import sys
+import argparse
+import re
+import time
+from datetime import datetime
+from pathlib import Path
+
+# Path to the YAML config listing known Maven component repos
+YAML_PATH = Path(__file__).resolve().parent.parent / '.gh-configuration.yaml'
+
+# Rate limit: GitHub code search allows 10 requests/minute
+CODE_SEARCH_DELAY = 7  # seconds between code search API calls
+
+# Versions that do not exist (yet) and should be flagged
+SUSPECT_VERSIONS = {'4.0.0'}
+WARN_ICON = '\u26a0\ufe0f'  # warning sign emoji
+
+
+def load_maven_repos(yaml_path=YAML_PATH):
+    """Load the list of known Maven component repo names from .gh-configuration.yaml."""
+    if not yaml_path.exists():
+        print(f"Warning: {yaml_path} not found, no exclusions applied.", file=sys.stderr)
+        return set()
+
+    repos = set()
+    with open(yaml_path, 'r', encoding='utf-8') as f:
+        for line in f:
+            line = line.strip()
+            if line.startswith('- '):
+                repo_name = line[2:].strip()
+                if repo_name and not repo_name.startswith('#'):
+                    repos.add(repo_name)
+    return repos
+
+
+def gh_api_call(endpoint, params=None, method='GET'):
+    """Call GitHub API via gh CLI with error handling and rate limit awareness."""
+    cmd = ['gh', 'api', endpoint, '--method', method]
+    if params:
+        for key, value in params.items():
+            cmd.extend(['-f', f'{key}={value}'])
+
+    try:
+        result = subprocess.run(cmd, capture_output=True, text=True, check=True)
+        return json.loads(result.stdout)
+    except subprocess.CalledProcessError as e:
+        stderr = e.stderr or ''
+        if '403' in stderr or '429' in stderr or 'rate limit' in stderr.lower():
+            print(f"  Rate limited on {endpoint}, waiting 60s...", file=sys.stderr)
+            time.sleep(60)
+            # Retry once
+            try:
+                result = subprocess.run(cmd, capture_output=True, text=True, check=True)
+                return json.loads(result.stdout)
+            except subprocess.CalledProcessError:
+                return None
+        if '422' in stderr:
+            # Validation error (e.g., search query issues)
+            print(f"  API validation error on {endpoint}: {stderr.strip()}", file=sys.stderr)
+            return None
+        print(f"  API error on {endpoint}: {stderr.strip()}", file=sys.stderr)
+        return None
+    except json.JSONDecodeError:
+        return None
+
+
+def code_search(query, signal_name):
+    """Run a GitHub code search with pagination. Returns list of (repo_full_name, file_path) tuples."""
+    results = []
+    page = 1
+    total_count = None
+
+    while True:
+        print(f"  Searching '{signal_name}' page {page}...", file=sys.stderr)
+        data = gh_api_call('search/code', {
+            'q': query,
+            'per_page': '100',
+            'page': str(page),
+        })
+
+        if not data or 'items' not in data:
+            break
+
+        if total_count is None:
+            total_count = data.get('total_count', 0)
+            print(f"  Total matches: {total_count}", file=sys.stderr)
+
+        for item in data['items']:
+            repo_name = item.get('repository', {}).get('full_name', '')
+            file_path = item.get('path', '')
+            results.append((repo_name, file_path))
+
+        # Check if there are more pages
+        if len(data['items']) < 100:
+            break
+
+        page += 1
+        # Rate limit: max 10 code search requests per minute
+        time.sleep(CODE_SEARCH_DELAY)
+
+    return results
+
+
+def search_pom_410():
+    """Search for POM model version 4.1.0 across all of GitHub."""
+    return code_search(
+        '"maven.apache.org/POM/4.1.0" filename:pom.xml',
+        'POM 4.1.0'
+    )
+
+
+def search_maven4_wrapper():
+    """Search for Maven 4 wrapper properties across all of GitHub."""
+    return code_search(
+        'filename:maven-wrapper.properties "apache-maven-4"',
+        'Maven 4 Wrapper'
+    )
+
+
+def search_maven4_gh_actions():
+    """Search for Maven 4 references in GitHub Actions workflows across all of GitHub."""
+    return code_search(
+        'path:.github/workflows "apache-maven-4"',
+        'GH Actions Maven 4'
+    )
+
+
+def flag_version(version):
+    """Add a warning icon to suspect/non-existent versions."""
+    if version in SUSPECT_VERSIONS:
+        return f'{version} {WARN_ICON}'
+    return version
+
+
+def flag_version_string(version_string):
+    """Flag suspect versions in a comma-separated version string."""
+    if not version_string:
+        return version_string
+    parts = [flag_version(v.strip()) for v in version_string.split(', ')]
+    return ', '.join(parts)
+
+
+def fetch_file_content(owner, repo, file_path):
+    """Fetch and decode a file from a GitHub repository."""
+    import base64
+    data = gh_api_call(f'repos/{owner}/{repo}/contents/{file_path}')
+    if not data or 'content' not in data:
+        return None
+    try:
+        return base64.b64decode(data['content']).decode('utf-8')
+    except Exception:
+        return None
+
+
+def extract_maven4_version(content):
+    """Extract Maven 4 version string from file content."""
+    # Match apache-maven-4.x.x[-suffix] and clean up
+    match = re.search(r'apache-maven-(4[\w.\-]+)', content)
+    if match:
+        version = match.group(1)
+        # Strip -bin.zip, -bin.tar.gz, -bin suffixes (common in distribution URLs)
+        version = re.sub(r'-bin(\.zip|\.tar\.gz)?$', '', version)
+        # Strip trailing .zip or .tar.gz
+        version = re.sub(r'\.(zip|tar\.gz)$', '', version)
+        return version
+    return None
+
+
+def extract_version_from_wrapper(owner, repo):
+    """Fetch maven-wrapper.properties and extract Maven 4 version."""
+    content = fetch_file_content(
+        owner, repo, '.mvn/wrapper/maven-wrapper.properties'
+    )
+    if not content:
+        return None
+    return extract_maven4_version(content)
+
+
+def extract_version_from_workflow(owner, repo, file_path):
+    """Fetch a workflow file and extract Maven 4 version."""
+    content = fetch_file_content(owner, repo, file_path)
+    if not content:
+        return None
+    return extract_maven4_version(content)
+
+
+def extract_version_from_pom(owner, repo, file_path):
+    """Fetch a pom.xml and extract Maven 4 version from parent or properties."""
+    content = fetch_file_content(owner, repo, file_path)
+    if not content:
+        return None
+    # The POM 4.1.0 namespace itself doesn't carry a Maven version,
+    # but we can confirm it uses model 4.1.0
+    if 'maven.apache.org/POM/4.1.0' in content:
+        return '4.1.0 (POM model)'
+    return None
+
+
+def enrich_repo(owner, repo):
+    """Fetch repository metadata."""
+    data = gh_api_call(f'repos/{owner}/{repo}')
+    if not data:
+        return {}
+    return {
+        'stars': data.get('stargazers_count', 0),
+        'description': data.get('description', '') or '',
+        'language': data.get('language', '') or '',
+        'default_branch': data.get('default_branch', 'main'),
+        'updated_at': data.get('updated_at', '')[:10],
+        'fork': data.get('fork', False),
+        'archived': data.get('archived', False),
+        'topics': data.get('topics', []),
+    }
+
+
+def get_last_workflow_run(owner, repo):
+    """Get the conclusion of the last workflow run."""
+    data = gh_api_call(f'repos/{owner}/{repo}/actions/runs', {
+        'per_page': '1',
+    })
+    if not data or 'workflow_runs' not in data or not data['workflow_runs']:
+        return 'UNKNOWN', ''
+
+    run = data['workflow_runs'][0]
+    conclusion = (run.get('conclusion') or run.get('status') or 'UNKNOWN').upper()
+    run_url = run.get('html_url', '')
+    return conclusion, run_url
+
+
+def check_maven4_branches(owner, repo):
+    """Check for branches with Maven 4-related names."""
+    # Fetch branches (limited to 100 - sufficient for pattern matching)
+    data = gh_api_call(f'repos/{owner}/{repo}/branches', {'per_page': '100'})
+    if not data or not isinstance(data, list):
+        return []
+
+    maven4_patterns = re.compile(r'maven[-_]?4|m4|mvn4', re.IGNORECASE)
+    maven4_branches = []
+    for branch in data:
+        name = branch.get('name', '')
+        if maven4_patterns.search(name):
+            maven4_branches.append(name)
+    return maven4_branches
+
+
+def collect_adoption_data(exclude_forks=False):
+    """Run all searches, deduplicate, enrich, and return adoption data."""
+    maven_repos = load_maven_repos()
+    print(f"Loaded {len(maven_repos)} Maven component repos to exclude.", file=sys.stderr)
+
+    # Run the three code searches
+    print("\nSearching for Maven 4 adoption signals...", file=sys.stderr)
+
+    pom_results = search_pom_410()
+    time.sleep(CODE_SEARCH_DELAY)
+
+    wrapper_results = search_maven4_wrapper()
+    time.sleep(CODE_SEARCH_DELAY)
+
+    actions_results = search_maven4_gh_actions()
+
+    # Aggregate by repo, tracking which signals were found and which files
+    repos = {}  # key: full_name, value: dict with signals and file paths
+
+    for full_name, file_path in pom_results:
+        if full_name not in repos:
+            repos[full_name] = {'signals': set(), 'files': {}}
+        repos[full_name]['signals'].add('POM 4.1.0')
+        repos[full_name]['files']['pom'] = file_path
+
+    for full_name, file_path in wrapper_results:
+        if full_name not in repos:
+            repos[full_name] = {'signals': set(), 'files': {}}
+        repos[full_name]['signals'].add('Wrapper')
+        repos[full_name]['files']['wrapper'] = file_path
+
+    for full_name, file_path in actions_results:
+        if full_name not in repos:
+            repos[full_name] = {'signals': set(), 'files': {}}
+        repos[full_name]['signals'].add('GH Action')
+        repos[full_name]['files']['action'] = file_path
+
+    print(f"\nFound {len(repos)} unique repos before filtering.", file=sys.stderr)
+
+    # Filter out known Maven component repos (apache/<name> where <name> is in the list)
+    filtered = {}
+    excluded_count = 0
+    for full_name, data in repos.items():
+        parts = full_name.split('/')
+        if len(parts) != 2:
+            continue
+        owner, repo_name = parts
+
+        # Exclude known Maven component repos from the apache org
+        if owner == 'apache' and repo_name in maven_repos:
+            excluded_count += 1
+            continue
+
+        filtered[full_name] = data
+
+    print(f"Excluded {excluded_count} Maven component repos.", file=sys.stderr)
+    print(f"Remaining: {len(filtered)} repos to enrich.\n", file=sys.stderr)
+
+    # Enrich each repo with metadata
+    results = []
+    for full_name, data in sorted(filtered.items()):
+        owner, repo_name = full_name.split('/')
+        print(f"  Enriching {full_name}...", file=sys.stderr)
+
+        meta = enrich_repo(owner, repo_name)
+
+        # Skip archived repos
+        if meta.get('archived', False):
+            print(f"    Skipping (archived)", file=sys.stderr)
+            continue
+
+        # Skip forks if requested
+        if exclude_forks and meta.get('fork', False):
+            print(f"    Skipping (fork)", file=sys.stderr)
+            continue
+
+        # Extract Maven 4 version from all available signals
+        versions = []
+        if 'wrapper' in data['files']:
+            v = extract_version_from_wrapper(owner, repo_name)
+            if v:
+                versions.append(v)
+        if 'action' in data['files']:
+            v = extract_version_from_workflow(
+                owner, repo_name, data['files']['action']
+            )
+            if v and v not in versions:
+                versions.append(v)
+        if 'pom' in data['files']:
+            v = extract_version_from_pom(
+                owner, repo_name, data['files']['pom']
+            )
+            if v and v not in versions:
+                versions.append(v)
+        version = ', '.join(versions) if versions else ''
+
+        # Get last workflow run
+        build_status, build_url = get_last_workflow_run(owner, repo_name)
+
+        # Check for Maven 4 branches
+        maven4_branches = check_maven4_branches(owner, repo_name)
+
+        branch_info = meta.get('default_branch', 'main')
+        if maven4_branches:
+            branch_info += f" + {', '.join(maven4_branches)}"
+
+        results.append({
+            'repository': full_name,
+            'description': meta.get('description', ''),
+            'stars': meta.get('stars', 0),
+            'signals': ', '.join(sorted(data['signals'])),
+            'maven4_version': version or '',
+            'branch': branch_info,
+            'build_status': build_status,
+            'build_url': build_url,
+            'language': meta.get('language', ''),
+            'updated': meta.get('updated_at', ''),
+            'url': f'https://github.com/{full_name}',
+            'fork': meta.get('fork', False),
+        })
+
+    # Sort by stars descending
+    results.sort(key=lambda x: x['stars'], reverse=True)
+
+    return results
+
+
+def export_to_csv(results, filename):
+    """Export results to CSV."""
+    with open(filename, 'w', newline='', encoding='utf-8') as f:
+        writer = csv.writer(f)
+        writer.writerow([
+            'Repository', 'Description', 'Stars', 'Maven 4 Signals',
+            'Maven 4 Version', 'Branch', 'Last Build', 'Build URL',
+            'Language', 'Updated', 'URL', 'Fork'
+        ])
+        for r in results:
+            writer.writerow([
+                r['repository'], r['description'], r['stars'],
+                r['signals'], r['maven4_version'], r['branch'],
+                r['build_status'], r['build_url'], r['language'],
+                r['updated'], r['url'], 'Yes' if r['fork'] else 'No'
+            ])
+    return filename
+
+
+def export_to_asciidoc(results, filename):
+    """Export results to AsciiDoc report."""
+    now = datetime.now().strftime('%a %b %d %H:%M:%S %Z %Y')
+
+    # Compute summary stats
+    total = len(results)
+    signal_counts = {}
+    version_counts = {}
+    for r in results:
+        for s in r['signals'].split(', '):
+            signal_counts[s] = signal_counts.get(s, 0) + 1
+        v = r.get('maven4_version', '')
+        if v:
+            # A repo may list multiple versions; count each
+            for ver in v.split(', '):
+                ver = ver.strip()
+                if ver:
+                    version_counts[ver] = version_counts.get(ver, 0) + 1
+
+    with open(filename, 'w', encoding='utf-8') as f:
+        f.write('= Maven 4 Adoption Report\n\n')
+        f.write(f'Generated: {now}\n\n')
+        f.write('Projects across GitHub using Maven 4 features.\n')
+        f.write('Known Maven component repositories are excluded.\n\n')
+
+        f.write('== Summary\n\n')
+        f.write(f'Total projects with Maven 4 signals: *{total}*\n\n')
+
+        if signal_counts:
+            f.write('[cols="2,1", options="header"]\n')
+            f.write('|===\n')
+            f.write('| Signal | Count\n\n')
+            for signal, count in sorted(signal_counts.items()):
+                f.write(f'| {signal}\n')
+                f.write(f'| {count}\n\n')
+            f.write('|===\n\n')
+
+        if version_counts:
+            has_suspect = any(v in SUSPECT_VERSIONS for v in version_counts)
+            f.write('=== Maven 4 Versions\n\n')
+            f.write('[cols="2,1", options="header"]\n')
+            f.write('|===\n')
+            f.write('| Version | Count\n\n')
+            for ver, count in sorted(version_counts.items(),
+                                     key=lambda x: x[1], reverse=True):
+                f.write(f'| {flag_version(ver)}\n')
+                f.write(f'| {count}\n\n')
+            f.write('|===\n\n')
+            if has_suspect:
+                f.write(f'{WARN_ICON} Version does not exist (yet).\n')
+                f.write('The wrapper configuration is likely misconfigured.\n\n')
+
+        f.write('== Adoption Details\n\n')
+        f.write('Sorted by star count (descending).\n\n')
+
+        f.write('[cols="3,1,2,2,1,2,1", options="header"]\n')
+        f.write('|===\n')
+        f.write('| Repository | Stars | Signals | Maven 4 Version | Branch | Last Build | Language\n\n')
+
+        for r in results:
+            repo_link = f'https://github.com/{r["repository"]}[{r["repository"]}]'
+            build_text = r['build_status']
+            if r['build_url']:
+                build_text = f'{r["build_url"]}[{r["build_status"]}]'
+            # Flag suspect versions and escape pipe characters
+            version = flag_version_string(r['maven4_version'])
+            version = version.replace('|', '{vbar}')
+            branch = r['branch'].replace('|', '{vbar}')
+
+            f.write(f'| {repo_link}\n')
+            f.write(f'| {r["stars"]}\n')
+            f.write(f'| {r["signals"]}\n')
+            f.write(f'| {version}\n')
+            f.write(f'| {branch}\n')
+            f.write(f'| {build_text}\n')
+            f.write(f'| {r["language"]}\n\n')
+
+        f.write('|===\n')
+
+    return filename
+
+
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser(
+        description='Export Maven 4 adoption data from GitHub (excluding Maven components)'
+    )
+    parser.add_argument(
+        '--format',
+        choices=['csv', 'asciidoc'],
+        default='csv',
+        help='Output format (default: csv)'
+    )
+    parser.add_argument(
+        '--output', '-o',
+        help='Output file path'
+    )
+    parser.add_argument(
+        '--exclude-forks',
+        action='store_true',
+        help='Exclude forked repositories from results'
+    )
+
+    args = parser.parse_args()
+
+    # Determine output filename
+    if args.output:
+        output_file = args.output
+    else:
+        ext = 'adoc' if args.format == 'asciidoc' else 'csv'
+        output_file = f'public/maven4-adoption.{ext}'
+
+    print("Collecting Maven 4 adoption data from GitHub...\n",
+          file=sys.stderr)
+    results = collect_adoption_data(exclude_forks=args.exclude_forks)
+
+    print(f"\n{'=' * 60}", file=sys.stderr)
+    print(f"Total repos found: {len(results)}", file=sys.stderr)
+    print(f"{'=' * 60}\n", file=sys.stderr)
+
+    if args.format == 'asciidoc':
+        filename = export_to_asciidoc(results, output_file)
+        print(f"Exported AsciiDoc to: {filename}", file=sys.stderr)
+    else:
+        filename = export_to_csv(results, output_file)
+        print(f"Exported CSV to: {filename}", file=sys.stderr)
+
+    # Print summary
+    if results:
+        print("\nBy signal:", file=sys.stderr)
+        signal_counts = {}
+        for r in results:
+            for s in r['signals'].split(', '):
+                signal_counts[s] = signal_counts.get(s, 0) + 1
+        for signal, count in sorted(signal_counts.items(),
+                                    key=lambda x: x[1], reverse=True):
+            print(f"  {signal}: {count}", file=sys.stderr)
+
+        print("\nBy Maven 4 version:", file=sys.stderr)
+        version_counts = {}
+        for r in results:
+            v = r.get('maven4_version', '')
+            if v:
+                for ver in v.split(', '):
+                    ver = ver.strip()
+                    if ver:
+                        version_counts[ver] = version_counts.get(ver, 0) + 1
+        if version_counts:
+            for ver, count in sorted(version_counts.items(),
+                                     key=lambda x: x[1], reverse=True):
+                print(f"  {ver}: {count}", file=sys.stderr)
+        else:
+            print("  (no versions detected)", file=sys.stderr)
+
+        print("\nTop repos by stars:", file=sys.stderr)
+        for r in results[:10]:
+            print(f"  {r['repository']} ({r['stars']} stars) - {r['signals']}",
+                  file=sys.stderr)
