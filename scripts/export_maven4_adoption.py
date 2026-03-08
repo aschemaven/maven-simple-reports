@@ -101,6 +101,97 @@ def save_cache():
     _cache_dirty = False
 
 
+def _strip_response(key, data):
+    """Strip API response to only the fields we use, to minimize cache size."""
+    if data is None:
+        return data
+
+    if 'search/code' in key:
+        # Keep total_count and only full_name + path from items
+        if isinstance(data, dict) and 'items' in data:
+            return {
+                'total_count': data.get('total_count', 0),
+                'incomplete_results': data.get('incomplete_results', False),
+                'items': [
+                    {
+                        'repository': {'full_name': item.get('repository', {}).get('full_name', '')},
+                        'path': item.get('path', ''),
+                    }
+                    for item in data.get('items', [])
+                ],
+            }
+
+    if '/contents/' in key:
+        # Keep only content and encoding (for base64 decode)
+        if isinstance(data, dict) and 'content' in data:
+            return {'content': data['content'], 'encoding': data.get('encoding', 'base64')}
+        # File existence check — just preserve non-None
+        return {}
+
+    if '/actions/runs' in key:
+        # Keep only first run's conclusion, status, html_url
+        if isinstance(data, dict) and 'workflow_runs' in data:
+            runs = data.get('workflow_runs', [])
+            return {
+                'total_count': data.get('total_count', 0),
+                'workflow_runs': [
+                    {
+                        'conclusion': r.get('conclusion'),
+                        'status': r.get('status'),
+                        'html_url': r.get('html_url', ''),
+                    }
+                    for r in runs[:1]
+                ],
+            }
+
+    if '/commits' in key and '__headers__' not in key:
+        # Keep only first commit's date
+        if isinstance(data, list) and data:
+            date = data[0].get('commit', {}).get('committer', {}).get('date', '')
+            return [{'commit': {'committer': {'date': date}}}]
+
+    if '/branches' in key and '__headers__' not in key:
+        # Keep only branch names
+        if isinstance(data, list):
+            return [{'name': b.get('name', '')} for b in data]
+
+    # Repo metadata — keep only fields we use
+    if isinstance(data, dict) and 'stargazers_count' in data:
+        return {
+            'stargazers_count': data.get('stargazers_count', 0),
+            'description': data.get('description', ''),
+            'language': data.get('language', ''),
+            'default_branch': data.get('default_branch', 'main'),
+            'updated_at': data.get('updated_at', ''),
+            'fork': data.get('fork', False),
+            'archived': data.get('archived', False),
+            'topics': data.get('topics', []),
+        }
+
+    return data
+
+
+def _strip_header_response(key, cached_data):
+    """Strip header+body responses to only what we need."""
+    if cached_data is None:
+        return cached_data
+    headers = cached_data.get('headers', '')
+    body = cached_data.get('body')
+    # Only keep Link header lines (for pagination count)
+    stripped_headers = '\n'.join(
+        line for line in headers.split('\n')
+        if line.lower().startswith('link:')
+    )
+    # For branches body, keep only names; for commits body, discard
+    stripped_body = None
+    if isinstance(body, list):
+        if '/branches' in key:
+            stripped_body = [{'name': b.get('name', '')} for b in body]
+        else:
+            stripped_body = []
+    return {'headers': stripped_headers, 'body': stripped_body}
+
+
 def cache_get(key):
     """Get a value from cache if it exists and is not expired."""
     if not _cache_enabled or key not in _cache:
@@ -113,11 +204,15 @@ def cache_get(key):
 
 
 def cache_put(key, data):
-    """Store a value in the cache."""
+    """Store a stripped-down value in the cache."""
     global _cache_dirty
     if not _cache_enabled:
         return
-    _cache[key] = {'data': data, 'ts': time.time()}
+    if '__headers__' in key:
+        stripped = _strip_header_response(key, data)
+    else:
+        stripped = _strip_response(key, data)
+    _cache[key] = {'data': stripped, 'ts': time.time()}
     _cache_dirty = True
 
 
@@ -159,6 +254,9 @@ def _gh_api_call_raw(endpoint, params=None, method='GET'):
                 return json.loads(result.stdout)
             except subprocess.CalledProcessError:
                 return None
+        if '404' in stderr:
+            # Not found — expected for file existence checks
+            return None
         if '422' in stderr:
             # Validation error (e.g., search query issues)
             print(f"  API validation error on {endpoint}: {stderr.strip()}", file=sys.stderr)
