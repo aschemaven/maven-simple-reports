@@ -45,6 +45,9 @@ CODE_SEARCH_DELAY = 7  # seconds between code search API calls
 # Versions that do not exist (yet) and should be flagged
 SUSPECT_VERSIONS = {'4.0.0'}
 WARN_ICON = '\u26a0\ufe0f'  # warning sign emoji
+STOP_ICON = '\U0001f6d1'   # stop sign (red octagon)
+CHECK_ICON = '\u2705'       # green check mark
+CROSS_ICON = '\u274c'       # red cross mark
 
 
 def load_maven_repos(yaml_path=YAML_PATH):
@@ -154,6 +157,28 @@ def search_maven4_gh_actions():
         'path:.github/workflows "apache-maven-4"',
         'GH Actions Maven 4'
     )
+
+
+def version_sort_key(version):
+    """Sort key for Maven versions: highest/most stable first.
+
+    Order: GA (4.0.0) > RC > beta > alpha, higher numbers first.
+    """
+    # Qualifier ranking: higher = more stable
+    qualifier_rank = {'': 100, 'rc': 3, 'beta': 2, 'alpha': 1}
+
+    match = re.match(r'([\d.]+)(?:-(alpha|beta|rc)-?(\d+))?', version)
+    if not match:
+        return (0, 0, 0, 0)
+
+    base = match.group(1)
+    qualifier = match.group(2) or ''
+    qualifier_num = int(match.group(3)) if match.group(3) else 0
+
+    # Parse base version parts as integers
+    base_parts = tuple(int(p) for p in base.split('.'))
+
+    return (base_parts, qualifier_rank.get(qualifier, 0), qualifier_num)
 
 
 def flag_version(version):
@@ -274,6 +299,103 @@ def check_maven4_branches(owner, repo):
     return maven4_branches
 
 
+def check_file_exists(owner, repo, file_path):
+    """Check if a file exists in a repository (HEAD request via contents API)."""
+    data = gh_api_call(f'repos/{owner}/{repo}/contents/{file_path}')
+    return data is not None
+
+
+def run_plausibility_checks(owner, repo, signals, files):
+    """Run plausibility checks and return list of warnings."""
+    warnings = []
+
+    # If wrapper signal: check that mvnw script exists relative to wrapper location
+    if 'Wrapper' in signals and 'wrapper' in files:
+        wrapper_path = files['wrapper']
+        # Derive project root from wrapper path:
+        # e.g. ".mvn/wrapper/maven-wrapper.properties" -> ""
+        # e.g. "subdir/.mvn/wrapper/maven-wrapper.properties" -> "subdir/"
+        # e.g. "a/b/.mvn/wrapper/maven-wrapper.properties" -> "a/b/"
+        mvn_dir_suffix = '.mvn/wrapper/maven-wrapper.properties'
+        if wrapper_path.endswith(mvn_dir_suffix):
+            project_root = wrapper_path[:-len(mvn_dir_suffix)]
+        else:
+            project_root = ''
+        mvnw_path = f'{project_root}mvnw' if project_root else 'mvnw'
+        has_mvnw = check_file_exists(owner, repo, mvnw_path)
+        if not has_mvnw:
+            warnings.append('wrapper.properties without mvnw script')
+
+    return warnings
+
+
+def get_repo_activity(owner, repo):
+    """Get repository activity stats: latest commit date, commit count, branch count."""
+    activity = {
+        'last_commit': '',
+        'commit_count': 0,
+        'branch_count': 0,
+    }
+
+    # Get latest commit on default branch
+    commits = gh_api_call(f'repos/{owner}/{repo}/commits', {'per_page': '1'})
+    if commits and isinstance(commits, list) and len(commits) > 0:
+        commit_date = commits[0].get('commit', {}).get('committer', {}).get('date', '')
+        if commit_date:
+            activity['last_commit'] = commit_date[:10]
+
+    # Get total commit count via the contributors stats (approximation via repo API)
+    # The repo API doesn't directly give commit count, but we can use the
+    # commits endpoint with per_page=1 and parse the Link header for the last page.
+    # Instead, use the simpler approach: fetch repo stats
+    cmd = [
+        'gh', 'api', f'repos/{owner}/{repo}/commits',
+        '--method', 'GET', '-f', 'per_page=1',
+        '--include'
+    ]
+    try:
+        result = subprocess.run(cmd, capture_output=True, text=True, check=True)
+        # Parse Link header for last page number to get total commits
+        for line in result.stdout.split('\n'):
+            if line.lower().startswith('link:'):
+                match = re.search(r'page=(\d+)>;\s*rel="last"', line)
+                if match:
+                    activity['commit_count'] = int(match.group(1))
+                break
+    except subprocess.CalledProcessError:
+        pass
+
+    # Get branch count from the branches we already fetch for maven4 branch check
+    # Use a lightweight call
+    cmd = [
+        'gh', 'api', f'repos/{owner}/{repo}/branches',
+        '--method', 'GET', '-f', 'per_page=1',
+        '--include'
+    ]
+    try:
+        result = subprocess.run(cmd, capture_output=True, text=True, check=True)
+        for line in result.stdout.split('\n'):
+            if line.lower().startswith('link:'):
+                match = re.search(r'page=(\d+)>;\s*rel="last"', line)
+                if match:
+                    activity['branch_count'] = int(match.group(1))
+                break
+        else:
+            # No Link header means single page — count items in body
+            # Extract JSON body (after headers)
+            body_start = result.stdout.find('[')
+            if body_start >= 0:
+                try:
+                    branches = json.loads(result.stdout[body_start:])
+                    activity['branch_count'] = len(branches)
+                except json.JSONDecodeError:
+                    pass
+    except subprocess.CalledProcessError:
+        pass
+
+    return activity
+
+
 def collect_adoption_data(exclude_forks=False):
     """Run all searches, deduplicate, enrich, and return adoption data."""
     maven_repos = load_maven_repos()
@@ -380,6 +502,14 @@ def collect_adoption_data(exclude_forks=False):
         if maven4_branches:
             branch_info += f" + {', '.join(maven4_branches)}"
 
+        # Run plausibility checks
+        warnings = run_plausibility_checks(
+            owner, repo_name, data['signals'], data['files']
+        )
+
+        # Get repository activity stats
+        activity = get_repo_activity(owner, repo_name)
+
         results.append({
             'repository': full_name,
             'description': meta.get('description', ''),
@@ -393,6 +523,10 @@ def collect_adoption_data(exclude_forks=False):
             'updated': meta.get('updated_at', ''),
             'url': f'https://github.com/{full_name}',
             'fork': meta.get('fork', False),
+            'warnings': warnings,
+            'last_commit': activity['last_commit'],
+            'commit_count': activity['commit_count'],
+            'branch_count': activity['branch_count'],
         })
 
     # Sort by stars descending
@@ -408,14 +542,17 @@ def export_to_csv(results, filename):
         writer.writerow([
             'Repository', 'Description', 'Stars', 'Maven 4 Signals',
             'Maven 4 Version', 'Branch', 'Last Build', 'Build URL',
-            'Language', 'Updated', 'URL', 'Fork'
+            'Language', 'Updated', 'Last Commit', 'Commits', 'Branches',
+            'Warnings', 'URL', 'Fork'
         ])
         for r in results:
             writer.writerow([
                 r['repository'], r['description'], r['stars'],
                 r['signals'], r['maven4_version'], r['branch'],
                 r['build_status'], r['build_url'], r['language'],
-                r['updated'], r['url'], 'Yes' if r['fork'] else 'No'
+                r['updated'], r['last_commit'], r['commit_count'],
+                r['branch_count'], '; '.join(r['warnings']),
+                r['url'], 'Yes' if r['fork'] else 'No'
             ])
     return filename
 
@@ -440,7 +577,8 @@ def export_to_asciidoc(results, filename):
                     version_counts[ver] = version_counts.get(ver, 0) + 1
 
     with open(filename, 'w', encoding='utf-8') as f:
-        f.write('= Maven 4 Adoption Report\n\n')
+        f.write('= Maven 4 Adoption Report\n')
+        f.write(':toc: left\n\n')
         f.write(f'Generated: {now}\n\n')
         f.write('Projects across GitHub using Maven 4 features.\n')
         f.write('Known Maven component repositories are excluded.\n\n')
@@ -457,14 +595,18 @@ def export_to_asciidoc(results, filename):
                 f.write(f'| {count}\n\n')
             f.write('|===\n\n')
 
-        if version_counts:
-            has_suspect = any(v in SUSPECT_VERSIONS for v in version_counts)
-            f.write('=== Maven 4 Versions\n\n')
+        # Filter out POM model version (XML schema, not a Maven version)
+        maven_versions = {k: v for k, v in version_counts.items()
+                          if '(POM model)' not in k}
+        if maven_versions:
+            has_suspect = any(v in SUSPECT_VERSIONS for v in maven_versions)
+            f.write('.Maven 4 Versions\n')
             f.write('[cols="2,1", options="header"]\n')
             f.write('|===\n')
             f.write('| Version | Count\n\n')
-            for ver, count in sorted(version_counts.items(),
-                                     key=lambda x: x[1], reverse=True):
+            for ver, count in sorted(maven_versions.items(),
+                                     key=lambda x: version_sort_key(x[0]),
+                                     reverse=True):
                 f.write(f'| {flag_version(ver)}\n')
                 f.write(f'| {count}\n\n')
             f.write('|===\n\n')
@@ -474,26 +616,44 @@ def export_to_asciidoc(results, filename):
 
         f.write('== Adoption Details\n\n')
         f.write('Sorted by star count (descending).\n\n')
+        f.write(f'{STOP_ICON} = plausibility issue (e.g., wrapper.properties without mvnw script) +\n')
+        f.write(f'{WARN_ICON} = suspect version (does not exist yet)\n\n')
 
-        f.write('[cols="3,1,2,2,1,2,1", options="header"]\n')
+        f.write('[cols="3,1,2,2,1,1,1,1,2,1", options="header"]\n')
         f.write('|===\n')
-        f.write('| Repository | Stars | Signals | Maven 4 Version | Branch | Last Build | Language\n\n')
+        f.write('| Repository | Stars | Signals | Maven 4 Version | Branch ')
+        f.write('| Last Commit | Commits | Branches | Last Build | Language\n\n')
 
         for r in results:
-            repo_link = f'https://github.com/{r["repository"]}[{r["repository"]}]'
+            repo_link = f'https://github.com/{r["repository"]}[{r["repository"]}^]'
             build_text = r['build_status']
             if r['build_url']:
-                build_text = f'{r["build_url"]}[{r["build_status"]}]'
+                build_text = f'{r["build_url"]}[{r["build_status"]}^]'
             # Flag suspect versions and escape pipe characters
             version = flag_version_string(r['maven4_version'])
             version = version.replace('|', '{vbar}')
             branch = r['branch'].replace('|', '{vbar}')
+            # Add icons to repo name for easy scanning
+            has_suspect_version = any(
+                v.strip() in SUSPECT_VERSIONS
+                for v in r['maven4_version'].split(', ') if v.strip()
+            )
+            repo_display = repo_link
+            if r['warnings']:
+                repo_display = f'{STOP_ICON} {repo_link}'
+            elif has_suspect_version:
+                repo_display = f'{WARN_ICON} {repo_link}'
+            commit_count = str(r['commit_count']) if r['commit_count'] else ''
+            branch_count = str(r['branch_count']) if r['branch_count'] else ''
 
-            f.write(f'| {repo_link}\n')
+            f.write(f'| {repo_display}\n')
             f.write(f'| {r["stars"]}\n')
             f.write(f'| {r["signals"]}\n')
             f.write(f'| {version}\n')
             f.write(f'| {branch}\n')
+            f.write(f'| {r["last_commit"]}\n')
+            f.write(f'| {commit_count}\n')
+            f.write(f'| {branch_count}\n')
             f.write(f'| {build_text}\n')
             f.write(f'| {r["language"]}\n\n')
 
