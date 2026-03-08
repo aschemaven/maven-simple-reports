@@ -279,6 +279,11 @@ def gh_api_call(endpoint, params=None, method='GET'):
 
     data = _gh_api_call_raw(endpoint, params, method)
     if data is not None:
+        # Don't cache empty code search results — GitHub code search
+        # can intermittently return 0 items for valid queries
+        if 'search/code' in endpoint and isinstance(data, dict):
+            if not data.get('items'):
+                return data
         cache_put(key, data)
     return data
 
