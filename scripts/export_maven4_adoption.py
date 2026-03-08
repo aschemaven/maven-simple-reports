@@ -39,6 +39,12 @@ from pathlib import Path
 # Path to the YAML config listing known Maven component repos
 YAML_PATH = Path(__file__).resolve().parent.parent / '.gh-configuration.yaml'
 
+# Default cache file location (committed to repo for reuse across CI runs)
+CACHE_PATH = Path(__file__).resolve().parent.parent / 'cache' / 'gh_api_cache.json'
+
+# Cache TTL in seconds (24 hours)
+CACHE_TTL = 86400
+
 # Rate limit: GitHub code search allows 10 requests/minute
 CODE_SEARCH_DELAY = 7  # seconds between code search API calls
 
@@ -48,6 +54,71 @@ WARN_ICON = '\u26a0\ufe0f'  # warning sign emoji
 STOP_ICON = '\U0001f6d1'   # stop sign (red octagon)
 CHECK_ICON = '\u2705'       # green check mark
 CROSS_ICON = '\u274c'       # red cross mark
+
+
+# Global cache state
+_cache = {}
+_cache_enabled = True
+_cache_path = CACHE_PATH
+_cache_dirty = False
+
+
+def _cache_key(endpoint, params=None):
+    """Create a deterministic cache key from endpoint and params."""
+    key = endpoint
+    if params:
+        sorted_params = '&'.join(f'{k}={v}' for k, v in sorted(params.items()))
+        key = f'{endpoint}?{sorted_params}'
+    return key
+
+
+def load_cache():
+    """Load cache from disk."""
+    global _cache
+    if not _cache_enabled:
+        return
+    if _cache_path.exists():
+        try:
+            with open(_cache_path, 'r', encoding='utf-8') as f:
+                _cache = json.load(f)
+            print(f"Loaded {len(_cache)} cached API responses.", file=sys.stderr)
+        except (json.JSONDecodeError, OSError) as e:
+            print(f"Warning: could not load cache: {e}", file=sys.stderr)
+            _cache = {}
+    else:
+        _cache = {}
+
+
+def save_cache():
+    """Save cache to disk (only if modified)."""
+    global _cache_dirty
+    if not _cache_enabled or not _cache_dirty:
+        return
+    _cache_path.parent.mkdir(parents=True, exist_ok=True)
+    with open(_cache_path, 'w', encoding='utf-8') as f:
+        json.dump(_cache, f, separators=(',', ':'))
+    print(f"Saved {len(_cache)} cached API responses.", file=sys.stderr)
+    _cache_dirty = False
+
+
+def cache_get(key):
+    """Get a value from cache if it exists and is not expired."""
+    if not _cache_enabled or key not in _cache:
+        return None
+    entry = _cache[key]
+    age = time.time() - entry.get('ts', 0)
+    if age > CACHE_TTL:
+        return None
+    return entry.get('data')
+
+
+def cache_put(key, data):
+    """Store a value in the cache."""
+    global _cache_dirty
+    if not _cache_enabled:
+        return
+    _cache[key] = {'data': data, 'ts': time.time()}
+    _cache_dirty = True
 
 
 def load_maven_repos(yaml_path=YAML_PATH):
@@ -67,8 +138,8 @@ def load_maven_repos(yaml_path=YAML_PATH):
     return repos
 
 
-def gh_api_call(endpoint, params=None, method='GET'):
-    """Call GitHub API via gh CLI with error handling and rate limit awareness."""
+def _gh_api_call_raw(endpoint, params=None, method='GET'):
+    """Call GitHub API via gh CLI (no caching). Returns parsed JSON or None."""
     cmd = ['gh', 'api', endpoint, '--method', method]
     if params:
         for key, value in params.items():
@@ -96,6 +167,19 @@ def gh_api_call(endpoint, params=None, method='GET'):
         return None
     except json.JSONDecodeError:
         return None
+
+
+def gh_api_call(endpoint, params=None, method='GET'):
+    """Call GitHub API with caching support."""
+    key = _cache_key(endpoint, params)
+    cached = cache_get(key)
+    if cached is not None:
+        return cached
+
+    data = _gh_api_call_raw(endpoint, params, method)
+    if data is not None:
+        cache_put(key, data)
+    return data
 
 
 def code_search(query, signal_name):
@@ -329,6 +413,39 @@ def run_plausibility_checks(owner, repo, signals, files):
     return warnings
 
 
+def _gh_api_call_with_headers(endpoint, params=None):
+    """Call GitHub API with --include to get headers. Returns (headers_str, body_json).
+    Results are cached."""
+    key = _cache_key(f'__headers__{endpoint}', params)
+    cached = cache_get(key)
+    if cached is not None:
+        return cached.get('headers', ''), cached.get('body')
+
+    cmd = ['gh', 'api', endpoint, '--method', 'GET', '--include']
+    if params:
+        for k, v in params.items():
+            cmd.extend(['-f', f'{k}={v}'])
+
+    try:
+        result = subprocess.run(cmd, capture_output=True, text=True, check=True)
+        # Split headers from body
+        output = result.stdout
+        body_start = output.find('[')
+        if body_start < 0:
+            body_start = output.find('{')
+        headers = output[:body_start] if body_start >= 0 else output
+        body = None
+        if body_start >= 0:
+            try:
+                body = json.loads(output[body_start:])
+            except json.JSONDecodeError:
+                pass
+        cache_put(key, {'headers': headers, 'body': body})
+        return headers, body
+    except subprocess.CalledProcessError:
+        return '', None
+
+
 def get_repo_activity(owner, repo):
     """Get repository activity stats: latest commit date, commit count, branch count."""
     activity = {
@@ -344,54 +461,31 @@ def get_repo_activity(owner, repo):
         if commit_date:
             activity['last_commit'] = commit_date[:10]
 
-    # Get total commit count via the contributors stats (approximation via repo API)
-    # The repo API doesn't directly give commit count, but we can use the
-    # commits endpoint with per_page=1 and parse the Link header for the last page.
-    # Instead, use the simpler approach: fetch repo stats
-    cmd = [
-        'gh', 'api', f'repos/{owner}/{repo}/commits',
-        '--method', 'GET', '-f', 'per_page=1',
-        '--include'
-    ]
-    try:
-        result = subprocess.run(cmd, capture_output=True, text=True, check=True)
-        # Parse Link header for last page number to get total commits
-        for line in result.stdout.split('\n'):
-            if line.lower().startswith('link:'):
-                match = re.search(r'page=(\d+)>;\s*rel="last"', line)
-                if match:
-                    activity['commit_count'] = int(match.group(1))
-                break
-    except subprocess.CalledProcessError:
-        pass
+    # Get total commit count via Link header pagination
+    headers, _ = _gh_api_call_with_headers(
+        f'repos/{owner}/{repo}/commits', {'per_page': '1'}
+    )
+    for line in headers.split('\n'):
+        if line.lower().startswith('link:'):
+            match = re.search(r'page=(\d+)>;\s*rel="last"', line)
+            if match:
+                activity['commit_count'] = int(match.group(1))
+            break
 
-    # Get branch count from the branches we already fetch for maven4 branch check
-    # Use a lightweight call
-    cmd = [
-        'gh', 'api', f'repos/{owner}/{repo}/branches',
-        '--method', 'GET', '-f', 'per_page=1',
-        '--include'
-    ]
-    try:
-        result = subprocess.run(cmd, capture_output=True, text=True, check=True)
-        for line in result.stdout.split('\n'):
-            if line.lower().startswith('link:'):
-                match = re.search(r'page=(\d+)>;\s*rel="last"', line)
-                if match:
-                    activity['branch_count'] = int(match.group(1))
-                break
-        else:
-            # No Link header means single page — count items in body
-            # Extract JSON body (after headers)
-            body_start = result.stdout.find('[')
-            if body_start >= 0:
-                try:
-                    branches = json.loads(result.stdout[body_start:])
-                    activity['branch_count'] = len(branches)
-                except json.JSONDecodeError:
-                    pass
-    except subprocess.CalledProcessError:
-        pass
+    # Get branch count via Link header pagination
+    headers, body = _gh_api_call_with_headers(
+        f'repos/{owner}/{repo}/branches', {'per_page': '1'}
+    )
+    found_link = False
+    for line in headers.split('\n'):
+        if line.lower().startswith('link:'):
+            match = re.search(r'page=(\d+)>;\s*rel="last"', line)
+            if match:
+                activity['branch_count'] = int(match.group(1))
+            found_link = True
+            break
+    if not found_link and body and isinstance(body, list):
+        activity['branch_count'] = len(body)
 
     return activity
 
@@ -405,12 +499,21 @@ def collect_adoption_data(exclude_forks=False):
     print("\nSearching for Maven 4 adoption signals...", file=sys.stderr)
 
     pom_results = search_pom_410()
+    if not pom_results:
+        print("  WARNING: POM 4.1.0 search returned no results (rate limit?)",
+              file=sys.stderr)
     time.sleep(CODE_SEARCH_DELAY)
 
     wrapper_results = search_maven4_wrapper()
+    if not wrapper_results:
+        print("  WARNING: Wrapper search returned no results (rate limit?)",
+              file=sys.stderr)
     time.sleep(CODE_SEARCH_DELAY)
 
     actions_results = search_maven4_gh_actions()
+    if not actions_results:
+        print("  WARNING: GH Actions search returned no results (rate limit?)",
+              file=sys.stderr)
 
     # Aggregate by repo, tracking which signals were found and which files
     repos = {}  # key: full_name, value: dict with signals and file paths
@@ -681,8 +784,26 @@ if __name__ == '__main__':
         action='store_true',
         help='Exclude forked repositories from results'
     )
+    parser.add_argument(
+        '--no-cache',
+        action='store_true',
+        help='Disable API response caching (fresh data from GitHub)'
+    )
+    parser.add_argument(
+        '--cache-file',
+        help=f'Cache file path (default: {CACHE_PATH})'
+    )
 
     args = parser.parse_args()
+
+    # Configure caching
+    if args.no_cache:
+        _cache_enabled = False
+        print("Caching disabled.", file=sys.stderr)
+    else:
+        if args.cache_file:
+            _cache_path = Path(args.cache_file)
+        load_cache()
 
     # Determine output filename
     if args.output:
@@ -737,3 +858,6 @@ if __name__ == '__main__':
         for r in results[:10]:
             print(f"  {r['repository']} ({r['stars']} stars) - {r['signals']}",
                   file=sys.stderr)
+
+    # Save cache for next run
+    save_cache()
