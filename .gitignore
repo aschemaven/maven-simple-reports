@@ -6,6 +6,7 @@ public/*.html
 public/*.csv
 public/dependabot-prs/
 cache/
+data/
 .claude/
 
 # Local Netlify folder

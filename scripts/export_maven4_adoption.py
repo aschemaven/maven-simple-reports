@@ -39,8 +39,11 @@ from pathlib import Path
 # Path to the YAML config listing known Maven component repos
 YAML_PATH = Path(__file__).resolve().parent.parent / '.gh-configuration.yaml'
 
-# Default cache file location (committed to repo for reuse across CI runs)
+# Default cache file location (stored via actions/cache in CI)
 CACHE_PATH = Path(__file__).resolve().parent.parent / 'cache' / 'gh_api_cache.json'
+
+# Time series history file (committed to repo)
+HISTORY_PATH = Path(__file__).resolve().parent.parent / 'data' / 'maven4-adoption-history.json'
 
 # Cache TTL in seconds (24 hours)
 CACHE_TTL = 86400
@@ -863,6 +866,53 @@ def export_to_asciidoc(results, filename):
     return filename
 
 
+def append_history(results, history_path=HISTORY_PATH):
+    """Append a timestamped summary snapshot to the adoption history file."""
+    today = datetime.now().strftime('%Y-%m-%d')
+
+    # Compute signal and version counts
+    signal_counts = {}
+    version_counts = {}
+    for r in results:
+        for s in r['signals'].split(', '):
+            signal_counts[s] = signal_counts.get(s, 0) + 1
+        v = r.get('maven4_version', '')
+        if v:
+            for ver in v.split(', '):
+                ver = ver.strip()
+                if ver:
+                    version_counts[ver] = version_counts.get(ver, 0) + 1
+
+    entry = {
+        'date': today,
+        'total': len(results),
+        'signals': signal_counts,
+        'versions': version_counts,
+    }
+
+    # Load existing history
+    history = []
+    if history_path.exists():
+        try:
+            with open(history_path, 'r', encoding='utf-8') as f:
+                history = json.load(f)
+        except (json.JSONDecodeError, OSError):
+            history = []
+
+    # Replace entry for today if it already exists (idempotent re-runs)
+    history = [h for h in history if h.get('date') != today]
+    history.append(entry)
+    history.sort(key=lambda h: h['date'])
+
+    # Write back
+    history_path.parent.mkdir(parents=True, exist_ok=True)
+    with open(history_path, 'w', encoding='utf-8') as f:
+        json.dump(history, f, indent=2)
+
+    print(f"Updated adoption history ({len(history)} entries) in {history_path}",
+          file=sys.stderr)
+
+
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(
         description='Export Maven 4 adoption data from GitHub (excluding Maven components)'
@@ -956,6 +1006,10 @@ if __name__ == '__main__':
         for r in results[:10]:
             print(f"  {r['repository']} ({r['stars']} stars) - {r['signals']}",
                   file=sys.stderr)
+
+    # Append to time series history
+    if results:
+        append_history(results)
 
     # Save cache for next run
     save_cache()
