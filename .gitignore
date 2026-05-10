@@ -4,4 +4,5 @@
 public/*.adoc
 public/*.html
 public/*.csv
+public/dependabot-prs/
 .claude/

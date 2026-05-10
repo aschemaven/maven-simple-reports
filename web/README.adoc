@@ -1,0 +1,118 @@
+//
+// Copyright 2026 The Apache Software Foundation
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+//
+
+= Maven Dependabot Dashboard (SPA)
+
+A statically-hosted single-page app that calls the GitHub REST API directly from the browser to show all open Dependabot PRs across the Apache Maven repositories, including build status.
+
+It replaces the previously cron-generated `dependabot-prs.html` page.
+
+== Status
+
+MVP (public mode only).
+The app runs without authentication, fetching public PR and check-run data anonymously.
+Authenticated mode (GitHub App + PKCE) is not implemented yet — see _Roadmap_ below.
+
+== Architecture
+
+* *Static SPA* built with Vite + React + TypeScript, deployed to GitHub Pages under `dependabot-prs/`.
+* *Direct REST calls* to `api.github.com` — no backend, no proxy.
+* *ETag / If-None-Match* caching per URL, persisted in `localStorage`.
+Unchanged responses come back as 304 and reuse the cached body.
+* *Serial request scheduling* (one in-flight request at a time) to stay within GitHub's secondary rate-limit guidance.
+* *Backoff on 403/429* using `x-ratelimit-reset` or `Retry-After`.
+* *Polling*: ~30 minutes between full refresh cycles, with an inter-request gap to spread the load.
+
+== Rate limits (important)
+
+GitHub's unauthenticated REST API limit is 60 requests per hour per IP, *shared* across all visitors going through the same egress IP.
+The dashboard touches roughly _N_repos + N_dependabot_PRs_ endpoints per cycle, so the unauthenticated quota will be exhausted on the first refresh.
+That is acceptable for MVP because:
+
+* The first cycle populates the cache; subsequent cycles will mostly receive 304s once authenticated mode is added.
+* Each repo's last successful result is persisted in `localStorage`, so reloads paint immediately from cache.
+* The UI surfaces the current quota and pause state so users can see when refresh is throttled.
+
+A future authenticated mode (per the Perplexity sketch in `../SPEC-*` if added) will lift this to ~5 000/h per token.
+
+== Local development
+
+[source,bash]
+----
+cd web
+npm install
+npm run dev          # http://localhost:5173/maven-simple-reports/dependabot-prs/
+----
+
+== Production build
+
+[source,bash]
+----
+npm run build        # outputs to web/dist/
+npm run typecheck    # tsc -b --noEmit
+----
+
+The repo's top-level `scripts/generate_report.sh` runs `npm ci && npm run build` and copies `web/dist/` into `public/dependabot-prs/` so the existing GitHub Pages / Netlify deploy step picks it up.
+
+== Layout
+
+[source]
+----
+web/
+├── index.html
+├── package.json
+├── tsconfig*.json
+├── vite.config.ts
+└── src/
+    ├── main.tsx
+    ├── App.tsx              # cycle orchestration, top-level UI
+    ├── styles.css
+    ├── components/          # presentational
+    │   ├── PrTable.tsx
+    │   ├── StatusBadge.tsx
+    │   └── RateLimitInfo.tsx
+    └── lib/
+        ├── repos.ts         # the apache/maven-* list
+        ├── types.ts
+        ├── cache.ts         # localStorage wrapper
+        ├── githubFetch.ts   # serial queue, ETag, backoff, rate-limit pub/sub
+        ├── buildStatus.ts   # check-runs → BuildState
+        └── dependabot.ts    # per-repo: list PRs, fetch checks
+----
+
+== Configuration
+
+The base path is set in `vite.config.ts` and can be overridden via the `PUBLIC_BASE` env var at build time:
+
+[source,bash]
+----
+PUBLIC_BASE=/ npm run build       # for local preview at /
+----
+
+== Known limitations
+
+* Public mode only.
+The unauthenticated 60/h limit is shared per IP and will be exhausted quickly under multi-visitor load.
+* Build status uses the *check-runs* endpoint only.
+Legacy commit statuses (separate API) are not consulted, which may show `UNKNOWN` for repos that still publish via the older Status API.
+* Merge-conflict detection is not implemented (would require an extra `GET /pulls/{n}` call per PR).
+* No service worker / push notifications.
+
+== Roadmap (not in MVP)
+
+* GitHub App + Authorization Code + PKCE flow with a small token-exchange edge function (per the original Perplexity sketch).
+* Authenticated polling at higher frequency (~3 minutes) and richer data (private repos, conflict status).
+* Hybrid mode: anonymous = sparse cache, authenticated = fresher view.

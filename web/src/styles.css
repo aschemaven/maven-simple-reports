@@ -1,0 +1,149 @@
+:root {
+  --fg: #1f2328;
+  --bg: #ffffff;
+  --muted: #57606a;
+  --border: #d0d7de;
+  --row-alt: #f6f8fa;
+  --warn-bg: #fff8c5;
+  --warn-fg: #7d4e00;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --fg: #e6edf3;
+    --bg: #0d1117;
+    --muted: #8b949e;
+    --border: #30363d;
+    --row-alt: #161b22;
+    --warn-bg: #3a2d04;
+    --warn-fg: #f3e9b3;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family:
+    -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  color: var(--fg);
+  background: var(--bg);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+a {
+  color: inherit;
+}
+
+.app {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 24px 16px 64px;
+}
+
+header h1 {
+  margin: 0 0 4px;
+  font-size: 24px;
+}
+
+.subtitle {
+  margin: 0 0 12px;
+  color: var(--muted);
+}
+
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  padding: 8px 12px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  margin-bottom: 16px;
+  font-size: 13px;
+}
+
+.meta-sep {
+  color: var(--muted);
+}
+
+.muted {
+  color: var(--muted);
+}
+
+.warn {
+  background: var(--warn-bg);
+  color: var(--warn-fg);
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.cycle.warn {
+  font-weight: 600;
+}
+
+code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.9em;
+  padding: 1px 4px;
+  background: var(--row-alt);
+  border-radius: 3px;
+}
+
+.pr-table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.pr-table th,
+.pr-table td {
+  padding: 8px 12px;
+  text-align: left;
+  vertical-align: top;
+  border-bottom: 1px solid var(--border);
+}
+
+.pr-table th {
+  background: var(--row-alt);
+  font-weight: 600;
+}
+
+.pr-table tr:last-child td {
+  border-bottom: none;
+}
+
+.pr-table .nowrap {
+  white-space: nowrap;
+}
+
+.pr-table .repo-header td {
+  background: var(--row-alt);
+  font-weight: 600;
+}
+
+.status-badge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 999px;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.empty {
+  padding: 24px;
+  text-align: center;
+  color: var(--muted);
+}
+
+footer {
+  margin-top: 32px;
+  font-size: 12px;
+}

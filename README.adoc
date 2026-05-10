@@ -16,7 +16,14 @@
 
 = Maven Simple Reports
 
-This repository contains utility scripts for generating reports about Apache Maven repositories.
+This repository contains utility scripts and a single-page dashboard for reports about Apache Maven repositories.
+
+== Dependabot PR dashboard (SPA)
+
+The primary user-facing report — open Dependabot PRs across the Apache Maven repositories with live build status — is a static single-page app under `web/`.
+It replaces the previous Python-generated `dependabot-prs.html` and is published to `\https://aschemaven.github.io/maven-simple-reports/dependabot-prs/`.
+
+See `web/README.adoc` for architecture, rate-limit handling, and local development.
 
 == export_maven_prs.py
 

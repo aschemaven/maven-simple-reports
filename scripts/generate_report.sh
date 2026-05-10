@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# Copyright 2025 The Apache Software Foundation
+# Copyright 2026 The Apache Software Foundation
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,30 +15,33 @@
 # limitations under the License.
 #
 
-set -e
+set -euo pipefail
 
-# Get the directory where this script is located
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-REPO_ROOT="$(cd "${SCRIPT_DIR}/.." && pwd)"
+SCRIPT_DIR="$(cd -- "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
+REPO_ROOT="$(cd -- "${SCRIPT_DIR}/.." >/dev/null 2>&1 && pwd)"
 
-# Create public directory if it doesn't exist
 mkdir -p "${REPO_ROOT}/public"
 
-# Run the export script
-echo "Generating Dependabot PR report..."
-"${SCRIPT_DIR}/export_maven_prs.py" \
-    --format asciidoc \
-    --dependabot \
-    --output "${REPO_ROOT}/public/dependabot-prs.adoc"
+# Build the Dependabot dashboard SPA (replaces the previous Python-generated
+# dependabot-prs.html — the SPA fetches data live from the GitHub REST API).
+echo "Building Dependabot dashboard SPA..."
+pushd "${REPO_ROOT}/web" >/dev/null
+npm ci
+npm run build
+popd >/dev/null
 
-# Convert all AsciiDoc files to HTML
+DASHBOARD_DEST="${REPO_ROOT}/public/dependabot-prs"
+rm -rf "${DASHBOARD_DEST}"
+mkdir -p "${DASHBOARD_DEST}"
+cp -R "${REPO_ROOT}/web/dist/." "${DASHBOARD_DEST}/"
+
+# Convert any remaining AsciiDoc files (e.g. index.adoc) to HTML.
 echo "Converting AsciiDoc files to HTML..."
+shopt -s nullglob
 for adoc_file in "${REPO_ROOT}/public"/*.adoc; do
-    if [ -f "$adoc_file" ]; then
-        html_file="${adoc_file%.adoc}.html"
-        echo "  Converting $(basename "$adoc_file")..."
-        asciidoctor -o "$html_file" "$adoc_file"
-    fi
+    html_file="${adoc_file%.adoc}.html"
+    echo "  Converting $(basename "$adoc_file")..."
+    asciidoctor -o "$html_file" "$adoc_file"
 done
 
 echo "Report generated successfully in ${REPO_ROOT}/public/"

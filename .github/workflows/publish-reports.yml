@@ -4,9 +4,6 @@ on:
   push:
   pull_request:
   workflow_dispatch:
-  schedule:
-    # Run every hour (scheduled workflows only run on the default branch, currently 'main')
-    - cron: '0 * * * *'
 
 jobs:
   build-and-publish:
@@ -21,10 +18,12 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
         with:
-          python-version: '3.x'
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: web/package-lock.json
 
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
@@ -34,18 +33,7 @@ jobs:
       - name: Install asciidoctor
         run: gem install asciidoctor
 
-      - name: Install GitHub CLI
-        run: |
-          type -p curl >/dev/null || (sudo apt update && sudo apt install curl -y)
-          curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg
-          sudo chmod go+r /usr/share/keyrings/githubcli-archive-keyring.gpg
-          echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null
-          sudo apt update
-          sudo apt install gh -y
-
       - name: Generate reports
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           chmod +x scripts/generate_report.sh
           scripts/generate_report.sh
@@ -57,7 +45,6 @@ jobs:
           if [ "${{ github.event_name }}" = "pull_request" ]; then
             echo "alias=pr-${{ github.event.pull_request.number }}" >> $GITHUB_OUTPUT
           else
-            # Use branch name, sanitize it for Netlify (replace / with -)
             BRANCH_NAME="${{ github.ref_name }}"
             SANITIZED_BRANCH=$(echo "$BRANCH_NAME" | sed 's/\//-/g')
             echo "alias=$SANITIZED_BRANCH" >> $GITHUB_OUTPUT
