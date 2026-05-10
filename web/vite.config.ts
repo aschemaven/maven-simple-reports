@@ -17,7 +17,11 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
-const base = process.env.PUBLIC_BASE ?? '/maven-simple-reports/dependabot-prs/'
+// Relative asset URLs so the same build works at any deploy path:
+//   GH Pages: aschemaven.github.io/maven-simple-reports/dependabot-prs/
+//   Netlify branch:  <site>--<branch>.netlify.app/dependabot-prs/
+//   Local dev:       /dependabot-prs/  (configured separately below)
+const base = process.env.PUBLIC_BASE ?? './'
 
 export default defineConfig({
   base,

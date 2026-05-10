@@ -54,7 +54,7 @@ A future authenticated mode (per the Perplexity sketch in `../SPEC-*` if added) 
 ----
 cd web
 npm install
-npm run dev          # http://localhost:5173/maven-simple-reports/dependabot-prs/
+npm run dev          # http://localhost:5173/
 ----
 
 == Production build
@@ -95,12 +95,8 @@ web/
 
 == Configuration
 
-The base path is set in `vite.config.ts` and can be overridden via the `PUBLIC_BASE` env var at build time:
-
-[source,bash]
-----
-PUBLIC_BASE=/ npm run build       # for local preview at /
-----
+Asset URLs are emitted relative (`base: './'` in `vite.config.ts`), so the same build works at any deploy path: GH Pages under `/maven-simple-reports/dependabot-prs/`, Netlify branch deploys under `/dependabot-prs/`, or a local preview at the root.
+Override with `PUBLIC_BASE=/foo/ npm run build` if you need an absolute base.
 
 == Known limitations
 
@@ -108,7 +104,7 @@ PUBLIC_BASE=/ npm run build       # for local preview at /
 The unauthenticated 60/h limit is shared per IP and will be exhausted quickly under multi-visitor load.
 * Build status uses the *check-runs* endpoint only.
 Legacy commit statuses (separate API) are not consulted, which may show `UNKNOWN` for repos that still publish via the older Status API.
-* Merge-conflict detection is not implemented (would require an extra `GET /pulls/{n}` call per PR).
+* Merge-conflict detection is not implemented (would require an extra `GET /pulls/<n>` call per PR).
 * No service worker / push notifications.
 
 == Roadmap (not in MVP)
