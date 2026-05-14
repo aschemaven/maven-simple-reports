@@ -19,17 +19,26 @@ import type { RateLimitInfo as RL } from '../lib/types'
 export function RateLimitInfo({ rl }: { rl: RL | null }) {
   if (!rl) return <span className="rate-limit muted">rate limit: unknown</span>
 
-  const reset = new Date(rl.resetAt)
-  const resetTime = reset.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
-  const diffMs = rl.resetAt - Date.now()
-  const mins = Math.max(0, Math.ceil(diffMs / 60_000))
-  const low = rl.remaining < 5
-
   const used = Math.max(0, rl.limit - rl.remaining)
+  // 60/h is the anonymous IP-shared quota — reset time is actionable there.
+  // With a PAT (limit ~5000) reset is rarely relevant and the value can flicker
+  // between resource buckets, so we omit it.
+  const isAnonymous = rl.limit <= 60
+  const low = isAnonymous ? rl.remaining < 5 : rl.remaining < rl.limit * 0.05
+
+  let resetSuffix = ''
+  if (isAnonymous) {
+    const resetTime = new Date(rl.resetAt).toLocaleTimeString([], {
+      hour: '2-digit',
+      minute: '2-digit',
+    })
+    const mins = Math.max(0, Math.ceil((rl.resetAt - Date.now()) / 60_000))
+    resetSuffix = ` · resets at ${resetTime} (in ${mins} min)`
+  }
 
   return (
     <span className={`rate-limit ${low ? 'warn' : ''}`}>
-      GitHub API: {rl.remaining} left of {rl.limit} ({used} used) · resets at {resetTime} (in {mins} min)
+      GitHub API: {rl.remaining} left of {rl.limit} ({used} used){resetSuffix}
     </span>
   )
 }

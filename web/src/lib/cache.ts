@@ -18,6 +18,8 @@ const PREFIX = 'gh-cache:v1:'
 const RESULT_PREFIX = 'gh-result:v1:'
 const ARCHIVED_PREFIX = 'gh-archived:v1:'
 const FILTER_KEY = 'gh-filter:v1'
+const TOKEN_KEY = 'gh-token:v1'
+const TOKEN_PERSIST_KEY = 'gh-token-persist:v1'
 
 const ARCHIVED_TTL_MS = 7 * 24 * 60 * 60_000
 
@@ -116,6 +118,68 @@ export function writeFilter(pattern: string): void {
   try {
     if (pattern) localStorage.setItem(FILTER_KEY, pattern)
     else localStorage.removeItem(FILTER_KEY)
+  } catch {
+    // ignore
+  }
+}
+
+/**
+ * Read the saved PAT. Prefers localStorage (persisted across browser sessions)
+ * over sessionStorage (tab-scoped). Returns '' if neither has one.
+ */
+export function readToken(): string {
+  try {
+    const persisted = localStorage.getItem(TOKEN_KEY)
+    if (persisted) return persisted
+    return sessionStorage.getItem(TOKEN_KEY) ?? ''
+  } catch {
+    return ''
+  }
+}
+
+/**
+ * Read the "remember this device" preference. Defaults to false so a first-time
+ * user has to actively opt in to persistent storage; the safer choice for the
+ * default. If no preference is saved but a token already exists in localStorage
+ * (e.g. left over from a previous session), keep the checkbox consistent with
+ * where the token actually lives.
+ */
+export function readTokenPersist(): boolean {
+  try {
+    const raw = localStorage.getItem(TOKEN_PERSIST_KEY)
+    if (raw !== null) return raw === '1'
+    return localStorage.getItem(TOKEN_KEY) !== null
+  } catch {
+    return false
+  }
+}
+
+/**
+ * Save the PAT to the chosen storage and clear the other so we never have two
+ * copies in flight. Empty token clears both storages.
+ */
+export function writeToken(token: string, persist: boolean): void {
+  try {
+    if (!token) {
+      localStorage.removeItem(TOKEN_KEY)
+      sessionStorage.removeItem(TOKEN_KEY)
+      return
+    }
+    if (persist) {
+      localStorage.setItem(TOKEN_KEY, token)
+      sessionStorage.removeItem(TOKEN_KEY)
+    } else {
+      sessionStorage.setItem(TOKEN_KEY, token)
+      localStorage.removeItem(TOKEN_KEY)
+    }
+  } catch {
+    // ignore
+  }
+}
+
+export function writeTokenPersist(persist: boolean): void {
+  try {
+    localStorage.setItem(TOKEN_PERSIST_KEY, persist ? '1' : '0')
   } catch {
     // ignore
   }

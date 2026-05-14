@@ -17,14 +17,27 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { fetchRepoPrs } from './lib/dependabot'
 import { GhRateLimitError, clearQueueBackoff, subscribeRateLimit } from './lib/githubFetch'
-import { clearAllCache, readAllResults, readFilter, writeFilter } from './lib/cache'
+import {
+  readAllResults,
+  readFilter,
+  readToken,
+  readTokenPersist,
+  writeFilter,
+  writeToken,
+  writeTokenPersist,
+} from './lib/cache'
 import { MAVEN_REPOS } from './lib/repos'
 import type { RateLimitInfo as RL, RepoFetchResult } from './lib/types'
 import { PrTable } from './components/PrTable'
 import { RateLimitInfo } from './components/RateLimitInfo'
 import { FilterInput } from './components/FilterInput'
+import { TokenInput } from './components/TokenInput'
 
-const CYCLE_INTERVAL_MS = 30 * 60_000 // 30 min between full cycles
+// 30 min between full cycles when unauthenticated (60/h budget); 5 min when a PAT
+// is configured (5 000/h budget). The interval is read at the start of each
+// sleep, so toggling the token takes effect on the next cycle.
+const CYCLE_INTERVAL_ANON_MS = 30 * 60_000
+const CYCLE_INTERVAL_AUTH_MS = 5 * 60_000
 const PER_REPO_SPACING_MS = 800
 const RATE_LIMIT_PAUSE_BUFFER_MS = 5_000
 
@@ -57,6 +70,8 @@ function applyFilter(pattern: string): { repos: string[]; invalid: boolean } {
 
 export function App() {
   const [filter, setFilter] = useState<string>(() => readFilter())
+  const [token, setToken] = useState<string>(() => readToken())
+  const [tokenPersist, setTokenPersist] = useState<boolean>(() => readTokenPersist())
   const initialFilter = useMemo(() => applyFilter(filter), [])
   // eslint-disable-next-line react-hooks/exhaustive-deps -- only computed once for init
   const initialActive = initialFilter.repos
@@ -72,7 +87,12 @@ export function App() {
 
   const pendingRef = useRef<string[]>([...initialActive])
   const activeReposRef = useRef<string[]>([...initialActive])
+  const tokenRef = useRef<string>(token)
   const restartTokenRef = useRef(0)
+
+  useEffect(() => {
+    tokenRef.current = token
+  }, [token])
 
   const filterResult = useMemo(() => applyFilter(filter), [filter])
   const activeRepos = filterResult.repos
@@ -86,16 +106,37 @@ export function App() {
 
   const syncPending = () => setPending([...pendingRef.current])
 
-  const restart = () => {
-    const cleared = clearAllCache()
+  const refreshNow = () => {
+    // Non-destructive: keep previously-fetched data on screen, just re-queue all
+    // active repos for a fresh fetch. ETag-cached unchanged responses come back
+    // as 304 so the displayed entries are simply refreshed in place.
     clearQueueBackoff()
     pendingRef.current = [...activeReposRef.current]
     restartTokenRef.current += 1
-    setRepos({})
     syncPending()
-    setCycle({ ...initialCycle, startedAt: Date.now() })
-    console.info(`Restart: cleared ${cleared} cache entries, requeued ${pendingRef.current.length} repos, reset queue backoff`)
+    setCycle((c) => ({
+      ...c,
+      startedAt: Date.now(),
+      completedAt: null,
+      nextCycleAt: null,
+      pausedUntil: null,
+    }))
   }
+
+  const updateToken = (next: string, persist: boolean) => {
+    setToken(next)
+    setTokenPersist(persist)
+    writeToken(next, persist)
+    writeTokenPersist(persist)
+    tokenRef.current = next
+    // Lift any pending anonymous-quota backoff and wake the cycle so the
+    // higher (or lower, on clear) limit takes effect immediately.
+    clearQueueBackoff()
+    restartTokenRef.current += 1
+    setCycle((c) => ({ ...c, pausedUntil: null }))
+  }
+
+  const clearTokenAction = () => updateToken('', tokenPersist)
 
   const updateFilter = (next: string) => {
     setFilter(next)
@@ -137,7 +178,10 @@ export function App() {
           const repo = pendingRef.current[0]
           setCycle((c) => ({ ...c, inFlight: repo }))
           try {
-            const result = await fetchRepoPrs(repo, { spaceBeforeMs: PER_REPO_SPACING_MS })
+            const result = await fetchRepoPrs(repo, {
+              spaceBeforeMs: PER_REPO_SPACING_MS,
+              token: tokenRef.current || undefined,
+            })
             if (cancelled) return
             setRepos((prev) => ({ ...prev, [repo]: result }))
             pendingRef.current = pendingRef.current.filter((r) => r !== repo)
@@ -151,13 +195,15 @@ export function App() {
               if (wait > 0) {
                 const result = await interruptibleSleep(wait, tok)
                 if (result === 'restart') {
+                  // Token/filter change or restart — wake immediately and retry
+                  // the queue (whatever pendingRef now holds).
                   setCycle((c) => ({ ...c, pausedUntil: null }))
-                  break // back to outer while; pending was just reset
+                  continue
                 }
               }
               if (cancelled) return
               setCycle((c) => ({ ...c, pausedUntil: null }))
-              // Leave repo at front of queue so we retry it
+              // Sleep expired naturally — retry the same repo (still at queue head)
               continue
             }
             // Unrecognized error — record and move on
@@ -178,8 +224,9 @@ export function App() {
         if (cancelled) return
 
         // Cycle complete (or restart drained the queue) — schedule next refill
+        const cycleInterval = tokenRef.current ? CYCLE_INTERVAL_AUTH_MS : CYCLE_INTERVAL_ANON_MS
         const completed = Date.now()
-        const nextAt = completed + CYCLE_INTERVAL_MS
+        const nextAt = completed + cycleInterval
         setCycle((c) => ({
           ...c,
           completedAt: completed,
@@ -188,7 +235,7 @@ export function App() {
           pausedUntil: null,
         }))
         const tok = restartTokenRef.current
-        const result = await interruptibleSleep(CYCLE_INTERVAL_MS, tok)
+        const result = await interruptibleSleep(cycleInterval, tok)
         if (cancelled) return
         if (result === 'restart') {
           // Restart already refilled pendingRef and reset state
@@ -228,6 +275,13 @@ export function App() {
         </p>
       </header>
 
+      <TokenInput
+        token={token}
+        persist={tokenPersist}
+        onSave={updateToken}
+        onClear={clearTokenAction}
+      />
+
       <FilterInput
         pattern={filter}
         onChange={updateFilter}
@@ -246,8 +300,8 @@ export function App() {
           {visibleResults.filter((r) => r.prs.length > 0).length} repos
         </span>
         <span className="meta-sep grow">·</span>
-        <button className="restart" type="button" onClick={restart} title="Clear cache and restart the fetch cycle from scratch">
-          Restart cycle
+        <button className="restart" type="button" onClick={refreshNow} title="Re-queue all active repos for a fresh fetch (previous data stays visible until each repo is updated)">
+          Refresh now
         </button>
       </section>
 

@@ -138,6 +138,119 @@ header h1 {
   flex: 0 0 auto;
 }
 
+.settings {
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  margin-bottom: 12px;
+  font-size: 13px;
+}
+
+.settings > summary {
+  padding: 8px 12px;
+  cursor: pointer;
+  user-select: none;
+  list-style: revert;
+  font-weight: 600;
+}
+
+.settings[open] > summary {
+  border-bottom: 1px solid var(--border);
+}
+
+.settings .auth-on {
+  color: #1a7f37;
+  font-weight: 600;
+}
+
+.settings .auth-off {
+  color: var(--muted);
+  font-weight: 400;
+}
+
+.settings-body {
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.settings-field {
+  font-weight: 600;
+  color: var(--muted);
+}
+
+.settings-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+
+.token-input {
+  flex: 1 1 320px;
+  min-width: 240px;
+  padding: 4px 8px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  background: var(--bg);
+  color: var(--fg);
+  font: inherit;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+.token-input:focus {
+  outline: 2px solid var(--warn-fg);
+  outline-offset: -1px;
+}
+
+.settings-body button {
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--fg);
+  padding: 4px 10px;
+  border-radius: 4px;
+  font: inherit;
+  cursor: pointer;
+}
+
+.settings-body button:hover:not(:disabled) {
+  background: var(--row-alt);
+}
+
+.settings-body button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.settings-checkbox {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 12px;
+  color: var(--muted);
+  cursor: pointer;
+}
+
+.settings-checkbox input[type='checkbox'] {
+  margin-top: 2px;
+  flex: 0 0 auto;
+  cursor: pointer;
+}
+
+.settings-help {
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.settings-help a {
+  text-decoration: underline;
+}
+
+.warn-text {
+  color: var(--warn-fg);
+}
+
 .muted {
   color: var(--muted);
 }

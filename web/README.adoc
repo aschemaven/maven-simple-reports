@@ -22,9 +22,10 @@ It replaces the previously cron-generated `dependabot-prs.html` page.
 
 == Status
 
-MVP (public mode only).
-The app runs without authentication, fetching public PR and check-run data anonymously.
-Authenticated mode (GitHub App + PKCE) is not implemented yet — see _Roadmap_ below.
+MVP with optional PAT authentication.
+By default the app runs anonymously against the public REST API (60 req/h per IP).
+A Personal Access Token can be pasted into the *Settings* section to lift the limit to ~5 000 req/h and shorten the refresh cycle from 30 min to 5 min.
+The proper GitHub App + Authorization Code + PKCE flow is still on the roadmap.
 
 == Architecture
 
@@ -34,17 +35,34 @@ Authenticated mode (GitHub App + PKCE) is not implemented yet — see _Roadmap_ 
 Unchanged responses come back as 304 and reuse the cached body.
 * *Serial request scheduling* (one in-flight request at a time) to stay within GitHub's secondary rate-limit guidance.
 * *Backoff on 403/429* using `x-ratelimit-reset` or `Retry-After`.
-* *Polling*: ~30 minutes between full refresh cycles, with an inter-request gap to spread the load.
+* *Polling*: ~30 minutes between full refresh cycles unauthenticated, ~5 minutes with a PAT configured. Inter-request gap spreads load across the rate-limit window.
 
 == UI controls
 
+Settings · GitHub PAT::
+A collapsible section at the top of the page accepts a GitHub Personal Access Token (fine-grained or classic, *no scopes required* for read-only access to public repos).
+The settings panel links to GitHub's PAT creation pages so the token can be generated without leaving context.
+The token is sent as `Authorization: Bearer …` on every request and lifts the rate limit from 60 req/h to ~5 000 req/h; the refresh cycle then drops from 30 min to 5 min.
+Adding or clearing a token wakes a paused cycle so the new limit takes effect immediately.
++
+A *Remember on this device* checkbox controls where the token is kept: it is unchecked by default (storing in `sessionStorage`, dropped when the tab closes); checking it moves the token to `localStorage` so it survives browser restarts.
++
+[WARNING]
+====
+Either storage holds the token in plain text and exposes it to any script running on this origin (XSS).
+Only enter it on machines you trust, and revoke it on GitHub if the browser profile is shared.
+The proper *GitHub App + PKCE* flow (no token in the browser) is on the roadmap.
+====
+
 Repo filter::
-A regex input above the status bar narrows the fetch cycle to a subset of `apache/maven-*` repos.
+A regex input narrows the fetch cycle to a subset of `apache/maven-*` repos.
 The pattern is persisted in `localStorage` and applied immediately: previously-fetched repos that no longer match are hidden, newly-matching repos are queued for the next fetch.
 Useful to stay within the unauthenticated 60/h quota by polling only the repos you care about (e.g. `mvnd|surefire`).
 
-Restart cycle::
-Clears the local cache (request bodies, archived-repo flags, persisted results), resets the queue backoff, and re-queues the currently active set from scratch.
+Refresh now::
+Re-queues all active repos for an immediate refresh and lifts any pending rate-limit backoff.
+The action is non-destructive: previously-fetched entries remain visible until each repo is updated in place.
+ETag-cached responses that haven't changed come back as 304 (no body re-download), so this is cheap when the data is stable.
 
 == Rate limits (important)
 
@@ -94,7 +112,8 @@ web/
     │   ├── PrTable.tsx
     │   ├── StatusBadge.tsx
     │   ├── RateLimitInfo.tsx
-    │   └── FilterInput.tsx  # regex repo filter (persisted in localStorage)
+    │   ├── FilterInput.tsx  # regex repo filter (persisted in localStorage)
+    │   └── TokenInput.tsx   # PAT settings section (persisted in localStorage)
     └── lib/
         ├── repos.ts         # the apache/maven-* list
         ├── types.ts
@@ -111,8 +130,10 @@ Override with `PUBLIC_BASE=/foo/ npm run build` if you need an absolute base.
 
 == Known limitations
 
-* Public mode only.
-The unauthenticated 60/h limit is shared per IP and will be exhausted quickly under multi-visitor load.
+* No GitHub App / OAuth yet.
+Authentication is by manually-pasted PAT only; the token lives in the browser's `localStorage` and is exposed to any script on this origin.
+The proper *GitHub App + Authorization Code + PKCE* flow (with a small token-exchange edge function) remains on the roadmap.
+* The unauthenticated mode's 60/h limit is shared per IP and will be exhausted quickly under multi-visitor load.
 * Build status uses the *check-runs* endpoint only.
 Legacy commit statuses (separate API) are not consulted, which may show `UNKNOWN` for repos that still publish via the older Status API.
 * Merge-conflict detection is not implemented (would require an extra `GET /pulls/<n>` call per PR).
