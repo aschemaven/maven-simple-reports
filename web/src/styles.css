@@ -284,9 +284,25 @@ code {
 
 .pr-table-controls {
   display: flex;
-  gap: 8px;
+  gap: 12px;
   margin-bottom: 8px;
-  justify-content: flex-end;
+  align-items: center;
+}
+
+.pr-table-controls-spacer {
+  flex: 1 1 auto;
+}
+
+.pr-table-controls .hide-empty {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.pr-table-controls .hide-empty input {
+  cursor: pointer;
 }
 
 .pr-table-controls button {

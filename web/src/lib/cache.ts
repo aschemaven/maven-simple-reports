@@ -20,6 +20,7 @@ const ARCHIVED_PREFIX = 'gh-archived:v1:'
 const FILTER_KEY = 'gh-filter:v1'
 const TOKEN_KEY = 'gh-token:v1'
 const TOKEN_PERSIST_KEY = 'gh-token-persist:v1'
+const HIDE_EMPTY_KEY = 'gh-hide-empty:v1'
 
 const ARCHIVED_TTL_MS = 7 * 24 * 60 * 60_000
 
@@ -147,6 +148,23 @@ export function writeFilter(pattern: string): void {
   try {
     if (pattern) localStorage.setItem(FILTER_KEY, pattern)
     else localStorage.removeItem(FILTER_KEY)
+  } catch {
+    // ignore
+  }
+}
+
+export function readHideEmpty(): boolean {
+  try {
+    return localStorage.getItem(HIDE_EMPTY_KEY) === '1'
+  } catch {
+    return false
+  }
+}
+
+export function writeHideEmpty(hide: boolean): void {
+  try {
+    if (hide) localStorage.setItem(HIDE_EMPTY_KEY, '1')
+    else localStorage.removeItem(HIDE_EMPTY_KEY)
   } catch {
     // ignore
   }

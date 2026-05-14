@@ -17,6 +17,7 @@
 import { useState } from 'react'
 import type { DependabotPr, RepoFetchResult } from '../lib/types'
 import { MAVEN_OWNER } from '../lib/repos'
+import { readHideEmpty, writeHideEmpty } from '../lib/cache'
 import { StatusBadge } from './StatusBadge'
 
 const STALE_THRESHOLD_MS = 60 * 60_000
@@ -80,6 +81,7 @@ export function PrTable({ allRepos, results, inFlight }: Props) {
   // Explicit per-repo overrides. Missing key → default: expanded iff the repo
   // has at least one PR.
   const [collapsed, setCollapsed] = useState<Record<string, boolean>>({})
+  const [hideEmpty, setHideEmpty] = useState<boolean>(() => readHideEmpty())
 
   const isCollapsed = (repo: string): boolean => {
     if (repo in collapsed) return collapsed[repo]
@@ -97,9 +99,39 @@ export function PrTable({ allRepos, results, inFlight }: Props) {
     setCollapsed(next)
   }
 
+  const updateHideEmpty = (value: boolean) => {
+    setHideEmpty(value)
+    writeHideEmpty(value)
+  }
+
+  // Hide only fully-fetched repos with zero PRs. Keep pending and errored
+  // entries visible so the user can still see fetch state.
+  const visible = hideEmpty
+    ? sorted.filter((repo) => {
+        const r = results[repo]
+        if (!r) return true
+        if (r.error) return true
+        return r.prs.length > 0
+      })
+    : sorted
+
+  const hiddenCount = sorted.length - visible.length
+
   return (
     <div className="pr-table-wrap">
       <div className="pr-table-controls">
+        <label className="hide-empty">
+          <input
+            type="checkbox"
+            checked={hideEmpty}
+            onChange={(e) => updateHideEmpty(e.target.checked)}
+          />
+          Hide repos without PRs
+          {hideEmpty && hiddenCount > 0 && (
+            <span className="muted"> ({hiddenCount} hidden)</span>
+          )}
+        </label>
+        <span className="pr-table-controls-spacer" />
         <button type="button" onClick={() => setAll(false)}>
           Expand all
         </button>
@@ -117,7 +149,7 @@ export function PrTable({ allRepos, results, inFlight }: Props) {
           </tr>
         </thead>
         <tbody>
-          {sorted.map((repo) => (
+          {visible.map((repo) => (
             <RepoRows
               key={repo}
               repo={repo}
