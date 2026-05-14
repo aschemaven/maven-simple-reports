@@ -63,16 +63,28 @@ The GitHub Actions workflow runs on push, PR, and manual dispatch (Actions → P
 ### Pipeline
 
 1. **`web/`** — Vite + React + TypeScript SPA. Calls `api.github.com` directly with ETag/`If-None-Match` caching, serial request scheduling, and 403/429 backoff. Output: `web/dist/`.
-2. **`scripts/generate_report.sh`** — orchestrator. Builds the SPA, copies it into `public/dependabot-prs/`, then runs `asciidoctor` on remaining `.adoc` files.
-3. **`scripts/export_maven_prs.py`** — legacy Python exporter (CSV/AsciiDoc) using `gh` CLI. No longer invoked by CI but kept for local use.
-4. **`.github/workflows/publish-reports.yml`** — runs `generate_report.sh`, publishes `public/` to GitHub Pages (main) or Netlify (PRs/branches).
+2. **`netlify/functions/`** — three TypeScript Netlify Functions (`auth-callback`, `token-exchange`, `token-refresh`) hosting the OAuth Authorization Code + PKCE flow against a registered GitHub App. They never touch dashboard data, only token exchange / refresh.
+3. **`scripts/generate_report.sh`** — orchestrator. Builds the SPA, copies it into `public/dependabot-prs/`, then runs `asciidoctor` on remaining `.adoc` files.
+4. **`scripts/export_maven_prs.py`** — legacy Python exporter (CSV/AsciiDoc) using `gh` CLI. No longer invoked by CI but kept for local use.
+5. **`.github/workflows/publish-reports.yml`** — runs `generate_report.sh`, publishes `public/` to GitHub Pages (main) or Netlify (PRs/branches), and uploads `netlify/functions/` alongside Netlify deploys.
 
 ### Directory layout
 
 - `web/` — SPA source (Vite + React + TS); `web/dist/` is generated
+- `netlify/functions/` — OAuth token-exchange Functions (`.mts`, ESM)
+- `netlify.toml` — Functions bundler config (no SPA build step here; the workflow runs `generate_report.sh`)
 - `scripts/` — Python and shell scripts
 - `public/` — published site root; only `index.adoc` is git-tracked (the rest is generated)
 - `.github/workflows/` — CI/CD
+
+### OAuth flow (browser ↔ Netlify Functions ↔ GitHub)
+
+The full setup is documented in `web/README.adoc` (sections _Status_, _UI controls_, _Configuration_). High-level summary:
+
+1. SPA generates PKCE `code_verifier`/`code_challenge` + a CSRF token + a base64-encoded `state = {origin, csrf}`, redirects to `github.com/login/oauth/authorize`.
+2. GitHub redirects to the single registered callback URL `https://<netlify-site>/.netlify/functions/auth-callback`. That function decodes `state.origin`, validates it against the allowlist in `netlify/functions/_lib/cors.mts`, and 302s the browser back to the SPA at its own origin with `code` + `state` in the query string.
+3. SPA on its origin verifies the CSRF token, POSTs `{code, code_verifier, redirect_uri}` to `/token-exchange`, which calls GitHub with the server-side `client_secret` added and returns the access + refresh tokens.
+4. Access tokens (~8 h) are refreshed transparently via `/token-refresh` before each fetch when their remaining lifetime is < 60 s.
 
 ## Build status detection (SPA)
 

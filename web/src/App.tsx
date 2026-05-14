@@ -21,12 +21,22 @@ import {
   migrateLegacyCache,
   readAllResults,
   readFilter,
+  readOauth,
   readToken,
   readTokenPersist,
   writeFilter,
+  writeOauth,
   writeToken,
   writeTokenPersist,
 } from './lib/cache'
+import {
+  completeOAuthFlow,
+  needsRefresh,
+  refreshOAuthToken,
+  refreshTokenStillValid,
+  startOAuthFlow,
+  type StoredOauthTokens,
+} from './lib/oauth'
 import { MAVEN_REPOS } from './lib/repos'
 import type { RateLimitInfo as RL, RepoFetchResult } from './lib/types'
 import { PrTable } from './components/PrTable'
@@ -73,6 +83,10 @@ export function App() {
   const [filter, setFilter] = useState<string>(() => readFilter())
   const [token, setToken] = useState<string>(() => readToken())
   const [tokenPersist, setTokenPersist] = useState<boolean>(() => readTokenPersist())
+  const [oauth, setOauth] = useState<StoredOauthTokens | null>(() =>
+    readOauth<StoredOauthTokens>(),
+  )
+  const [oauthError, setOauthError] = useState<string | null>(null)
   const initialFilter = useMemo(() => applyFilter(filter), [])
   // eslint-disable-next-line react-hooks/exhaustive-deps -- only computed once for init
   const initialActive = initialFilter.repos
@@ -96,11 +110,16 @@ export function App() {
   const pendingRef = useRef<string[]>([...initialActive])
   const activeReposRef = useRef<string[]>([...initialActive])
   const tokenRef = useRef<string>(token)
+  const oauthRef = useRef<StoredOauthTokens | null>(oauth)
   const restartTokenRef = useRef(0)
 
   useEffect(() => {
     tokenRef.current = token
   }, [token])
+
+  useEffect(() => {
+    oauthRef.current = oauth
+  }, [oauth])
 
   const filterResult = useMemo(() => applyFilter(filter), [filter])
   const activeRepos = filterResult.repos
@@ -146,6 +165,38 @@ export function App() {
 
   const clearTokenAction = () => updateToken('', tokenPersist)
 
+  const updateOauth = (next: StoredOauthTokens | null) => {
+    setOauth(next)
+    writeOauth(next, tokenPersist)
+    oauthRef.current = next
+    clearQueueBackoff()
+    restartTokenRef.current += 1
+    setCycle((c) => ({ ...c, pausedUntil: null }))
+  }
+
+  const connectOauth = () => {
+    setOauthError(null)
+    startOAuthFlow().catch((err) => {
+      setOauthError(err instanceof Error ? err.message : String(err))
+    })
+  }
+
+  const disconnectOauth = () => updateOauth(null)
+
+  // Detect an OAuth callback in the URL on the very first render (after the
+  // redirect from github.com → auth-callback function → back here). The helper
+  // also cleans `code`/`state` out of the URL so a refresh doesn't replay.
+  useEffect(() => {
+    completeOAuthFlow()
+      .then((tokens) => {
+        if (tokens) updateOauth(tokens)
+      })
+      .catch((err) => {
+        setOauthError(err instanceof Error ? err.message : String(err))
+      })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
   const updateFilter = (next: string) => {
     setFilter(next)
     writeFilter(next)
@@ -178,6 +229,29 @@ export function App() {
       return 'done'
     }
 
+    const acquireToken = async (): Promise<string | undefined> => {
+      const current = oauthRef.current
+      if (current) {
+        if (!refreshTokenStillValid(current)) {
+          console.warn('OAuth refresh token expired; falling back to PAT/anonymous')
+          updateOauth(null)
+        } else if (needsRefresh(current)) {
+          try {
+            const refreshed = await refreshOAuthToken(current.refresh_token)
+            updateOauth(refreshed)
+            return refreshed.access_token
+          } catch (err) {
+            console.error('OAuth token refresh failed; falling back to PAT/anonymous', err)
+            setOauthError(err instanceof Error ? err.message : String(err))
+            updateOauth(null)
+          }
+        } else {
+          return current.access_token
+        }
+      }
+      return tokenRef.current || undefined
+    }
+
     const loop = async () => {
       setCycle((c) => ({ ...c, startedAt: Date.now(), completedAt: null }))
       while (!cancelled) {
@@ -188,7 +262,7 @@ export function App() {
           try {
             const result = await fetchRepoPrs(repo, {
               spaceBeforeMs: PER_REPO_SPACING_MS,
-              token: tokenRef.current || undefined,
+              token: await acquireToken(),
             })
             if (cancelled) return
             setRepos((prev) => ({ ...prev, [repo]: result }))
@@ -232,7 +306,8 @@ export function App() {
         if (cancelled) return
 
         // Cycle complete (or restart drained the queue) — schedule next refill
-        const cycleInterval = tokenRef.current ? CYCLE_INTERVAL_AUTH_MS : CYCLE_INTERVAL_ANON_MS
+        const authenticated = !!oauthRef.current || !!tokenRef.current
+        const cycleInterval = authenticated ? CYCLE_INTERVAL_AUTH_MS : CYCLE_INTERVAL_ANON_MS
         const completed = Date.now()
         const nextAt = completed + cycleInterval
         setCycle((c) => ({
@@ -286,8 +361,12 @@ export function App() {
       <TokenInput
         token={token}
         persist={tokenPersist}
+        oauth={oauth}
+        oauthError={oauthError}
         onSave={updateToken}
         onClear={clearTokenAction}
+        onConnectOauth={connectOauth}
+        onDisconnectOauth={disconnectOauth}
       />
 
       <FilterInput

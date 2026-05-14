@@ -22,14 +22,21 @@ It replaces the previously cron-generated `dependabot-prs.html` page.
 
 == Status
 
-MVP with optional PAT authentication.
-By default the app runs anonymously against the public REST API (60 req/h per IP).
-A Personal Access Token can be pasted into the *Settings* section to lift the limit to ~5 000 req/h and shorten the refresh cycle from 30 min to 5 min.
-The proper GitHub App + Authorization Code + PKCE flow is still on the roadmap.
+Two authentication paths are available, both optional:
+
+. *Sign in with GitHub* — full OAuth Authorization Code + PKCE flow via a registered GitHub App.
+Access tokens (~8 h) are refreshed automatically using the long-lived refresh token (~6 months).
+. *Personal Access Token* — manually pasted into the Settings panel.
+No expiry-handling, but works without any backend.
+
+Either path lifts the API limit from 60 req/h (anonymous) to ~5 000 req/h and shortens the refresh cycle from 30 min to 5 min.
+The default state is anonymous so the dashboard works for visitors without setup.
 
 == Architecture
 
 * *Static SPA* built with Vite + React + TypeScript, deployed to GitHub Pages under `dependabot-prs/`.
+* *Three small Netlify Functions* (`netlify/functions/`) act as the only server-side component, exclusively for the OAuth token exchange and refresh.
+The functions never touch the dashboard's PR data — that still goes browser-to-GitHub directly.
 * *Direct REST calls* to `api.github.com` — no backend, no proxy.
 * *ETag / If-None-Match* caching per URL, persisted in `localStorage`.
 Unchanged responses come back as 304 and reuse the cached body.
@@ -39,19 +46,30 @@ Unchanged responses come back as 304 and reuse the cached body.
 
 == UI controls
 
-Settings · GitHub PAT::
-A collapsible section at the top of the page accepts a GitHub Personal Access Token (fine-grained or classic, *no scopes required* for read-only access to public repos).
-The settings panel links to GitHub's PAT creation pages so the token can be generated without leaving context.
-The token is sent as `Authorization: Bearer …` on every request and lifts the rate limit from 60 req/h to ~5 000 req/h; the refresh cycle then drops from 30 min to 5 min.
-Adding or clearing a token wakes a paused cycle so the new limit takes effect immediately.
+Settings · Sign in with GitHub::
+The recommended path.
+A *Connect with GitHub* button starts the OAuth Authorization Code + PKCE flow against a registered GitHub App.
+The user is redirected to `github.com`, authorises, and returns to the SPA with a fresh access token plus a refresh token.
+Subsequent fetch cycles use the access token; when it expires (~8 h), the SPA quietly refreshes via the Netlify `token-refresh` function and continues without re-prompting.
+The refresh token is valid for ~6 months.
 +
-A *Remember on this device* checkbox controls where the token is kept: it is unchecked by default (storing in `sessionStorage`, dropped when the tab closes); checking it moves the token to `localStorage` so it survives browser restarts.
+The button only appears when `VITE_GITHUB_CLIENT_ID` is set at build time (see _Configuration_).
+
+Settings · GitHub PAT::
+The fallback path for environments without OAuth set up (no Netlify functions, or no Client ID in the build).
+A Personal Access Token (fine-grained or classic, *no scopes required* for read-only public-repo access) can be pasted directly.
+The settings panel links to GitHub's PAT creation pages so the token can be generated without leaving context.
+The token is sent as `Authorization: Bearer …` on every request.
+Adding or clearing a token wakes a paused cycle so the new limit takes effect immediately.
+
+Both auth paths::
+A *Remember on this device* checkbox controls where the token (PAT _or_ OAuth) is kept: unchecked (default) stores in `sessionStorage` and is dropped when the tab closes; checked moves it to `localStorage` so it survives browser restarts.
 +
 [WARNING]
 ====
-Either storage holds the token in plain text and exposes it to any script running on this origin (XSS).
-Only enter it on machines you trust, and revoke it on GitHub if the browser profile is shared.
-The proper *GitHub App + PKCE* flow (no token in the browser) is on the roadmap.
+Both storages hold the token in plain text and expose it to any script running on this origin (XSS).
+Only enter / connect on machines you trust, and revoke the token on GitHub if the browser profile is shared.
+The Netlify functions keep the GitHub App *client secret* server-side; only the short-lived user-to-server access token and refresh token live in the browser.
 ====
 
 Repo filter::
@@ -113,27 +131,96 @@ web/
     │   ├── StatusBadge.tsx
     │   ├── RateLimitInfo.tsx
     │   ├── FilterInput.tsx  # regex repo filter (persisted in localStorage)
-    │   └── TokenInput.tsx   # PAT settings section (persisted in localStorage)
+    │   └── TokenInput.tsx   # OAuth + PAT settings section
     └── lib/
         ├── repos.ts         # the apache/maven-* list
         ├── types.ts
-        ├── cache.ts         # localStorage wrapper
+        ├── cache.ts         # local/sessionStorage wrapper
         ├── githubFetch.ts   # serial queue, ETag, backoff, rate-limit pub/sub
         ├── buildStatus.ts   # check-runs → BuildState
-        └── dependabot.ts    # per-repo: list PRs, fetch checks
+        ├── dependabot.ts    # per-repo: list PRs, fetch checks
+        ├── pkce.ts          # RFC 7636 code verifier + challenge
+        └── oauth.ts         # OAuth start / complete / refresh, talks to functions
+----
+
+The Netlify Functions live in a sibling directory at the repo root:
+
+[source]
+----
+netlify/
+├── package.json              # @netlify/functions
+├── netlify.toml -> ../       # config lives at repo root
+└── functions/
+    ├── _lib/
+    │   └── cors.mts          # origin allowlist + CORS / preflight helpers
+    ├── auth-callback.mts     # GitHub redirect target; 302s back to SPA origin
+    ├── token-exchange.mts    # code + verifier → tokens (with client_secret)
+    └── token-refresh.mts     # refresh_token → new tokens
 ----
 
 == Configuration
 
+=== Asset base path
+
 Asset URLs are emitted relative (`base: './'` in `vite.config.ts`), so the same build works at any deploy path: GH Pages under `/maven-simple-reports/dependabot-prs/`, Netlify branch deploys under `/dependabot-prs/`, or a local preview at the root.
 Override with `PUBLIC_BASE=/foo/ npm run build` if you need an absolute base.
 
+=== OAuth (optional)
+
+Two Vite build-time variables enable the *Connect with GitHub* button:
+
+`VITE_GITHUB_CLIENT_ID`::
+Client ID of the registered GitHub App.
+Publicly visible (it's in the OAuth authorize URL), so safe to commit per environment if needed; in this repo it's expected from the build environment instead.
+
+`VITE_AUTH_ENDPOINT`::
+Base URL of the Netlify Functions site that hosts `auth-callback`, `token-exchange`, and `token-refresh`.
+Defaults to `https://maven-simple-reports.netlify.app`.
+
+For local development, create `web/.env.local` (gitignored):
+
+[source]
+----
+VITE_GITHUB_CLIENT_ID=Iv23xxxxxxxxxxxxxxxx
+----
+
+When the variable is unset, the OAuth button is shown disabled with a tooltip and the SPA falls back to anonymous / PAT mode.
+
+=== GitHub App setup (one-time, admin only)
+
+The dashboard authenticates against a registered GitHub App.
+Steps to set one up:
+
+. Register at https://github.com/settings/apps/new with:
++
+* *Homepage URL*: the production SPA URL.
+* *Callback URL*: `https://<netlify-site>.netlify.app/.netlify/functions/auth-callback` — exactly one URL covers every SPA origin, because the `auth-callback` function decodes the SPA's original origin from the `state` parameter and 302s the browser back there.
+* *Webhook → Active*: off.
+* *Permissions*: leave all empty (the higher rate limit applies without any scopes).
+* *Where can this GitHub App be installed?*: Any account.
+* *Expire user authorization tokens*: on (provides the `refresh_token`).
+* *Request user authorization (OAuth) during installation*: off.
+* *Enable Device Flow*: off.
+
+. After saving, copy the Client ID and generate a Client Secret.
+
+. In Netlify, set two environment variables on the site that hosts the functions:
++
+* `GITHUB_CLIENT_ID` — public.
+* `GITHUB_CLIENT_SECRET` — mark "Contains secret values" so it isn't readable in the UI.
+
+. Set `VITE_GITHUB_CLIENT_ID` in the SPA build environment (Netlify SPA site, GitHub Pages CI, or local `.env.local`).
+
+=== Origin allowlist
+
+Both the function CORS layer and the `auth-callback` redirect destination are gated by a small regex allowlist in `netlify/functions/_lib/cors.mts`.
+Adjust it when adding new SPA deploy origins (additional Netlify sites, custom domains, etc.).
+
 == Known limitations
 
-* No GitHub App / OAuth yet.
-Authentication is by manually-pasted PAT only; the token lives in the browser's `localStorage` and is exposed to any script on this origin.
-The proper *GitHub App + Authorization Code + PKCE* flow (with a small token-exchange edge function) remains on the roadmap.
 * The unauthenticated mode's 60/h limit is shared per IP and will be exhausted quickly under multi-visitor load.
+* Access and refresh tokens live in `localStorage` or `sessionStorage` (user choice) — accessible to any script on this origin via XSS.
+A future hardening would move tokens into HTTP-only cookies set by the token-exchange function, requiring credentialed CORS.
 * Build status uses the *check-runs* endpoint only.
 Legacy commit statuses (separate API) are not consulted, which may show `UNKNOWN` for repos that still publish via the older Status API.
 * Merge-conflict detection is not implemented (would require an extra `GET /pulls/<n>` call per PR).
@@ -141,6 +228,6 @@ Legacy commit statuses (separate API) are not consulted, which may show `UNKNOWN
 
 == Roadmap (not in MVP)
 
-* GitHub App + Authorization Code + PKCE flow with a small token-exchange edge function (per the original Perplexity sketch).
 * Authenticated polling at higher frequency (~3 minutes) and richer data (private repos, conflict status).
 * Hybrid mode: anonymous = sparse cache, authenticated = fresher view.
+* Move OAuth tokens into HTTP-only cookies (set by the token-exchange function) instead of `localStorage`, eliminating XSS exposure of the access token.

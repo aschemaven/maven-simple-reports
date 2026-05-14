@@ -15,6 +15,8 @@
  */
 
 import { useEffect, useState } from 'react'
+import type { StoredOauthTokens } from '../lib/oauth'
+import { oauthConfigured } from '../lib/oauth'
 
 // Classic PAT creation page accepts ?description= and ?scopes= query params.
 // Leaving scopes empty means no checkboxes are pre-selected — which is what
@@ -26,16 +28,28 @@ const FINE_GRAINED_PAT_URL = 'https://github.com/settings/personal-access-tokens
 interface Props {
   token: string
   persist: boolean
+  oauth: StoredOauthTokens | null
+  oauthError: string | null
   onSave: (token: string, persist: boolean) => void
   onClear: () => void
+  onConnectOauth: () => void
+  onDisconnectOauth: () => void
 }
 
-export function TokenInput({ token, persist, onSave, onClear }: Props) {
+export function TokenInput({
+  token,
+  persist,
+  oauth,
+  oauthError,
+  onSave,
+  onClear,
+  onConnectOauth,
+  onDisconnectOauth,
+}: Props) {
   const [draft, setDraft] = useState(token)
   const [persistDraft, setPersistDraft] = useState(persist)
   const [reveal, setReveal] = useState(false)
 
-  // Resync if the parent state changes outside this component
   useEffect(() => {
     setDraft(token)
   }, [token])
@@ -56,23 +70,42 @@ export function TokenInput({ token, persist, onSave, onClear }: Props) {
     onClear()
   }
 
-  const storageLabel = token
-    ? persist
-      ? 'localStorage (persistent)'
-      : 'sessionStorage (this tab only)'
-    : '—'
+  const authState: 'oauth' | 'pat' | 'anonymous' = oauth
+    ? 'oauth'
+    : token
+      ? 'pat'
+      : 'anonymous'
+
+  const storageLabel = (() => {
+    if (authState === 'anonymous') return '—'
+    return persist ? 'localStorage (persistent)' : 'sessionStorage (this tab only)'
+  })()
 
   return (
     <details className="settings">
       <summary>
         Settings ·{' '}
-        <span className={token ? 'auth-on' : 'auth-off'}>
-          {token ? 'authenticated' : 'anonymous'}
+        <span className={authState !== 'anonymous' ? 'auth-on' : 'auth-off'}>
+          {authState === 'oauth'
+            ? 'authenticated (GitHub OAuth)'
+            : authState === 'pat'
+              ? 'authenticated (PAT)'
+              : 'anonymous'}
         </span>
       </summary>
       <div className="settings-body">
+        <OauthSection
+          oauth={oauth}
+          oauthError={oauthError}
+          configured={oauthConfigured()}
+          onConnect={onConnectOauth}
+          onDisconnect={onDisconnectOauth}
+        />
+
+        <hr className="settings-divider" />
+
         <label className="settings-field" htmlFor="gh-token">
-          GitHub Personal Access Token
+          GitHub Personal Access Token (manual fallback)
         </label>
         <div className="settings-row">
           <input
@@ -104,8 +137,8 @@ export function TokenInput({ token, persist, onSave, onClear }: Props) {
             checked={persistDraft}
             onChange={(e) => setPersistDraft(e.target.checked)}
           />
-          Remember on this device (store in <code>localStorage</code>);
-          uncheck to keep the token only for this tab (<code>sessionStorage</code>).
+          Remember on this device (store in <code>localStorage</code>); uncheck to keep
+          the token only for this tab (<code>sessionStorage</code>).
         </label>
         <p className="settings-help muted">
           Don't have a token?{' '}
@@ -131,4 +164,80 @@ export function TokenInput({ token, persist, onSave, onClear }: Props) {
       </div>
     </details>
   )
+}
+
+interface OauthSectionProps {
+  oauth: StoredOauthTokens | null
+  oauthError: string | null
+  configured: boolean
+  onConnect: () => void
+  onDisconnect: () => void
+}
+
+function OauthSection({ oauth, oauthError, configured, onConnect, onDisconnect }: OauthSectionProps) {
+  if (oauth) {
+    const accessIn = Math.max(0, oauth.access_expires_at - Date.now())
+    const refreshIn = Math.max(0, oauth.refresh_expires_at - Date.now())
+    return (
+      <div className="oauth-section">
+        <div className="settings-field">Sign in with GitHub</div>
+        <div className="settings-row">
+          <span className="muted">
+            Connected via GitHub OAuth. Access token{' '}
+            {accessIn === 0
+              ? 'expired (will refresh on next request)'
+              : `refreshes automatically in ${formatDuration(accessIn)}`}
+            ; refresh token valid for {formatDuration(refreshIn)}.
+          </span>
+        </div>
+        <div className="settings-row">
+          <button type="button" onClick={onDisconnect}>
+            Disconnect
+          </button>
+        </div>
+      </div>
+    )
+  }
+
+  return (
+    <div className="oauth-section">
+      <div className="settings-field">Sign in with GitHub</div>
+      <div className="settings-row">
+        <button
+          type="button"
+          onClick={onConnect}
+          disabled={!configured}
+          title={
+            configured
+              ? 'Start the OAuth flow (you will be redirected to github.com)'
+              : 'OAuth is not configured. Set VITE_GITHUB_CLIENT_ID and build the SPA.'
+          }
+        >
+          Connect with GitHub
+        </button>
+        {!configured && (
+          <span className="muted">
+            Disabled — <code>VITE_GITHUB_CLIENT_ID</code> not configured in this build.
+          </span>
+        )}
+      </div>
+      {oauthError && <p className="settings-help warn-text">OAuth error: {oauthError}</p>}
+      <p className="settings-help muted">
+        Logs you in via the registered GitHub App. The access token refreshes
+        automatically every ~8 hours; the refresh token is valid for 6 months. No
+        scopes are required for read-only access to public repos.
+      </p>
+    </div>
+  )
+}
+
+function formatDuration(ms: number): string {
+  const totalMin = Math.round(ms / 60_000)
+  if (totalMin < 1) return '<1 min'
+  if (totalMin < 60) return `${totalMin} min`
+  const hours = Math.floor(totalMin / 60)
+  const mins = totalMin % 60
+  if (hours < 48) return mins ? `${hours} h ${mins} min` : `${hours} h`
+  const days = Math.floor(hours / 24)
+  return `${days} day${days === 1 ? '' : 's'}`
 }

@@ -3,3 +3,7 @@ dist/
 *.log
 .vite/
 *.tsbuildinfo
+
+# Vite env files (may carry per-developer secrets like OAuth client IDs)
+.env.local
+.env.*.local

@@ -230,6 +230,18 @@ header h1 {
   cursor: not-allowed;
 }
 
+.oauth-section {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.settings-divider {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 4px 0;
+}
+
 .settings-checkbox {
   display: flex;
   align-items: flex-start;

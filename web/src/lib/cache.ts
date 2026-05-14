@@ -21,6 +21,7 @@ const FILTER_KEY = 'gh-filter:v1'
 const TOKEN_KEY = 'gh-token:v1'
 const TOKEN_PERSIST_KEY = 'gh-token-persist:v1'
 const HIDE_EMPTY_KEY = 'gh-hide-empty:v1'
+const OAUTH_KEY = 'gh-oauth:v1'
 
 const ARCHIVED_TTL_MS = 7 * 24 * 60 * 60_000
 
@@ -227,6 +228,43 @@ export function writeToken(token: string, persist: boolean): void {
 export function writeTokenPersist(persist: boolean): void {
   try {
     localStorage.setItem(TOKEN_PERSIST_KEY, persist ? '1' : '0')
+  } catch {
+    // ignore
+  }
+}
+
+/**
+ * Read the OAuth tokens (access + refresh + expirations). The persist flag
+ * picks between localStorage (set) and sessionStorage (clear), same as the
+ * PAT. We prefer localStorage if both happen to have a copy.
+ */
+export function readOauth<T>(): T | null {
+  try {
+    const persisted = localStorage.getItem(OAUTH_KEY)
+    if (persisted) return JSON.parse(persisted) as T
+    const session = sessionStorage.getItem(OAUTH_KEY)
+    if (session) return JSON.parse(session) as T
+    return null
+  } catch {
+    return null
+  }
+}
+
+export function writeOauth<T>(tokens: T | null, persist: boolean): void {
+  try {
+    if (!tokens) {
+      localStorage.removeItem(OAUTH_KEY)
+      sessionStorage.removeItem(OAUTH_KEY)
+      return
+    }
+    const value = JSON.stringify(tokens)
+    if (persist) {
+      localStorage.setItem(OAUTH_KEY, value)
+      sessionStorage.removeItem(OAUTH_KEY)
+    } else {
+      sessionStorage.setItem(OAUTH_KEY, value)
+      localStorage.removeItem(OAUTH_KEY)
+    }
   } catch {
     // ignore
   }
