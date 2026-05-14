@@ -36,6 +36,16 @@ Unchanged responses come back as 304 and reuse the cached body.
 * *Backoff on 403/429* using `x-ratelimit-reset` or `Retry-After`.
 * *Polling*: ~30 minutes between full refresh cycles, with an inter-request gap to spread the load.
 
+== UI controls
+
+Repo filter::
+A regex input above the status bar narrows the fetch cycle to a subset of `apache/maven-*` repos.
+The pattern is persisted in `localStorage` and applied immediately: previously-fetched repos that no longer match are hidden, newly-matching repos are queued for the next fetch.
+Useful to stay within the unauthenticated 60/h quota by polling only the repos you care about (e.g. `mvnd|surefire`).
+
+Restart cycle::
+Clears the local cache (request bodies, archived-repo flags, persisted results), resets the queue backoff, and re-queues the currently active set from scratch.
+
 == Rate limits (important)
 
 GitHub's unauthenticated REST API limit is 60 requests per hour per IP, *shared* across all visitors going through the same egress IP.
@@ -83,7 +93,8 @@ web/
     ├── components/          # presentational
     │   ├── PrTable.tsx
     │   ├── StatusBadge.tsx
-    │   └── RateLimitInfo.tsx
+    │   ├── RateLimitInfo.tsx
+    │   └── FilterInput.tsx  # regex repo filter (persisted in localStorage)
     └── lib/
         ├── repos.ts         # the apache/maven-* list
         ├── types.ts

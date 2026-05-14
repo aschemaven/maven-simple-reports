@@ -70,6 +70,74 @@ header h1 {
   color: var(--muted);
 }
 
+.meta-sep.grow {
+  flex: 1 1 auto;
+}
+
+.restart,
+.filter-reset {
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--fg);
+  padding: 4px 10px;
+  border-radius: 4px;
+  font: inherit;
+  cursor: pointer;
+}
+
+.restart:hover,
+.filter-reset:hover:not(:disabled) {
+  background: var(--row-alt);
+}
+
+.filter-reset:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.filter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  padding: 8px 12px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  margin-bottom: 12px;
+  font-size: 13px;
+}
+
+.filter label {
+  font-weight: 600;
+  color: var(--muted);
+}
+
+.filter input {
+  flex: 1 1 240px;
+  min-width: 200px;
+  padding: 4px 8px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  background: var(--bg);
+  color: var(--fg);
+  font: inherit;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+.filter input:focus {
+  outline: 2px solid var(--warn-fg);
+  outline-offset: -1px;
+}
+
+.filter.invalid input {
+  border-color: var(--warn-fg);
+  background: var(--warn-bg);
+}
+
+.filter-status {
+  flex: 0 0 auto;
+}
+
 .muted {
   color: var(--muted);
 }
@@ -125,6 +193,21 @@ code {
 .pr-table .repo-header td {
   background: var(--row-alt);
   font-weight: 600;
+}
+
+.pr-table .repo-header-empty td {
+  font-weight: 400;
+  background: transparent;
+  padding: 4px 12px;
+}
+
+.pr-table .repo-header-empty + .repo-header-empty td {
+  border-top: 1px dashed var(--border);
+}
+
+.pr-table .repo-header-active td {
+  background: var(--warn-bg);
+  color: var(--warn-fg);
 }
 
 .status-badge {

@@ -48,6 +48,7 @@ export interface RepoFetchResult {
   fetchedAt: number
   fromCache: boolean
   error?: string
+  archived?: boolean
 }
 
 export interface DashboardState {

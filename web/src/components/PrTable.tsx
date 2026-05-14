@@ -18,18 +18,35 @@ import type { DependabotPr, RepoFetchResult } from '../lib/types'
 import { MAVEN_OWNER } from '../lib/repos'
 import { StatusBadge } from './StatusBadge'
 
-function formatDate(iso: string): string {
+const STALE_THRESHOLD_MS = 60 * 60_000
+
+function formatPrDate(iso: string): string {
   return iso.slice(0, 10)
 }
 
-export function PrTable({ repos }: { repos: RepoFetchResult[] }) {
-  const reposWithPrs = repos
-    .filter((r) => r.prs.length > 0)
-    .sort((a, b) => a.repo.localeCompare(b.repo))
-
-  if (reposWithPrs.length === 0) {
-    return <p className="empty">No open Dependabot PRs found yet.</p>
+function formatFetchedAt(ms: number): string {
+  const d = new Date(ms)
+  const ageMs = Date.now() - ms
+  if (ageMs < STALE_THRESHOLD_MS) {
+    return d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
   }
+  return d.toLocaleString([], {
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+    hour: '2-digit',
+    minute: '2-digit',
+  })
+}
+
+interface Props {
+  allRepos: readonly string[]
+  results: Record<string, RepoFetchResult>
+  inFlight: string | null
+}
+
+export function PrTable({ allRepos, results, inFlight }: Props) {
+  const sorted = [...allRepos].sort((a, b) => a.localeCompare(b))
 
   return (
     <table className="pr-table">
@@ -42,29 +59,39 @@ export function PrTable({ repos }: { repos: RepoFetchResult[] }) {
         </tr>
       </thead>
       <tbody>
-        {reposWithPrs.map((r) => (
-          <RepoRows key={r.repo} result={r} />
+        {sorted.map((repo) => (
+          <RepoRows
+            key={repo}
+            repo={repo}
+            result={results[repo]}
+            isInFlight={inFlight === repo}
+          />
         ))}
       </tbody>
     </table>
   )
 }
 
-function RepoRows({ result }: { result: RepoFetchResult }) {
-  const repoUrl = `https://github.com/${MAVEN_OWNER}/${result.repo}/pulls`
-  const prs = [...result.prs].sort((a, b) => b.createdAt.localeCompare(a.createdAt))
+interface RepoRowsProps {
+  repo: string
+  result: RepoFetchResult | undefined
+  isInFlight: boolean
+}
+
+function RepoRows({ repo, result, isInFlight }: RepoRowsProps) {
+  const repoUrl = `https://github.com/${MAVEN_OWNER}/${repo}/pulls`
+  const prs = result ? [...result.prs].sort((a, b) => b.createdAt.localeCompare(a.createdAt)) : []
+  const status = computeStatus(result, isInFlight)
+  const empty = prs.length === 0
+  const className = `repo-header${empty ? ' repo-header-empty' : ''}${isInFlight ? ' repo-header-active' : ''}`
   return (
     <>
-      <tr className="repo-header">
+      <tr className={className}>
         <td colSpan={4}>
           <a href={repoUrl} target="_blank" rel="noreferrer">
-            {result.repo}
+            {repo}
           </a>
-          <span className="muted">
-            {' '}
-            · {prs.length} PR{prs.length === 1 ? '' : 's'} · updated{' '}
-            {new Date(result.fetchedAt).toLocaleTimeString()}
-          </span>
+          <span className="muted"> · {status}</span>
         </td>
       </tr>
       {prs.map((pr) => (
@@ -74,11 +101,20 @@ function RepoRows({ result }: { result: RepoFetchResult }) {
   )
 }
 
+function computeStatus(result: RepoFetchResult | undefined, isInFlight: boolean): string {
+  if (isInFlight) return 'fetching…'
+  if (!result) return 'pending'
+  if (result.error) return `error: ${result.error}`
+  const fetched = formatFetchedAt(result.fetchedAt)
+  if (result.prs.length === 0) return `no Dependabot PRs · last fetched ${fetched}`
+  return `${result.prs.length} PR${result.prs.length === 1 ? '' : 's'} · last fetched ${fetched}`
+}
+
 function PrRow({ pr }: { pr: DependabotPr }) {
   return (
     <tr>
       <td>{pr.title}</td>
-      <td className="nowrap">{formatDate(pr.createdAt)}</td>
+      <td className="nowrap">{formatPrDate(pr.createdAt)}</td>
       <td>
         <a href={pr.checksUrl} target="_blank" rel="noreferrer">
           <StatusBadge state={pr.buildState} />

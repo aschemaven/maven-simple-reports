@@ -38,6 +38,10 @@ class SerialQueue {
     if (untilMs > this.backoffUntil) this.backoffUntil = untilMs
   }
 
+  clearBackoff(): void {
+    this.backoffUntil = 0
+  }
+
   enqueue<T>(work: () => Promise<T>): Promise<T> {
     return new Promise<T>((resolve, reject) => {
       const item: QueueItem = {
@@ -74,6 +78,11 @@ export function subscribeRateLimit(fn: (rl: RateLimitInfo | null) => void): () =
 function publishRateLimit(rl: RateLimitInfo | null): void {
   lastRateLimit = rl
   for (const l of listeners) l(rl)
+}
+
+/** Force the next request to fire immediately, ignoring any pending backoff. */
+export function clearQueueBackoff(): void {
+  queue.clearBackoff()
 }
 
 function sleep(ms: number): Promise<void> {

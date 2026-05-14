@@ -17,7 +17,12 @@
 import { ghFetch, GhRateLimitError } from './githubFetch'
 import { deriveBuildState, type CheckRunsResponse } from './buildStatus'
 import { MAVEN_OWNER } from './repos'
+import { readArchived, writeArchived, writeResult } from './cache'
 import type { DependabotPr, RepoFetchResult } from './types'
+
+interface RepoMetadata {
+  archived: boolean
+}
 
 interface RestPullRequest {
   number: number
@@ -46,9 +51,36 @@ export interface FetchRepoOptions {
 
 export async function fetchRepoPrs(repo: string, opts: FetchRepoOptions = {}): Promise<RepoFetchResult> {
   try {
+    // Step 1: archived check (cached in localStorage for 7 days). If archived,
+    // we skip the PR fetch entirely so quota isn't wasted on dead repos.
+    let archived = false
+    const cachedArchived = readArchived(repo)
+    if (cachedArchived) {
+      archived = cachedArchived.archived
+    } else {
+      const meta = await ghFetch<RepoMetadata>(`/repos/${MAVEN_OWNER}/${repo}`, {
+        token: opts.token,
+        spaceBeforeMs: opts.spaceBeforeMs,
+      })
+      archived = !!meta.data.archived
+      writeArchived(repo, archived)
+    }
+
+    if (archived) {
+      const result: RepoFetchResult = {
+        repo,
+        prs: [],
+        fetchedAt: Date.now(),
+        fromCache: !!cachedArchived,
+        archived: true,
+      }
+      writeResult(repo, result)
+      return result
+    }
+
     const list = await ghFetch<RestPullRequest[]>(
       `/repos/${MAVEN_OWNER}/${repo}/pulls?state=open&per_page=100`,
-      { token: opts.token, spaceBeforeMs: opts.spaceBeforeMs },
+      { token: opts.token, spaceBeforeMs: cachedArchived ? opts.spaceBeforeMs : 0 },
     )
 
     const dependabotPulls = list.data.filter((p) => isDependabotAuthor(p.user?.login))
@@ -92,13 +124,18 @@ export async function fetchRepoPrs(repo: string, opts: FetchRepoOptions = {}): P
       prs.push(pull)
     }
 
-    return {
+    const result: RepoFetchResult = {
       repo,
       prs,
       fetchedAt: Date.now(),
       fromCache: list.fromCache,
     }
+    writeResult(repo, result)
+    return result
   } catch (err) {
+    // Rate-limit errors bubble up so the caller can pause the cycle and
+    // re-queue this repo; everything else is recorded as a per-repo failure.
+    if (err instanceof GhRateLimitError) throw err
     return {
       repo,
       prs: [],

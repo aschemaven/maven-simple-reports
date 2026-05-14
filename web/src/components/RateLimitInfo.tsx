@@ -19,12 +19,17 @@ import type { RateLimitInfo as RL } from '../lib/types'
 export function RateLimitInfo({ rl }: { rl: RL | null }) {
   if (!rl) return <span className="rate-limit muted">rate limit: unknown</span>
 
-  const resetIn = Math.max(0, rl.resetAt - Date.now())
-  const mins = Math.ceil(resetIn / 60_000)
+  const reset = new Date(rl.resetAt)
+  const resetTime = reset.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+  const diffMs = rl.resetAt - Date.now()
+  const mins = Math.max(0, Math.ceil(diffMs / 60_000))
   const low = rl.remaining < 5
+
+  const used = Math.max(0, rl.limit - rl.remaining)
+
   return (
     <span className={`rate-limit ${low ? 'warn' : ''}`}>
-      GitHub API quota: {rl.remaining}/{rl.limit} (resets in {mins} min)
+      GitHub API: {rl.remaining} left of {rl.limit} ({used} used) · resets at {resetTime} (in {mins} min)
     </span>
   )
 }
