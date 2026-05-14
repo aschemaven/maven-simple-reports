@@ -17,13 +17,15 @@
 import { originAllowed } from './_lib/cors.mjs'
 
 // Stable OAuth callback. GitHub redirects here with ?code=&state=. The state
-// is a base64-encoded JSON `{ origin, csrf }`, written by the SPA before the
-// authorize step. We validate the origin against the allowlist and 302 back
-// to the SPA with code + state intact, so the SPA can finish the exchange
-// from its own origin.
+// is a base64-encoded JSON `{ origin, path, csrf }`, written by the SPA before
+// the authorize step. We validate the origin against the allowlist and 302
+// back to <origin><path> with code + state intact, so the SPA can finish the
+// exchange from its own URL — important when the SPA isn't at the origin's
+// root (e.g. /dependabot-prs/ on this deploy).
 
 interface DecodedState {
   origin?: string
+  path?: string
   csrf?: string
 }
 
@@ -60,9 +62,20 @@ export default async (request: Request): Promise<Response> => {
     )
   }
 
-  // Forward to the SPA on the original origin. We pass code + state through
-  // so the SPA can verify CSRF and perform the token exchange itself.
-  const dest = new URL('/', parsed.origin)
+  // Resolve the destination path on the trusted origin. We must guard against
+  // protocol-relative (`//evil.example/x`) or absolute (`https://...`) paths
+  // that the URL constructor would happily resolve away from the origin.
+  // After parsing, the resulting origin must still match the allowlisted one.
+  const rawPath = typeof parsed.path === 'string' && parsed.path.startsWith('/') ? parsed.path : '/'
+  let dest: URL
+  try {
+    dest = new URL(rawPath, parsed.origin)
+  } catch {
+    return new Response('Invalid path in state', { status: 400 })
+  }
+  if (dest.origin !== parsed.origin) {
+    return new Response('Path attempts to break out of origin', { status: 400 })
+  }
   if (code) dest.searchParams.set('code', code)
   dest.searchParams.set('state', stateRaw)
   if (error) dest.searchParams.set('error', error)

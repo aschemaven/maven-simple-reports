@@ -40,6 +40,10 @@ export function oauthConfigured(): boolean {
 
 interface OauthState {
   origin: string
+  // Path on which the SPA lives. The auth-callback function appends this when
+  // redirecting back so we land on the SPA, not on whatever else is at the
+  // origin's root (e.g. a static AsciiDoctor index on Netlify previews).
+  path: string
   csrf: string
 }
 
@@ -75,7 +79,11 @@ export async function startOAuthFlow(): Promise<void> {
   sessionStorage.setItem(VERIFIER_SESSION_KEY, verifier)
   sessionStorage.setItem(STATE_SESSION_KEY, csrf)
 
-  const state = encodeState({ origin: window.location.origin, csrf })
+  const state = encodeState({
+    origin: window.location.origin,
+    path: window.location.pathname,
+    csrf,
+  })
 
   const url = new URL(GITHUB_AUTHORIZE_URL)
   url.searchParams.set('client_id', CLIENT_ID)
