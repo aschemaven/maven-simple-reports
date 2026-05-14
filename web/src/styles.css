@@ -6,6 +6,8 @@
   --row-alt: #f6f8fa;
   --warn-bg: #fff8c5;
   --warn-fg: #7d4e00;
+  --success-fg: #1a7f37;
+  --danger-fg: #cf222e;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -17,6 +19,8 @@
     --row-alt: #161b22;
     --warn-bg: #3a2d04;
     --warn-fg: #f3e9b3;
+    --success-fg: #3fb950;
+    --danger-fg: #f85149;
   }
 }
 
@@ -153,6 +157,10 @@ header h1 {
   font-weight: 600;
 }
 
+.settings > summary::marker {
+  font-size: 16px;
+}
+
 .settings[open] > summary {
   border-bottom: 1px solid var(--border);
 }
@@ -274,6 +282,28 @@ code {
   border-radius: 3px;
 }
 
+.pr-table-controls {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 8px;
+  justify-content: flex-end;
+}
+
+.pr-table-controls button {
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--fg);
+  padding: 4px 10px;
+  border-radius: 4px;
+  font: inherit;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.pr-table-controls button:hover {
+  background: var(--row-alt);
+}
+
 .pr-table {
   width: 100%;
   border-collapse: collapse;
@@ -321,6 +351,49 @@ code {
 .pr-table .repo-header-active td {
   background: var(--warn-bg);
   color: var(--warn-fg);
+}
+
+.repo-toggle {
+  border: none;
+  background: transparent;
+  color: var(--fg);
+  font: inherit;
+  font-size: 16px;
+  cursor: pointer;
+  padding: 0 8px 0 0;
+  width: 24px;
+  text-align: left;
+  line-height: 1;
+}
+
+.repo-toggle:disabled {
+  visibility: hidden;
+}
+
+.repo-toggle:focus-visible {
+  outline: 2px solid var(--warn-fg);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+.count {
+  font-weight: 600;
+}
+
+.count-success {
+  color: var(--success-fg);
+}
+
+.count-failure {
+  color: var(--danger-fg);
+}
+
+.count-pending {
+  color: var(--warn-fg);
+}
+
+.pr-table .pr-row .pr-indent {
+  padding-left: 32px;
 }
 
 .status-badge {

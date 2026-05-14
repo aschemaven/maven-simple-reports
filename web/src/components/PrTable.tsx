@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+import { useState } from 'react'
 import type { DependabotPr, RepoFetchResult } from '../lib/types'
 import { MAVEN_OWNER } from '../lib/repos'
 import { StatusBadge } from './StatusBadge'
@@ -39,6 +40,35 @@ function formatFetchedAt(ms: number): string {
   })
 }
 
+interface BuildCounts {
+  success: number
+  failure: number
+  pending: number
+  unknown: number
+}
+
+function countBuildStates(prs: DependabotPr[]): BuildCounts {
+  const c: BuildCounts = { success: 0, failure: 0, pending: 0, unknown: 0 }
+  for (const pr of prs) {
+    switch (pr.buildState) {
+      case 'SUCCESS':
+        c.success++
+        break
+      case 'FAILURE':
+      case 'CONFLICT':
+        c.failure++
+        break
+      case 'PENDING':
+        c.pending++
+        break
+      default:
+        c.unknown++
+        break
+    }
+  }
+  return c
+}
+
 interface Props {
   allRepos: readonly string[]
   results: Record<string, RepoFetchResult>
@@ -47,28 +77,59 @@ interface Props {
 
 export function PrTable({ allRepos, results, inFlight }: Props) {
   const sorted = [...allRepos].sort((a, b) => a.localeCompare(b))
+  // Explicit per-repo overrides. Missing key → default: expanded iff the repo
+  // has at least one PR.
+  const [collapsed, setCollapsed] = useState<Record<string, boolean>>({})
+
+  const isCollapsed = (repo: string): boolean => {
+    if (repo in collapsed) return collapsed[repo]
+    const result = results[repo]
+    return !result || result.prs.length === 0
+  }
+
+  const toggle = (repo: string) => {
+    setCollapsed((c) => ({ ...c, [repo]: !isCollapsed(repo) }))
+  }
+
+  const setAll = (value: boolean) => {
+    const next: Record<string, boolean> = {}
+    for (const r of sorted) next[r] = value
+    setCollapsed(next)
+  }
 
   return (
-    <table className="pr-table">
-      <thead>
-        <tr>
-          <th>Title</th>
-          <th>Date</th>
-          <th>Build status</th>
-          <th>PR</th>
-        </tr>
-      </thead>
-      <tbody>
-        {sorted.map((repo) => (
-          <RepoRows
-            key={repo}
-            repo={repo}
-            result={results[repo]}
-            isInFlight={inFlight === repo}
-          />
-        ))}
-      </tbody>
-    </table>
+    <div className="pr-table-wrap">
+      <div className="pr-table-controls">
+        <button type="button" onClick={() => setAll(false)}>
+          Expand all
+        </button>
+        <button type="button" onClick={() => setAll(true)}>
+          Collapse all
+        </button>
+      </div>
+      <table className="pr-table">
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Date</th>
+            <th>Build status</th>
+            <th>PR</th>
+          </tr>
+        </thead>
+        <tbody>
+          {sorted.map((repo) => (
+            <RepoRows
+              key={repo}
+              repo={repo}
+              result={results[repo]}
+              isInFlight={inFlight === repo}
+              collapsed={isCollapsed(repo)}
+              onToggle={() => toggle(repo)}
+            />
+          ))}
+        </tbody>
+      </table>
+    </div>
   )
 }
 
@@ -76,44 +137,95 @@ interface RepoRowsProps {
   repo: string
   result: RepoFetchResult | undefined
   isInFlight: boolean
+  collapsed: boolean
+  onToggle: () => void
 }
 
-function RepoRows({ repo, result, isInFlight }: RepoRowsProps) {
+function RepoRows({ repo, result, isInFlight, collapsed, onToggle }: RepoRowsProps) {
   const repoUrl = `https://github.com/${MAVEN_OWNER}/${repo}/pulls`
   const prs = result ? [...result.prs].sort((a, b) => b.createdAt.localeCompare(a.createdAt)) : []
-  const status = computeStatus(result, isInFlight)
+  const counts = countBuildStates(prs)
   const empty = prs.length === 0
-  const className = `repo-header${empty ? ' repo-header-empty' : ''}${isInFlight ? ' repo-header-active' : ''}`
+  const className = `repo-header${empty ? ' repo-header-empty' : ''}${
+    isInFlight ? ' repo-header-active' : ''
+  }`
+  const canToggle = !empty
+
   return (
     <>
       <tr className={className}>
         <td colSpan={4}>
+          <button
+            type="button"
+            className="repo-toggle"
+            onClick={onToggle}
+            disabled={!canToggle}
+            aria-expanded={!collapsed}
+            aria-label={collapsed ? `Expand ${repo}` : `Collapse ${repo}`}
+            title={canToggle ? (collapsed ? 'Expand' : 'Collapse') : 'Nothing to expand'}
+          >
+            {collapsed ? '▶' : '▼'}
+          </button>
           <a href={repoUrl} target="_blank" rel="noreferrer">
             {repo}
           </a>
-          <span className="muted"> · {status}</span>
+          <RepoMeta result={result} isInFlight={isInFlight} counts={counts} prCount={prs.length} />
         </td>
       </tr>
-      {prs.map((pr) => (
-        <PrRow key={pr.number} pr={pr} />
-      ))}
+      {!collapsed && prs.map((pr) => <PrRow key={pr.number} pr={pr} />)}
     </>
   )
 }
 
-function computeStatus(result: RepoFetchResult | undefined, isInFlight: boolean): string {
-  if (isInFlight) return 'fetching…'
-  if (!result) return 'pending'
-  if (result.error) return `error: ${result.error}`
+interface RepoMetaProps {
+  result: RepoFetchResult | undefined
+  isInFlight: boolean
+  counts: BuildCounts
+  prCount: number
+}
+
+function RepoMeta({ result, isInFlight, counts, prCount }: RepoMetaProps) {
+  if (isInFlight) return <span className="muted"> · fetching…</span>
+  if (!result) return <span className="muted"> · pending</span>
+  if (result.error) return <span className="muted"> · error: {result.error}</span>
+
   const fetched = formatFetchedAt(result.fetchedAt)
-  if (result.prs.length === 0) return `no Dependabot PRs · last fetched ${fetched}`
-  return `${result.prs.length} PR${result.prs.length === 1 ? '' : 's'} · last fetched ${fetched}`
+  if (prCount === 0) {
+    return <span className="muted"> · no Dependabot PRs · {fetched}</span>
+  }
+  return (
+    <>
+      <span className="muted">
+        {' '}
+        · {prCount} PR{prCount === 1 ? '' : 's'}
+      </span>
+      {counts.success > 0 && (
+        <span className="count count-success">
+          {' '}
+          · ✓ {counts.success}
+        </span>
+      )}
+      {counts.failure > 0 && (
+        <span className="count count-failure">
+          {' '}
+          · ✗ {counts.failure}
+        </span>
+      )}
+      {counts.pending > 0 && (
+        <span className="count count-pending">
+          {' '}
+          · ⏳ {counts.pending}
+        </span>
+      )}
+      <span className="muted"> · {fetched}</span>
+    </>
+  )
 }
 
 function PrRow({ pr }: { pr: DependabotPr }) {
   return (
-    <tr>
-      <td>{pr.title}</td>
+    <tr className="pr-row">
+      <td className="pr-indent">{pr.title}</td>
       <td className="nowrap">{formatPrDate(pr.createdAt)}</td>
       <td>
         <a href={pr.checksUrl} target="_blank" rel="noreferrer">

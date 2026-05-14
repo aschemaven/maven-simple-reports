@@ -34,9 +34,14 @@ interface Entry<T> {
   fetchedAt: number
 }
 
+// ETag-cached response bodies can be large (full check-runs responses etc.).
+// Keep them in sessionStorage so they don't compete with persisted results
+// for the ~5 MB localStorage budget. The cache survives reloads of the same
+// tab; on tab close it's lost, but the next session simply fetches fresh
+// bodies (no ETag → full response, then re-populate the session cache).
 export function readCache<T>(key: string): Entry<T> | null {
   try {
-    const raw = localStorage.getItem(PREFIX + key)
+    const raw = sessionStorage.getItem(PREFIX + key)
     if (!raw) return null
     return JSON.parse(raw) as Entry<T>
   } catch {
@@ -46,7 +51,7 @@ export function readCache<T>(key: string): Entry<T> | null {
 
 export function writeCache<T>(key: string, entry: Entry<T>): void {
   try {
-    localStorage.setItem(PREFIX + key, JSON.stringify(entry))
+    sessionStorage.setItem(PREFIX + key, JSON.stringify(entry))
   } catch {
     // Quota exceeded or storage disabled — fail open, in-memory state still works
   }
@@ -54,29 +59,53 @@ export function writeCache<T>(key: string, entry: Entry<T>): void {
 
 export function deleteCache(key: string): void {
   try {
-    localStorage.removeItem(PREFIX + key)
+    sessionStorage.removeItem(PREFIX + key)
   } catch {
     // ignore
   }
 }
 
+// Migration: earlier versions stored the ETag cache in localStorage, which
+// could exhaust the 5 MB quota and silently break persisted results. Drop
+// any leftover gh-cache entries from localStorage so the budget is reclaimed.
+// Idempotent — safe to run every page load.
+export function migrateLegacyCache(): number {
+  let removed = 0
+  try {
+    const stale: string[] = []
+    for (let i = 0; i < localStorage.length; i++) {
+      const k = localStorage.key(i)
+      if (k && k.startsWith(PREFIX)) stale.push(k)
+    }
+    for (const k of stale) localStorage.removeItem(k)
+    removed = stale.length
+  } catch {
+    // ignore
+  }
+  return removed
+}
+
 export function clearAllCache(): number {
   let removed = 0
   try {
-    const keys: string[] = []
+    const lsKeys: string[] = []
     for (let i = 0; i < localStorage.length; i++) {
       const k = localStorage.key(i)
-      if (
-        k &&
-        (k.startsWith(PREFIX) ||
-          k.startsWith(RESULT_PREFIX) ||
-          k.startsWith(ARCHIVED_PREFIX))
-      ) {
-        keys.push(k)
+      if (k && (k.startsWith(RESULT_PREFIX) || k.startsWith(ARCHIVED_PREFIX))) {
+        lsKeys.push(k)
       }
     }
-    for (const k of keys) {
+    for (const k of lsKeys) {
       localStorage.removeItem(k)
+      removed++
+    }
+    const ssKeys: string[] = []
+    for (let i = 0; i < sessionStorage.length; i++) {
+      const k = sessionStorage.key(i)
+      if (k && k.startsWith(PREFIX)) ssKeys.push(k)
+    }
+    for (const k of ssKeys) {
+      sessionStorage.removeItem(k)
       removed++
     }
   } catch {

@@ -18,6 +18,7 @@ import { useEffect, useMemo, useRef, useState } from 'react'
 import { fetchRepoPrs } from './lib/dependabot'
 import { GhRateLimitError, clearQueueBackoff, subscribeRateLimit } from './lib/githubFetch'
 import {
+  migrateLegacyCache,
   readAllResults,
   readFilter,
   readToken,
@@ -77,10 +78,17 @@ export function App() {
   const initialActive = initialFilter.repos
 
   // Hydrate from any prior tab's persisted results so a freshly opened tab
-  // shows data instantly (even before its own fetch completes).
-  const [repos, setRepos] = useState<Record<string, RepoFetchResult>>(() =>
-    readAllResults<RepoFetchResult>(),
-  )
+  // shows data instantly (even before its own fetch completes). Also run the
+  // one-time migration that evicts the legacy ETag cache from localStorage so
+  // persisted results have the full 5 MB budget.
+  const [repos, setRepos] = useState<Record<string, RepoFetchResult>>(() => {
+    const removed = migrateLegacyCache()
+    const hydrated = readAllResults<RepoFetchResult>()
+    console.log(
+      `[cache] migration removed ${removed} legacy ETag entries from localStorage; hydrated ${Object.keys(hydrated).length} repos from persisted results`,
+    )
+    return hydrated
+  })
   const [pending, setPending] = useState<string[]>([...initialActive])
   const [rl, setRl] = useState<RL | null>(null)
   const [cycle, setCycle] = useState<CycleState>(initialCycle)
