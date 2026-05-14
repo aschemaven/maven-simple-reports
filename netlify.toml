@@ -1,0 +1,14 @@
+# Netlify build/deploy config.
+# The SPA build is driven by .github/workflows/publish-reports.yml and uploaded
+# via the actions-netlify step. This file only configures functions and
+# redirects so that the function endpoints are stable across deploys.
+
+[build]
+  publish = "public"
+  # Functions are bundled by Netlify directly from the directory below;
+  # no build command is set here because the GitHub Actions workflow runs
+  # `scripts/generate_report.sh` before the upload step.
+
+[functions]
+  directory = "netlify/functions"
+  node_bundler = "esbuild"

@@ -50,12 +50,18 @@ jobs:
             echo "alias=$SANITIZED_BRANCH" >> $GITHUB_OUTPUT
           fi
 
+      - name: Install Netlify Functions dependencies
+        if: github.ref != 'refs/heads/main'
+        working-directory: ./netlify
+        run: npm install --no-audit --no-fund
+
       - name: Deploy to Netlify (branches and PRs)
         if: github.ref != 'refs/heads/main'
         id: netlify-deploy
         uses: nwtgck/actions-netlify@v2
         with:
           publish-dir: './public'
+          functions-dir: './netlify/functions'
           production-deploy: false
           github-token: ${{ secrets.GITHUB_TOKEN }}
           deploy-message: "Deploy from GitHub Actions - ${{ github.event.head_commit.message || github.event.pull_request.title }}"

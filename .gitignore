@@ -6,3 +6,9 @@ public/*.html
 public/*.csv
 public/dependabot-prs/
 .claude/
+
+# Local Netlify folder
+.netlify
+
+# Netlify Functions deps — installed by CI before deploy
+netlify/node_modules/

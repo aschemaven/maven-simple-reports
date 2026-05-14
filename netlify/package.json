@@ -1,0 +1,9 @@
+{
+  "name": "maven-simple-reports-functions",
+  "version": "1.0.0",
+  "private": true,
+  "description": "OAuth token-exchange Netlify Functions for the Maven Dependabot dashboard.",
+  "dependencies": {
+    "@netlify/functions": "^2.8.0"
+  }
+}
