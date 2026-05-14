@@ -34,6 +34,12 @@ jobs:
         run: gem install asciidoctor
 
       - name: Generate reports
+        env:
+          # Public GitHub App Client ID baked into the SPA bundle for the OAuth
+          # "Connect with GitHub" button. Stored as a repository variable (not a
+          # secret) because it's visible in the OAuth authorize URL anyway.
+          # If unset, the build still succeeds; the button just stays disabled.
+          VITE_GITHUB_CLIENT_ID: ${{ vars.VITE_GITHUB_CLIENT_ID }}
         run: |
           chmod +x scripts/generate_report.sh
           scripts/generate_report.sh
