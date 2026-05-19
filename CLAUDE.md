@@ -8,8 +8,9 @@ This is a **supporting project** (not an MCP server) that publishes reports and 
 
 **Key outputs:**
 - A static **single-page dashboard** (`web/`) that calls the GitHub REST API directly from the browser to show open Dependabot PRs with live build status. This replaces the previous Python-generated `dependabot-prs.html`.
-- A **Python CSV/AsciiDoc exporter** (`scripts/export_maven_prs.py`), retained for ad-hoc local exports.
 - Reports published to GitHub Pages (main) and Netlify (PRs/branches) on push.
+
+Further Python-based reports may live under `scripts/` in the future.
 
 ## Commands
 
@@ -32,19 +33,6 @@ npm run typecheck    # tsc -b --noEmit
 
 See `web/README.adoc` for architecture, rate-limit handling, and roadmap.
 
-### Ad-hoc Python exports
-
-```bash
-# CSV of all open Maven PRs
-scripts/export_maven_prs.py
-
-# Dependabot only, AsciiDoc
-scripts/export_maven_prs.py --format asciidoc --dependabot
-
-# Filter by author
-scripts/export_maven_prs.py --author "someuser"
-```
-
 ### Testing the workflow
 
 The GitHub Actions workflow runs on push, PR, and manual dispatch (Actions → Publish Reports → Run workflow). The previous hourly cron schedule has been removed — the SPA polls itself in the browser.
@@ -56,7 +44,7 @@ The GitHub Actions workflow runs on push, PR, and manual dispatch (Actions → P
   ```bash
   gem install asciidoctor
   ```
-- **Python 3** and **GitHub CLI (`gh`)** — only needed for the legacy `export_maven_prs.py` exporter
+- **Python 3** and **GitHub CLI (`gh`)** — required by future Python-based report scripts under `scripts/`
 
 ## Project Architecture
 
@@ -65,8 +53,7 @@ The GitHub Actions workflow runs on push, PR, and manual dispatch (Actions → P
 1. **`web/`** — Vite + React + TypeScript SPA. Calls `api.github.com` directly with ETag/`If-None-Match` caching, serial request scheduling, and 403/429 backoff. Output: `web/dist/`.
 2. **`netlify/functions/`** — three TypeScript Netlify Functions (`auth-callback`, `token-exchange`, `token-refresh`) hosting the OAuth Authorization Code + PKCE flow against a registered GitHub App. They never touch dashboard data, only token exchange / refresh.
 3. **`scripts/generate_report.sh`** — orchestrator. Builds the SPA, copies it into `public/dependabot-prs/`, then runs `asciidoctor` on remaining `.adoc` files.
-4. **`scripts/export_maven_prs.py`** — legacy Python exporter (CSV/AsciiDoc) using `gh` CLI. No longer invoked by CI but kept for local use.
-5. **`.github/workflows/publish-reports.yml`** — runs `generate_report.sh`, publishes `public/` to GitHub Pages (main) or Netlify (PRs/branches), and uploads `netlify/functions/` alongside Netlify deploys.
+4. **`.github/workflows/publish-reports.yml`** — runs `generate_report.sh`, publishes `public/` to GitHub Pages (main) or Netlify (PRs/branches), and uploads `netlify/functions/` alongside Netlify deploys.
 
 ### Directory layout
 
