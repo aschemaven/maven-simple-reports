@@ -15,8 +15,9 @@
 //
 
 = Maven Dependabot Dashboard (SPA)
+:icons: font
 
-A statically-hosted single-page app that calls the GitHub REST API directly from the browser to show all open Dependabot PRs across the Apache Maven repositories, including build status.
+A statically hosted single-page app that calls the GitHub REST API directly from the browser to show all open Dependabot PRs across the Apache Maven repositories, including build status.
 
 It replaces the previously cron-generated `dependabot-prs.html` page.
 
@@ -30,7 +31,7 @@ Access tokens (~8 h) are refreshed automatically using the long-lived refresh to
 No expiry-handling, but works without any backend.
 
 Either path lifts the API limit from 60 req/h (anonymous) to ~5 000 req/h and shortens the refresh cycle from 30 min to 5 min.
-The default state is anonymous so the dashboard works for visitors without setup.
+The default state is anonymous, so the dashboard works for visitors without setup.
 
 == Architecture
 
@@ -42,14 +43,14 @@ The functions never touch the dashboard's PR data — that still goes browser-to
 Unchanged responses come back as 304 and reuse the cached body.
 * *Serial request scheduling* (one in-flight request at a time) to stay within GitHub's secondary rate-limit guidance.
 * *Backoff on 403/429* using `x-ratelimit-reset` or `Retry-After`.
-* *Polling*: ~30 minutes between full refresh cycles unauthenticated, ~5 minutes with a PAT configured. Inter-request gap spreads load across the rate-limit window.
+* *Polling*: ~30 minutes between full refresh cycles unauthenticated, ~5 minutes with a PAT configured. Inter-request gap spreads the load across the rate-limit window.
 
 == UI controls
 
 Settings · Sign in with GitHub::
 The recommended path.
 A *Connect with GitHub* button starts the OAuth Authorization Code + PKCE flow against a registered GitHub App.
-The user is redirected to `github.com`, authorises, and returns to the SPA with a fresh access token plus a refresh token.
+The user is redirected to `github.com`, authorizes, and returns to the SPA with a fresh access token plus a refresh token.
 Subsequent fetch cycles use the access token; when it expires (~8 h), the SPA quietly refreshes via the Netlify `token-refresh` function and continues without re-prompting.
 The refresh token is valid for ~6 months.
 +
@@ -60,7 +61,7 @@ The fallback path for environments without OAuth set up (no Netlify functions, o
 A Personal Access Token (fine-grained or classic, *no scopes required* for read-only public-repo access) can be pasted directly.
 The settings panel links to GitHub's PAT creation pages so the token can be generated without leaving context.
 The token is sent as `Authorization: Bearer …` on every request.
-Adding or clearing a token wakes a paused cycle so the new limit takes effect immediately.
+Adding or clearing a token wakes a paused cycle, so the new limit takes effect immediately.
 
 Both auth paths::
 A *Remember on this device* checkbox controls where the token (PAT _or_ OAuth) is kept: unchecked (default) stores in `sessionStorage` and is dropped when the tab closes; checked moves it to `localStorage` so it survives browser restarts.
@@ -68,31 +69,32 @@ A *Remember on this device* checkbox controls where the token (PAT _or_ OAuth) i
 [WARNING]
 ====
 Both storages hold the token in plain text and expose it to any script running on this origin (XSS).
-Only enter / connect on machines you trust, and revoke the token on GitHub if the browser profile is shared.
+Only enter/connect on machines you trust.
+Revoke the token on GitHub if the browser profile is shared.
 The Netlify functions keep the GitHub App *client secret* server-side; only the short-lived user-to-server access token and refresh token live in the browser.
 ====
 
 Repo filter::
 A regex input narrows the fetch cycle to a subset of `apache/maven-*` repos.
-The pattern is persisted in `localStorage` and applied immediately: previously-fetched repos that no longer match are hidden, newly-matching repos are queued for the next fetch.
+The pattern is persisted in `localStorage` and applied immediately: previously fetched repos that no longer match are hidden, newly matching repos are queued for the next fetch.
 Useful to stay within the unauthenticated 60/h quota by polling only the repos you care about (e.g. `mvnd|surefire`).
 
 Refresh now::
 Re-queues all active repos for an immediate refresh and lifts any pending rate-limit backoff.
-The action is non-destructive: previously-fetched entries remain visible until each repo is updated in place.
-ETag-cached responses that haven't changed come back as 304 (no body re-download), so this is cheap when the data is stable.
+The action is non-destructive: previously fetched entries remain visible until each repo is updated in place.
+ETag-cached responses that haven't changed come back as 304 responses (no response body to re-download), so this is cheap when the data is stable.
 
 == Rate limits (important)
 
 GitHub's unauthenticated REST API limit is 60 requests per hour per IP, *shared* across all visitors going through the same egress IP.
 The dashboard touches roughly _N_repos + N_dependabot_PRs_ endpoints per cycle, so the unauthenticated quota will be exhausted on the first refresh.
-That is acceptable for MVP because:
+That degraded mode is tolerable because:
 
-* The first cycle populates the cache; subsequent cycles will mostly receive 304s once authenticated mode is added.
+* The first cycle populates the cache; subsequent cycles mostly receive 304 responses.
 * Each repo's last successful result is persisted in `localStorage`, so reloads paint immediately from cache.
 * The UI surfaces the current quota and pause state so users can see when refresh is throttled.
 
-A future authenticated mode (per the Perplexity sketch in `../SPEC-*` if added) will lift this to ~5 000/h per token.
+Either authenticated path documented above (OAuth or PAT) lifts the limit to ~5 000/h per token, and is the recommended setup for anything beyond a quick look.
 
 == Local development
 
@@ -162,7 +164,7 @@ netlify/
 
 === Asset base path
 
-Asset URLs are emitted relative (`base: './'` in `vite.config.ts`), so the same build works at any deploy path: GH Pages under `/maven-simple-reports/dependabot-prs/`, Netlify branch deploys under `/dependabot-prs/`, or a local preview at the root.
+Asset URLs are emitted relative (`base: './'` in `vite.config.ts`), so the same build works at any deployment path: GH Pages under `/maven-simple-reports/dependabot-prs/`, Netlify branch deploys under `/dependabot-prs/`, or a local preview at the root.
 Override with `PUBLIC_BASE=/foo/ npm run build` if you need an absolute base.
 
 === OAuth (optional)
@@ -177,7 +179,7 @@ Publicly visible (it's in the OAuth authorize URL), so safe to commit per enviro
 Base URL of the Netlify Functions site that hosts `auth-callback`, `token-exchange`, and `token-refresh`.
 Defaults to `https://maven-simple-reports.netlify.app`.
 
-For local development, create `web/.env.local` (gitignored):
+For local development, create `web/.env.local` (ignored by Git):
 
 [source]
 ----
@@ -194,10 +196,10 @@ Steps to set one up:
 . Register at https://github.com/settings/apps/new with:
 +
 * *Homepage URL*: the production SPA URL.
-* *Callback URL*: `https://<netlify-site>.netlify.app/.netlify/functions/auth-callback` — exactly one URL covers every SPA origin, because the `auth-callback` function decodes the SPA's original origin from the `state` parameter and 302s the browser back there.
+* *Callback URL*: `https://<netlify-site>.netlify.app/.netlify/functions/auth-callback` — exactly one URL covers every SPA origin, because the `auth-callback` function decodes the SPA's original origin from the `state` parameter and issues a 302 redirect back to the browser.
 * *Webhook → Active*: off.
 * *Permissions*: leave all empty (the higher rate limit applies without any scopes).
-* *Where can this GitHub App be installed?*: Any account.
+* *Where can this GitHub App be installed?* Any account.
 * *Expire user authorization tokens*: on (provides the `refresh_token`).
 * *Request user authorization (OAuth) during installation*: off.
 * *Enable Device Flow*: off.
@@ -207,18 +209,18 @@ Steps to set one up:
 . In Netlify, set two environment variables on the site that hosts the functions:
 +
 * `GITHUB_CLIENT_ID` — public.
-* `GITHUB_CLIENT_SECRET` — mark "Contains secret values" so it isn't readable in the UI.
+* `GITHUB_CLIENT_SECRET` — mark "Contains secret values", so it isn't readable in the UI.
 
 . Set `VITE_GITHUB_CLIENT_ID` in the SPA build environment (Netlify SPA site, GitHub Pages CI, or local `.env.local`).
 
 === Origin allowlist
 
 Both the function CORS layer and the `auth-callback` redirect destination are gated by a small regex allowlist in `netlify/functions/_lib/cors.mts`.
-Adjust it when adding new SPA deploy origins (additional Netlify sites, custom domains, etc.).
+Adjust it when adding new SPA deploy origins — for example, additional Netlify sites or custom domains.
 
 == Known limitations
 
-* The unauthenticated mode's 60/h limit is shared per IP and will be exhausted quickly under multi-visitor load.
+* The unauthenticated mode's 60/h limit is shared per IP and will be exhausted quickly under multi-visitor traffic.
 * Access and refresh tokens live in `localStorage` or `sessionStorage` (user choice) — accessible to any script on this origin via XSS.
 A future hardening would move tokens into HTTP-only cookies set by the token-exchange function, requiring credentialed CORS.
 * Build status combines the modern *check-runs* endpoint with the legacy *combined commit status* (used by Apache Jenkins for the maven-box plugin builds).
@@ -229,7 +231,7 @@ A failure in either source flips the PR to FAILURE; this costs one extra REST ca
 == Future options for status fetching
 
 The current build-status path is _Option 1_ below: stay on REST, fetch check-runs *and* combined commit status, merge them.
-This keeps anonymous mode working but costs two requests per PR.
+This keeps the anonymous mode working but costs two requests per PR.
 Two alternative paths are documented here as fallbacks if Option 1 hits its limits.
 
 Option 2: migrate to GraphQL `statusCheckRollup`::
@@ -243,7 +245,7 @@ Cons: GraphQL requires authentication (no anonymous mode), uses a *point-based* 
 Reasonable to consider once OAuth is the dominant access path and anonymous mode is no longer the primary fallback.
 
 Option 3: hybrid REST + GraphQL::
-REST when anonymous (current behaviour), GraphQL when authenticated.
+REST when anonymous (current behavior), GraphQL when authenticated.
 Best functionality for signed-in users without breaking anonymous visitors, but roughly doubles the maintenance surface (two fetch paths, two `BuildState` derivations).
 +
 Worth considering only if anonymous traffic turns out to matter *and* signed-in users would benefit measurably from the GraphQL savings.

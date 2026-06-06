@@ -15,6 +15,7 @@
 //
 
 = Maven Reports
+:icons: font
 
 This site contains reports about Apache Maven repositories.
 
