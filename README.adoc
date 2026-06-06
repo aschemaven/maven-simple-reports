@@ -15,13 +15,46 @@
 //
 
 = Maven Simple Reports
+:icons: font
 
-This repository contains utility scripts and a single-page dashboard for reports about Apache Maven repositories.
+This repository publishes a small collection of reports about Apache Maven repositories.
+Currently, a Dependabot PR dashboard (single-page app) and a Maven 4 adoption report (regenerated daily as static AsciiDoc).
 
 == Dependabot PR dashboard (SPA)
 
 The primary user-facing report — open Dependabot PRs across the Apache Maven repositories with live build status — is a static single-page app under `web/`.
-It replaces the previous Python-generated `dependabot-prs.html` and is published to `\https://aschemaven.github.io/maven-simple-reports/dependabot-prs/`.
+It replaces the previous Python-generated `dependabot-prs.html` and is published to https://aschemaven.github.io/maven-simple-reports/dependabot-prs[].
 
-See `web/README.adoc` for architecture, rate-limit handling, and local development.
+See xref:web/README.adoc[] for architecture, rate-limit handling, and local development.
+
+== Maven 4 adoption report
+
+A scheduled Python script (`scripts/export_maven4_adoption.py`) searches GitHub for projects using Maven 4 — POM model version 4.1.0, the Maven 4 wrapper, and `apache-maven-4` invocations in GitHub Actions workflows.
+It runs daily at 06:00 UTC via `.github/workflows/publish-maven4-report.yml`, appends a snapshot to `data/maven4-adoption-history.json`, and commits the regenerated `public/maven4-adoption.adoc` back to `main` so the regular publishing pipeline picks it up.
+
+Apache Maven *component* repositories (the list in `.gh-configuration.yaml`) are filtered out as expected.
+Other Apache projects are kept on purpose: their Maven 4 adoption is itself a signal worth surfacing.
+
+=== Future extensions
+
+The following ideas from the original report SPEC remain open.
+Each one lists the tradeoff so we can pick it up when there's a concrete reason to.
+
+YAML POM support detection::
+Add a fourth GitHub code search for `build.maven.yml` / `pom.yml` files referencing the Maven 4 namespace.
+Drop-in extension of the existing `search_*` functions; no new architecture, just one more code-search query per run.
+
+Per-feature drill-down::
+Distinguish *build POM* vs. *consumer POM* usage, and surface which Maven 4-specific features each adopter exercises — for example, extension declarations or schema migrations.
+Requires fetching and parsing each POM body, not just confirming the namespace — more bandwidth and per-repo CPU.
+
+Cross-reference with Maven mailing list discussions::
+Link each adopter (or each adoption signal) to relevant `dev@maven.apache.org` or `users@maven.apache.org` threads via the sibling `mail-mcp` MCP server in the umbrella project.
++
+[IMPORTANT]
+====
+The MCP server only runs locally with an attached LLM, not on a GitHub-hosted runner.
+This rules out the current centralized, scheduled pipeline.
+A realistic path would be a separate on-demand report (e.g., a notebook or a developer-workstation CLI run) that consumes the latest committed `public/maven4-adoption.adoc` and produces an enriched, locally rendered companion.
+====
 
