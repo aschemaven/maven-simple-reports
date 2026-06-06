@@ -21,3 +21,4 @@ This site contains reports about Apache Maven repositories.
 == Available Reports
 
 * link:dependabot-prs/[Dependabot Pull Requests] - Live dashboard of open Dependabot PRs across Maven repositories (single-page app, fetches the GitHub REST API directly)
+* xref:maven4-adoption.adoc[Maven 4 Adoption] - External GitHub projects using Maven 4 POM format, wrapper, or GitHub Actions (regenerated daily)

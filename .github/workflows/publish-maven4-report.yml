@@ -1,0 +1,81 @@
+name: Publish Maven 4 Adoption Report
+
+on:
+  schedule:
+    # Daily at 06:00 UTC. The GitHub code search API caps at 10 requests/min,
+    # so a full scan takes several minutes; daily is plenty for adoption data.
+    - cron: '0 6 * * *'
+  workflow_dispatch:
+    inputs:
+      no_cache:
+        description: 'Disable API response cache (fetch fresh data from GitHub)'
+        required: false
+        default: false
+        type: boolean
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      actions: write
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Cache GitHub API responses
+        if: ${{ inputs.no_cache != true }}
+        uses: actions/cache@v4
+        with:
+          path: cache/gh_api_cache.json
+          key: maven4-gh-cache-${{ github.run_id }}
+          restore-keys: |
+            maven4-gh-cache-
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Generate Maven 4 adoption report
+        run: |
+          mkdir -p cache data public
+          NO_CACHE_FLAG=""
+          if [ "${{ inputs.no_cache }}" = "true" ]; then
+            NO_CACHE_FLAG="--no-cache"
+          fi
+          scripts/export_maven4_adoption.py \
+            --format asciidoc \
+            --output public/maven4-adoption.adoc \
+            $NO_CACHE_FLAG
+
+      - name: Upload generated files as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: maven4-adoption-report
+          path: |
+            public/maven4-adoption.adoc
+            data/maven4-adoption-history.json
+          if-no-files-found: error
+
+      # Only commit + re-trigger the publish workflow on main. Branch/dispatch
+      # runs from other refs leave the artifact downloadable but don't touch
+      # the repo.
+      - name: Commit report and history
+        if: github.ref == 'refs/heads/main'
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add public/maven4-adoption.adoc data/maven4-adoption-history.json
+          if git diff --staged --quiet; then
+            echo "No changes — nothing to commit"
+            exit 0
+          fi
+          git commit -m "Update Maven 4 adoption report ($(date -u +%Y-%m-%d))"
+          git push
+          # The default GITHUB_TOKEN's push does not trigger workflows that
+          # listen on push events, so kick the deploy pipeline explicitly.
+          gh workflow run publish-reports.yml --ref main
