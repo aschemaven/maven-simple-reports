@@ -26,17 +26,31 @@ export interface CheckRunsResponse {
   check_runs: CheckRun[]
 }
 
-export function deriveBuildState(checks: CheckRunsResponse): BuildState {
-  if (checks.total_count === 0) return 'UNKNOWN'
+interface CommitStatus {
+  state: string
+  context: string
+}
 
+// Legacy combined-status API. Apache Jenkins (ci-maven.apache.org) posts
+// build results here as StatusContext entries instead of CheckRuns, so
+// without this source the dashboard misses Jenkins failures on plugin PRs.
+export interface CommitStatusResponse {
+  state: string
+  statuses: CommitStatus[]
+}
+
+export function deriveBuildState(
+  checks: CheckRunsResponse,
+  status?: CommitStatusResponse | null,
+): BuildState {
   let hasFailure = false
   let hasPending = false
   let hasSuccess = false
 
   for (const run of checks.check_runs) {
-    const status = (run.status || '').toUpperCase()
+    const runStatus = (run.status || '').toUpperCase()
     const conclusion = (run.conclusion || '').toUpperCase()
-    const effective = status === 'COMPLETED' ? conclusion || 'UNKNOWN' : status
+    const effective = runStatus === 'COMPLETED' ? conclusion || 'UNKNOWN' : runStatus
 
     if (
       effective === 'FAILURE' ||
@@ -55,6 +69,17 @@ export function deriveBuildState(checks: CheckRunsResponse): BuildState {
       hasPending = true
     } else if (effective === 'SUCCESS' || effective === 'NEUTRAL' || effective === 'SKIPPED') {
       hasSuccess = true
+    }
+  }
+
+  // Combined-status rolls "no statuses" up to state=pending — only trust the
+  // individual entries, so an empty array stays neutral (UNKNOWN-eligible).
+  if (status && status.statuses.length > 0) {
+    for (const s of status.statuses) {
+      const state = (s.state || '').toUpperCase()
+      if (state === 'FAILURE' || state === 'ERROR') hasFailure = true
+      else if (state === 'PENDING') hasPending = true
+      else if (state === 'SUCCESS') hasSuccess = true
     }
   }
 

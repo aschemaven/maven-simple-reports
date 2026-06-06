@@ -440,6 +440,28 @@ code {
   color: var(--muted);
 }
 
+.pr-chip {
+  display: inline-block;
+  padding: 1px 6px;
+  margin-right: 6px;
+  border-radius: 4px;
+  border: 1px solid var(--border);
+  font-size: 11px;
+  font-weight: 600;
+  vertical-align: 1px;
+  color: var(--muted);
+}
+
+.pr-chip-draft {
+  color: var(--warn-fg);
+  border-color: var(--warn-fg);
+}
+
+.pr-chip-base {
+  font-weight: 500;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
 footer {
   margin-top: 32px;
   font-size: 12px;

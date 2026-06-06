@@ -257,7 +257,11 @@ function RepoMeta({ result, isInFlight, counts, prCount }: RepoMetaProps) {
 function PrRow({ pr }: { pr: DependabotPr }) {
   return (
     <tr className="pr-row">
-      <td className="pr-indent">{pr.title}</td>
+      <td className="pr-indent">
+        {pr.isDraft && <span className="pr-chip pr-chip-draft">Draft</span>}
+        {pr.baseRef && <span className="pr-chip pr-chip-base">→ {pr.baseRef}</span>}
+        {pr.title}
+      </td>
       <td className="nowrap">{formatPrDate(pr.createdAt)}</td>
       <td>
         <a href={pr.checksUrl} target="_blank" rel="noreferrer">

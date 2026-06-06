@@ -35,6 +35,7 @@ export interface DependabotPr {
   createdAt: string
   updatedAt: string
   isDraft: boolean
+  baseRef: string
   url: string
   checksUrl: string
   headSha: string

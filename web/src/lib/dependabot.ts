@@ -15,7 +15,11 @@
  */
 
 import { ghFetch, GhRateLimitError } from './githubFetch'
-import { deriveBuildState, type CheckRunsResponse } from './buildStatus'
+import {
+  deriveBuildState,
+  type CheckRunsResponse,
+  type CommitStatusResponse,
+} from './buildStatus'
 import { MAVEN_OWNER } from './repos'
 import { readArchived, writeArchived, writeResult } from './cache'
 import type { DependabotPr, RepoFetchResult } from './types'
@@ -33,6 +37,7 @@ interface RestPullRequest {
   draft: boolean
   html_url: string
   head: { sha: string }
+  base: { ref: string }
 }
 
 const DEPENDABOT_LOGIN_PATTERNS = [/^dependabot(\[bot\])?$/i, /^app\/dependabot$/i]
@@ -96,6 +101,7 @@ export async function fetchRepoPrs(repo: string, opts: FetchRepoOptions = {}): P
         createdAt: pr.created_at,
         updatedAt: pr.updated_at,
         isDraft: pr.draft,
+        baseRef: pr.base.ref,
         url: pr.html_url,
         checksUrl: `${baseUrl}/pull/${pr.number}/checks`,
         headSha: pr.head.sha,
@@ -109,7 +115,23 @@ export async function fetchRepoPrs(repo: string, opts: FetchRepoOptions = {}): P
             `/repos/${MAVEN_OWNER}/${repo}/commits/${pr.head.sha}/check-runs?per_page=100`,
             { token: opts.token },
           )
-          pull.buildState = deriveBuildState(checks.data)
+          // Legacy combined-status surfaces Apache Jenkins results that
+          // never appear as CheckRuns. Failure here mustn't drop the
+          // CheckRun signal we already have — fall back to checks-only.
+          let status: CommitStatusResponse | null = null
+          try {
+            const statusRes = await ghFetch<CommitStatusResponse>(
+              `/repos/${MAVEN_OWNER}/${repo}/commits/${pr.head.sha}/status?per_page=100`,
+              { token: opts.token },
+            )
+            status = statusRes.data
+          } catch (err) {
+            if (err instanceof GhRateLimitError) {
+              prs.push(pull)
+              throw err
+            }
+          }
+          pull.buildState = deriveBuildState(checks.data, status)
           pull.buildStateFetchedAt = Date.now()
         } catch (err) {
           if (err instanceof GhRateLimitError) {

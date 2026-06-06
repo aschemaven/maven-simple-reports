@@ -221,10 +221,32 @@ Adjust it when adding new SPA deploy origins (additional Netlify sites, custom d
 * The unauthenticated mode's 60/h limit is shared per IP and will be exhausted quickly under multi-visitor load.
 * Access and refresh tokens live in `localStorage` or `sessionStorage` (user choice) — accessible to any script on this origin via XSS.
 A future hardening would move tokens into HTTP-only cookies set by the token-exchange function, requiring credentialed CORS.
-* Build status uses the *check-runs* endpoint only.
-Legacy commit statuses (separate API) are not consulted, which may show `UNKNOWN` for repos that still publish via the older Status API.
+* Build status combines the modern *check-runs* endpoint with the legacy *combined commit status* (used by Apache Jenkins for the maven-box plugin builds).
+A failure in either source flips the PR to FAILURE; this costs one extra REST call per PR.
 * Merge-conflict detection is not implemented (would require an extra `GET /pulls/<n>` call per PR).
 * No service worker / push notifications.
+
+== Future options for status fetching
+
+The current build-status path is _Option 1_ below: stay on REST, fetch check-runs *and* combined commit status, merge them.
+This keeps anonymous mode working but costs two requests per PR.
+Two alternative paths are documented here as fallbacks if Option 1 hits its limits.
+
+Option 2: migrate to GraphQL `statusCheckRollup`::
+GitHub's GraphQL API exposes `pullRequest.commits.last.commit.statusCheckRollup`, which returns *both* CheckRun *and* StatusContext entries in a single rollup.
+A single query per repo can return all PRs with their rollup, draft flag, base ref, title, and author.
++
+Pros: fixes the Jenkins blind spot for free, fewer total requests, all the metadata in one shot.
++
+Cons: GraphQL requires authentication (no anonymous mode), uses a *point-based* rate limit rather than request counts (one bad nested query can cost 100+ points), and would need a rewrite of `githubFetch.ts` (different error/retry shape, weaker ETag/304 hit rates).
++
+Reasonable to consider once OAuth is the dominant access path and anonymous mode is no longer the primary fallback.
+
+Option 3: hybrid REST + GraphQL::
+REST when anonymous (current behaviour), GraphQL when authenticated.
+Best functionality for signed-in users without breaking anonymous visitors, but roughly doubles the maintenance surface (two fetch paths, two `BuildState` derivations).
++
+Worth considering only if anonymous traffic turns out to matter *and* signed-in users would benefit measurably from the GraphQL savings.
 
 == Roadmap (not in MVP)
 
