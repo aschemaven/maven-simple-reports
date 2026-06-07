@@ -85,17 +85,32 @@ jobs:
           npm ci
           npm run build
 
-      - name: Fetch latest production SPA artifact
+      # Prefer an artifact from the current branch (a developer may have
+      # dispatched build-spa.yml here for an experiment); fall back to the
+      # main-branch artifact otherwise. Production runs trigger from main,
+      # so the first lookup is a no-op for them.
+      - name: Fetch latest SPA artifact (current branch, then main)
         if: needs.detect-changes.outputs.spa-changed != 'true'
         run: |
           mkdir -p web/dist
-          RUN_ID=$(gh api "repos/${GITHUB_REPOSITORY}/actions/workflows/build-spa.yml/runs?status=success&branch=main&per_page=1" \
-                   --jq '.workflow_runs[0].id // empty')
+          BRANCH="${{ github.head_ref || github.ref_name }}"
+          RUN_ID=""
+          if [ "$BRANCH" != "main" ]; then
+            RUN_ID=$(gh api -X GET "repos/${GITHUB_REPOSITORY}/actions/workflows/build-spa.yml/runs" \
+                     -f branch="$BRANCH" -f status=success -f per_page=1 \
+                     --jq '.workflow_runs[0].id // empty')
+            [ -n "$RUN_ID" ] && echo "Found build-spa.yml run on $BRANCH: #$RUN_ID"
+          fi
+          if [ -z "$RUN_ID" ]; then
+            RUN_ID=$(gh api -X GET "repos/${GITHUB_REPOSITORY}/actions/workflows/build-spa.yml/runs" \
+                     -f branch=main -f status=success -f per_page=1 \
+                     --jq '.workflow_runs[0].id // empty')
+          fi
           if [ -n "$RUN_ID" ]; then
             gh run download "$RUN_ID" -R "$GITHUB_REPOSITORY" -n spa-dist -D web/dist/
-            echo "Restored SPA from build-spa.yml run #$RUN_ID"
+            echo "Restored SPA from run #$RUN_ID"
           else
-            echo "::warning::No successful build-spa.yml run found yet — SPA will be missing from this preview"
+            echo "::warning::No successful build-spa.yml run found on $BRANCH or main — SPA will be missing from this preview"
           fi
 
       - name: Upload prepared SPA
@@ -138,17 +153,29 @@ jobs:
             --output public/maven4-adoption.adoc \
             --no-history
 
-      - name: Fetch latest production Maven 4 report artifact
+      # Same prefer-branch-then-main pattern as for the SPA artifact.
+      - name: Fetch latest Maven 4 report artifact (current branch, then main)
         if: needs.detect-changes.outputs.maven4-changed != 'true'
         run: |
           mkdir -p public
-          RUN_ID=$(gh api "repos/${GITHUB_REPOSITORY}/actions/workflows/publish-maven4-report.yml/runs?status=success&branch=main&per_page=1" \
-                   --jq '.workflow_runs[0].id // empty')
+          BRANCH="${{ github.head_ref || github.ref_name }}"
+          RUN_ID=""
+          if [ "$BRANCH" != "main" ]; then
+            RUN_ID=$(gh api -X GET "repos/${GITHUB_REPOSITORY}/actions/workflows/publish-maven4-report.yml/runs" \
+                     -f branch="$BRANCH" -f status=success -f per_page=1 \
+                     --jq '.workflow_runs[0].id // empty')
+            [ -n "$RUN_ID" ] && echo "Found publish-maven4-report.yml run on $BRANCH: #$RUN_ID"
+          fi
+          if [ -z "$RUN_ID" ]; then
+            RUN_ID=$(gh api -X GET "repos/${GITHUB_REPOSITORY}/actions/workflows/publish-maven4-report.yml/runs" \
+                     -f branch=main -f status=success -f per_page=1 \
+                     --jq '.workflow_runs[0].id // empty')
+          fi
           if [ -n "$RUN_ID" ]; then
             gh run download "$RUN_ID" -R "$GITHUB_REPOSITORY" -n maven4-report -D public/
-            echo "Restored Maven 4 report from publish-maven4-report.yml run #$RUN_ID"
+            echo "Restored Maven 4 report from run #$RUN_ID"
           else
-            echo "::warning::No successful publish-maven4-report.yml run found yet — Maven 4 report will be missing from this preview"
+            echo "::warning::No successful publish-maven4-report.yml run found on $BRANCH or main — Maven 4 report will be missing from this preview"
           fi
 
       - name: Upload prepared Maven 4 report

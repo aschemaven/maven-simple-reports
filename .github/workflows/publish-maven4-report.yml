@@ -117,19 +117,31 @@ jobs:
           retention-days: 90
           if-no-files-found: error
 
-      # Fetch the SPA from build-spa.yml's last successful main run. The SPA
-      # is decoupled from this daily pipeline — it's rebuilt only on web/
-      # changes by its own workflow.
-      - name: Download latest SPA artifact
+      # Fetch the SPA from build-spa.yml's last successful run. Production
+      # runs always trigger from main so the main-branch lookup wins; the
+      # current-branch first-pass exists so feature-branch dispatches of
+      # this workflow can pick up an experimental SPA from the same branch.
+      - name: Download latest SPA artifact (current branch, then main)
         run: |
           mkdir -p public/dependabot-prs
-          RUN_ID=$(gh api "repos/${GITHUB_REPOSITORY}/actions/workflows/build-spa.yml/runs?status=success&branch=main&per_page=1" \
-                   --jq '.workflow_runs[0].id // empty')
+          BRANCH="${{ github.head_ref || github.ref_name }}"
+          RUN_ID=""
+          if [ "$BRANCH" != "main" ]; then
+            RUN_ID=$(gh api -X GET "repos/${GITHUB_REPOSITORY}/actions/workflows/build-spa.yml/runs" \
+                     -f branch="$BRANCH" -f status=success -f per_page=1 \
+                     --jq '.workflow_runs[0].id // empty')
+            [ -n "$RUN_ID" ] && echo "Found build-spa.yml run on $BRANCH: #$RUN_ID"
+          fi
+          if [ -z "$RUN_ID" ]; then
+            RUN_ID=$(gh api -X GET "repos/${GITHUB_REPOSITORY}/actions/workflows/build-spa.yml/runs" \
+                     -f branch=main -f status=success -f per_page=1 \
+                     --jq '.workflow_runs[0].id // empty')
+          fi
           if [ -n "$RUN_ID" ]; then
             gh run download "$RUN_ID" -R "$GITHUB_REPOSITORY" -n spa-dist -D public/dependabot-prs/
-            echo "Restored SPA from build-spa.yml run #$RUN_ID"
+            echo "Restored SPA from run #$RUN_ID"
           else
-            echo "::warning::No successful build-spa.yml run found yet — SPA will be missing from this deploy"
+            echo "::warning::No successful build-spa.yml run found on $BRANCH or main — SPA will be missing from this deploy"
           fi
 
       - name: Set up Ruby
