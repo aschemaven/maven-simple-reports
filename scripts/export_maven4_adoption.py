@@ -47,8 +47,9 @@ HISTORY_PATH = Path(__file__).resolve().parent.parent / 'data' / 'maven4-adoptio
 
 # Forge attribution for the federated history schema. Today only the GitHub
 # runner writes here, so each snapshot carries by_forge.github plus mirrored
-# top-level aggregates. Phase 1 turns this into a CLI flag so a GitLab or
-# Codeberg runner can tag its own contribution.
+# top-level aggregates. Going multi-forge would mean parameterising this and
+# adding a per-forge API layer; the architecture for that is being worked
+# out separately — see README.adoc "Multi-forge expansion".
 FORGE_NAME = 'github'
 
 # Cache TTL in seconds (24 hours)

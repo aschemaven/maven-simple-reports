@@ -58,3 +58,7 @@ This rules out the current centralized, scheduled pipeline.
 A realistic path would be a separate on-demand report (e.g., a notebook or a developer-workstation CLI run) that consumes the latest committed `public/maven4-adoption.adoc` and produces an enriched, locally rendered companion.
 ====
 
+Multi-forge expansion::
+The history schema already carries a `by_forge.<forge>` breakdown so additional forges (e.g. `gitlab.com`, `codeberg.org`) can plug in later without a migration.
+The pipeline architecture for non-GitHub forges — how the scan runs, how results travel back, where they live — is being worked out separately and intentionally not pinned down here.
+
