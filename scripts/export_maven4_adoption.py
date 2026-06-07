@@ -967,6 +967,11 @@ if __name__ == '__main__':
         '--cache-file',
         help=f'Cache file path (default: {CACHE_PATH})'
     )
+    parser.add_argument(
+        '--no-history',
+        action='store_true',
+        help='Skip appending to the adoption history file (useful for previews)'
+    )
 
     args = parser.parse_args()
 
@@ -1034,7 +1039,7 @@ if __name__ == '__main__':
                   file=sys.stderr)
 
     # Append to time series history
-    if results:
+    if results and not args.no_history:
         append_history(results)
 
     # Save cache for next run

@@ -1,29 +1,184 @@
-name: Publish Reports
+name: Publish Preview
 
+# Preview deploys for PRs and non-main branches.
+# Production (main) is deployed by publish-maven4-report.yml.
+#
+# Two prepare jobs run in parallel: each decides "rebuild source" (when this
+# PR/branch touches the source) or "fetch latest production artifact" (when
+# it does not). The publish job synchronises on both, renders AsciiDoc and
+# deploys to Netlify.
 on:
   push:
+    branches-ignore: [main]
   pull_request:
   workflow_dispatch:
 
-jobs:
-  build-and-publish:
-    runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      pull-requests: write
-      pages: write
-      id-token: write
+permissions:
+  contents: read
+  pull-requests: write
+  actions: read
 
+env:
+  GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+jobs:
+  detect-changes:
+    runs-on: ubuntu-latest
+    outputs:
+      spa-changed: ${{ steps.changes.outputs.spa-changed }}
+      maven4-changed: ${{ steps.changes.outputs.maven4-changed }}
     steps:
-      - name: Checkout repository
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Detect changed paths
+        id: changes
+        run: |
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            BASE_REF="${{ github.event.pull_request.base.ref }}"
+          else
+            BASE_REF="main"
+          fi
+          git fetch origin "$BASE_REF" --depth=1 || true
+          CHANGED=$(git diff --name-only "origin/$BASE_REF...HEAD")
+          echo "Changed files:"
+          echo "$CHANGED"
+          # A SPA rebuild covers web/ source changes and changes to the
+          # build workflow itself, so preview catches build-side regressions.
+          if echo "$CHANGED" | grep -qE '^(web/|\.github/workflows/build-spa\.yml$)'; then
+            echo "spa-changed=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "spa-changed=false" >> "$GITHUB_OUTPUT"
+          fi
+          # A Maven 4 rescan covers exporter/config changes and the
+          # production workflow itself.
+          if echo "$CHANGED" | grep -qE '^(scripts/(export_maven4_adoption|migrate_history_to_federated)\.py|\.gh-configuration\.yaml|\.github/workflows/publish-maven4-report\.yml)$'; then
+            echo "maven4-changed=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "maven4-changed=false" >> "$GITHUB_OUTPUT"
+          fi
+
+  prepare-spa:
+    runs-on: ubuntu-latest
+    needs: detect-changes
+    steps:
+      - name: Checkout
+        if: needs.detect-changes.outputs.spa-changed == 'true'
         uses: actions/checkout@v4
 
       - name: Set up Node.js
+        if: needs.detect-changes.outputs.spa-changed == 'true'
         uses: actions/setup-node@v4
         with:
           node-version: '20'
           cache: 'npm'
           cache-dependency-path: web/package-lock.json
+
+      - name: Build SPA from this branch
+        if: needs.detect-changes.outputs.spa-changed == 'true'
+        env:
+          VITE_GITHUB_CLIENT_ID: ${{ vars.VITE_GITHUB_CLIENT_ID }}
+        working-directory: ./web
+        run: |
+          npm ci
+          npm run build
+
+      - name: Fetch latest production SPA artifact
+        if: needs.detect-changes.outputs.spa-changed != 'true'
+        run: |
+          mkdir -p web/dist
+          RUN_ID=$(gh api "repos/${GITHUB_REPOSITORY}/actions/workflows/build-spa.yml/runs?status=success&branch=main&per_page=1" \
+                   --jq '.workflow_runs[0].id // empty')
+          if [ -n "$RUN_ID" ]; then
+            gh run download "$RUN_ID" -R "$GITHUB_REPOSITORY" -n spa-dist -D web/dist/
+            echo "Restored SPA from build-spa.yml run #$RUN_ID"
+          else
+            echo "::warning::No successful build-spa.yml run found yet — SPA will be missing from this preview"
+          fi
+
+      - name: Upload prepared SPA
+        uses: actions/upload-artifact@v4
+        with:
+          name: prepared-spa-dist
+          path: web/dist/
+          retention-days: 7
+          if-no-files-found: warn
+
+  prepare-maven4:
+    runs-on: ubuntu-latest
+    needs: detect-changes
+    steps:
+      - name: Checkout
+        if: needs.detect-changes.outputs.maven4-changed == 'true'
+        uses: actions/checkout@v4
+
+      - name: Cache GitHub API responses
+        if: needs.detect-changes.outputs.maven4-changed == 'true'
+        uses: actions/cache@v4
+        with:
+          path: cache/gh_api_cache.json
+          key: maven4-gh-cache-preview-${{ github.run_id }}
+          restore-keys: |
+            maven4-gh-cache-
+
+      - name: Set up Python
+        if: needs.detect-changes.outputs.maven4-changed == 'true'
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Generate Maven 4 adoption report (no history side-effect)
+        if: needs.detect-changes.outputs.maven4-changed == 'true'
+        run: |
+          mkdir -p cache public
+          scripts/export_maven4_adoption.py \
+            --format asciidoc \
+            --output public/maven4-adoption.adoc \
+            --no-history
+
+      - name: Fetch latest production Maven 4 report artifact
+        if: needs.detect-changes.outputs.maven4-changed != 'true'
+        run: |
+          mkdir -p public
+          RUN_ID=$(gh api "repos/${GITHUB_REPOSITORY}/actions/workflows/publish-maven4-report.yml/runs?status=success&branch=main&per_page=1" \
+                   --jq '.workflow_runs[0].id // empty')
+          if [ -n "$RUN_ID" ]; then
+            gh run download "$RUN_ID" -R "$GITHUB_REPOSITORY" -n maven4-report -D public/
+            echo "Restored Maven 4 report from publish-maven4-report.yml run #$RUN_ID"
+          else
+            echo "::warning::No successful publish-maven4-report.yml run found yet — Maven 4 report will be missing from this preview"
+          fi
+
+      - name: Upload prepared Maven 4 report
+        uses: actions/upload-artifact@v4
+        with:
+          name: prepared-maven4-report
+          path: public/maven4-adoption.adoc
+          retention-days: 7
+          if-no-files-found: warn
+
+  publish:
+    runs-on: ubuntu-latest
+    needs: [prepare-spa, prepare-maven4]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Download prepared SPA
+        uses: actions/download-artifact@v4
+        with:
+          name: prepared-spa-dist
+          path: public/dependabot-prs/
+        continue-on-error: true
+
+      - name: Download prepared Maven 4 report
+        uses: actions/download-artifact@v4
+        with:
+          name: prepared-maven4-report
+          path: public/
+        continue-on-error: true
 
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
@@ -33,36 +188,31 @@ jobs:
       - name: Install asciidoctor
         run: gem install asciidoctor
 
-      - name: Generate reports
-        env:
-          # Public GitHub App Client ID baked into the SPA bundle for the OAuth
-          # "Connect with GitHub" button. Stored as a repository variable (not a
-          # secret) because it's visible in the OAuth authorize URL anyway.
-          # If unset, the build still succeeds; the button just stays disabled.
-          VITE_GITHUB_CLIENT_ID: ${{ vars.VITE_GITHUB_CLIENT_ID }}
+      - name: Render AsciiDoc to HTML
         run: |
-          chmod +x scripts/generate_report.sh
-          scripts/generate_report.sh
+          shopt -s nullglob
+          for adoc_file in public/*.adoc; do
+            html_file="${adoc_file%.adoc}.html"
+            echo "  Converting $(basename "$adoc_file")..."
+            asciidoctor -o "$html_file" "$adoc_file"
+          done
 
       - name: Set Netlify alias
-        if: github.ref != 'refs/heads/main'
         id: netlify-alias
         run: |
           if [ "${{ github.event_name }}" = "pull_request" ]; then
-            echo "alias=pr-${{ github.event.pull_request.number }}" >> $GITHUB_OUTPUT
+            echo "alias=pr-${{ github.event.pull_request.number }}" >> "$GITHUB_OUTPUT"
           else
             BRANCH_NAME="${{ github.ref_name }}"
             SANITIZED_BRANCH=$(echo "$BRANCH_NAME" | sed 's/\//-/g')
-            echo "alias=$SANITIZED_BRANCH" >> $GITHUB_OUTPUT
+            echo "alias=$SANITIZED_BRANCH" >> "$GITHUB_OUTPUT"
           fi
 
       - name: Install Netlify Functions dependencies
-        if: github.ref != 'refs/heads/main'
         working-directory: ./netlify
         run: npm install --no-audit --no-fund
 
-      - name: Deploy to Netlify (branches and PRs)
-        if: github.ref != 'refs/heads/main'
+      - name: Deploy to Netlify
         id: netlify-deploy
         uses: nwtgck/actions-netlify@v2
         with:
@@ -70,7 +220,7 @@ jobs:
           functions-dir: './netlify/functions'
           production-deploy: false
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          deploy-message: "Deploy from GitHub Actions - ${{ github.event.head_commit.message || github.event.pull_request.title }}"
+          deploy-message: "Preview from GitHub Actions - ${{ github.event.head_commit.message || github.event.pull_request.title }}"
           enable-pull-request-comment: true
           enable-commit-comment: false
           alias: ${{ steps.netlify-alias.outputs.alias }}
@@ -79,22 +229,9 @@ jobs:
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
 
       - name: Display Netlify URL
-        if: github.ref != 'refs/heads/main'
         run: |
-          echo "### 🚀 Netlify Deployment" >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
-          echo "✅ **Deployed successfully!**" >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
-          echo "🔗 **URL:** ${{ steps.netlify-deploy.outputs.deploy-url }}" >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
-          echo "📝 **Alias:** \`${{ steps.netlify-alias.outputs.alias }}\`" >> $GITHUB_STEP_SUMMARY
-
-      - name: Upload GitHub Pages artifact
-        if: github.ref == 'refs/heads/main'
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: ./public
-
-      - name: Deploy to GitHub Pages
-        if: github.ref == 'refs/heads/main'
-        uses: actions/deploy-pages@v4
+          echo "### Netlify Preview" >> "$GITHUB_STEP_SUMMARY"
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+          echo "URL: ${{ steps.netlify-deploy.outputs.deploy-url }}" >> "$GITHUB_STEP_SUMMARY"
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+          echo "Alias: \`${{ steps.netlify-alias.outputs.alias }}\`" >> "$GITHUB_STEP_SUMMARY"

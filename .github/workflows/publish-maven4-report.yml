@@ -13,18 +13,44 @@ on:
         default: false
         type: boolean
 
+permissions:
+  contents: write    # push to data branch
+  pages: write       # deploy to Pages
+  id-token: write    # OIDC token for actions/deploy-pages
+  actions: read      # fetch SPA artifact from build-spa.yml run
+
+env:
+  GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+# Pages allows only one in-flight deploy at a time. Queue rather than cancel
+# so a scheduled run is not lost to a manual dispatch and vice versa.
+concurrency:
+  group: 'pages-deploy'
+  cancel-in-progress: false
+
 jobs:
-  build:
+  build-and-deploy:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
-      actions: write
-    env:
-      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+
+      # Adoption history lives on an orphan `data` branch so daily snapshots
+      # stay off main. First run will see no branch yet and start empty.
+      - name: Restore adoption history from data branch
+        run: |
+          mkdir -p data
+          if git ls-remote --exit-code --heads origin data >/dev/null 2>&1; then
+            git fetch origin data --depth=1
+            git show FETCH_HEAD:maven4-adoption-history.json > data/maven4-adoption-history.json
+            echo "Restored history ($(wc -c < data/maven4-adoption-history.json) bytes)"
+          else
+            echo "data branch does not exist yet — starting with empty history"
+          fi
 
       - name: Cache GitHub API responses
         if: ${{ inputs.no_cache != true }}
@@ -52,30 +78,84 @@ jobs:
             --output public/maven4-adoption.adoc \
             $NO_CACHE_FLAG
 
-      - name: Upload generated files as artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: maven4-adoption-report
-          path: |
-            public/maven4-adoption.adoc
-            data/maven4-adoption-history.json
-          if-no-files-found: error
-
-      # Only commit + re-trigger the publish workflow on main. Branch/dispatch
-      # runs from other refs leave the artifact downloadable but don't touch
-      # the repo.
-      - name: Commit report and history
+      # Only the production runs on main push to the data branch and deploy
+      # to Pages. workflow_dispatch from a feature branch exercises the
+      # generator and renderer without mutating shared state.
+      - name: Push updated history to data branch
         if: github.ref == 'refs/heads/main'
         run: |
-          git config user.name 'github-actions[bot]'
-          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add public/maven4-adoption.adoc data/maven4-adoption-history.json
+          [ -f data/maven4-adoption-history.json ] || { echo "No history file to push"; exit 0; }
+          WORK=$(mktemp -d)
+          cd "$WORK"
+          REPO_URL="https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
+          if git clone --depth=1 --branch data --single-branch "$REPO_URL" . 2>/dev/null; then
+            echo "Cloned existing data branch"
+          else
+            echo "data branch does not exist; initializing orphan"
+            git init -q
+            git remote add origin "$REPO_URL"
+            git checkout --orphan data
+          fi
+          cp "$GITHUB_WORKSPACE/data/maven4-adoption-history.json" .
+          git add maven4-adoption-history.json
           if git diff --staged --quiet; then
-            echo "No changes — nothing to commit"
+            echo "No history changes — nothing to commit"
             exit 0
           fi
-          git commit -m "Update Maven 4 adoption report ($(date -u +%Y-%m-%d))"
-          git push
-          # The default GITHUB_TOKEN's push does not trigger workflows that
-          # listen on push events, so kick the deploy pipeline explicitly.
-          gh workflow run publish-reports.yml --ref main
+          git -c user.name='github-actions[bot]' \
+              -c user.email='41898282+github-actions[bot]@users.noreply.github.com' \
+              commit -m "Update Maven 4 adoption history ($(date -u +%Y-%m-%d))"
+          git push origin HEAD:data
+
+      # Publish the generated .adoc as an artifact so PR/branch previews can
+      # fetch the latest production version without re-running the scan.
+      - name: Upload Maven 4 report artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: maven4-report
+          path: public/maven4-adoption.adoc
+          retention-days: 90
+          if-no-files-found: error
+
+      # Fetch the SPA from build-spa.yml's last successful main run. The SPA
+      # is decoupled from this daily pipeline — it's rebuilt only on web/
+      # changes by its own workflow.
+      - name: Download latest SPA artifact
+        run: |
+          mkdir -p public/dependabot-prs
+          RUN_ID=$(gh api "repos/${GITHUB_REPOSITORY}/actions/workflows/build-spa.yml/runs?status=success&branch=main&per_page=1" \
+                   --jq '.workflow_runs[0].id // empty')
+          if [ -n "$RUN_ID" ]; then
+            gh run download "$RUN_ID" -R "$GITHUB_REPOSITORY" -n spa-dist -D public/dependabot-prs/
+            echo "Restored SPA from build-spa.yml run #$RUN_ID"
+          else
+            echo "::warning::No successful build-spa.yml run found yet — SPA will be missing from this deploy"
+          fi
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.2'
+
+      - name: Install asciidoctor
+        run: gem install asciidoctor
+
+      - name: Render AsciiDoc to HTML
+        run: |
+          for adoc_file in public/*.adoc; do
+            [ -f "$adoc_file" ] || continue
+            html_file="${adoc_file%.adoc}.html"
+            echo "  Converting $(basename "$adoc_file")..."
+            asciidoctor -o "$html_file" "$adoc_file"
+          done
+
+      - name: Upload Pages artifact
+        if: github.ref == 'refs/heads/main'
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./public
+
+      - name: Deploy to GitHub Pages
+        if: github.ref == 'refs/heads/main'
+        id: deploy
+        uses: actions/deploy-pages@v4

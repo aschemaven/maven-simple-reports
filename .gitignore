@@ -3,13 +3,11 @@
 
 public/*.adoc
 !public/index.adoc
-!public/maven4-adoption.adoc
 public/*.html
 public/*.csv
 public/dependabot-prs/
 cache/
-data/*
-!data/maven4-adoption-history.json
+data/
 .claude/
 
 # Local Netlify folder
