@@ -45,6 +45,12 @@ CACHE_PATH = Path(__file__).resolve().parent.parent / 'cache' / 'gh_api_cache.js
 # Time series history file (committed to repo)
 HISTORY_PATH = Path(__file__).resolve().parent.parent / 'data' / 'maven4-adoption-history.json'
 
+# Forge attribution for the federated history schema. Today only the GitHub
+# runner writes here, so each snapshot carries by_forge.github plus mirrored
+# top-level aggregates. Phase 1 turns this into a CLI flag so a GitLab or
+# Codeberg runner can tag its own contribution.
+FORGE_NAME = 'github'
+
 # Cache TTL in seconds (24 hours)
 CACHE_TTL = 86400
 
@@ -871,8 +877,15 @@ def export_to_asciidoc(results, filename):
     return filename
 
 
-def append_history(results, history_path=HISTORY_PATH):
-    """Append a timestamped summary snapshot to the adoption history file."""
+def append_history(results, history_path=HISTORY_PATH, forge=FORGE_NAME):
+    """Append a federated timestamped snapshot to the adoption history file.
+
+    Each snapshot carries per-forge breakdown under by_forge.<forge> plus
+    mirrored top-level aggregates so existing readers keep working. While
+    only one forge feeds the history the top-level fields equal
+    by_forge.<forge>; once additional forges (gitlab, codeberg) ship,
+    the consolidator will recompute top-level totals from by_forge.
+    """
     today = datetime.now().strftime('%Y-%m-%d')
 
     # Compute signal and version counts
@@ -888,14 +901,21 @@ def append_history(results, history_path=HISTORY_PATH):
                 if ver:
                     version_counts[ver] = version_counts.get(ver, 0) + 1
 
-    entry = {
-        'date': today,
+    forge_data = {
         'total': len(results),
         'signals': signal_counts,
         'versions': version_counts,
     }
+    entry = {
+        'date': today,
+        'by_forge': {forge: forge_data},
+        'total': forge_data['total'],
+        'signals': dict(forge_data['signals']),
+        'versions': dict(forge_data['versions']),
+    }
 
-    # Load existing history
+    # Load existing history (federated shape after the one-time migration;
+    # see scripts/migrate_history_to_federated.py).
     history = []
     if history_path.exists():
         try:
