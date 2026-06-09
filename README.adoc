@@ -30,11 +30,12 @@ See xref:web/README.adoc[] for architecture, rate-limit handling, and local deve
 == Maven 4 adoption report
 
 A scheduled Python script (`scripts/export_maven4_adoption.py`) searches GitHub for projects using Maven 4 — POM model version 4.1.0, the Maven 4 wrapper, and `apache-maven-4` invocations in GitHub Actions workflows.
-It runs daily at 06:00 UTC via `.github/workflows/publish-maven4-report.yml`.
-That workflow generates the report, pushes the updated `maven4-adoption-history.json` to an orphan `data` branch, uploads the `.adoc` as a workflow artifact, fetches the latest SPA build via `build-spa.yml`'s artifact, renders the combined site to HTML, and deploys it to GitHub Pages.
-No daily commits to `main`.
 
-PR and branch previews on Netlify are driven by `publish-reports.yml`, which runs two prepare jobs in parallel: each part (SPA, Maven 4 report) is either rebuilt from the PR's sources when those sources changed, or fetched as the latest production artifact when they did not.
+Everything — Maven 4 scan, SPA build, AsciiDoc rendering, GitHub Pages deploy on `main`, Netlify previews on PRs and branches — runs through a single workflow `.github/workflows/publish.yml`.
+A `context` job decides per trigger which parts need rebuilding from source and where the run deploys; `build-spa` and `scan-maven4` jobs run conditionally; `publish-pages` (for `main`) or `publish-netlify` (for previews) combines the freshly-built parts with the latest production artifacts for whatever was not rebuilt, renders the site, and deploys.
+
+The rolling history snapshot lives on an orphan `data` branch as `maven4-adoption-history.json` — kept off `main` so daily time-series updates do not pollute the main commit log.
+No daily commits to `main`.
 
 Apache Maven *component* repositories (the list in `.gh-configuration.yaml`) are filtered out as expected.
 Other Apache projects are kept on purpose: their Maven 4 adoption is itself a signal worth surfacing.

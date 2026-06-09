@@ -1,0 +1,445 @@
+name: Publish
+
+# Single pipeline that handles every build/deploy path:
+#
+#   trigger             | rebuild SPA | rebuild Maven 4 scan | deploy target
+#   ----                | ----------- | -------------------- | -------------
+#   push main           | iff web/    | iff scripts/         | GitHub Pages
+#   push branch         | iff web/    | iff scripts/         | Netlify preview
+#   pull_request        | iff web/    | iff scripts/         | Netlify preview
+#   schedule (06:00)    | no          | yes                  | GitHub Pages
+#   workflow_dispatch   | no          | yes                  | Pages (main) / Netlify (branch)
+#
+# Parts that do not need rebuilding fall back to the latest successful
+# `publish.yml` run's artifact — current branch first, then main.
+
+on:
+  push:
+    branches: ['**']
+  pull_request:
+  schedule:
+    - cron: '0 6 * * *'
+  workflow_dispatch:
+    inputs:
+      no_cache:
+        description: 'Disable API response cache (fetch fresh data from GitHub)'
+        required: false
+        default: false
+        type: boolean
+
+permissions:
+  contents: write       # push history to data branch
+  pages: write          # deploy to Pages
+  id-token: write       # OIDC for actions/deploy-pages
+  pull-requests: write  # Netlify bot PR comment
+  actions: read         # artifact discovery via gh api
+
+env:
+  GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+# Serialize per ref so two pushes to the same branch do not race; main
+# deploys queue rather than cancel each other.
+concurrency:
+  group: publish-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  context:
+    runs-on: ubuntu-latest
+    outputs:
+      deploy-target: ${{ steps.ctx.outputs.deploy-target }}
+      need-spa-build: ${{ steps.ctx.outputs.need-spa-build }}
+      need-maven4-scan: ${{ steps.ctx.outputs.need-maven4-scan }}
+      is-main: ${{ steps.ctx.outputs.is-main }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Resolve deploy target and rebuild needs
+        id: ctx
+        run: |
+          set -e
+          EVENT="${{ github.event_name }}"
+          IS_MAIN=false
+          if [ "${{ github.ref }}" = "refs/heads/main" ]; then
+            IS_MAIN=true
+          fi
+
+          # Decide where the run deploys.
+          TARGET=none
+          case "$EVENT" in
+            schedule)
+              TARGET=pages
+              ;;
+            push|workflow_dispatch)
+              if [ "$IS_MAIN" = "true" ]; then
+                TARGET=pages
+              else
+                TARGET=netlify
+              fi
+              ;;
+            pull_request)
+              TARGET=netlify
+              ;;
+          esac
+
+          # Decide what to rebuild from source.
+          # Schedule/dispatch always rescan the Maven 4 report (the whole
+          # point of those triggers); SPA only rebuilds when web/ changed.
+          NEED_SPA=false
+          NEED_MAVEN4=false
+          if [ "$EVENT" = "schedule" ] || [ "$EVENT" = "workflow_dispatch" ]; then
+            NEED_MAVEN4=true
+          fi
+
+          if [ "$EVENT" = "pull_request" ] || [ "$EVENT" = "push" ]; then
+            if [ "$EVENT" = "pull_request" ]; then
+              BASE_BRANCH="${{ github.event.pull_request.base.ref }}"
+              git fetch origin "$BASE_BRANCH" --depth=1 || true
+              BASE_REF="origin/$BASE_BRANCH"
+            elif [ "$IS_MAIN" = "true" ]; then
+              BASE_REF="HEAD~1"
+            else
+              git fetch origin main --depth=1 || true
+              BASE_REF="origin/main"
+            fi
+            CHANGED=$(git diff --name-only "$BASE_REF...HEAD" 2>/dev/null || true)
+            echo "Changed files vs $BASE_REF:"
+            echo "$CHANGED"
+
+            if echo "$CHANGED" | grep -qE '^(web/|\.github/workflows/publish\.yml$)'; then
+              NEED_SPA=true
+            fi
+            if echo "$CHANGED" | grep -qE '^(scripts/(export_maven4_adoption|migrate_history_to_federated)\.py|\.gh-configuration\.yaml|\.github/workflows/publish\.yml)$'; then
+              NEED_MAVEN4=true
+            fi
+          fi
+
+          echo "is-main=$IS_MAIN" >> "$GITHUB_OUTPUT"
+          echo "deploy-target=$TARGET" >> "$GITHUB_OUTPUT"
+          echo "need-spa-build=$NEED_SPA" >> "$GITHUB_OUTPUT"
+          echo "need-maven4-scan=$NEED_MAVEN4" >> "$GITHUB_OUTPUT"
+          echo "Resolved: target=$TARGET need-spa=$NEED_SPA need-maven4=$NEED_MAVEN4 is-main=$IS_MAIN"
+
+  build-spa:
+    runs-on: ubuntu-latest
+    needs: context
+    if: needs.context.outputs.need-spa-build == 'true'
+    env:
+      VITE_GITHUB_CLIENT_ID: ${{ vars.VITE_GITHUB_CLIENT_ID }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: web/package-lock.json
+
+      - name: Build SPA
+        working-directory: ./web
+        run: |
+          npm ci
+          npm run build
+
+      - name: Upload SPA artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: spa-dist
+          path: web/dist/
+          retention-days: 90
+          if-no-files-found: error
+
+  scan-maven4:
+    runs-on: ubuntu-latest
+    needs: context
+    if: needs.context.outputs.need-maven4-scan == 'true'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # Restore history only on main paths so previews never read it (and
+      # never push it back). First production run will see no branch yet
+      # and start with an empty time series.
+      - name: Restore adoption history from data branch
+        if: needs.context.outputs.is-main == 'true'
+        run: |
+          mkdir -p data
+          if git ls-remote --exit-code --heads origin data >/dev/null 2>&1; then
+            git fetch origin data --depth=1
+            git show FETCH_HEAD:maven4-adoption-history.json > data/maven4-adoption-history.json
+            echo "Restored history ($(wc -c < data/maven4-adoption-history.json) bytes)"
+          else
+            echo "data branch does not exist yet — starting with empty history"
+          fi
+
+      - name: Cache GitHub API responses
+        if: ${{ inputs.no_cache != true }}
+        uses: actions/cache@v4
+        with:
+          path: cache/gh_api_cache.json
+          key: maven4-gh-cache-${{ github.run_id }}
+          restore-keys: |
+            maven4-gh-cache-
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Generate Maven 4 adoption report
+        run: |
+          mkdir -p cache data public
+          FLAGS=""
+          if [ "${{ inputs.no_cache }}" = "true" ]; then
+            FLAGS="$FLAGS --no-cache"
+          fi
+          if [ "${{ needs.context.outputs.is-main }}" != "true" ]; then
+            FLAGS="$FLAGS --no-history"
+          fi
+          scripts/export_maven4_adoption.py \
+            --format asciidoc \
+            --output public/maven4-adoption.adoc \
+            $FLAGS
+
+      - name: Push updated history to data branch
+        if: needs.context.outputs.is-main == 'true'
+        run: |
+          [ -f data/maven4-adoption-history.json ] || { echo "No history file to push"; exit 0; }
+          WORK=$(mktemp -d)
+          cd "$WORK"
+          REPO_URL="https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
+          if git clone --depth=1 --branch data --single-branch "$REPO_URL" . 2>/dev/null; then
+            echo "Cloned existing data branch"
+          else
+            echo "data branch does not exist; initializing orphan"
+            git init -q
+            git remote add origin "$REPO_URL"
+            git checkout --orphan data
+          fi
+          cp "$GITHUB_WORKSPACE/data/maven4-adoption-history.json" .
+          git add maven4-adoption-history.json
+          if git diff --staged --quiet; then
+            echo "No history changes — nothing to commit"
+            exit 0
+          fi
+          git -c user.name='github-actions[bot]' \
+              -c user.email='41898282+github-actions[bot]@users.noreply.github.com' \
+              commit -m "Update Maven 4 adoption history ($(date -u +%Y-%m-%d))"
+          git push origin HEAD:data
+
+      - name: Upload Maven 4 report artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: maven4-report
+          path: public/maven4-adoption.adoc
+          retention-days: 90
+          if-no-files-found: error
+
+  publish-pages:
+    runs-on: ubuntu-latest
+    needs: [context, build-spa, scan-maven4]
+    if: |
+      always()
+      && needs.context.outputs.deploy-target == 'pages'
+      && (needs.build-spa.result == 'success' || needs.build-spa.result == 'skipped')
+      && (needs.scan-maven4.result == 'success' || needs.scan-maven4.result == 'skipped')
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Get SPA artifact (this run, then fall back)
+        run: |
+          mkdir -p public/dependabot-prs
+          if [ "${{ needs.build-spa.result }}" = "success" ]; then
+            gh run download "$GITHUB_RUN_ID" -R "$GITHUB_REPOSITORY" -n spa-dist -D public/dependabot-prs/
+            echo "Used SPA built in this run"
+          else
+            RUN_ID=$(gh api -X GET "repos/${GITHUB_REPOSITORY}/actions/workflows/publish.yml/runs" \
+                     -f branch=main -f status=success -f per_page=1 \
+                     --jq '.workflow_runs[0].id // empty')
+            if [ -n "$RUN_ID" ]; then
+              gh run download "$RUN_ID" -R "$GITHUB_REPOSITORY" -n spa-dist -D public/dependabot-prs/ 2>/dev/null \
+                || echo "::warning::Run #$RUN_ID has no spa-dist artifact"
+            else
+              echo "::warning::No prior publish.yml run on main — SPA missing"
+            fi
+          fi
+
+      - name: Get Maven 4 report artifact (this run, then fall back)
+        run: |
+          mkdir -p public
+          if [ "${{ needs.scan-maven4.result }}" = "success" ]; then
+            gh run download "$GITHUB_RUN_ID" -R "$GITHUB_REPOSITORY" -n maven4-report -D public/
+            echo "Used Maven 4 report scanned in this run"
+          else
+            RUN_ID=$(gh api -X GET "repos/${GITHUB_REPOSITORY}/actions/workflows/publish.yml/runs" \
+                     -f branch=main -f status=success -f per_page=1 \
+                     --jq '.workflow_runs[0].id // empty')
+            if [ -n "$RUN_ID" ]; then
+              gh run download "$RUN_ID" -R "$GITHUB_REPOSITORY" -n maven4-report -D public/ 2>/dev/null \
+                || echo "::warning::Run #$RUN_ID has no maven4-report artifact"
+            else
+              echo "::warning::No prior publish.yml run on main — Maven 4 report missing"
+            fi
+          fi
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.2'
+
+      - name: Install asciidoctor
+        run: gem install asciidoctor
+
+      - name: Render AsciiDoc to HTML
+        run: |
+          shopt -s nullglob
+          for adoc_file in public/*.adoc; do
+            html_file="${adoc_file%.adoc}.html"
+            echo "  Converting $(basename "$adoc_file")..."
+            asciidoctor -o "$html_file" "$adoc_file"
+          done
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./public
+
+      - name: Deploy to GitHub Pages
+        id: deploy
+        uses: actions/deploy-pages@v4
+
+  publish-netlify:
+    runs-on: ubuntu-latest
+    needs: [context, build-spa, scan-maven4]
+    if: |
+      always()
+      && needs.context.outputs.deploy-target == 'netlify'
+      && (needs.build-spa.result == 'success' || needs.build-spa.result == 'skipped')
+      && (needs.scan-maven4.result == 'success' || needs.scan-maven4.result == 'skipped')
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # Preview SPA falls back to the same-branch run when present (so a
+      # developer can dispatch publish.yml on their feature branch and have
+      # subsequent preview deploys pick up the experimental SPA), otherwise
+      # falls back to main.
+      - name: Get SPA artifact (this run, then fall back)
+        run: |
+          mkdir -p public/dependabot-prs
+          if [ "${{ needs.build-spa.result }}" = "success" ]; then
+            gh run download "$GITHUB_RUN_ID" -R "$GITHUB_REPOSITORY" -n spa-dist -D public/dependabot-prs/
+            echo "Used SPA built in this run"
+          else
+            BRANCH="${{ github.head_ref || github.ref_name }}"
+            RUN_ID=""
+            if [ "$BRANCH" != "main" ]; then
+              RUN_ID=$(gh api -X GET "repos/${GITHUB_REPOSITORY}/actions/workflows/publish.yml/runs" \
+                       -f "branch=$BRANCH" -f status=success -f per_page=1 \
+                       --jq '.workflow_runs[0].id // empty')
+              [ -n "$RUN_ID" ] && echo "Found publish.yml run on $BRANCH: #$RUN_ID"
+            fi
+            if [ -z "$RUN_ID" ]; then
+              RUN_ID=$(gh api -X GET "repos/${GITHUB_REPOSITORY}/actions/workflows/publish.yml/runs" \
+                       -f branch=main -f status=success -f per_page=1 \
+                       --jq '.workflow_runs[0].id // empty')
+            fi
+            if [ -n "$RUN_ID" ]; then
+              gh run download "$RUN_ID" -R "$GITHUB_REPOSITORY" -n spa-dist -D public/dependabot-prs/ 2>/dev/null \
+                || echo "::warning::Run #$RUN_ID has no spa-dist artifact"
+            else
+              echo "::warning::No prior publish.yml run found — SPA missing from this preview"
+            fi
+          fi
+
+      - name: Get Maven 4 report artifact (this run, then fall back)
+        run: |
+          mkdir -p public
+          if [ "${{ needs.scan-maven4.result }}" = "success" ]; then
+            gh run download "$GITHUB_RUN_ID" -R "$GITHUB_REPOSITORY" -n maven4-report -D public/
+            echo "Used Maven 4 report scanned in this run"
+          else
+            BRANCH="${{ github.head_ref || github.ref_name }}"
+            RUN_ID=""
+            if [ "$BRANCH" != "main" ]; then
+              RUN_ID=$(gh api -X GET "repos/${GITHUB_REPOSITORY}/actions/workflows/publish.yml/runs" \
+                       -f "branch=$BRANCH" -f status=success -f per_page=1 \
+                       --jq '.workflow_runs[0].id // empty')
+              [ -n "$RUN_ID" ] && echo "Found publish.yml run on $BRANCH: #$RUN_ID"
+            fi
+            if [ -z "$RUN_ID" ]; then
+              RUN_ID=$(gh api -X GET "repos/${GITHUB_REPOSITORY}/actions/workflows/publish.yml/runs" \
+                       -f branch=main -f status=success -f per_page=1 \
+                       --jq '.workflow_runs[0].id // empty')
+            fi
+            if [ -n "$RUN_ID" ]; then
+              gh run download "$RUN_ID" -R "$GITHUB_REPOSITORY" -n maven4-report -D public/ 2>/dev/null \
+                || echo "::warning::Run #$RUN_ID has no maven4-report artifact"
+            else
+              echo "::warning::No prior publish.yml run found — Maven 4 report missing from this preview"
+            fi
+          fi
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.2'
+
+      - name: Install asciidoctor
+        run: gem install asciidoctor
+
+      - name: Render AsciiDoc to HTML
+        run: |
+          shopt -s nullglob
+          for adoc_file in public/*.adoc; do
+            html_file="${adoc_file%.adoc}.html"
+            echo "  Converting $(basename "$adoc_file")..."
+            asciidoctor -o "$html_file" "$adoc_file"
+          done
+
+      - name: Set Netlify alias
+        id: netlify-alias
+        run: |
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            echo "alias=pr-${{ github.event.pull_request.number }}" >> "$GITHUB_OUTPUT"
+          else
+            BRANCH_NAME="${{ github.ref_name }}"
+            SANITIZED=$(echo "$BRANCH_NAME" | sed 's/\//-/g')
+            echo "alias=$SANITIZED" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Install Netlify Functions dependencies
+        working-directory: ./netlify
+        run: npm install --no-audit --no-fund
+
+      - name: Deploy to Netlify
+        id: netlify-deploy
+        uses: nwtgck/actions-netlify@v2
+        with:
+          publish-dir: './public'
+          functions-dir: './netlify/functions'
+          production-deploy: false
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          deploy-message: "Preview from GitHub Actions - ${{ github.event.head_commit.message || github.event.pull_request.title }}"
+          enable-pull-request-comment: true
+          enable-commit-comment: false
+          alias: ${{ steps.netlify-alias.outputs.alias }}
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+
+      - name: Display Netlify URL
+        run: |
+          echo "### Netlify Preview" >> "$GITHUB_STEP_SUMMARY"
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+          echo "URL: ${{ steps.netlify-deploy.outputs.deploy-url }}" >> "$GITHUB_STEP_SUMMARY"
+          echo "Alias: \`${{ steps.netlify-alias.outputs.alias }}\`" >> "$GITHUB_STEP_SUMMARY"
