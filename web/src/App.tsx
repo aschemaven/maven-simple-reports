@@ -446,7 +446,11 @@ function CycleStatus({
 }
 
 function formatTime(ms: number): string {
-  return new Date(ms).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+  return new Date(ms).toLocaleTimeString([], {
+    hour: '2-digit',
+    minute: '2-digit',
+    timeZoneName: 'short',
+  })
 }
 
 function formatRelative(targetMs: number): string {
