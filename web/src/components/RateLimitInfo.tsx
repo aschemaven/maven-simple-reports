@@ -31,6 +31,7 @@ export function RateLimitInfo({ rl }: { rl: RL | null }) {
     const resetTime = new Date(rl.resetAt).toLocaleTimeString([], {
       hour: '2-digit',
       minute: '2-digit',
+      timeZoneName: 'short',
     })
     const mins = Math.max(0, Math.ceil((rl.resetAt - Date.now()) / 60_000))
     resetSuffix = ` · resets at ${resetTime} (in ${mins} min)`

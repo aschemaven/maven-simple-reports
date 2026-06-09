@@ -30,7 +30,11 @@ function formatFetchedAt(ms: number): string {
   const d = new Date(ms)
   const ageMs = Date.now() - ms
   if (ageMs < STALE_THRESHOLD_MS) {
-    return d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+    return d.toLocaleTimeString([], {
+      hour: '2-digit',
+      minute: '2-digit',
+      timeZoneName: 'short',
+    })
   }
   return d.toLocaleString([], {
     year: 'numeric',
@@ -38,6 +42,7 @@ function formatFetchedAt(ms: number): string {
     day: '2-digit',
     hour: '2-digit',
     minute: '2-digit',
+    timeZoneName: 'short',
   })
 }
 
