@@ -58,8 +58,11 @@ CACHE_TTL = 86400
 # Rate limit: GitHub code search allows 10 requests/minute
 CODE_SEARCH_DELAY = 7  # seconds between code search API calls
 
-# Versions that do not exist (yet) and should be flagged
-SUSPECT_VERSIONS = {'4.0.0'}
+# A 4.0.x runtime version without a pre-release qualifier
+# (-alpha-, -beta-, -rc-) is suspect \u2014 Maven 4 has not GA'd yet,
+# so any bare 4.0.0 / 4.0.1 / 4.0.2 / 4.0.3 ... is almost certainly
+# a misconfigured wrapper.
+SUSPECT_VERSION_RE = re.compile(r'^4\.0\.\d+$')
 WARN_ICON = '\u26a0\ufe0f'  # warning sign emoji
 STOP_ICON = '\U0001f6d1'   # stop sign (red octagon)
 CHECK_ICON = '\u2705'       # green check mark
@@ -154,16 +157,11 @@ def _strip_response(key, data):
                 ],
             }
 
-    if '/commits' in key and '__headers__' not in key:
+    if '/commits' in key:
         # Keep only first commit's date
         if isinstance(data, list) and data:
             date = data[0].get('commit', {}).get('committer', {}).get('date', '')
             return [{'commit': {'committer': {'date': date}}}]
-
-    if '/branches' in key and '__headers__' not in key:
-        # Keep only branch names
-        if isinstance(data, list):
-            return [{'name': b.get('name', '')} for b in data]
 
     # Repo metadata — keep only fields we use
     if isinstance(data, dict) and 'stargazers_count' in data:
@@ -179,27 +177,6 @@ def _strip_response(key, data):
         }
 
     return data
-
-
-def _strip_header_response(key, cached_data):
-    """Strip header+body responses to only what we need."""
-    if cached_data is None:
-        return cached_data
-    headers = cached_data.get('headers', '')
-    body = cached_data.get('body')
-    # Only keep Link header lines (for pagination count)
-    stripped_headers = '\n'.join(
-        line for line in headers.split('\n')
-        if line.lower().startswith('link:')
-    )
-    # For branches body, keep only names; for commits body, discard
-    stripped_body = None
-    if isinstance(body, list):
-        if '/branches' in key:
-            stripped_body = [{'name': b.get('name', '')} for b in body]
-        else:
-            stripped_body = []
-    return {'headers': stripped_headers, 'body': stripped_body}
 
 
 def cache_get(key):
@@ -218,11 +195,7 @@ def cache_put(key, data):
     global _cache_dirty
     if not _cache_enabled:
         return
-    if '__headers__' in key:
-        stripped = _strip_header_response(key, data)
-    else:
-        stripped = _strip_response(key, data)
-    _cache[key] = {'data': stripped, 'ts': time.time()}
+    _cache[key] = {'data': _strip_response(key, data), 'ts': time.time()}
     _cache_dirty = True
 
 
@@ -380,7 +353,7 @@ def version_sort_key(version):
 
 def flag_version(version):
     """Add a warning icon to suspect/non-existent versions."""
-    if version in SUSPECT_VERSIONS:
+    if SUSPECT_VERSION_RE.match(version):
         return f'{version} {WARN_ICON}'
     return version
 
@@ -437,16 +410,43 @@ def extract_version_from_workflow(owner, repo, file_path):
     return extract_maven4_version(content)
 
 
-def extract_version_from_pom(owner, repo, file_path):
-    """Fetch a pom.xml and extract Maven 4 version from parent or properties."""
-    content = fetch_file_content(owner, repo, file_path)
-    if not content:
-        return None
-    # The POM 4.1.0 namespace itself doesn't carry a Maven version,
-    # but we can confirm it uses model 4.1.0
-    if 'maven.apache.org/POM/4.1.0' in content:
-        return '4.1.0 (POM model)'
-    return None
+POM_MODEL_RE = re.compile(r'maven\.apache\.org/POM/(\d+\.\d+\.\d+)')
+
+
+def detect_pom_model(owner, repo, files):
+    """Detect the POM model version declared in the project root pom.xml.
+
+    Returns the model version string (e.g. '4.0.0', '4.1.0') or '' if no
+    pom.xml could be located or parsed.
+
+    Strategy:
+    - If the repo already has a POM 4.1.0 signal, return '4.1.0' (the
+      code-search query that produced the signal targets that exact
+      namespace; no file fetch needed).
+    - Otherwise probe the project root pom.xml. For wrapper-using repos
+      the root is the directory containing .mvn/. As a fallback, try
+      the repository root.
+    """
+    if 'pom' in files:
+        return '4.1.0'
+
+    candidates = []
+    wrapper = files.get('wrapper', '')
+    suffix = '.mvn/wrapper/maven-wrapper.properties'
+    if wrapper.endswith(suffix):
+        project_root = wrapper[:-len(suffix)]
+        candidates.append(f'{project_root}pom.xml')
+    if 'pom.xml' not in candidates:
+        candidates.append('pom.xml')
+
+    for path in candidates:
+        content = fetch_file_content(owner, repo, path)
+        if not content:
+            continue
+        match = POM_MODEL_RE.search(content)
+        if match:
+            return match.group(1)
+    return ''
 
 
 def enrich_repo(owner, repo):
@@ -480,22 +480,6 @@ def get_last_workflow_run(owner, repo):
     return conclusion, run_url
 
 
-def check_maven4_branches(owner, repo):
-    """Check for branches with Maven 4-related names."""
-    # Fetch branches (limited to 100 - sufficient for pattern matching)
-    data = gh_api_call(f'repos/{owner}/{repo}/branches', {'per_page': '100'})
-    if not data or not isinstance(data, list):
-        return []
-
-    maven4_patterns = re.compile(r'maven[-_]?4|m4|mvn4', re.IGNORECASE)
-    maven4_branches = []
-    for branch in data:
-        name = branch.get('name', '')
-        if maven4_patterns.search(name):
-            maven4_branches.append(name)
-    return maven4_branches
-
-
 def check_file_exists(owner, repo, file_path):
     """Check if a file exists in a repository (HEAD request via contents API)."""
     data = gh_api_call(f'repos/{owner}/{repo}/contents/{file_path}')
@@ -526,81 +510,14 @@ def run_plausibility_checks(owner, repo, signals, files):
     return warnings
 
 
-def _gh_api_call_with_headers(endpoint, params=None):
-    """Call GitHub API with --include to get headers. Returns (headers_str, body_json).
-    Results are cached."""
-    key = _cache_key(f'__headers__{endpoint}', params)
-    cached = cache_get(key)
-    if cached is not None:
-        return cached.get('headers', ''), cached.get('body')
-
-    cmd = ['gh', 'api', endpoint, '--method', 'GET', '--include']
-    if params:
-        for k, v in params.items():
-            cmd.extend(['-f', f'{k}={v}'])
-
-    try:
-        result = subprocess.run(cmd, capture_output=True, text=True, check=True)
-        # Split headers from body
-        output = result.stdout
-        body_start = output.find('[')
-        if body_start < 0:
-            body_start = output.find('{')
-        headers = output[:body_start] if body_start >= 0 else output
-        body = None
-        if body_start >= 0:
-            try:
-                body = json.loads(output[body_start:])
-            except json.JSONDecodeError:
-                pass
-        cache_put(key, {'headers': headers, 'body': body})
-        return headers, body
-    except subprocess.CalledProcessError:
-        return '', None
-
-
-def get_repo_activity(owner, repo):
-    """Get repository activity stats: latest commit date, commit count, branch count."""
-    activity = {
-        'last_commit': '',
-        'commit_count': 0,
-        'branch_count': 0,
-    }
-
-    # Get latest commit on default branch
+def get_last_commit_date(owner, repo):
+    """Return the date of the latest commit on the default branch, or ''."""
     commits = gh_api_call(f'repos/{owner}/{repo}/commits', {'per_page': '1'})
     if commits and isinstance(commits, list) and len(commits) > 0:
         commit_date = commits[0].get('commit', {}).get('committer', {}).get('date', '')
         if commit_date:
-            activity['last_commit'] = commit_date[:10]
-
-    # Get total commit count via Link header pagination
-    headers, _ = _gh_api_call_with_headers(
-        f'repos/{owner}/{repo}/commits', {'per_page': '1'}
-    )
-    for line in headers.split('\n'):
-        if line.lower().startswith('link:'):
-            match = re.search(r'page=(\d+)>;\s*rel="last"', line)
-            if match:
-                activity['commit_count'] = int(match.group(1))
-            break
-
-    # Get branch count via Link header pagination
-    headers, body = _gh_api_call_with_headers(
-        f'repos/{owner}/{repo}/branches', {'per_page': '1'}
-    )
-    found_link = False
-    for line in headers.split('\n'):
-        if line.lower().startswith('link:'):
-            match = re.search(r'page=(\d+)>;\s*rel="last"', line)
-            if match:
-                activity['branch_count'] = int(match.group(1))
-            found_link = True
-            break
-    if not found_link and body and isinstance(body, list):
-        activity['branch_count'] = len(body)
-
-    return activity
+            return commit_date[:10]
+    return ''
 
 
 def collect_adoption_data(exclude_forks=False):
@@ -688,51 +605,42 @@ def collect_adoption_data(exclude_forks=False):
             print(f"    Skipping (fork)", file=sys.stderr)
             continue
 
-        # Extract Maven 4 version from all available signals
-        versions = []
+        # POM model version: known to be 4.1.0 for repos with the POM
+        # signal; for the others (wrapper/action only) we actively probe
+        # the project root pom.xml so we get a real distribution.
+        pom_model = detect_pom_model(owner, repo_name, data['files'])
+
+        # Maven runtime version: extracted from wrapper or workflow.
+        # Both may report different versions — keep all of them visible.
+        runtime_versions = []
         if 'wrapper' in data['files']:
             v = extract_version_from_wrapper(owner, repo_name)
             if v:
-                versions.append(v)
+                runtime_versions.append(v)
         if 'action' in data['files']:
             v = extract_version_from_workflow(
                 owner, repo_name, data['files']['action']
             )
-            if v and v not in versions:
-                versions.append(v)
-        if 'pom' in data['files']:
-            v = extract_version_from_pom(
-                owner, repo_name, data['files']['pom']
-            )
-            if v and v not in versions:
-                versions.append(v)
-        version = ', '.join(versions) if versions else ''
+            if v and v not in runtime_versions:
+                runtime_versions.append(v)
+        maven_runtime = ', '.join(runtime_versions)
 
         # Get last workflow run
         build_status, build_url = get_last_workflow_run(owner, repo_name)
-
-        # Check for Maven 4 branches
-        maven4_branches = check_maven4_branches(owner, repo_name)
-
-        branch_info = meta.get('default_branch', 'main')
-        if maven4_branches:
-            branch_info += f" + {', '.join(maven4_branches)}"
 
         # Run plausibility checks
         warnings = run_plausibility_checks(
             owner, repo_name, data['signals'], data['files']
         )
 
-        # Get repository activity stats
-        activity = get_repo_activity(owner, repo_name)
-
         results.append({
             'repository': full_name,
             'description': meta.get('description', ''),
             'stars': meta.get('stars', 0),
             'signals': ', '.join(sorted(data['signals'])),
-            'maven4_version': version or '',
-            'branch': branch_info,
+            'pom_model': pom_model,
+            'maven_runtime': maven_runtime,
+            'branch': meta.get('default_branch', 'main'),
             'build_status': build_status,
             'build_url': build_url,
             'language': meta.get('language', ''),
@@ -740,9 +648,7 @@ def collect_adoption_data(exclude_forks=False):
             'url': f'https://github.com/{full_name}',
             'fork': meta.get('fork', False),
             'warnings': warnings,
-            'last_commit': activity['last_commit'],
-            'commit_count': activity['commit_count'],
-            'branch_count': activity['branch_count'],
+            'last_commit': get_last_commit_date(owner, repo_name),
         })
 
     # Sort by stars descending
@@ -757,17 +663,17 @@ def export_to_csv(results, filename):
         writer = csv.writer(f)
         writer.writerow([
             'Repository', 'Description', 'Stars', 'Maven 4 Signals',
-            'Maven 4 Version', 'Branch', 'Last Build', 'Build URL',
-            'Language', 'Updated', 'Last Commit', 'Commits', 'Branches',
-            'Warnings', 'URL', 'Fork'
+            'POM Model', 'Maven Runtime', 'Default Branch',
+            'Last Build', 'Build URL', 'Language', 'Updated',
+            'Last Commit', 'Warnings', 'URL', 'Fork'
         ])
         for r in results:
             writer.writerow([
                 r['repository'], r['description'], r['stars'],
-                r['signals'], r['maven4_version'], r['branch'],
-                r['build_status'], r['build_url'], r['language'],
-                r['updated'], r['last_commit'], r['commit_count'],
-                r['branch_count'], '; '.join(r['warnings']),
+                r['signals'], r['pom_model'], r['maven_runtime'],
+                r['branch'], r['build_status'], r['build_url'],
+                r['language'], r['updated'], r['last_commit'],
+                '; '.join(r['warnings']),
                 r['url'], 'Yes' if r['fork'] else 'No'
             ])
     return filename
@@ -777,32 +683,40 @@ def export_to_asciidoc(results, filename):
     """Export results to AsciiDoc report."""
     now = datetime.now().strftime('%a %b %d %H:%M:%S %Z %Y')
 
-    # Compute summary stats
+    # Compute summary stats: POM model and Maven runtime are tracked
+    # separately because they're orthogonal — a repo can have POM
+    # model 4.1.0 in pom.xml but build with a Maven 4.0.0-rc-X runtime.
     total = len(results)
     signal_counts = {}
-    version_counts = {}
+    pom_model_counts = {}
+    runtime_counts = {}
     for r in results:
         for s in r['signals'].split(', '):
             signal_counts[s] = signal_counts.get(s, 0) + 1
-        v = r.get('maven4_version', '')
-        if v:
-            # A repo may list multiple versions; count each
-            for ver in v.split(', '):
-                ver = ver.strip()
-                if ver:
-                    version_counts[ver] = version_counts.get(ver, 0) + 1
+        pm = r.get('pom_model', '')
+        if pm:
+            pom_model_counts[pm] = pom_model_counts.get(pm, 0) + 1
+        for ver in r.get('maven_runtime', '').split(', '):
+            ver = ver.strip()
+            if ver:
+                runtime_counts[ver] = runtime_counts.get(ver, 0) + 1
 
     with open(filename, 'w', encoding='utf-8') as f:
         f.write('= Maven 4 Adoption Report\n')
-        f.write(':toc: left\n\n')
+        f.write(':toc: left\n')
+        f.write(':icons: font\n\n')
         f.write(f'Generated: {now}\n\n')
         f.write('Projects across GitHub using Maven 4 features.\n')
         f.write('Known Maven component repositories are excluded.\n\n')
+
+        f.write('NOTE: Detection runs against each repository\'s default branch only. ')
+        f.write('Maven 4 work on feature branches is not currently captured.\n\n')
 
         f.write('== Summary\n\n')
         f.write(f'Total projects with Maven 4 signals: *{total}*\n\n')
 
         if signal_counts:
+            f.write('.Signals\n')
             f.write('[cols="2,1", options="header"]\n')
             f.write('|===\n')
             f.write('| Signal | Count\n\n')
@@ -811,16 +725,36 @@ def export_to_asciidoc(results, filename):
                 f.write(f'| {count}\n\n')
             f.write('|===\n\n')
 
-        # Filter out POM model version (XML schema, not a Maven version)
-        maven_versions = {k: v for k, v in version_counts.items()
-                          if '(POM model)' not in k}
-        if maven_versions:
-            has_suspect = any(v in SUSPECT_VERSIONS for v in maven_versions)
-            f.write('.Maven 4 Versions\n')
+        f.write('.POM Model Versions\n')
+        f.write('The XML schema declared in the project root `pom.xml` (the `xmlns` URL).\n')
+        f.write('Independent of which Maven runtime built the project.\n\n')
+        detected = sum(pom_model_counts.values())
+        undetected = total - detected
+        f.write('[cols="2,1", options="header"]\n')
+        f.write('|===\n')
+        f.write('| Version | Count\n\n')
+        for ver, count in sorted(pom_model_counts.items(),
+                                 key=lambda x: version_sort_key(x[0]),
+                                 reverse=True):
+            f.write(f'| {ver}\n')
+            f.write(f'| {count}\n\n')
+        if undetected:
+            f.write('| (not detected)\n')
+            f.write(f'| {undetected}\n\n')
+        f.write('|===\n\n')
+        if undetected:
+            f.write(f'_{undetected} repos have no reachable project root `pom.xml` ')
+            f.write('(multi-module without an aggregator at the obvious location, ')
+            f.write('archived layout, or a non-standard structure)._\n\n')
+
+        if runtime_counts:
+            has_suspect = any(SUSPECT_VERSION_RE.match(v) for v in runtime_counts)
+            f.write('.Maven Runtime Versions\n')
+            f.write('The Maven CLI version pinned in the wrapper or workflow.\n\n')
             f.write('[cols="2,1", options="header"]\n')
             f.write('|===\n')
             f.write('| Version | Count\n\n')
-            for ver, count in sorted(maven_versions.items(),
+            for ver, count in sorted(runtime_counts.items(),
                                      key=lambda x: version_sort_key(x[0]),
                                      reverse=True):
                 f.write(f'| {flag_version(ver)}\n')
@@ -833,43 +767,64 @@ def export_to_asciidoc(results, filename):
         f.write('== Adoption Details\n\n')
         f.write('Sorted by star count (descending).\n\n')
         f.write(f'{STOP_ICON} = plausibility issue (e.g., wrapper.properties without mvnw script) +\n')
-        f.write(f'{WARN_ICON} = suspect version (does not exist yet)\n\n')
+        f.write(f'{WARN_ICON} = suspect runtime version (does not exist yet)\n\n')
 
-        f.write('[cols="3,1,2,2,1,1,1,1,2,1", options="header"]\n')
+        f.write('.Column reference\n')
+        f.write('Repository:: GitHub repo (`owner/name`), linked to its GitHub page.\n')
+        f.write('Stars:: GitHub star count.\n')
+        f.write('Used here as a popularity proxy and as the table sort key.\n')
+        f.write('_Not a Maven 4 signal._\n')
+        f.write('Signals:: Which of the three Maven 4 detection signals fired for this repo: ')
+        f.write('`POM 4.1.0` (a `pom.xml` with the new namespace), ')
+        f.write('`Wrapper` (a `maven-wrapper.properties` referencing `apache-maven-4`), ')
+        f.write('`GH Action` (a workflow installing Maven 4).\n')
+        f.write('POM Model:: XML schema version declared in the project root `pom.xml` ')
+        f.write('(`4.0.0` = legacy, `4.1.0` = new). ')
+        f.write('Independent of the Maven runtime version. Empty if no root `pom.xml` was reachable.\n')
+        f.write('Maven Runtime:: Maven CLI version pinned in the wrapper or workflow ')
+        f.write('(e.g., `4.0.0-rc-5`). Multiple values if wrapper and workflow disagree.\n')
+        f.write('Default Branch:: The repository\'s default branch — this is the branch ')
+        f.write('all detections were run against. _Not a Maven 4 signal._\n')
+        f.write('Last Commit:: Date of the most recent commit on the default branch.\n')
+        f.write('Lets you tell active projects apart from dormant ones at a glance.\n')
+        f.write('_Not a Maven 4 signal._\n')
+        f.write('Last Build:: Conclusion of the repo\'s most recent GitHub Actions ')
+        f.write('workflow run (any workflow, not necessarily a Maven build). ')
+        f.write('Useful as a sanity check that CI is wired up. _Not a Maven 4 signal._\n')
+        f.write('Language:: GitHub\'s primary-language detection for the repo. ')
+        f.write('_Not a Maven 4 signal._\n\n')
+
+        f.write('[cols="3,1,2,1,2,2,1,2,1", options="header"]\n')
         f.write('|===\n')
-        f.write('| Repository | Stars | Signals | Maven 4 Version | Branch ')
-        f.write('| Last Commit | Commits | Branches | Last Build | Language\n\n')
+        f.write('| Repository | Stars | Signals | POM Model | Maven Runtime ')
+        f.write('| Default Branch | Last Commit | Last Build | Language\n\n')
 
         for r in results:
             repo_link = f'https://github.com/{r["repository"]}[{r["repository"]}^]'
             build_text = r['build_status']
             if r['build_url']:
                 build_text = f'{r["build_url"]}[{r["build_status"]}^]'
-            # Flag suspect versions and escape pipe characters
-            version = flag_version_string(r['maven4_version'])
-            version = version.replace('|', '{vbar}')
+            pom_model = r['pom_model'].replace('|', '{vbar}')
+            runtime = flag_version_string(r['maven_runtime'])
+            runtime = runtime.replace('|', '{vbar}')
             branch = r['branch'].replace('|', '{vbar}')
-            # Add icons to repo name for easy scanning
-            has_suspect_version = any(
-                v.strip() in SUSPECT_VERSIONS
-                for v in r['maven4_version'].split(', ') if v.strip()
+            has_suspect_runtime = any(
+                SUSPECT_VERSION_RE.match(v.strip())
+                for v in r['maven_runtime'].split(', ') if v.strip()
             )
             repo_display = repo_link
             if r['warnings']:
                 repo_display = f'{STOP_ICON} {repo_link}'
-            elif has_suspect_version:
+            elif has_suspect_runtime:
                 repo_display = f'{WARN_ICON} {repo_link}'
-            commit_count = str(r['commit_count']) if r['commit_count'] else ''
-            branch_count = str(r['branch_count']) if r['branch_count'] else ''
 
             f.write(f'| {repo_display}\n')
             f.write(f'| {r["stars"]}\n')
             f.write(f'| {r["signals"]}\n')
-            f.write(f'| {version}\n')
+            f.write(f'| {pom_model}\n')
+            f.write(f'| {runtime}\n')
             f.write(f'| {branch}\n')
             f.write(f'| {r["last_commit"]}\n')
-            f.write(f'| {commit_count}\n')
-            f.write(f'| {branch_count}\n')
             f.write(f'| {build_text}\n')
             f.write(f'| {r["language"]}\n\n')
 
@@ -889,22 +844,32 @@ def append_history(results, history_path=HISTORY_PATH, forge=FORGE_NAME):
     """
     today = datetime.now().strftime('%Y-%m-%d')
 
-    # Compute signal and version counts
+    # Compute signal, POM model and Maven runtime counts. `versions` is
+    # kept as a legacy union (POM model entries tagged "(POM model)") so
+    # existing readers of the history schema keep working.
     signal_counts = {}
-    version_counts = {}
+    pom_model_counts = {}
+    runtime_counts = {}
     for r in results:
         for s in r['signals'].split(', '):
             signal_counts[s] = signal_counts.get(s, 0) + 1
-        v = r.get('maven4_version', '')
-        if v:
-            for ver in v.split(', '):
-                ver = ver.strip()
-                if ver:
-                    version_counts[ver] = version_counts.get(ver, 0) + 1
+        pm = r.get('pom_model', '')
+        if pm:
+            pom_model_counts[pm] = pom_model_counts.get(pm, 0) + 1
+        for ver in r.get('maven_runtime', '').split(', '):
+            ver = ver.strip()
+            if ver:
+                runtime_counts[ver] = runtime_counts.get(ver, 0) + 1
+
+    version_counts = dict(runtime_counts)
+    for ver, count in pom_model_counts.items():
+        version_counts[f'{ver} (POM model)'] = count
 
     forge_data = {
         'total': len(results),
         'signals': signal_counts,
+        'pom_models': pom_model_counts,
+        'runtimes': runtime_counts,
         'versions': version_counts,
     }
     entry = {
@@ -912,6 +877,8 @@ def append_history(results, history_path=HISTORY_PATH, forge=FORGE_NAME):
         'by_forge': {forge: forge_data},
         'total': forge_data['total'],
         'signals': dict(forge_data['signals']),
+        'pom_models': dict(forge_data['pom_models']),
+        'runtimes': dict(forge_data['runtimes']),
         'versions': dict(forge_data['versions']),
     }
 
@@ -1017,21 +984,32 @@ if __name__ == '__main__':
                                     key=lambda x: x[1], reverse=True):
             print(f"  {signal}: {count}", file=sys.stderr)
 
-        print("\nBy Maven 4 version:", file=sys.stderr)
-        version_counts = {}
+        print("\nBy POM model:", file=sys.stderr)
+        pom_model_counts = {}
         for r in results:
-            v = r.get('maven4_version', '')
-            if v:
-                for ver in v.split(', '):
-                    ver = ver.strip()
-                    if ver:
-                        version_counts[ver] = version_counts.get(ver, 0) + 1
-        if version_counts:
-            for ver, count in sorted(version_counts.items(),
+            pm = r.get('pom_model', '')
+            if pm:
+                pom_model_counts[pm] = pom_model_counts.get(pm, 0) + 1
+        if pom_model_counts:
+            for ver, count in sorted(pom_model_counts.items(),
                                      key=lambda x: x[1], reverse=True):
                 print(f"  {ver}: {count}", file=sys.stderr)
         else:
-            print("  (no versions detected)", file=sys.stderr)
+            print("  (no POM model versions detected)", file=sys.stderr)
+
+        print("\nBy Maven runtime:", file=sys.stderr)
+        runtime_counts = {}
+        for r in results:
+            for ver in r.get('maven_runtime', '').split(', '):
+                ver = ver.strip()
+                if ver:
+                    runtime_counts[ver] = runtime_counts.get(ver, 0) + 1
+        if runtime_counts:
+            for ver, count in sorted(runtime_counts.items(),
+                                     key=lambda x: x[1], reverse=True):
+                print(f"  {ver}: {count}", file=sys.stderr)
+        else:
+            print("  (no runtime versions detected)", file=sys.stderr)
 
         print("\nTop repos by stars:", file=sys.stderr)
         for r in results[:10]:
