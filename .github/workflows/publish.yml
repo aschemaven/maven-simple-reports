@@ -175,19 +175,27 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      # Restore history only on main paths so previews never read it (and
-      # never push it back). First production run will see no branch yet
-      # and start with an empty time series.
-      - name: Restore adoption history from data branch
-        if: needs.context.outputs.is-main == 'true'
+      # Restore adoption data from the data branch:
+      #   - per-repo snapshot for every trigger (previews use it as a fast
+      #     read-only path; only main pushes write it back)
+      #   - time series history only on main paths (previews would otherwise
+      #     pollute the daily cadence)
+      # First production run will see no branch yet and start from scratch.
+      - name: Restore adoption data from data branch
         run: |
           mkdir -p data
           if git ls-remote --exit-code --heads origin data >/dev/null 2>&1; then
             git fetch origin data --depth=1
-            git show FETCH_HEAD:maven4-adoption-history.json > data/maven4-adoption-history.json
-            echo "Restored history ($(wc -c < data/maven4-adoption-history.json) bytes)"
+            git show FETCH_HEAD:maven4-repos-snapshot.json > data/maven4-repos-snapshot.json 2>/dev/null \
+              && echo "Restored snapshot ($(wc -c < data/maven4-repos-snapshot.json) bytes)" \
+              || echo "No prior snapshot on data branch yet"
+            if [ "${{ needs.context.outputs.is-main }}" = "true" ]; then
+              git show FETCH_HEAD:maven4-adoption-history.json > data/maven4-adoption-history.json 2>/dev/null \
+                && echo "Restored history ($(wc -c < data/maven4-adoption-history.json) bytes)" \
+                || echo "No prior history on data branch yet"
+            fi
           else
-            echo "data branch does not exist yet — starting with empty history"
+            echo "data branch does not exist yet — starting from scratch"
           fi
 
       - name: Cache GitHub API responses
@@ -211,18 +219,31 @@ jobs:
           if [ "${{ inputs.no_cache }}" = "true" ]; then
             FLAGS="$FLAGS --no-cache"
           fi
+          # Fast-path via the per-repo snapshot for every trigger EXCEPT
+          # the daily scheduled scan (which is the canonical full refresh)
+          # and explicit no_cache dispatches. Previews don't write the
+          # snapshot back (so they don't steal it from main).
+          if [ "${{ github.event_name }}" != "schedule" ] && [ "${{ inputs.no_cache }}" != "true" ]; then
+            FLAGS="$FLAGS --use-snapshot"
+          fi
           if [ "${{ needs.context.outputs.is-main }}" != "true" ]; then
-            FLAGS="$FLAGS --no-history"
+            FLAGS="$FLAGS --no-history --no-snapshot-write"
           fi
           scripts/export_maven4_adoption.py \
             --format asciidoc \
             --output public/maven4-adoption.adoc \
             $FLAGS
 
-      - name: Push updated history to data branch
+      - name: Push updated adoption data to data branch
         if: needs.context.outputs.is-main == 'true'
         run: |
-          [ -f data/maven4-adoption-history.json ] || { echo "No history file to push"; exit 0; }
+          files=()
+          [ -f data/maven4-adoption-history.json ] && files+=(maven4-adoption-history.json)
+          [ -f data/maven4-repos-snapshot.json ]  && files+=(maven4-repos-snapshot.json)
+          if [ ${#files[@]} -eq 0 ]; then
+            echo "No data files to push"
+            exit 0
+          fi
           WORK=$(mktemp -d)
           cd "$WORK"
           REPO_URL="https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
@@ -234,15 +255,17 @@ jobs:
             git remote add origin "$REPO_URL"
             git checkout --orphan data
           fi
-          cp "$GITHUB_WORKSPACE/data/maven4-adoption-history.json" .
-          git add maven4-adoption-history.json
+          for f in "${files[@]}"; do
+            cp "$GITHUB_WORKSPACE/data/$f" .
+            git add "$f"
+          done
           if git diff --staged --quiet; then
-            echo "No history changes — nothing to commit"
+            echo "No data changes — nothing to commit"
             exit 0
           fi
           git -c user.name='github-actions[bot]' \
               -c user.email='41898282+github-actions[bot]@users.noreply.github.com' \
-              commit -m "Update Maven 4 adoption history ($(date -u +%Y-%m-%d))"
+              commit -m "Update Maven 4 adoption data ($(date -u +%Y-%m-%d))"
           git push origin HEAD:data
 
       - name: Upload Maven 4 report artifact

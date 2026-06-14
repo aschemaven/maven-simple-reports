@@ -45,6 +45,13 @@ CACHE_PATH = Path(__file__).resolve().parent.parent / 'cache' / 'gh_api_cache.js
 # Time series history file (committed to repo)
 HISTORY_PATH = Path(__file__).resolve().parent.parent / 'data' / 'maven4-adoption-history.json'
 
+# Per-repo snapshot of the previous run's enriched results. Used to skip
+# enrichment for repos whose discovery signature (signals + file paths)
+# hasn't changed since the snapshot was taken. Lives alongside the history
+# file on the data branch; see scan-maven4 in publish.yml for restore/push.
+SNAPSHOT_PATH = Path(__file__).resolve().parent.parent / 'data' / 'maven4-repos-snapshot.json'
+SNAPSHOT_SCHEMA_VERSION = 1
+
 # Forge attribution for the federated history schema. Today only the GitHub
 # runner writes here, so each snapshot carries by_forge.github plus mirrored
 # top-level aggregates. Going multi-forge would mean parameterising this and
@@ -520,10 +527,55 @@ def get_last_commit_date(owner, repo):
     return ''
 
 
-def collect_adoption_data(exclude_forks=False):
+def load_snapshot(snapshot_path=SNAPSHOT_PATH):
+    """Load the previous run's per-repo snapshot. Returns a dict keyed by
+    full_name -> result entry, or empty dict if the file is missing,
+    unreadable, or has an incompatible schema_version."""
+    if not snapshot_path.exists():
+        print(f"No prior snapshot at {snapshot_path.name}; full enrichment.",
+              file=sys.stderr)
+        return {}
+    try:
+        with open(snapshot_path, 'r', encoding='utf-8') as f:
+            payload = json.load(f)
+    except (json.JSONDecodeError, OSError) as e:
+        print(f"Warning: snapshot unreadable ({e}); falling back to full enrichment.",
+              file=sys.stderr)
+        return {}
+    if payload.get('schema_version') != SNAPSHOT_SCHEMA_VERSION:
+        print(f"Snapshot schema mismatch (have {payload.get('schema_version')}, "
+              f"want {SNAPSHOT_SCHEMA_VERSION}); falling back to full enrichment.",
+              file=sys.stderr)
+        return {}
+    by_repo = {r['repository']: r for r in payload.get('repos', [])}
+    print(f"Loaded {len(by_repo)} entries from snapshot "
+          f"(taken {payload.get('snapshot_date', '?')})",
+          file=sys.stderr)
+    return by_repo
+
+
+def save_snapshot(results, snapshot_path=SNAPSHOT_PATH):
+    """Persist the current run's results so the next run can skip
+    re-enrichment for unchanged repos."""
+    snapshot_path.parent.mkdir(parents=True, exist_ok=True)
+    payload = {
+        'schema_version': SNAPSHOT_SCHEMA_VERSION,
+        'snapshot_date': datetime.now().strftime('%Y-%m-%d'),
+        'total': len(results),
+        'repos': results,
+    }
+    with open(snapshot_path, 'w', encoding='utf-8') as f:
+        json.dump(payload, f, indent=2)
+    print(f"Wrote snapshot of {len(results)} repos to {snapshot_path}",
+          file=sys.stderr)
+
+
+def collect_adoption_data(exclude_forks=False, use_snapshot=False):
     """Run all searches, deduplicate, enrich, and return adoption data."""
     maven_repos = load_maven_repos()
     print(f"Loaded {len(maven_repos)} Maven component repos to exclude.", file=sys.stderr)
+
+    snapshot = load_snapshot() if use_snapshot else {}
 
     # Run the three code searches
     print("\nSearching for Maven 4 adoption signals...", file=sys.stderr)
@@ -587,10 +639,31 @@ def collect_adoption_data(exclude_forks=False):
     print(f"Excluded {excluded_count} Maven component repos.", file=sys.stderr)
     print(f"Remaining: {len(filtered)} repos to enrich.\n", file=sys.stderr)
 
-    # Enrich each repo with metadata
+    # Enrich each repo with metadata. When a snapshot is loaded, the fast
+    # path skips the whole enrichment for repos whose discovery signature
+    # (signals + file paths) hasn't changed; that turns ~300 API-heavy
+    # enrichments per run into ~5-20 for the actual delta.
     results = []
+    reused = 0
+    re_enriched_signal_change = 0
+    fresh = 0
     for full_name, data in sorted(filtered.items()):
         owner, repo_name = full_name.split('/')
+
+        snap_entry = snapshot.get(full_name)
+        if snap_entry is not None:
+            snap_signals = tuple(sorted(snap_entry.get('_signals_raw') or []))
+            snap_files = tuple(sorted((snap_entry.get('_files') or {}).items()))
+            cur_signals = tuple(sorted(data['signals']))
+            cur_files = tuple(sorted(data['files'].items()))
+            if snap_signals == cur_signals and snap_files == cur_files:
+                results.append(snap_entry)
+                reused += 1
+                continue
+            re_enriched_signal_change += 1
+        else:
+            fresh += 1
+
         print(f"  Enriching {full_name}...", file=sys.stderr)
 
         meta = enrich_repo(owner, repo_name)
@@ -649,7 +722,18 @@ def collect_adoption_data(exclude_forks=False):
             'fork': meta.get('fork', False),
             'warnings': warnings,
             'last_commit': get_last_commit_date(owner, repo_name),
+            # Internal fields for snapshot signature matching on the next
+            # run. Underscore prefix marks them as not for human display;
+            # CSV/AsciiDoc writers reference fields by name and ignore them.
+            '_signals_raw': sorted(data['signals']),
+            '_files': data['files'],
         })
+
+    if use_snapshot:
+        print(f"\nSnapshot delta: {reused} reused, "
+              f"{re_enriched_signal_change} re-enriched (signals/files changed), "
+              f"{fresh} new",
+              file=sys.stderr)
 
     # Sort by stars descending
     results.sort(key=lambda x: x['stars'], reverse=True)
@@ -939,6 +1023,19 @@ if __name__ == '__main__':
         action='store_true',
         help='Skip appending to the adoption history file (useful for previews)'
     )
+    parser.add_argument(
+        '--use-snapshot',
+        action='store_true',
+        help='Reuse enrichment from data/maven4-repos-snapshot.json for repos '
+             'whose discovery signature (signals + file paths) is unchanged. '
+             'Turns ~300 enrichments into ~5-20; intended for branch/PR previews.'
+    )
+    parser.add_argument(
+        '--no-snapshot-write',
+        action='store_true',
+        help='Do not overwrite the snapshot file after the run (useful for '
+             'previews so they do not steal the snapshot from main).'
+    )
 
     args = parser.parse_args()
 
@@ -960,7 +1057,10 @@ if __name__ == '__main__':
 
     print("Collecting Maven 4 adoption data from GitHub...\n",
           file=sys.stderr)
-    results = collect_adoption_data(exclude_forks=args.exclude_forks)
+    results = collect_adoption_data(
+        exclude_forks=args.exclude_forks,
+        use_snapshot=args.use_snapshot,
+    )
 
     print(f"\n{'=' * 60}", file=sys.stderr)
     print(f"Total repos found: {len(results)}", file=sys.stderr)
@@ -1019,6 +1119,11 @@ if __name__ == '__main__':
     # Append to time series history
     if results and not args.no_history:
         append_history(results)
+
+    # Persist the per-repo snapshot so the next run can fast-path repos
+    # whose discovery signature hasn't changed.
+    if results and not args.no_snapshot_write:
+        save_snapshot(results)
 
     # Save cache for next run
     save_cache()
