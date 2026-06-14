@@ -41,7 +41,7 @@ shopt -s nullglob
 for adoc_file in "${REPO_ROOT}/public"/*.adoc; do
     html_file="${adoc_file%.adoc}.html"
     echo "  Converting $(basename "$adoc_file")..."
-    asciidoctor -o "$html_file" "$adoc_file"
+    asciidoctor -a docinfo=shared-footer -o "$html_file" "$adoc_file"
 done
 
 echo "Report generated successfully in ${REPO_ROOT}/public/"

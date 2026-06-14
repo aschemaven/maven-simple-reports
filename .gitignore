@@ -4,6 +4,7 @@
 public/*.adoc
 !public/index.adoc
 public/*.html
+!public/docinfo-footer.html
 public/*.csv
 public/dependabot-prs/
 cache/
