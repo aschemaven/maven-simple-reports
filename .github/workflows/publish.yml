@@ -262,27 +262,28 @@ jobs:
             gh run download "$GITHUB_RUN_ID" -R "$GITHUB_REPOSITORY" -n spa-dist -D public/dependabot-prs/
             echo "Used SPA built in this run"
           else
-            # Walk recent successful main runs and pick the first one that
-            # still has a spa-dist artifact. Scheduled runs skip build-spa
-            # by design, so the *latest* successful run is usually empty;
-            # the most recent run that actually built the SPA can be many
-            # runs back.
-            RUN_ID=""
+            # Walk recent successful main runs and download from the first
+            # one whose artifact list actually still has a non-expired
+            # spa-dist AND whose download succeeds. The listing check alone
+            # is not sufficient: an artifact can race with retention cleanup
+            # between the API listing and the download.
+            DOWNLOADED=""
             for ID in $(gh api -X GET "repos/${GITHUB_REPOSITORY}/actions/workflows/publish.yml/runs" \
                          -f branch=main -f status=success -f per_page=20 \
                          --jq '.workflow_runs[].id'); do
               if gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${ID}/artifacts" \
-                 --jq '[.artifacts[].name] | index("spa-dist")' 2>/dev/null \
-                 | grep -qv '^null$'; then
-                RUN_ID="$ID"
-                break
+                 --jq '.artifacts[] | select(.expired==false) | .name' 2>/dev/null \
+                 | grep -qx 'spa-dist'; then
+                if gh run download "$ID" -R "$GITHUB_REPOSITORY" -n spa-dist -D public/dependabot-prs/ 2>/dev/null; then
+                  echo "Used SPA from prior run #$ID"
+                  DOWNLOADED=1
+                  break
+                fi
+                echo "Run #$ID listed spa-dist but download failed; trying next"
               fi
             done
-            if [ -n "$RUN_ID" ]; then
-              gh run download "$RUN_ID" -R "$GITHUB_REPOSITORY" -n spa-dist -D public/dependabot-prs/
-              echo "Used SPA from prior run #$RUN_ID"
-            else
-              echo "::warning::No publish.yml run on main within the last 20 has a spa-dist artifact — SPA missing"
+            if [ -z "$DOWNLOADED" ]; then
+              echo "::warning::No publish.yml run on main within the last 20 has a downloadable spa-dist artifact — SPA missing"
             fi
           fi
 
@@ -293,22 +294,23 @@ jobs:
             gh run download "$GITHUB_RUN_ID" -R "$GITHUB_REPOSITORY" -n maven4-report -D public/
             echo "Used Maven 4 report scanned in this run"
           else
-            RUN_ID=""
+            DOWNLOADED=""
             for ID in $(gh api -X GET "repos/${GITHUB_REPOSITORY}/actions/workflows/publish.yml/runs" \
                          -f branch=main -f status=success -f per_page=20 \
                          --jq '.workflow_runs[].id'); do
               if gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${ID}/artifacts" \
-                 --jq '[.artifacts[].name] | index("maven4-report")' 2>/dev/null \
-                 | grep -qv '^null$'; then
-                RUN_ID="$ID"
-                break
+                 --jq '.artifacts[] | select(.expired==false) | .name' 2>/dev/null \
+                 | grep -qx 'maven4-report'; then
+                if gh run download "$ID" -R "$GITHUB_REPOSITORY" -n maven4-report -D public/ 2>/dev/null; then
+                  echo "Used Maven 4 report from prior run #$ID"
+                  DOWNLOADED=1
+                  break
+                fi
+                echo "Run #$ID listed maven4-report but download failed; trying next"
               fi
             done
-            if [ -n "$RUN_ID" ]; then
-              gh run download "$RUN_ID" -R "$GITHUB_REPOSITORY" -n maven4-report -D public/
-              echo "Used Maven 4 report from prior run #$RUN_ID"
-            else
-              echo "::warning::No prior publish.yml run on main — Maven 4 report missing"
+            if [ -z "$DOWNLOADED" ]; then
+              echo "::warning::No publish.yml run on main within the last 20 has a downloadable maven4-report artifact"
             fi
           fi
 
@@ -362,33 +364,33 @@ jobs:
             echo "Used SPA built in this run"
           else
             # Walk recent successful publish.yml runs (current branch first,
-            # then main) and pick the first one that still has a spa-dist
-            # artifact. Scheduled runs on main skip build-spa by design.
+            # then main) and try to download spa-dist from each that lists
+            # a non-expired one. The download itself may still race with
+            # retention cleanup, so we tolerate failure and try the next.
             BRANCH="${{ github.head_ref || github.ref_name }}"
-            RUN_ID=""
-            find_run_with_spa() {
+            try_download_spa() {
               local b="$1"
               for ID in $(gh api -X GET "repos/${GITHUB_REPOSITORY}/actions/workflows/publish.yml/runs" \
                            -f "branch=$b" -f status=success -f per_page=20 \
                            --jq '.workflow_runs[].id'); do
                 if gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${ID}/artifacts" \
-                   --jq '[.artifacts[].name] | index("spa-dist")' 2>/dev/null \
-                   | grep -qv '^null$'; then
-                  echo "$ID"
-                  return 0
+                   --jq '.artifacts[] | select(.expired==false) | .name' 2>/dev/null \
+                   | grep -qx 'spa-dist'; then
+                  if gh run download "$ID" -R "$GITHUB_REPOSITORY" -n spa-dist -D public/dependabot-prs/ 2>/dev/null; then
+                    echo "Used SPA from prior run #$ID (branch $b)"
+                    return 0
+                  fi
+                  echo "Run #$ID listed spa-dist but download failed; trying next"
                 fi
               done
+              return 1
             }
-            if [ "$BRANCH" != "main" ]; then
-              RUN_ID="$(find_run_with_spa "$BRANCH")"
-              [ -n "$RUN_ID" ] && echo "Found publish.yml run with spa-dist on $BRANCH: #$RUN_ID"
-            fi
-            [ -z "$RUN_ID" ] && RUN_ID="$(find_run_with_spa main)"
-            if [ -n "$RUN_ID" ]; then
-              gh run download "$RUN_ID" -R "$GITHUB_REPOSITORY" -n spa-dist -D public/dependabot-prs/
-              echo "Used SPA from prior run #$RUN_ID"
+            if [ "$BRANCH" != "main" ] && try_download_spa "$BRANCH"; then
+              :
+            elif try_download_spa main; then
+              :
             else
-              echo "::warning::No publish.yml run within the last 20 has a spa-dist artifact — SPA missing from this preview"
+              echo "::warning::No publish.yml run within the last 20 has a downloadable spa-dist artifact — SPA missing from this preview"
             fi
           fi
 
@@ -400,30 +402,29 @@ jobs:
             echo "Used Maven 4 report scanned in this run"
           else
             BRANCH="${{ github.head_ref || github.ref_name }}"
-            RUN_ID=""
-            find_run_with_m4() {
+            try_download_m4() {
               local b="$1"
               for ID in $(gh api -X GET "repos/${GITHUB_REPOSITORY}/actions/workflows/publish.yml/runs" \
                            -f "branch=$b" -f status=success -f per_page=20 \
                            --jq '.workflow_runs[].id'); do
                 if gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${ID}/artifacts" \
-                   --jq '[.artifacts[].name] | index("maven4-report")' 2>/dev/null \
-                   | grep -qv '^null$'; then
-                  echo "$ID"
-                  return 0
+                   --jq '.artifacts[] | select(.expired==false) | .name' 2>/dev/null \
+                   | grep -qx 'maven4-report'; then
+                  if gh run download "$ID" -R "$GITHUB_REPOSITORY" -n maven4-report -D public/ 2>/dev/null; then
+                    echo "Used Maven 4 report from prior run #$ID (branch $b)"
+                    return 0
+                  fi
+                  echo "Run #$ID listed maven4-report but download failed; trying next"
                 fi
               done
+              return 1
             }
-            if [ "$BRANCH" != "main" ]; then
-              RUN_ID="$(find_run_with_m4 "$BRANCH")"
-              [ -n "$RUN_ID" ] && echo "Found publish.yml run with maven4-report on $BRANCH: #$RUN_ID"
-            fi
-            [ -z "$RUN_ID" ] && RUN_ID="$(find_run_with_m4 main)"
-            if [ -n "$RUN_ID" ]; then
-              gh run download "$RUN_ID" -R "$GITHUB_REPOSITORY" -n maven4-report -D public/
-              echo "Used Maven 4 report from prior run #$RUN_ID"
+            if [ "$BRANCH" != "main" ] && try_download_m4 "$BRANCH"; then
+              :
+            elif try_download_m4 main; then
+              :
             else
-              echo "::warning::No publish.yml run within the last 20 has a maven4-report artifact — Maven 4 report missing from this preview"
+              echo "::warning::No publish.yml run within the last 20 has a downloadable maven4-report artifact — Maven 4 report missing from this preview"
             fi
           fi
 
