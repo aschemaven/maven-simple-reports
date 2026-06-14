@@ -401,13 +401,13 @@ export function App() {
           Static SPA · GitHub REST API · ETag-cached, serial polling. The unauthenticated 60 req/h limit is shared per IP.
         </p>
         <p>
-          Source &amp; issues:{' '}
+          Contribute on GitHub:{' '}
           <a
             href="https://github.com/aschemaven/maven-simple-reports"
             target="_blank"
             rel="noopener noreferrer"
           >
-            github.com/aschemaven/maven-simple-reports
+            aschemaven/maven-simple-reports
           </a>
         </p>
       </footer>
