@@ -326,7 +326,7 @@ jobs:
           for adoc_file in public/*.adoc; do
             html_file="${adoc_file%.adoc}.html"
             echo "  Converting $(basename "$adoc_file")..."
-            asciidoctor -o "$html_file" "$adoc_file"
+            asciidoctor -a docinfo=shared-footer -o "$html_file" "$adoc_file"
           done
 
       - name: Upload Pages artifact
@@ -441,7 +441,7 @@ jobs:
           for adoc_file in public/*.adoc; do
             html_file="${adoc_file%.adoc}.html"
             echo "  Converting $(basename "$adoc_file")..."
-            asciidoctor -o "$html_file" "$adoc_file"
+            asciidoctor -a docinfo=shared-footer -o "$html_file" "$adoc_file"
           done
 
       - name: Set Netlify alias
