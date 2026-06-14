@@ -262,14 +262,27 @@ jobs:
             gh run download "$GITHUB_RUN_ID" -R "$GITHUB_REPOSITORY" -n spa-dist -D public/dependabot-prs/
             echo "Used SPA built in this run"
           else
-            RUN_ID=$(gh api -X GET "repos/${GITHUB_REPOSITORY}/actions/workflows/publish.yml/runs" \
-                     -f branch=main -f status=success -f per_page=1 \
-                     --jq '.workflow_runs[0].id // empty')
+            # Walk recent successful main runs and pick the first one that
+            # still has a spa-dist artifact. Scheduled runs skip build-spa
+            # by design, so the *latest* successful run is usually empty;
+            # the most recent run that actually built the SPA can be many
+            # runs back.
+            RUN_ID=""
+            for ID in $(gh api -X GET "repos/${GITHUB_REPOSITORY}/actions/workflows/publish.yml/runs" \
+                         -f branch=main -f status=success -f per_page=20 \
+                         --jq '.workflow_runs[].id'); do
+              if gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${ID}/artifacts" \
+                 --jq '[.artifacts[].name] | index("spa-dist")' 2>/dev/null \
+                 | grep -qv '^null$'; then
+                RUN_ID="$ID"
+                break
+              fi
+            done
             if [ -n "$RUN_ID" ]; then
-              gh run download "$RUN_ID" -R "$GITHUB_REPOSITORY" -n spa-dist -D public/dependabot-prs/ 2>/dev/null \
-                || echo "::warning::Run #$RUN_ID has no spa-dist artifact"
+              gh run download "$RUN_ID" -R "$GITHUB_REPOSITORY" -n spa-dist -D public/dependabot-prs/
+              echo "Used SPA from prior run #$RUN_ID"
             else
-              echo "::warning::No prior publish.yml run on main — SPA missing"
+              echo "::warning::No publish.yml run on main within the last 20 has a spa-dist artifact — SPA missing"
             fi
           fi
 
@@ -280,12 +293,20 @@ jobs:
             gh run download "$GITHUB_RUN_ID" -R "$GITHUB_REPOSITORY" -n maven4-report -D public/
             echo "Used Maven 4 report scanned in this run"
           else
-            RUN_ID=$(gh api -X GET "repos/${GITHUB_REPOSITORY}/actions/workflows/publish.yml/runs" \
-                     -f branch=main -f status=success -f per_page=1 \
-                     --jq '.workflow_runs[0].id // empty')
+            RUN_ID=""
+            for ID in $(gh api -X GET "repos/${GITHUB_REPOSITORY}/actions/workflows/publish.yml/runs" \
+                         -f branch=main -f status=success -f per_page=20 \
+                         --jq '.workflow_runs[].id'); do
+              if gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${ID}/artifacts" \
+                 --jq '[.artifacts[].name] | index("maven4-report")' 2>/dev/null \
+                 | grep -qv '^null$'; then
+                RUN_ID="$ID"
+                break
+              fi
+            done
             if [ -n "$RUN_ID" ]; then
-              gh run download "$RUN_ID" -R "$GITHUB_REPOSITORY" -n maven4-report -D public/ 2>/dev/null \
-                || echo "::warning::Run #$RUN_ID has no maven4-report artifact"
+              gh run download "$RUN_ID" -R "$GITHUB_REPOSITORY" -n maven4-report -D public/
+              echo "Used Maven 4 report from prior run #$RUN_ID"
             else
               echo "::warning::No prior publish.yml run on main — Maven 4 report missing"
             fi
@@ -340,24 +361,34 @@ jobs:
             gh run download "$GITHUB_RUN_ID" -R "$GITHUB_REPOSITORY" -n spa-dist -D public/dependabot-prs/
             echo "Used SPA built in this run"
           else
+            # Walk recent successful publish.yml runs (current branch first,
+            # then main) and pick the first one that still has a spa-dist
+            # artifact. Scheduled runs on main skip build-spa by design.
             BRANCH="${{ github.head_ref || github.ref_name }}"
             RUN_ID=""
+            find_run_with_spa() {
+              local b="$1"
+              for ID in $(gh api -X GET "repos/${GITHUB_REPOSITORY}/actions/workflows/publish.yml/runs" \
+                           -f "branch=$b" -f status=success -f per_page=20 \
+                           --jq '.workflow_runs[].id'); do
+                if gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${ID}/artifacts" \
+                   --jq '[.artifacts[].name] | index("spa-dist")' 2>/dev/null \
+                   | grep -qv '^null$'; then
+                  echo "$ID"
+                  return 0
+                fi
+              done
+            }
             if [ "$BRANCH" != "main" ]; then
-              RUN_ID=$(gh api -X GET "repos/${GITHUB_REPOSITORY}/actions/workflows/publish.yml/runs" \
-                       -f "branch=$BRANCH" -f status=success -f per_page=1 \
-                       --jq '.workflow_runs[0].id // empty')
-              [ -n "$RUN_ID" ] && echo "Found publish.yml run on $BRANCH: #$RUN_ID"
+              RUN_ID="$(find_run_with_spa "$BRANCH")"
+              [ -n "$RUN_ID" ] && echo "Found publish.yml run with spa-dist on $BRANCH: #$RUN_ID"
             fi
-            if [ -z "$RUN_ID" ]; then
-              RUN_ID=$(gh api -X GET "repos/${GITHUB_REPOSITORY}/actions/workflows/publish.yml/runs" \
-                       -f branch=main -f status=success -f per_page=1 \
-                       --jq '.workflow_runs[0].id // empty')
-            fi
+            [ -z "$RUN_ID" ] && RUN_ID="$(find_run_with_spa main)"
             if [ -n "$RUN_ID" ]; then
-              gh run download "$RUN_ID" -R "$GITHUB_REPOSITORY" -n spa-dist -D public/dependabot-prs/ 2>/dev/null \
-                || echo "::warning::Run #$RUN_ID has no spa-dist artifact"
+              gh run download "$RUN_ID" -R "$GITHUB_REPOSITORY" -n spa-dist -D public/dependabot-prs/
+              echo "Used SPA from prior run #$RUN_ID"
             else
-              echo "::warning::No prior publish.yml run found — SPA missing from this preview"
+              echo "::warning::No publish.yml run within the last 20 has a spa-dist artifact — SPA missing from this preview"
             fi
           fi
 
@@ -370,22 +401,29 @@ jobs:
           else
             BRANCH="${{ github.head_ref || github.ref_name }}"
             RUN_ID=""
+            find_run_with_m4() {
+              local b="$1"
+              for ID in $(gh api -X GET "repos/${GITHUB_REPOSITORY}/actions/workflows/publish.yml/runs" \
+                           -f "branch=$b" -f status=success -f per_page=20 \
+                           --jq '.workflow_runs[].id'); do
+                if gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${ID}/artifacts" \
+                   --jq '[.artifacts[].name] | index("maven4-report")' 2>/dev/null \
+                   | grep -qv '^null$'; then
+                  echo "$ID"
+                  return 0
+                fi
+              done
+            }
             if [ "$BRANCH" != "main" ]; then
-              RUN_ID=$(gh api -X GET "repos/${GITHUB_REPOSITORY}/actions/workflows/publish.yml/runs" \
-                       -f "branch=$BRANCH" -f status=success -f per_page=1 \
-                       --jq '.workflow_runs[0].id // empty')
-              [ -n "$RUN_ID" ] && echo "Found publish.yml run on $BRANCH: #$RUN_ID"
+              RUN_ID="$(find_run_with_m4 "$BRANCH")"
+              [ -n "$RUN_ID" ] && echo "Found publish.yml run with maven4-report on $BRANCH: #$RUN_ID"
             fi
-            if [ -z "$RUN_ID" ]; then
-              RUN_ID=$(gh api -X GET "repos/${GITHUB_REPOSITORY}/actions/workflows/publish.yml/runs" \
-                       -f branch=main -f status=success -f per_page=1 \
-                       --jq '.workflow_runs[0].id // empty')
-            fi
+            [ -z "$RUN_ID" ] && RUN_ID="$(find_run_with_m4 main)"
             if [ -n "$RUN_ID" ]; then
-              gh run download "$RUN_ID" -R "$GITHUB_REPOSITORY" -n maven4-report -D public/ 2>/dev/null \
-                || echo "::warning::Run #$RUN_ID has no maven4-report artifact"
+              gh run download "$RUN_ID" -R "$GITHUB_REPOSITORY" -n maven4-report -D public/
+              echo "Used Maven 4 report from prior run #$RUN_ID"
             else
-              echo "::warning::No prior publish.yml run found — Maven 4 report missing from this preview"
+              echo "::warning::No publish.yml run within the last 20 has a maven4-report artifact — Maven 4 report missing from this preview"
             fi
           fi
 
