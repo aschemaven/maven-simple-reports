@@ -2,16 +2,20 @@ name: Publish
 
 # Single pipeline that handles every build/deploy path:
 #
-#   trigger             | rebuild SPA | rebuild Maven 4 scan | deploy target
-#   ----                | ----------- | -------------------- | -------------
-#   push main           | iff web/    | iff scripts/         | GitHub Pages
-#   push branch         | iff web/    | iff scripts/         | Netlify preview
-#   pull_request        | iff web/    | iff scripts/         | Netlify preview
-#   schedule (06:00)    | no          | yes                  | GitHub Pages
-#   workflow_dispatch   | no          | yes                  | Pages (main) / Netlify (branch)
+#   trigger             | SPA build          | Maven 4 scan  | deploy target
+#   ----                | ---------          | ------------- | -------------
+#   push main           | cached (iff web/)  | iff scripts/  | GitHub Pages
+#   push branch         | cached (iff web/)  | iff scripts/  | Netlify preview
+#   pull_request        | cached (iff web/)  | iff scripts/  | Netlify preview
+#   schedule (06:00)    | cached             | yes           | GitHub Pages
+#   workflow_dispatch   | cached             | yes           | Pages (main) / Netlify (branch)
 #
-# Parts that do not need rebuilding fall back to the latest successful
-# `publish.yml` run's artifact — current branch first, then main.
+# The build-spa job always runs but restores web/dist from the Actions
+# cache (key = hash of web/**); it only rebuilds on a cache miss (web/
+# changed, or the cache was evicted). So every deploy gets a ready SPA
+# without depending on any artifact retention window. The Maven 4 report
+# is regenerated on schedule/dispatch and otherwise falls back to the
+# latest successful run's artifact (renewed daily, so it never expires).
 
 on:
   push:
@@ -48,7 +52,6 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       deploy-target: ${{ steps.ctx.outputs.deploy-target }}
-      need-spa-build: ${{ steps.ctx.outputs.need-spa-build }}
       need-maven4-scan: ${{ steps.ctx.outputs.need-maven4-scan }}
       is-main: ${{ steps.ctx.outputs.is-main }}
     steps:
@@ -85,10 +88,11 @@ jobs:
               ;;
           esac
 
-          # Decide what to rebuild from source.
-          # Schedule/dispatch always rescan the Maven 4 report (the whole
-          # point of those triggers); SPA only rebuilds when web/ changed.
-          NEED_SPA=false
+          # Decide whether to rescan the Maven 4 report. Schedule/dispatch
+          # always rescan (the whole point of those triggers); a push
+          # rescans only when the scanner or its config changed. The SPA is
+          # not decided here — build-spa always runs and lets the Actions
+          # cache decide between restore and rebuild.
           NEED_MAVEN4=false
           if [ "$EVENT" = "schedule" ] || [ "$EVENT" = "workflow_dispatch" ]; then
             NEED_MAVEN4=true
@@ -109,9 +113,6 @@ jobs:
             echo "Changed files vs $BASE_REF:"
             echo "$CHANGED"
 
-            if echo "$CHANGED" | grep -qE '^(web/|\.github/workflows/publish\.yml$)'; then
-              NEED_SPA=true
-            fi
             if echo "$CHANGED" | grep -qE '^(scripts/(export_maven4_adoption|migrate_history_to_federated)\.py|\.gh-configuration\.yaml|\.github/workflows/publish\.yml)$'; then
               NEED_MAVEN4=true
             fi
@@ -119,21 +120,32 @@ jobs:
 
           echo "is-main=$IS_MAIN" >> "$GITHUB_OUTPUT"
           echo "deploy-target=$TARGET" >> "$GITHUB_OUTPUT"
-          echo "need-spa-build=$NEED_SPA" >> "$GITHUB_OUTPUT"
           echo "need-maven4-scan=$NEED_MAVEN4" >> "$GITHUB_OUTPUT"
-          echo "Resolved: target=$TARGET need-spa=$NEED_SPA need-maven4=$NEED_MAVEN4 is-main=$IS_MAIN"
+          echo "Resolved: target=$TARGET need-maven4=$NEED_MAVEN4 is-main=$IS_MAIN"
 
   build-spa:
     runs-on: ubuntu-latest
-    needs: context
-    if: needs.context.outputs.need-spa-build == 'true'
     env:
       VITE_GITHUB_CLIENT_ID: ${{ vars.VITE_GITHUB_CLIENT_ID }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
+      # web/dist is a pure function of the web/ sources, so cache it keyed
+      # by their content hash. A hit restores the built SPA in seconds and
+      # the Node build below is skipped; a miss (web/ changed, or the cache
+      # was evicted) rebuilds and repopulates the cache. Either way this
+      # job always ends with a web/dist to upload as the spa-dist artifact,
+      # so the publish jobs never need an artifact-retention fallback.
+      - name: Restore SPA build cache
+        id: spa-cache
+        uses: actions/cache@v4
+        with:
+          path: web/dist
+          key: spa-dist-${{ hashFiles('web/**') }}
+
       - name: Set up Node.js
+        if: steps.spa-cache.outputs.cache-hit != 'true'
         uses: actions/setup-node@v4
         with:
           node-version: '20'
@@ -141,6 +153,7 @@ jobs:
           cache-dependency-path: web/package-lock.json
 
       - name: Build SPA
+        if: steps.spa-cache.outputs.cache-hit != 'true'
         working-directory: ./web
         run: |
           npm ci
@@ -246,7 +259,7 @@ jobs:
     if: |
       always()
       && needs.context.outputs.deploy-target == 'pages'
-      && (needs.build-spa.result == 'success' || needs.build-spa.result == 'skipped')
+      && needs.build-spa.result == 'success'
       && (needs.scan-maven4.result == 'success' || needs.scan-maven4.result == 'skipped')
     environment:
       name: github-pages
@@ -255,37 +268,13 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Get SPA artifact (this run, then fall back)
+      # build-spa always runs (cache-restore or rebuild), so this run's
+      # spa-dist artifact is always present — no retention fallback needed.
+      - name: Download SPA (from this run's build-spa)
         run: |
           mkdir -p public/dependabot-prs
-          if [ "${{ needs.build-spa.result }}" = "success" ]; then
-            gh run download "$GITHUB_RUN_ID" -R "$GITHUB_REPOSITORY" -n spa-dist -D public/dependabot-prs/
-            echo "Used SPA built in this run"
-          else
-            # Walk recent successful main runs and download from the first
-            # one whose artifact list actually still has a non-expired
-            # spa-dist AND whose download succeeds. The listing check alone
-            # is not sufficient: an artifact can race with retention cleanup
-            # between the API listing and the download.
-            DOWNLOADED=""
-            for ID in $(gh api -X GET "repos/${GITHUB_REPOSITORY}/actions/workflows/publish.yml/runs" \
-                         -f branch=main -f status=success -f per_page=20 \
-                         --jq '.workflow_runs[].id'); do
-              if gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${ID}/artifacts" \
-                 --jq '.artifacts[] | select(.expired==false) | .name' 2>/dev/null \
-                 | grep -qx 'spa-dist'; then
-                if gh run download "$ID" -R "$GITHUB_REPOSITORY" -n spa-dist -D public/dependabot-prs/ 2>/dev/null; then
-                  echo "Used SPA from prior run #$ID"
-                  DOWNLOADED=1
-                  break
-                fi
-                echo "Run #$ID listed spa-dist but download failed; trying next"
-              fi
-            done
-            if [ -z "$DOWNLOADED" ]; then
-              echo "::warning::No publish.yml run on main within the last 20 has a downloadable spa-dist artifact — SPA missing"
-            fi
-          fi
+          gh run download "$GITHUB_RUN_ID" -R "$GITHUB_REPOSITORY" -n spa-dist -D public/dependabot-prs/
+          echo "Deployed SPA from this run's build-spa job"
 
       - name: Get Maven 4 report artifact (this run, then fall back)
         run: |
@@ -346,53 +335,20 @@ jobs:
     if: |
       always()
       && needs.context.outputs.deploy-target == 'netlify'
-      && (needs.build-spa.result == 'success' || needs.build-spa.result == 'skipped')
+      && needs.build-spa.result == 'success'
       && (needs.scan-maven4.result == 'success' || needs.scan-maven4.result == 'skipped')
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      # Preview SPA falls back to the same-branch run when present (so a
-      # developer can dispatch publish.yml on their feature branch and have
-      # subsequent preview deploys pick up the experimental SPA), otherwise
-      # falls back to main.
-      - name: Get SPA artifact (this run, then fall back)
+      # build-spa always runs. Its cache key is hashFiles('web/**'), so a
+      # preview whose web/ matches main restores main's cached SPA, while a
+      # preview that changed web/ rebuilds its own — no run-walking needed.
+      - name: Download SPA (from this run's build-spa)
         run: |
           mkdir -p public/dependabot-prs
-          if [ "${{ needs.build-spa.result }}" = "success" ]; then
-            gh run download "$GITHUB_RUN_ID" -R "$GITHUB_REPOSITORY" -n spa-dist -D public/dependabot-prs/
-            echo "Used SPA built in this run"
-          else
-            # Walk recent successful publish.yml runs (current branch first,
-            # then main) and try to download spa-dist from each that lists
-            # a non-expired one. The download itself may still race with
-            # retention cleanup, so we tolerate failure and try the next.
-            BRANCH="${{ github.head_ref || github.ref_name }}"
-            try_download_spa() {
-              local b="$1"
-              for ID in $(gh api -X GET "repos/${GITHUB_REPOSITORY}/actions/workflows/publish.yml/runs" \
-                           -f "branch=$b" -f status=success -f per_page=20 \
-                           --jq '.workflow_runs[].id'); do
-                if gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${ID}/artifacts" \
-                   --jq '.artifacts[] | select(.expired==false) | .name' 2>/dev/null \
-                   | grep -qx 'spa-dist'; then
-                  if gh run download "$ID" -R "$GITHUB_REPOSITORY" -n spa-dist -D public/dependabot-prs/ 2>/dev/null; then
-                    echo "Used SPA from prior run #$ID (branch $b)"
-                    return 0
-                  fi
-                  echo "Run #$ID listed spa-dist but download failed; trying next"
-                fi
-              done
-              return 1
-            }
-            if [ "$BRANCH" != "main" ] && try_download_spa "$BRANCH"; then
-              :
-            elif try_download_spa main; then
-              :
-            else
-              echo "::warning::No publish.yml run within the last 20 has a downloadable spa-dist artifact — SPA missing from this preview"
-            fi
-          fi
+          gh run download "$GITHUB_RUN_ID" -R "$GITHUB_REPOSITORY" -n spa-dist -D public/dependabot-prs/
+          echo "Deployed SPA from this run's build-spa job"
 
       - name: Get Maven 4 report artifact (this run, then fall back)
         run: |
