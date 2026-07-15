@@ -230,31 +230,45 @@ def _gh_api_call_raw(endpoint, params=None, method='GET'):
         for key, value in params.items():
             cmd.extend(['-f', f'{key}={value}'])
 
-    try:
-        result = subprocess.run(cmd, capture_output=True, text=True, check=True)
-        return json.loads(result.stdout)
-    except subprocess.CalledProcessError as e:
-        stderr = e.stderr or ''
-        if '403' in stderr or '429' in stderr or 'rate limit' in stderr.lower():
-            print(f"  Rate limited on {endpoint}, waiting 60s...", file=sys.stderr)
-            time.sleep(60)
-            # Retry once
-            try:
-                result = subprocess.run(cmd, capture_output=True, text=True, check=True)
-                return json.loads(result.stdout)
-            except subprocess.CalledProcessError:
+    # Code search shares a stricter secondary rate limit than the core API.
+    # A single 60s retry was not enough: the wrapper and GH-Action searches
+    # run after the POM search has drained the budget and were left empty on
+    # essentially every run, collapsing the 'signals'/'maven_runtime' columns.
+    # Retry rate-limit failures several times with escalating backoff.
+    max_rate_limit_retries = 3
+    attempt = 0
+    while True:
+        try:
+            result = subprocess.run(cmd, capture_output=True, text=True, check=True)
+            return json.loads(result.stdout)
+        except subprocess.CalledProcessError as e:
+            stderr = e.stderr or ''
+            is_rate_limit = ('403' in stderr or '429' in stderr
+                             or 'rate limit' in stderr.lower())
+            if is_rate_limit and attempt < max_rate_limit_retries:
+                attempt += 1
+                wait = 30 + 60 * attempt  # 90s, 150s, 210s
+                print(f"  Rate limited on {endpoint}, waiting {wait}s "
+                      f"(attempt {attempt}/{max_rate_limit_retries})...",
+                      file=sys.stderr)
+                time.sleep(wait)
+                continue
+            if is_rate_limit:
+                print(f"  Still rate limited on {endpoint} after "
+                      f"{max_rate_limit_retries} retries; giving up.",
+                      file=sys.stderr)
                 return None
-        if '404' in stderr:
-            # Not found — expected for file existence checks
+            if '404' in stderr:
+                # Not found — expected for file existence checks
+                return None
+            if '422' in stderr:
+                # Validation error (e.g., search query issues)
+                print(f"  API validation error on {endpoint}: {stderr.strip()}", file=sys.stderr)
+                return None
+            print(f"  API error on {endpoint}: {stderr.strip()}", file=sys.stderr)
             return None
-        if '422' in stderr:
-            # Validation error (e.g., search query issues)
-            print(f"  API validation error on {endpoint}: {stderr.strip()}", file=sys.stderr)
+        except json.JSONDecodeError:
             return None
-        print(f"  API error on {endpoint}: {stderr.strip()}", file=sys.stderr)
-        return None
-    except json.JSONDecodeError:
-        return None
 
 
 def gh_api_call(endpoint, params=None, method='GET'):
