@@ -1,0 +1,1456 @@
+{
+  "schema_version": 1,
+  "snapshot_date": "2026-07-15",
+  "total": 63,
+  "repos": [
+    {
+      "repository": "eugenp/tutorials",
+      "description": "Getting Started with Spring Boot 3: ",
+      "stars": 37336,
+      "signals": "POM 4.1.0",
+      "pom_model": "4.1.0",
+      "maven_runtime": "",
+      "branch": "master",
+      "build_status": "UNKNOWN",
+      "build_url": "",
+      "language": "Java",
+      "updated": "2026-07-15",
+      "url": "https://github.com/eugenp/tutorials",
+      "fork": false,
+      "warnings": [],
+      "last_commit": "2026-07-14",
+      "_signals_raw": [
+        "POM 4.1.0"
+      ],
+      "_files": {
+        "pom": "apache-maven-4/pom.xml"
+      }
+    },
+    {
+      "repository": "apache/plc4x",
+      "description": "PLC4X The Industrial IoT adapter",
+      "stars": 1682,
+      "signals": "POM 4.1.0",
+      "pom_model": "4.1.0",
+      "maven_runtime": "",
+      "branch": "develop",
+      "build_status": "FAILURE",
+      "build_url": "https://github.com/apache/plc4x/actions/runs/29427858695",
+      "language": "Java",
+      "updated": "2026-07-15",
+      "url": "https://github.com/apache/plc4x",
+      "fork": false,
+      "warnings": [],
+      "last_commit": "2026-07-15",
+      "_signals_raw": [
+        "POM 4.1.0"
+      ],
+      "_files": {
+        "pom": "plc4j/drivers/s7/pom.xml"
+      }
+    },
+    {
+      "repository": "MorphiaOrg/morphia",
+      "description": "MongoDB object-document mapper in Java based on https://github.com/mongodb/mongo-java-driver",
+      "stars": 1677,
+      "signals": "POM 4.1.0",
+      "pom_model": "4.1.0",
+      "maven_runtime": "",
+      "branch": "master",
+      "build_status": "SUCCESS",
+      "build_url": "https://github.com/MorphiaOrg/morphia/actions/runs/29382772724",
+      "language": "Java",
+      "updated": "2026-07-03",
+      "url": "https://github.com/MorphiaOrg/morphia",
+      "fork": false,
+      "warnings": [],
+      "last_commit": "2026-07-03",
+      "_signals_raw": [
+        "POM 4.1.0"
+      ],
+      "_files": {
+        "pom": "core/pom.xml"
+      }
+    },
+    {
+      "repository": "Pi4J/pi4j",
+      "description": "Pi4J, the Java library to control the GPIOs of the Raspberry Pi",
+      "stars": 370,
+      "signals": "POM 4.1.0",
+      "pom_model": "4.1.0",
+      "maven_runtime": "",
+      "branch": "main",
+      "build_status": "SUCCESS",
+      "build_url": "https://github.com/Pi4J/pi4j/actions/runs/29407618628",
+      "language": "Java",
+      "updated": "2026-07-15",
+      "url": "https://github.com/Pi4J/pi4j",
+      "fork": false,
+      "warnings": [],
+      "last_commit": "2026-07-15",
+      "_signals_raw": [
+        "POM 4.1.0"
+      ],
+      "_files": {
+        "pom": "plugins/pi4j-plugin-ffm/pom.xml"
+      }
+    },
+    {
+      "repository": "SAP/olingo-jpa-processor-v4",
+      "description": "The JPA Processor fills the gap between Olingo V4 and the database, by providing a mapping between JPA metadata and OData metadata, generating queries and supporting the entity manipulations. ",
+      "stars": 145,
+      "signals": "POM 4.1.0",
+      "pom_model": "4.1.0",
+      "maven_runtime": "",
+      "branch": "main",
+      "build_status": "FAILURE",
+      "build_url": "https://github.com/SAP/olingo-jpa-processor-v4/actions/runs/27621513805",
+      "language": "Java",
+      "updated": "2026-06-26",
+      "url": "https://github.com/SAP/olingo-jpa-processor-v4",
+      "fork": false,
+      "warnings": [],
+      "last_commit": "2026-06-06",
+      "_signals_raw": [
+        "POM 4.1.0"
+      ],
+      "_files": {
+        "pom": "jpa/odata-jpa-annotation/pom.xml"
+      }
+    },
+    {
+      "repository": "maveniverse/mason",
+      "description": "Maven YAML / JSON / HOCON Parsers",
+      "stars": 46,
+      "signals": "POM 4.1.0",
+      "pom_model": "4.1.0",
+      "maven_runtime": "",
+      "branch": "main",
+      "build_status": "SUCCESS",
+      "build_url": "https://github.com/maveniverse/mason/actions/runs/29418227448",
+      "language": "Java",
+      "updated": "2026-07-05",
+      "url": "https://github.com/maveniverse/mason",
+      "fork": false,
+      "warnings": [],
+      "last_commit": "2026-06-23",
+      "_signals_raw": [
+        "POM 4.1.0"
+      ],
+      "_files": {
+        "pom": "its/src/it/yaml/pom.xml"
+      }
+    },
+    {
+      "repository": "brunoborges/jlib-inspector",
+      "description": "Runtime Library Intelligence for Production JVMs",
+      "stars": 45,
+      "signals": "POM 4.1.0",
+      "pom_model": "4.1.0",
+      "maven_runtime": "",
+      "branch": "main",
+      "build_status": "SUCCESS",
+      "build_url": "https://github.com/brunoborges/jlib-inspector/actions/runs/27389487890",
+      "language": "Java",
+      "updated": "2026-04-24",
+      "url": "https://github.com/brunoborges/jlib-inspector",
+      "fork": false,
+      "warnings": [],
+      "last_commit": "2026-04-24",
+      "_signals_raw": [
+        "POM 4.1.0"
+      ],
+      "_files": {
+        "pom": "pom.xml"
+      }
+    },
+    {
+      "repository": "apache/maven-hocon-extension",
+      "description": "Apache maven",
+      "stars": 32,
+      "signals": "POM 4.1.0",
+      "pom_model": "4.1.0",
+      "maven_runtime": "",
+      "branch": "main",
+      "build_status": "SKIPPED",
+      "build_url": "https://github.com/apache/maven-hocon-extension/actions/runs/25944211888",
+      "language": "Java",
+      "updated": "2026-04-30",
+      "url": "https://github.com/apache/maven-hocon-extension",
+      "fork": false,
+      "warnings": [],
+      "last_commit": "2025-07-16",
+      "_signals_raw": [
+        "POM 4.1.0"
+      ],
+      "_files": {
+        "pom": "pom.xml"
+      }
+    },
+    {
+      "repository": "osscameroon/js-generator",
+      "description": "Generates JavaScript from HTML",
+      "stars": 22,
+      "signals": "POM 4.1.0",
+      "pom_model": "4.1.0",
+      "maven_runtime": "",
+      "branch": "main",
+      "build_status": "SUCCESS",
+      "build_url": "https://github.com/osscameroon/js-generator/actions/runs/19743030307",
+      "language": "Java",
+      "updated": "2025-11-27",
+      "url": "https://github.com/osscameroon/js-generator",
+      "fork": false,
+      "warnings": [],
+      "last_commit": "2025-11-27",
+      "_signals_raw": [
+        "POM 4.1.0"
+      ],
+      "_files": {
+        "pom": "jsgenerator-cli/pom.xml"
+      }
+    },
+    {
+      "repository": "apache/plc4x-build-tools",
+      "description": "Apache plc4x Build Tools",
+      "stars": 19,
+      "signals": "POM 4.1.0",
+      "pom_model": "4.1.0",
+      "maven_runtime": "",
+      "branch": "develop",
+      "build_status": "SUCCESS",
+      "build_url": "https://github.com/apache/plc4x-build-tools/actions/runs/29096217697",
+      "language": "Java",
+      "updated": "2026-07-10",
+      "url": "https://github.com/apache/plc4x-build-tools",
+      "fork": false,
+      "warnings": [],
+      "last_commit": "2026-07-10",
+      "_signals_raw": [
+        "POM 4.1.0"
+      ],
+      "_files": {
+        "pom": "code-generation/plc4x-maven-plugin/pom.xml"
+      }
+    },
+    {
+      "repository": "ikmdev/komet",
+      "description": "Komet is a health care interoperability solution that seeks to translate and integrate terminology standards used in health care settings.",
+      "stars": 19,
+      "signals": "POM 4.1.0",
+      "pom_model": "4.1.0",
+      "maven_runtime": "",
+      "branch": "main",
+      "build_status": "SKIPPED",
+      "build_url": "https://github.com/ikmdev/komet/actions/runs/29374710666",
+      "language": "Java",
+      "updated": "2026-07-14",
+      "url": "https://github.com/ikmdev/komet",
+      "fork": false,
+      "warnings": [],
+      "last_commit": "2026-07-14",
+      "_signals_raw": [
+        "POM 4.1.0"
+      ],
+      "_files": {
+        "pom": "application/pom.xml"
+      }
+    },
+    {
+      "repository": "null-object-0000/ai-clash",
+      "description": "AI Clash / AI \u5bf9\u649e\u673a\uff1a\u4e00\u6b21\u63d0\u95ee\uff0c\u591a\u6b3e\u7f51\u9875 AI \u540c\u5c4f\u5bf9\u6bd4\uff1b\u652f\u6301\u4e2d\u82f1\u6587\u754c\u9762\uff0c\u5185\u7f6e AI \u88c1\u5224\u603b\u7ed3\u5171\u8bc6\u3001\u5206\u6b67\u548c\u6700\u4f18\u7b54\u6848\u3002",
+      "stars": 19,
+      "signals": "POM 4.1.0",
+      "pom_model": "4.1.0",
+      "maven_runtime": "",
+      "branch": "main",
+      "build_status": "SUCCESS",
+      "build_url": "https://github.com/null-object-0000/ai-clash/actions/runs/29137637130",
+      "language": "TypeScript",
+      "updated": "2026-07-03",
+      "url": "https://github.com/null-object-0000/ai-clash",
+      "fork": false,
+      "warnings": [],
+      "last_commit": "2026-06-22",
+      "_signals_raw": [
+        "POM 4.1.0"
+      ],
+      "_files": {
+        "pom": "packages/api/pom.xml"
+      }
+    },
+    {
+      "repository": "apache/plc4x-extras",
+      "description": "PLC4X The Industrial IoT adapter",
+      "stars": 18,
+      "signals": "POM 4.1.0",
+      "pom_model": "4.1.0",
+      "maven_runtime": "",
+      "branch": "develop",
+      "build_status": "SUCCESS",
+      "build_url": "https://github.com/apache/plc4x-extras/actions/runs/29385125583",
+      "language": "Java",
+      "updated": "2026-07-10",
+      "url": "https://github.com/apache/plc4x-extras",
+      "fork": false,
+      "warnings": [],
+      "last_commit": "2026-07-10",
+      "_signals_raw": [
+        "POM 4.1.0"
+      ],
+      "_files": {
+        "pom": "plc4j/integrations/apache-nifi/nifi-2/nifi-2-plc4x-processors/pom.xml"
+      }
+    },
+    {
+      "repository": "youngledo/godot-java",
+      "description": "Java bindings for Godot is here.",
+      "stars": 18,
+      "signals": "POM 4.1.0",
+      "pom_model": "4.1.0",
+      "maven_runtime": "",
+      "branch": "main",
+      "build_status": "SUCCESS",
+      "build_url": "https://github.com/youngledo/godot-java/actions/runs/26228504734",
+      "language": "Java",
+      "updated": "2026-07-14",
+      "url": "https://github.com/youngledo/godot-java",
+      "fork": false,
+      "warnings": [],
+      "last_commit": "2026-06-10",
+      "_signals_raw": [
+        "POM 4.1.0"
+      ],
+      "_files": {
+        "pom": "pom.xml"
+      }
+    },
+    {
+      "repository": "youngledo/sdkman-gui",
+      "description": "A modern graphical management tool for SDKMAN, providing an Applite-like user experience.",
+      "stars": 12,
+      "signals": "POM 4.1.0",
+      "pom_model": "4.1.0",
+      "maven_runtime": "",
+      "branch": "master",
+      "build_status": "SUCCESS",
+      "build_url": "https://github.com/youngledo/sdkman-gui/actions/runs/19506886844",
+      "language": "Java",
+      "updated": "2026-05-10",
+      "url": "https://github.com/youngledo/sdkman-gui",
+      "fork": false,
+      "warnings": [],
+      "last_commit": "2026-01-12",
+      "_signals_raw": [
+        "POM 4.1.0"
+      ],
+      "_files": {
+        "pom": "pom.xml"
+      }
+    },
+    {
+      "repository": "ikmdev/tinkar-core",
+      "description": "Tinkar-core is a java software project that aims to provides a reference implementation for the open-source HL7 Tinkar informational Ballot.",
+      "stars": 6,
+      "signals": "POM 4.1.0",
+      "pom_model": "4.1.0",
+      "maven_runtime": "",
+      "branch": "main",
+      "build_status": "SKIPPED",
+      "build_url": "https://github.com/ikmdev/tinkar-core/actions/runs/29339882098",
+      "language": "Java",
+      "updated": "2026-07-03",
+      "url": "https://github.com/ikmdev/tinkar-core",
+      "fork": false,
+      "warnings": [],
+      "last_commit": "2026-07-03",
+      "_signals_raw": [
+        "POM 4.1.0"
+      ],
+      "_files": {
+        "pom": "provider/data-websocket-server-provider/pom.xml"
+      }
+    },
+    {
+      "repository": "apache/maven-xinclude-extension",
+      "description": "Apache maven",
+      "stars": 5,
+      "signals": "POM 4.1.0",
+      "pom_model": "4.1.0",
+      "maven_runtime": "",
+      "branch": "main",
+      "build_status": "SUCCESS",
+      "build_url": "https://github.com/apache/maven-xinclude-extension/actions/runs/29411969546",
+      "language": "Java",
+      "updated": "2026-06-12",
+      "url": "https://github.com/apache/maven-xinclude-extension",
+      "fork": false,
+      "warnings": [],
+      "last_commit": "2026-06-12",
+      "_signals_raw": [
+        "POM 4.1.0"
+      ],
+      "_files": {
+        "pom": "pom.xml"
+      }
+    },
+    {
+      "repository": "c-guntur/maven-4-is-awesome",
+      "description": "Comparison between Apache Maven 3 and Apache Maven 4",
+      "stars": 5,
+      "signals": "POM 4.1.0",
+      "pom_model": "4.1.0",
+      "maven_runtime": "",
+      "branch": "main",
+      "build_status": "UNKNOWN",
+      "build_url": "",
+      "language": "Java",
+      "updated": "2025-11-11",
+      "url": "https://github.com/c-guntur/maven-4-is-awesome",
+      "fork": false,
+      "warnings": [],
+      "last_commit": "2025-11-11",
+      "_signals_raw": [
+        "POM 4.1.0"
+      ],
+      "_files": {
+        "pom": "maven4/child3/child31/pom.xml"
+      }
+    },
+    {
+      "repository": "mthmulders/maven4-examples",
+      "description": "Examples for \"Wait no more, here comes Maven 4!\"",
+      "stars": 3,
+      "signals": "POM 4.1.0",
+      "pom_model": "4.1.0",
+      "maven_runtime": "",
+      "branch": "main",
+      "build_status": "UNKNOWN",
+      "build_url": "",
+      "language": "Java",
+      "updated": "2024-10-13",
+      "url": "https://github.com/mthmulders/maven4-examples",
+      "fork": false,
+      "warnings": [],
+      "last_commit": "2024-10-13",
+      "_signals_raw": [
+        "POM 4.1.0"
+      ],
+      "_files": {
+        "pom": "maven-4/module-a/pom.xml"
+      }
+    },
+    {
+      "repository": "elveahuang/examples",
+      "description": "spring-next-examples",
+      "stars": 2,
+      "signals": "POM 4.1.0",
+      "pom_model": "4.1.0",
+      "maven_runtime": "",
+      "branch": "main",
+      "build_status": "UNKNOWN",
+      "build_url": "",
+      "language": "Java",
+      "updated": "2026-07-15",
+      "url": "https://github.com/elveahuang/examples",
+      "fork": false,
+      "warnings": [],
+      "last_commit": "2026-07-15",
+      "_signals_raw": [
+        "POM 4.1.0"
+      ],
+      "_files": {
+        "pom": "spring-boot-ai-example/pom.xml"
+      }
+    },
+    {
+      "repository": "zhoozhoo/spring-load-development",
+      "description": "Java microservices sample application built with Spring Boot",
+      "stars": 2,
+      "signals": "POM 4.1.0",
+      "pom_model": "4.1.0",
+      "maven_runtime": "",
+      "branch": "main",
+      "build_status": "SUCCESS",
+      "build_url": "https://github.com/zhoozhoo/spring-load-development/actions/runs/29172256163",
+      "language": "Java",
+      "updated": "2026-04-06",
+      "url": "https://github.com/zhoozhoo/spring-load-development",
+      "fork": false,
+      "warnings": [],
+      "last_commit": "2026-04-05",
+      "_signals_raw": [
+        "POM 4.1.0"
+      ],
+      "_files": {
+        "pom": "mcp-server/pom.xml"
+      }
+    },
+    {
+      "repository": "khmarbaise/maven400-rc4-bug-i",
+      "description": "Test Setup for reproducing a Maven 4.0.0-rc-4 Bug",
+      "stars": 1,
+      "signals": "POM 4.1.0",
+      "pom_model": "4.1.0",
+      "maven_runtime": "",
+      "branch": "main",
+      "build_status": "UNKNOWN",
+      "build_url": "",
+      "language": "Java",
+      "updated": "2025-08-16",
+      "url": "https://github.com/khmarbaise/maven400-rc4-bug-i",
+      "fork": false,
+      "warnings": [],
+      "last_commit": "2025-06-19",
+      "_signals_raw": [
+        "POM 4.1.0"
+      ],
+      "_files": {
+        "pom": "app/pom.xml"
+      }
+    },
+    {
+      "repository": "leibrother/qqbot",
+      "description": "\u8f7b\u91cf\u5316QQ\u673a\u5668\u4eba\u5f00\u53d1\u6846\u67b6",
+      "stars": 1,
+      "signals": "POM 4.1.0",
+      "pom_model": "4.1.0",
+      "maven_runtime": "",
+      "branch": "main",
+      "build_status": "UNKNOWN",
+      "build_url": "",
+      "language": "Java",
+      "updated": "2026-07-10",
+      "url": "https://github.com/leibrother/qqbot",
+      "fork": false,
+      "warnings": [],
+      "last_commit": "2026-07-10",
+      "_signals_raw": [
+        "POM 4.1.0"
+      ],
+      "_files": {
+        "pom": "qqbot-plugin/pom.xml"
+      }
+    },
+    {
+      "repository": "ursaj/maven-4-bom-template",
+      "description": "Maven v4 mutli-module project template using a BOM",
+      "stars": 1,
+      "signals": "POM 4.1.0",
+      "pom_model": "4.1.0",
+      "maven_runtime": "",
+      "branch": "main",
+      "build_status": "SUCCESS",
+      "build_url": "https://github.com/ursaj/maven-4-bom-template/actions/runs/25642556689",
+      "language": "Java",
+      "updated": "2026-07-02",
+      "url": "https://github.com/ursaj/maven-4-bom-template",
+      "fork": false,
+      "warnings": [],
+      "last_commit": "2026-05-10",
+      "_signals_raw": [
+        "POM 4.1.0"
+      ],
+      "_files": {
+        "pom": "template-project-parent/pom.xml"
+      }
+    },
+    {
+      "repository": "BenSlabbert/vertx-dagger-web",
+      "description": "",
+      "stars": 0,
+      "signals": "POM 4.1.0",
+      "pom_model": "4.1.0",
+      "maven_runtime": "",
+      "branch": "main",
+      "build_status": "SUCCESS",
+      "build_url": "https://github.com/BenSlabbert/vertx-dagger-web/actions/runs/29375268200",
+      "language": "Java",
+      "updated": "2025-12-24",
+      "url": "https://github.com/BenSlabbert/vertx-dagger-web",
+      "fork": false,
+      "warnings": [],
+      "last_commit": "2025-12-24",
+      "_signals_raw": [
+        "POM 4.1.0"
+      ],
+      "_files": {
+        "pom": "spi/pom.xml"
+      }
+    },
+    {
+      "repository": "DVamshi21/netflix-gpt",
+      "description": "",
+      "stars": 0,
+      "signals": "POM 4.1.0",
+      "pom_model": "4.1.0",
+      "maven_runtime": "",
+      "branch": "main",
+      "build_status": "UNKNOWN",
+      "build_url": "",
+      "language": "Java",
+      "updated": "2025-11-06",
+      "url": "https://github.com/DVamshi21/netflix-gpt",
+      "fork": false,
+      "warnings": [],
+      "last_commit": "2025-10-25",
+      "_signals_raw": [
+        "POM 4.1.0"
+      ],
+      "_files": {
+        "pom": "news-app/pom.xml"
+      }
+    },
+    {
+      "repository": "DeniDo11a/educational_equipment_accounting_system",
+      "description": "",
+      "stars": 0,
+      "signals": "POM 4.1.0",
+      "pom_model": "4.1.0",
+      "maven_runtime": "",
+      "branch": "main",
+      "build_status": "UNKNOWN",
+      "build_url": "",
+      "language": "Java",
+      "updated": "2026-07-05",
+      "url": "https://github.com/DeniDo11a/educational_equipment_accounting_system",
+      "fork": false,
+      "warnings": [],
+      "last_commit": "2026-07-05",
+      "_signals_raw": [
+        "POM 4.1.0"
+      ],
+      "_files": {
+        "pom": "pom.xml"
+      }
+    },
+    {
+      "repository": "FunmbiO/VeilRestaurant",
+      "description": "",
+      "stars": 0,
+      "signals": "POM 4.1.0",
+      "pom_model": "4.1.0",
+      "maven_runtime": "",
+      "branch": "main",
+      "build_status": "UNKNOWN",
+      "build_url": "",
+      "language": "Java",
+      "updated": "2026-04-15",
+      "url": "https://github.com/FunmbiO/VeilRestaurant",
+      "fork": false,
+      "warnings": [],
+      "last_commit": "2026-04-15",
+      "_signals_raw": [
+        "POM 4.1.0"
+      ],
+      "_files": {
+        "pom": "Restaurant-Project/app-web/pom.xml"
+      }
+    },
+    {
+      "repository": "IKE-Network/ike-base-parent",
+      "description": "IKE Network Tier 0 foundation parent POM \u2014 apex of the parent inheritance forest (network.ike:ike-base-parent)",
+      "stars": 0,
+      "signals": "POM 4.1.0",
+      "pom_model": "4.1.0",
+      "maven_runtime": "",
+      "branch": "main",
+      "build_status": "SUCCESS",
+      "build_url": "https://github.com/IKE-Network/ike-base-parent/actions/runs/26474650280",
+      "language": "CSS",
+      "updated": "2026-05-26",
+      "url": "https://github.com/IKE-Network/ike-base-parent",
+      "fork": false,
+      "warnings": [],
+      "last_commit": "2026-05-26",
+      "_signals_raw": [
+        "POM 4.1.0"
+      ],
+      "_files": {
+        "pom": "pom.xml"
+      }
+    },
+    {
+      "repository": "IKE-Network/ike-tooling",
+      "description": "IKE Tooling: workspace management, release orchestration, build standards, and Maven plugins for IKE Community projects",
+      "stars": 0,
+      "signals": "POM 4.1.0",
+      "pom_model": "4.1.0",
+      "maven_runtime": "",
+      "branch": "main",
+      "build_status": "SUCCESS",
+      "build_url": "https://github.com/IKE-Network/ike-tooling/actions/runs/28712566529",
+      "language": "Java",
+      "updated": "2026-07-13",
+      "url": "https://github.com/IKE-Network/ike-tooling",
+      "fork": false,
+      "warnings": [],
+      "last_commit": "2026-07-13",
+      "_signals_raw": [
+        "POM 4.1.0"
+      ],
+      "_files": {
+        "pom": "ike-build-standards/src/main/scaffold/starter-set/pom.xml"
+      }
+    },
+    {
+      "repository": "avaje/avaje-maven4-mixins",
+      "description": "Experimental Maven 4 mixins",
+      "stars": 0,
+      "signals": "POM 4.1.0",
+      "pom_model": "4.1.0",
+      "maven_runtime": "",
+      "branch": "main",
+      "build_status": "UNKNOWN",
+      "build_url": "",
+      "language": "",
+      "updated": "2026-01-26",
+      "url": "https://github.com/avaje/avaje-maven4-mixins",
+      "fork": false,
+      "warnings": [],
+      "last_commit": "2026-01-26",
+      "_signals_raw": [
+        "POM 4.1.0"
+      ],
+      "_files": {
+        "pom": "avaje/avaje-nima/pom.xml"
+      }
+    },
+    {
+      "repository": "bmarwell/proximo-pitido",
+      "description": "WebSphere Liberty SIP Servlet \u2013 Retro-Zeitansage auf Spanisch: \u201aAl pr\u00f3ximo pitido es\u2026\u2018",
+      "stars": 0,
+      "signals": "POM 4.1.0",
+      "pom_model": "4.1.0",
+      "maven_runtime": "",
+      "branch": "main",
+      "build_status": "SUCCESS",
+      "build_url": "https://github.com/bmarwell/proximo-pitido/actions/runs/29400009830",
+      "language": "Java",
+      "updated": "2026-05-04",
+      "url": "https://github.com/bmarwell/proximo-pitido",
+      "fork": false,
+      "warnings": [],
+      "last_commit": "2026-05-04",
+      "_signals_raw": [
+        "POM 4.1.0"
+      ],
+      "_files": {
+        "pom": "test-support/pom.xml"
+      }
+    },
+    {
+      "repository": "c-guntur/maven4",
+      "description": "Comparison between Apache Maven 3 and Apache Maven 4",
+      "stars": 0,
+      "signals": "POM 4.1.0",
+      "pom_model": "4.1.0",
+      "maven_runtime": "",
+      "branch": "main",
+      "build_status": "UNKNOWN",
+      "build_url": "",
+      "language": "Java",
+      "updated": "2024-05-21",
+      "url": "https://github.com/c-guntur/maven4",
+      "fork": false,
+      "warnings": [],
+      "last_commit": "2024-05-21",
+      "_signals_raw": [
+        "POM 4.1.0"
+      ],
+      "_files": {
+        "pom": "maven-multi4/greeting/pom.xml"
+      }
+    },
+    {
+      "repository": "doggentle/doggentle",
+      "description": "\ubc18\ub824\ub3d9\ubb3c\uc744 \uc704\ud55c \uc1fc\ud551\ubab0",
+      "stars": 0,
+      "signals": "POM 4.1.0",
+      "pom_model": "4.1.0",
+      "maven_runtime": "",
+      "branch": "branch",
+      "build_status": "UNKNOWN",
+      "build_url": "",
+      "language": "Java",
+      "updated": "2024-10-15",
+      "url": "https://github.com/doggentle/doggentle",
+      "fork": false,
+      "warnings": [],
+      "last_commit": "2022-08-01",
+      "_signals_raw": [
+        "POM 4.1.0"
+      ],
+      "_files": {
+        "pom": "doggentle/class/spring/source/doggentle/target/m2e-wtp/web-resources/META-INF/maven/com.gentle/www/pom.xml"
+      }
+    },
+    {
+      "repository": "elide-dev/native-maven",
+      "description": "PoC of natively compiled maven using GraalVM native image",
+      "stars": 0,
+      "signals": "POM 4.1.0",
+      "pom_model": "4.1.0",
+      "maven_runtime": "",
+      "branch": "flatten-classloading",
+      "build_status": "SUCCESS",
+      "build_url": "https://github.com/elide-dev/native-maven/actions/runs/28826625363",
+      "language": "Java",
+      "updated": "2026-07-06",
+      "url": "https://github.com/elide-dev/native-maven",
+      "fork": false,
+      "warnings": [],
+      "last_commit": "2026-06-26",
+      "_signals_raw": [
+        "POM 4.1.0"
+      ],
+      "_files": {
+        "pom": "its/core-it-suite/src/test/resources/gh-11715/pom.xml"
+      }
+    },
+    {
+      "repository": "extact-io/jjug-ccc-2026-spring",
+      "description": "JJUG CCC 2026 Spring\u306e\u300c\u5148\u53d6\u308aMaven 4 \u2013 16\u5e74\u3076\u308a\u306e\u30e1\u30b8\u30e3\u30fc\u30a2\u30c3\u30d7\u30c7\u30fc\u30c8\u3001\u305d\u306e\u9032\u5316\u3068\u306f\uff1f\u300d\u767b\u58c7\u30b9\u30e9\u30a4\u30c9\u3067\u4f7f\u3063\u3066\u3044\u308b\u30b5\u30f3\u30d7\u30eb\u30a2\u30d7\u30ea\u4e00\u5f0f",
+      "stars": 0,
+      "signals": "POM 4.1.0",
+      "pom_model": "4.1.0",
+      "maven_runtime": "",
+      "branch": "main",
+      "build_status": "UNKNOWN",
+      "build_url": "",
+      "language": "Java",
+      "updated": "2026-05-30",
+      "url": "https://github.com/extact-io/jjug-ccc-2026-spring",
+      "fork": false,
+      "warnings": [],
+      "last_commit": "2026-05-30",
+      "_signals_raw": [
+        "POM 4.1.0"
+      ],
+      "_files": {
+        "pom": "maven4/order-infrastructure/pom.xml"
+      }
+    },
+    {
+      "repository": "grubeninspekteur/iskibal",
+      "description": "",
+      "stars": 0,
+      "signals": "POM 4.1.0",
+      "pom_model": "4.1.0",
+      "maven_runtime": "",
+      "branch": "master",
+      "build_status": "FAILURE",
+      "build_url": "https://github.com/grubeninspekteur/iskibal/actions/runs/23713550668",
+      "language": "Java",
+      "updated": "2026-03-08",
+      "url": "https://github.com/grubeninspekteur/iskibal",
+      "fork": false,
+      "warnings": [],
+      "last_commit": "2026-03-08",
+      "_signals_raw": [
+        "POM 4.1.0"
+      ],
+      "_files": {
+        "pom": "iskibal-lsp/pom.xml"
+      }
+    },
+    {
+      "repository": "handicraftsman/UUIDj47",
+      "description": "A library for UUID v7 <-> v4 conversion using SipHash masking.",
+      "stars": 0,
+      "signals": "POM 4.1.0",
+      "pom_model": "4.1.0",
+      "maven_runtime": "",
+      "branch": "main",
+      "build_status": "UNKNOWN",
+      "build_url": "",
+      "language": "Java",
+      "updated": "2025-09-22",
+      "url": "https://github.com/handicraftsman/UUIDj47",
+      "fork": false,
+      "warnings": [],
+      "last_commit": "2025-09-22",
+      "_signals_raw": [
+        "POM 4.1.0"
+      ],
+      "_files": {
+        "pom": "pom.xml"
+      }
+    },
+    {
+      "repository": "ikmdev/build-parent",
+      "description": "The General Parent that helps to define the build processes",
+      "stars": 0,
+      "signals": "POM 4.1.0",
+      "pom_model": "4.1.0",
+      "maven_runtime": "",
+      "branch": "main",
+      "build_status": "SUCCESS",
+      "build_url": "https://github.com/ikmdev/build-parent/actions/runs/19827474125",
+      "language": "",
+      "updated": "2025-12-01",
+      "url": "https://github.com/ikmdev/build-parent",
+      "fork": false,
+      "warnings": [],
+      "last_commit": "2025-12-01",
+      "_signals_raw": [
+        "POM 4.1.0"
+      ],
+      "_files": {
+        "pom": "pom.xml"
+      }
+    },
+    {
+      "repository": "ikmdev/rocks-kb",
+      "description": "RocksDB knowledge base",
+      "stars": 0,
+      "signals": "POM 4.1.0",
+      "pom_model": "4.1.0",
+      "maven_runtime": "",
+      "branch": "main",
+      "build_status": "SKIPPED",
+      "build_url": "https://github.com/ikmdev/rocks-kb/actions/runs/29224074591",
+      "language": "Java",
+      "updated": "2026-07-03",
+      "url": "https://github.com/ikmdev/rocks-kb",
+      "fork": false,
+      "warnings": [],
+      "last_commit": "2026-07-03",
+      "_signals_raw": [
+        "POM 4.1.0"
+      ],
+      "_files": {
+        "pom": "rocks-kb-engine/pom.xml"
+      }
+    },
+    {
+      "repository": "iuliana/jdk25-parent-project",
+      "description": "Project demo-ing Maven 4, Java 25 and Spring 7",
+      "stars": 0,
+      "signals": "POM 4.1.0",
+      "pom_model": "4.1.0",
+      "maven_runtime": "",
+      "branch": "main",
+      "build_status": "UNKNOWN",
+      "build_url": "",
+      "language": "Java",
+      "updated": "2026-01-06",
+      "url": "https://github.com/iuliana/jdk25-parent-project",
+      "fork": false,
+      "warnings": [],
+      "last_commit": "2026-01-06",
+      "_signals_raw": [
+        "POM 4.1.0"
+      ],
+      "_files": {
+        "pom": "child-one-project/pom.xml"
+      }
+    },
+    {
+      "repository": "j-bisew/spring-quiz-app",
+      "description": "",
+      "stars": 0,
+      "signals": "POM 4.1.0",
+      "pom_model": "4.1.0",
+      "maven_runtime": "",
+      "branch": "master",
+      "build_status": "UNKNOWN",
+      "build_url": "",
+      "language": "Java",
+      "updated": "2026-01-27",
+      "url": "https://github.com/j-bisew/spring-quiz-app",
+      "fork": false,
+      "warnings": [],
+      "last_commit": "2026-01-27",
+      "_signals_raw": [
+        "POM 4.1.0"
+      ],
+      "_files": {
+        "pom": "pom.xml"
+      }
+    },
+    {
+      "repository": "kaiohs333/lab02-experimentacao-software",
+      "description": "",
+      "stars": 0,
+      "signals": "POM 4.1.0",
+      "pom_model": "4.1.0",
+      "maven_runtime": "",
+      "branch": "main",
+      "build_status": "UNKNOWN",
+      "build_url": "",
+      "language": "Java",
+      "updated": "2026-04-10",
+      "url": "https://github.com/kaiohs333/lab02-experimentacao-software",
+      "fork": false,
+      "warnings": [],
+      "last_commit": "2026-04-10",
+      "_signals_raw": [
+        "POM 4.1.0"
+      ],
+      "_files": {
+        "pom": "data/repos/apache__maven/impl/maven-core/src/test/projects/project-builder/modular-sources-with-explicit-resources/pom.xml"
+      }
+    },
+    {
+      "repository": "kec/ike-tooling",
+      "description": "",
+      "stars": 0,
+      "signals": "POM 4.1.0",
+      "pom_model": "4.1.0",
+      "maven_runtime": "",
+      "branch": "main",
+      "build_status": "UNKNOWN",
+      "build_url": "",
+      "language": "Java",
+      "updated": "2026-04-03",
+      "url": "https://github.com/kec/ike-tooling",
+      "fork": false,
+      "warnings": [],
+      "last_commit": "2026-04-03",
+      "_signals_raw": [
+        "POM 4.1.0"
+      ],
+      "_files": {
+        "pom": "ike-workspace-model/pom.xml"
+      }
+    },
+    {
+      "repository": "kec/tinkar-komet-desktop-ws",
+      "description": "",
+      "stars": 0,
+      "signals": "POM 4.1.0",
+      "pom_model": "4.1.0",
+      "maven_runtime": "",
+      "branch": "main",
+      "build_status": "UNKNOWN",
+      "build_url": "",
+      "language": "",
+      "updated": "2026-03-23",
+      "url": "https://github.com/kec/tinkar-komet-desktop-ws",
+      "fork": false,
+      "warnings": [],
+      "last_commit": "2026-03-23",
+      "_signals_raw": [
+        "POM 4.1.0"
+      ],
+      "_files": {
+        "pom": "pom.xml"
+      }
+    },
+    {
+      "repository": "khmarbaise/maven-bugs",
+      "description": "maven-bugs for possible bugs and explanation for jira issues",
+      "stars": 0,
+      "signals": "POM 4.1.0",
+      "pom_model": "4.1.0",
+      "maven_runtime": "",
+      "branch": "master",
+      "build_status": "UNKNOWN",
+      "build_url": "",
+      "language": "Java",
+      "updated": "2025-09-18",
+      "url": "https://github.com/khmarbaise/maven-bugs",
+      "fork": false,
+      "warnings": [],
+      "last_commit": "2025-09-18",
+      "_signals_raw": [
+        "POM 4.1.0"
+      ],
+      "_files": {
+        "pom": "MNG-7920/bom/pom.xml"
+      }
+    },
+    {
+      "repository": "mendirl/electrix",
+      "description": "",
+      "stars": 0,
+      "signals": "POM 4.1.0",
+      "pom_model": "4.1.0",
+      "maven_runtime": "",
+      "branch": "main",
+      "build_status": "SUCCESS",
+      "build_url": "https://github.com/mendirl/electrix/actions/runs/29410075389",
+      "language": "Java",
+      "updated": "2026-06-06",
+      "url": "https://github.com/mendirl/electrix",
+      "fork": false,
+      "warnings": [],
+      "last_commit": "2026-06-06",
+      "_signals_raw": [
+        "POM 4.1.0"
+      ],
+      "_files": {
+        "pom": "app/pom.xml"
+      }
+    },
+    {
+      "repository": "mendirl/prez_oauth2",
+      "description": "",
+      "stars": 0,
+      "signals": "POM 4.1.0",
+      "pom_model": "4.1.0",
+      "maven_runtime": "",
+      "branch": "main",
+      "build_status": "UNKNOWN",
+      "build_url": "",
+      "language": "Java",
+      "updated": "2026-05-30",
+      "url": "https://github.com/mendirl/prez_oauth2",
+      "fork": false,
+      "warnings": [],
+      "last_commit": "2026-05-30",
+      "_signals_raw": [
+        "POM 4.1.0"
+      ],
+      "_files": {
+        "pom": "pom.xml"
+      }
+    },
+    {
+      "repository": "mtkhawaja/jlama-demo",
+      "description": "",
+      "stars": 0,
+      "signals": "POM 4.1.0",
+      "pom_model": "4.1.0",
+      "maven_runtime": "",
+      "branch": "main",
+      "build_status": "SUCCESS",
+      "build_url": "https://github.com/mtkhawaja/jlama-demo/actions/runs/20018303452",
+      "language": "Java",
+      "updated": "2025-12-08",
+      "url": "https://github.com/mtkhawaja/jlama-demo",
+      "fork": false,
+      "warnings": [],
+      "last_commit": "2025-12-08",
+      "_signals_raw": [
+        "POM 4.1.0"
+      ],
+      "_files": {
+        "pom": "pom.xml"
+      }
+    },
+    {
+      "repository": "mtkhawaja/polyglot-jvm",
+      "description": "A JVM multiverse demo exploring coexistence, compilation, and execution of multiple JVM languages within one Maven build and unified bytecode universe.",
+      "stars": 0,
+      "signals": "POM 4.1.0",
+      "pom_model": "4.1.0",
+      "maven_runtime": "",
+      "branch": "main",
+      "build_status": "SUCCESS",
+      "build_url": "https://github.com/mtkhawaja/polyglot-jvm/actions/runs/19980748014",
+      "language": "Dockerfile",
+      "updated": "2025-12-08",
+      "url": "https://github.com/mtkhawaja/polyglot-jvm",
+      "fork": false,
+      "warnings": [],
+      "last_commit": "2025-12-06",
+      "_signals_raw": [
+        "POM 4.1.0"
+      ],
+      "_files": {
+        "pom": "clojure-lib/pom.xml"
+      }
+    },
+    {
+      "repository": "mtkhawaja/testing-cookbook",
+      "description": "Common testing scenarios Java + SpringBoot",
+      "stars": 0,
+      "signals": "POM 4.1.0",
+      "pom_model": "4.1.0",
+      "maven_runtime": "",
+      "branch": "main",
+      "build_status": "SUCCESS",
+      "build_url": "https://github.com/mtkhawaja/testing-cookbook/actions/runs/27874802320",
+      "language": "Java",
+      "updated": "2026-06-20",
+      "url": "https://github.com/mtkhawaja/testing-cookbook",
+      "fork": false,
+      "warnings": [],
+      "last_commit": "2026-06-20",
+      "_signals_raw": [
+        "POM 4.1.0"
+      ],
+      "_files": {
+        "pom": "modules/unit-tests/pom.xml"
+      }
+    },
+    {
+      "repository": "petr-panteleyev/money-manager",
+      "description": "Personal finance manager, work in progress",
+      "stars": 0,
+      "signals": "POM 4.1.0",
+      "pom_model": "4.1.0",
+      "maven_runtime": "",
+      "branch": "master",
+      "build_status": "SUCCESS",
+      "build_url": "https://github.com/petr-panteleyev/money-manager/actions/runs/28722745039",
+      "language": "Java",
+      "updated": "2026-07-06",
+      "url": "https://github.com/petr-panteleyev/money-manager",
+      "fork": false,
+      "warnings": [],
+      "last_commit": "2026-07-06",
+      "_signals_raw": [
+        "POM 4.1.0"
+      ],
+      "_files": {
+        "pom": "desktop/persistence/pom.xml"
+      }
+    },
+    {
+      "repository": "roskenet/alchemy",
+      "description": "Make programming playground great again",
+      "stars": 0,
+      "signals": "POM 4.1.0",
+      "pom_model": "4.1.0",
+      "maven_runtime": "",
+      "branch": "main",
+      "build_status": "SUCCESS",
+      "build_url": "https://github.com/roskenet/alchemy/actions/runs/25632933095",
+      "language": "HTML",
+      "updated": "2026-07-05",
+      "url": "https://github.com/roskenet/alchemy",
+      "fork": false,
+      "warnings": [],
+      "last_commit": "2026-07-05",
+      "_signals_raw": [
+        "POM 4.1.0"
+      ],
+      "_files": {
+        "pom": "04_demos/multimodule-demo/pom.xml"
+      }
+    },
+    {
+      "repository": "saikiran2143/tutorials",
+      "description": "",
+      "stars": 0,
+      "signals": "POM 4.1.0",
+      "pom_model": "4.1.0",
+      "maven_runtime": "",
+      "branch": "master",
+      "build_status": "UNKNOWN",
+      "build_url": "",
+      "language": "Java",
+      "updated": "2026-02-22",
+      "url": "https://github.com/saikiran2143/tutorials",
+      "fork": false,
+      "warnings": [],
+      "last_commit": "2026-02-22",
+      "_signals_raw": [
+        "POM 4.1.0"
+      ],
+      "_files": {
+        "pom": "apache-maven-4/pom.xml"
+      }
+    },
+    {
+      "repository": "silviuburceadev/leetcode",
+      "description": "My LeetCode submissions",
+      "stars": 0,
+      "signals": "POM 4.1.0",
+      "pom_model": "4.1.0",
+      "maven_runtime": "",
+      "branch": "main",
+      "build_status": "UNKNOWN",
+      "build_url": "",
+      "language": "Java",
+      "updated": "2025-11-26",
+      "url": "https://github.com/silviuburceadev/leetcode",
+      "fork": false,
+      "warnings": [],
+      "last_commit": "2025-11-26",
+      "_signals_raw": [
+        "POM 4.1.0"
+      ],
+      "_files": {
+        "pom": "core/pom.xml"
+      }
+    },
+    {
+      "repository": "silviuburceadev/puzzles",
+      "description": "",
+      "stars": 0,
+      "signals": "POM 4.1.0",
+      "pom_model": "4.1.0",
+      "maven_runtime": "",
+      "branch": "main",
+      "build_status": "UNKNOWN",
+      "build_url": "",
+      "language": "Java",
+      "updated": "2025-12-01",
+      "url": "https://github.com/silviuburceadev/puzzles",
+      "fork": false,
+      "warnings": [],
+      "last_commit": "2025-12-01",
+      "_signals_raw": [
+        "POM 4.1.0"
+      ],
+      "_files": {
+        "pom": "advent-of-code/year-2019/pom.xml"
+      }
+    },
+    {
+      "repository": "sophievdl/brp-energy-sat-configurations",
+      "description": "",
+      "stars": 0,
+      "signals": "POM 4.1.0",
+      "pom_model": "4.1.0",
+      "maven_runtime": "",
+      "branch": "main",
+      "build_status": "UNKNOWN",
+      "build_url": "",
+      "language": "Java",
+      "updated": "2026-01-25",
+      "url": "https://github.com/sophievdl/brp-energy-sat-configurations",
+      "fork": false,
+      "warnings": [],
+      "last_commit": "2026-01-25",
+      "_signals_raw": [
+        "POM 4.1.0"
+      ],
+      "_files": {
+        "pom": "projects/maven/its/core-it-suite/src/test/resources/gh-11384/pom.xml"
+      }
+    },
+    {
+      "repository": "stefanofornari/nb-ste-plugins",
+      "description": "",
+      "stars": 0,
+      "signals": "POM 4.1.0",
+      "pom_model": "4.1.0",
+      "maven_runtime": "",
+      "branch": "main",
+      "build_status": "SUCCESS",
+      "build_url": "https://github.com/stefanofornari/nb-ste-plugins/actions/runs/29246301310",
+      "language": "HTML",
+      "updated": "2026-07-13",
+      "url": "https://github.com/stefanofornari/nb-ste-plugins",
+      "fork": false,
+      "warnings": [],
+      "last_commit": "2026-07-13",
+      "_signals_raw": [
+        "POM 4.1.0"
+      ],
+      "_files": {
+        "pom": "pom.xml"
+      }
+    },
+    {
+      "repository": "support-and-care/maven-modular-sources-showcases",
+      "description": "Showcases for Java Modules with Maven 4 - companion code for blog articles",
+      "stars": 0,
+      "signals": "POM 4.1.0",
+      "pom_model": "4.1.0",
+      "maven_runtime": "",
+      "branch": "main",
+      "build_status": "UNKNOWN",
+      "build_url": "",
+      "language": "Java",
+      "updated": "2026-02-26",
+      "url": "https://github.com/support-and-care/maven-modular-sources-showcases",
+      "fork": false,
+      "warnings": [],
+      "last_commit": "2026-02-26",
+      "_signals_raw": [
+        "POM 4.1.0"
+      ],
+      "_files": {
+        "pom": "pom.xml"
+      }
+    },
+    {
+      "repository": "training360-trainings/java-build-tools-2024-10-25",
+      "description": "Java build tools el\u0151ad\u00e1s anyaga",
+      "stars": 0,
+      "signals": "POM 4.1.0",
+      "pom_model": "4.1.0",
+      "maven_runtime": "",
+      "branch": "master",
+      "build_status": "UNKNOWN",
+      "build_url": "",
+      "language": "Java",
+      "updated": "2026-05-15",
+      "url": "https://github.com/training360-trainings/java-build-tools-2024-10-25",
+      "fork": false,
+      "warnings": [],
+      "last_commit": "2024-10-25",
+      "_signals_raw": [
+        "POM 4.1.0"
+      ],
+      "_files": {
+        "pom": "hello-multimodule-maven4/pom.xml"
+      }
+    },
+    {
+      "repository": "valkyria-gk/vppps",
+      "description": "Valkyria's Pack of Poorly Photoshopped Ships, a mod for Starsector",
+      "stars": 0,
+      "signals": "POM 4.1.0",
+      "pom_model": "4.1.0",
+      "maven_runtime": "",
+      "branch": "latest",
+      "build_status": "SUCCESS",
+      "build_url": "https://github.com/valkyria-gk/vppps/actions/runs/17695983417",
+      "language": "Kotlin",
+      "updated": "2025-09-08",
+      "url": "https://github.com/valkyria-gk/vppps",
+      "fork": false,
+      "warnings": [],
+      "last_commit": "2025-09-08",
+      "_signals_raw": [
+        "POM 4.1.0"
+      ],
+      "_files": {
+        "pom": "pom.xml"
+      }
+    },
+    {
+      "repository": "wavi-odt/App-Gest-o-Atividades-Letivas",
+      "description": "",
+      "stars": 0,
+      "signals": "POM 4.1.0",
+      "pom_model": "4.1.0",
+      "maven_runtime": "",
+      "branch": "main",
+      "build_status": "UNKNOWN",
+      "build_url": "",
+      "language": "JavaScript",
+      "updated": "2026-05-27",
+      "url": "https://github.com/wavi-odt/App-Gest-o-Atividades-Letivas",
+      "fork": false,
+      "warnings": [],
+      "last_commit": "2026-01-25",
+      "_signals_raw": [
+        "POM 4.1.0"
+      ],
+      "_files": {
+        "pom": "CheckPointsSpring/pom.xml"
+      }
+    },
+    {
+      "repository": "yupiik/yupiik-chords",
+      "description": "Yupiik Chords is a lightweight Kubernetes-native batch/workflow orchestrator designed to simplify workflow execution in Kubernetes environments.",
+      "stars": 0,
+      "signals": "POM 4.1.0",
+      "pom_model": "4.1.0",
+      "maven_runtime": "",
+      "branch": "main",
+      "build_status": "SUCCESS",
+      "build_url": "https://github.com/yupiik/yupiik-chords/actions/runs/22806357866",
+      "language": "Java",
+      "updated": "2026-03-07",
+      "url": "https://github.com/yupiik/yupiik-chords",
+      "fork": false,
+      "warnings": [],
+      "last_commit": "2026-03-07",
+      "_signals_raw": [
+        "POM 4.1.0"
+      ],
+      "_files": {
+        "pom": "documentation/pom.xml"
+      }
+    }
+  ]
+}
