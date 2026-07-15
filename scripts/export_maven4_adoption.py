@@ -50,7 +50,11 @@ HISTORY_PATH = Path(__file__).resolve().parent.parent / 'data' / 'maven4-adoptio
 # hasn't changed since the snapshot was taken. Lives alongside the history
 # file on the data branch; see scan-maven4 in publish.yml for restore/push.
 SNAPSHOT_PATH = Path(__file__).resolve().parent.parent / 'data' / 'maven4-repos-snapshot.json'
-SNAPSHOT_SCHEMA_VERSION = 1
+# Bump whenever enrichment semantics change so cached entries are not reused
+# with stale values. v2: pom_model now probes the real root pom (was a
+# constant '4.1.0' for POM-signal repos) and maven_runtime uses the
+# discovered wrapper path (was empty for non-root wrappers).
+SNAPSHOT_SCHEMA_VERSION = 2
 
 # Forge attribution for the federated history schema. Today only the GitHub
 # runner writes here, so each snapshot carries by_forge.github plus mirrored
@@ -413,11 +417,15 @@ def extract_maven4_version(content):
     return None
 
 
-def extract_version_from_wrapper(owner, repo):
-    """Fetch maven-wrapper.properties and extract Maven 4 version."""
-    content = fetch_file_content(
-        owner, repo, '.mvn/wrapper/maven-wrapper.properties'
-    )
+def extract_version_from_wrapper(owner, repo,
+                                 file_path='.mvn/wrapper/maven-wrapper.properties'):
+    """Fetch maven-wrapper.properties and extract Maven 4 version.
+
+    file_path is the wrapper path discovered by the code search; a repo
+    can carry its wrapper below the root (e.g. sub-module/.mvn/...), so
+    trusting a hardcoded root path left maven_runtime empty for them.
+    """
+    content = fetch_file_content(owner, repo, file_path)
     if not content:
         return None
     return extract_maven4_version(content)
@@ -441,16 +449,18 @@ def detect_pom_model(owner, repo, files):
     pom.xml could be located or parsed.
 
     Strategy:
-    - If the repo already has a POM 4.1.0 signal, return '4.1.0' (the
-      code-search query that produced the signal targets that exact
-      namespace; no file fetch needed).
-    - Otherwise probe the project root pom.xml. For wrapper-using repos
-      the root is the directory containing .mvn/. As a fallback, try
-      the repository root.
-    """
-    if 'pom' in files:
-        return '4.1.0'
+    - Always probe the actual project root pom.xml. For wrapper-using
+      repos the root is the directory containing .mvn/; otherwise the
+      repository root.
+    - Fall back to '4.1.0' only when the root pom cannot be read but the
+      repo carries the POM 4.1.0 signal (some (sub)module declared it).
 
+    We deliberately do NOT short-circuit to '4.1.0' just because the POM
+    signal fired: a repo is surfaced by the 4.1.0 code search whenever
+    *any* (sub)module declares that namespace, while its root pom may
+    still be on 4.0.0. Trusting the signal collapsed this column to a
+    constant '4.1.0' for every POM-signal repo.
+    """
     candidates = []
     wrapper = files.get('wrapper', '')
     suffix = '.mvn/wrapper/maven-wrapper.properties'
@@ -467,6 +477,10 @@ def detect_pom_model(owner, repo, files):
         match = POM_MODEL_RE.search(content)
         if match:
             return match.group(1)
+
+    # Root pom unreadable; preserve the weaker signal-based knowledge.
+    if 'pom' in files:
+        return '4.1.0'
     return ''
 
 
@@ -701,7 +715,9 @@ def collect_adoption_data(exclude_forks=False, use_snapshot=False):
         # Both may report different versions — keep all of them visible.
         runtime_versions = []
         if 'wrapper' in data['files']:
-            v = extract_version_from_wrapper(owner, repo_name)
+            v = extract_version_from_wrapper(
+                owner, repo_name, data['files']['wrapper']
+            )
             if v:
                 runtime_versions.append(v)
         if 'action' in data['files']:
