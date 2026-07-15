@@ -3104,5 +3104,34 @@
       "4.0.0 (POM model)": 161,
       "4.1.0 (POM model)": 15
     }
+  },
+  {
+    "date": "2026-07-15",
+    "by_forge": {
+      "github": {
+        "total": 63,
+        "signals": {
+          "POM 4.1.0": 63
+        },
+        "pom_models": {
+          "4.1.0": 63
+        },
+        "runtimes": {},
+        "versions": {
+          "4.1.0 (POM model)": 63
+        }
+      }
+    },
+    "total": 63,
+    "signals": {
+      "POM 4.1.0": 63
+    },
+    "pom_models": {
+      "4.1.0": 63
+    },
+    "runtimes": {},
+    "versions": {
+      "4.1.0 (POM model)": 63
+    }
   }
 ]
