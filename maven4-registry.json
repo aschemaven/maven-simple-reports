@@ -10,8 +10,8 @@
   "lastknown_signal": "https://github.com/Ahmed-Soliman33/bug-tracking-system-kafka[Ahmed-Soliman33/bug-tracking-system-kafka^]",
   "lastknown_version": "0",
   "renamed_to": "",
-  "build": "SUCCESS",
-  "build_url": "https://github.com/0xpasive/epasal-backend-public/actions/runs/25442985510"
+  "build": "NONE",
+  "build_url": ""
  },
  {
   "repo": "24DP1SGrig/TaskBattle",
@@ -66,8 +66,8 @@
   "lastknown_signal": "Wrapper",
   "lastknown_version": "4.0.0-rc-5",
   "renamed_to": "",
-  "build": "SUCCESS",
-  "build_url": "https://github.com/AdityaRaj81/NidanPro-backend/actions/runs/25110022178"
+  "build": "NONE",
+  "build_url": ""
  },
  {
   "repo": "Ahmed-Soliman33/bug-tracking-system-kafka",
@@ -206,8 +206,8 @@
   "lastknown_signal": "https://github.com/Arisgav/uamApp[Arisgav/uamApp^]",
   "lastknown_version": "0",
   "renamed_to": "",
-  "build": "SUCCESS",
-  "build_url": "https://github.com/Anushangar-U/PAF-Project/actions/runs/24140475473"
+  "build": "NONE",
+  "build_url": ""
  },
  {
   "repo": "AocholAyoul9/NetProxi",
@@ -220,8 +220,8 @@
   "lastknown_signal": null,
   "lastknown_version": null,
   "renamed_to": "",
-  "build": "SUCCESS",
-  "build_url": "https://github.com/AocholAyoul9/NetProxi/actions/runs/26812712922"
+  "build": "NONE",
+  "build_url": ""
  },
  {
   "repo": "Apress/Java-23-for-Absolute-Beginners",
@@ -305,7 +305,7 @@
   "lastknown_version": "4.0.0",
   "renamed_to": "",
   "build": "SUCCESS",
-  "build_url": "https://github.com/BenSlabbert/vertx-dagger-bom/actions/runs/29387570027"
+  "build_url": "https://github.com/BenSlabbert/vertx-dagger-bom/actions/runs/29469976658"
  },
  {
   "repo": "BenSlabbert/vertx-dagger-web",
@@ -319,7 +319,7 @@
   "lastknown_version": "4.1.0",
   "renamed_to": "",
   "build": "SUCCESS",
-  "build_url": "https://github.com/BenSlabbert/vertx-dagger-web/actions/runs/29375268200"
+  "build_url": "https://github.com/BenSlabbert/vertx-dagger-web/actions/runs/29457724721"
  },
  {
   "repo": "Bexerlmao/XCTO",
@@ -375,7 +375,7 @@
   "lastknown_version": "4.0.0-rc-5",
   "renamed_to": "",
   "build": "SUCCESS",
-  "build_url": "https://github.com/CodeNameSJ/AirlineReservationSystem/actions/runs/29184659296"
+  "build_url": "https://github.com/CodeNameSJ/AirlineReservationSystem/actions/runs/29184638448"
  },
  {
   "repo": "Codzs-Architecture/java-admin-service",
@@ -850,8 +850,8 @@
   "lastknown_signal": "\ud83d\uded1 https://github.com/bowbahdoe/the-great-link[bowbahdoe/the-great-link^]",
   "lastknown_version": "4",
   "renamed_to": "",
-  "build": "FAILURE",
-  "build_url": "https://github.com/IFML2/ifml3/actions/runs/20797240077"
+  "build": "NONE",
+  "build_url": ""
  },
  {
   "repo": "IKE-Network/ike-base-parent",
@@ -864,8 +864,8 @@
   "lastknown_signal": "POM 4.1.0",
   "lastknown_version": "4.1.0",
   "renamed_to": "",
-  "build": "SUCCESS",
-  "build_url": "https://github.com/IKE-Network/ike-base-parent/actions/runs/26474650280"
+  "build": "NONE",
+  "build_url": ""
  },
  {
   "repo": "IKE-Network/ike-tooling",
@@ -878,8 +878,8 @@
   "lastknown_signal": "Wrapper",
   "lastknown_version": "4.1.0",
   "renamed_to": "",
-  "build": "SUCCESS",
-  "build_url": "https://github.com/IKE-Network/ike-tooling/actions/runs/28712566529"
+  "build": "FAILURE",
+  "build_url": "https://github.com/IKE-Network/ike-tooling/actions/runs/24012981987"
  },
  {
   "repo": "IgnacioSantanaEN/Proyecto-FullStack-III",
@@ -990,8 +990,8 @@
   "lastknown_signal": "https://github.com/Madzi/branch-check-maven-plugin[Madzi/branch-check-maven-plugin^]",
   "lastknown_version": "0",
   "renamed_to": "",
-  "build": "FAILURE",
-  "build_url": "https://github.com/M4gic1540/GrupoCordillera/actions/runs/25824185869"
+  "build": "NONE",
+  "build_url": ""
  },
  {
   "repo": "Madzi/branch-check-maven-plugin",
@@ -1033,7 +1033,7 @@
   "lastknown_version": "4.1.0 (POM model)",
   "renamed_to": "",
   "build": "SUCCESS",
-  "build_url": "https://github.com/MorphiaOrg/morphia/actions/runs/29382772724"
+  "build_url": "https://github.com/MorphiaOrg/morphia/actions/runs/29465702008"
  },
  {
   "repo": "MukundP13/QwApp",
@@ -1200,8 +1200,8 @@
   "lastknown_signal": "https://github.com/RalfNaujokat/xui[RalfNaujokat/xui^]",
   "lastknown_version": "1",
   "renamed_to": "",
-  "build": "FAILURE",
-  "build_url": "https://github.com/Prionto2405012/PokemonBattle/actions/runs/23533482487"
+  "build": "NONE",
+  "build_url": ""
  },
  {
   "repo": "RITHISHM2696/Compilix-AI-Powered-Code-Execution-Platform",
@@ -1312,8 +1312,8 @@
   "lastknown_signal": "POM 4.1.0",
   "lastknown_version": "4.1.0",
   "renamed_to": "",
-  "build": "FAILURE",
-  "build_url": "https://github.com/SAP/olingo-jpa-processor-v4/actions/runs/27621513805"
+  "build": "SUCCESS",
+  "build_url": "https://github.com/SAP/olingo-jpa-processor-v4/actions/runs/27621461131"
  },
  {
   "repo": "SUMIT74184/WolfDire-Central-Infra",
@@ -1425,7 +1425,7 @@
   "lastknown_version": "4",
   "renamed_to": "",
   "build": "SUCCESS",
-  "build_url": "https://github.com/Shubhambhagat3226/github-activity-cli/actions/runs/23585986880"
+  "build_url": "https://github.com/Shubhambhagat3226/github-activity-cli/actions/runs/23499413312"
  },
  {
   "repo": "Siddd-hrr/QPrint-Extension",
@@ -1439,7 +1439,7 @@
   "lastknown_version": "4.0.0-rc-5",
   "renamed_to": "",
   "build": "SUCCESS",
-  "build_url": "https://github.com/Siddd-hrr/QPrint-Extension/actions/runs/23979968179"
+  "build_url": "https://github.com/Siddd-hrr/QPrint-Extension/actions/runs/23937163742"
  },
  {
   "repo": "Siomai0-hi/CafeWeb",
@@ -1648,8 +1648,8 @@
   "lastknown_signal": "Wrapper",
   "lastknown_version": "4.0.0",
   "renamed_to": "",
-  "build": "FAILURE",
-  "build_url": "https://github.com/Workday/spin.build/actions/runs/29428261126"
+  "build": "SUCCESS",
+  "build_url": "https://github.com/Workday/spin.build/actions/runs/29491035185"
  },
  {
   "repo": "XLaiHuy/Back-spring-NCKH",
@@ -1662,8 +1662,8 @@
   "lastknown_signal": "https://github.com/XLaiHuy/FullStack-SciencetTificProducts-Mangament[XLaiHuy/FullStack-SciencetTificProducts-Mangament^]",
   "lastknown_version": "0",
   "renamed_to": "",
-  "build": "SUCCESS",
-  "build_url": "https://github.com/XLaiHuy/Back-spring-NCKH/actions/runs/24598628842"
+  "build": "NONE",
+  "build_url": ""
  },
  {
   "repo": "XLaiHuy/FullStack-SciencetTificProducts-Mangament",
@@ -1676,8 +1676,8 @@
   "lastknown_signal": "Wrapper",
   "lastknown_version": "4.0.0",
   "renamed_to": "",
-  "build": "SUCCESS",
-  "build_url": "https://github.com/XLaiHuy/FullStack-SciencetTificProducts-Mangament/actions/runs/24598603585"
+  "build": "NONE",
+  "build_url": ""
  },
  {
   "repo": "XiaoTie123/Dental_POS",
@@ -1914,8 +1914,8 @@
   "lastknown_signal": "Wrapper",
   "lastknown_version": "4.0.0",
   "renamed_to": "",
-  "build": "FAILURE",
-  "build_url": "https://github.com/amansinha11-dev/SAP-Project/actions/runs/24727707726"
+  "build": "NONE",
+  "build_url": ""
  },
  {
   "repo": "amiraz014/Sirius-ing2-hopital",
@@ -1998,8 +1998,8 @@
   "lastknown_signal": "https://github.com/osscameroon/js-generator[osscameroon/js-generator^]",
   "lastknown_version": "22",
   "renamed_to": "",
-  "build": "SKIPPED",
-  "build_url": "https://github.com/apache/maven-hocon-extension/actions/runs/25944211888"
+  "build": "SUCCESS",
+  "build_url": "https://github.com/apache/maven-hocon-extension/actions/runs/24020613189"
  },
  {
   "repo": "apache/maven-xinclude-extension",
@@ -2013,7 +2013,7 @@
   "lastknown_version": "4.1.0",
   "renamed_to": "",
   "build": "SUCCESS",
-  "build_url": "https://github.com/apache/maven-xinclude-extension/actions/runs/29411969546"
+  "build_url": "https://github.com/apache/maven-xinclude-extension/actions/runs/29494777797"
  },
  {
   "repo": "apache/plc4x",
@@ -2026,8 +2026,8 @@
   "lastknown_signal": null,
   "lastknown_version": null,
   "renamed_to": "",
-  "build": "SUCCESS",
-  "build_url": "https://github.com/apache/plc4x/actions/runs/29449234671"
+  "build": "FAILURE",
+  "build_url": "https://github.com/apache/plc4x/actions/runs/29489834910"
  },
  {
   "repo": "apache/plc4x-build-tools",
@@ -2054,8 +2054,8 @@
   "lastknown_signal": "Wrapper",
   "lastknown_version": "4.1.0",
   "renamed_to": "",
-  "build": "IN_PROGRESS",
-  "build_url": "https://github.com/apache/plc4x-extras/actions/runs/29449527369"
+  "build": "SUCCESS",
+  "build_url": "https://github.com/apache/plc4x-extras/actions/runs/29467601452"
  },
  {
   "repo": "apetrozzelli/jaus",
@@ -2082,8 +2082,8 @@
   "lastknown_signal": "Wrapper",
   "lastknown_version": "4.0.0",
   "renamed_to": "",
-  "build": "FAILURE",
-  "build_url": "https://github.com/apetrozzelli/truelayer-pokedex/actions/runs/27425497270"
+  "build": "SUCCESS",
+  "build_url": "https://github.com/apetrozzelli/truelayer-pokedex/actions/runs/24643097890"
  },
  {
   "repo": "aschemaven/maven-modular-sources-showcases",
@@ -2264,8 +2264,8 @@
   "lastknown_signal": "Wrapper",
   "lastknown_version": "4.0.0",
   "renamed_to": "",
-  "build": "FAILURE",
-  "build_url": "https://github.com/bmarwell/aktienfinder-scraper/actions/runs/29034174255"
+  "build": "NONE",
+  "build_url": ""
  },
  {
   "repo": "bmarwell/jfmt",
@@ -2279,7 +2279,7 @@
   "lastknown_version": "45",
   "renamed_to": "",
   "build": "SUCCESS",
-  "build_url": "https://github.com/bmarwell/jfmt/actions/runs/29176558406"
+  "build_url": "https://github.com/bmarwell/jfmt/actions/runs/29458846589"
  },
  {
   "repo": "bmarwell/proximo-pitido",
@@ -2293,7 +2293,7 @@
   "lastknown_version": "0",
   "renamed_to": "",
   "build": "SUCCESS",
-  "build_url": "https://github.com/bmarwell/proximo-pitido/actions/runs/29400009830"
+  "build_url": "https://github.com/bmarwell/proximo-pitido/actions/runs/29400009596"
  },
  {
   "repo": "bones0xab/event-sourcing-cqrs-spring-axon-app",
@@ -2447,7 +2447,7 @@
   "lastknown_version": "4.0.0",
   "renamed_to": "",
   "build": "SUCCESS",
-  "build_url": "https://github.com/bowbahdoe/module_info/actions/runs/18330120456"
+  "build_url": "https://github.com/bowbahdoe/module_info/actions/runs/18330112011"
  },
  {
   "repo": "bowbahdoe/ppm",
@@ -2601,7 +2601,7 @@
   "lastknown_version": "4.0.0-rc-5",
   "renamed_to": "",
   "build": "SUCCESS",
-  "build_url": "https://github.com/carlspring/idempotence/actions/runs/29382168158"
+  "build_url": "https://github.com/carlspring/idempotence/actions/runs/29464690699"
  },
  {
   "repo": "chosenking1/MautonLaundryJava",
@@ -2614,8 +2614,8 @@
   "lastknown_signal": "https://github.com/cstamas/MNG-8486[cstamas/MNG-8486^]",
   "lastknown_version": "0",
   "renamed_to": "",
-  "build": "SUCCESS",
-  "build_url": "https://github.com/chosenking1/MautonLaundryJava/actions/runs/27197295080"
+  "build": "NONE",
+  "build_url": ""
  },
  {
   "repo": "codacy-open-source-projects-scans/maven",
@@ -2643,7 +2643,7 @@
   "lastknown_version": "4",
   "renamed_to": "",
   "build": "SUCCESS",
-  "build_url": "https://github.com/conorheffron/hl7-hapi-fhir-obs-api/actions/runs/29379509716"
+  "build_url": "https://github.com/conorheffron/hl7-hapi-fhir-obs-api/actions/runs/29379478734"
  },
  {
   "repo": "conorheffron/simple-calculator",
@@ -2908,8 +2908,8 @@
   "lastknown_signal": "Wrapper",
   "lastknown_version": "4.0.0-rc-5",
   "renamed_to": "",
-  "build": "FAILURE",
-  "build_url": "https://github.com/dungtq2k5/ams-backend/actions/runs/23706713237"
+  "build": "NONE",
+  "build_url": ""
  },
  {
   "repo": "duwaragie/it3030-paf-2026-smart-campus-group188",
@@ -2936,8 +2936,8 @@
   "lastknown_signal": null,
   "lastknown_version": null,
   "renamed_to": "",
-  "build": "SUCCESS",
-  "build_url": "https://github.com/edwarddn/dinosaur-edward-game/actions/runs/27965823171"
+  "build": "NONE",
+  "build_url": ""
  },
  {
   "repo": "eelcodevlieger/mapimage",
@@ -3077,7 +3077,7 @@
   "lastknown_version": "0",
   "renamed_to": "",
   "build": "SUCCESS",
-  "build_url": "https://github.com/flowlogix/arq-reproducers/actions/runs/29405494763"
+  "build_url": "https://github.com/flowlogix/arq-reproducers/actions/runs/29488131089"
  },
  {
   "repo": "flowlogix/cdi-tck-reproducer",
@@ -3091,7 +3091,7 @@
   "lastknown_version": "0",
   "renamed_to": "",
   "build": "SUCCESS",
-  "build_url": "https://github.com/flowlogix/cdi-tck-reproducer/actions/runs/29400558873"
+  "build_url": "https://github.com/flowlogix/cdi-tck-reproducer/actions/runs/29483235940"
  },
  {
   "repo": "flowlogix/cdi-tck-reproducer-appcontext",
@@ -3105,7 +3105,7 @@
   "lastknown_version": "0",
   "renamed_to": "",
   "build": "SUCCESS",
-  "build_url": "https://github.com/flowlogix/cdi-tck-reproducer-appcontext/actions/runs/29416888159"
+  "build_url": "https://github.com/flowlogix/cdi-tck-reproducer-appcontext/actions/runs/29499856500"
  },
  {
   "repo": "flowlogix/container-deploy-plugin",
@@ -3133,7 +3133,7 @@
   "lastknown_version": "4.0.0-rc-5",
   "renamed_to": "",
   "build": "SUCCESS",
-  "build_url": "https://github.com/flowlogix/ear-sample/actions/runs/29414970164"
+  "build_url": "https://github.com/flowlogix/ear-sample/actions/runs/29497873977"
  },
  {
   "repo": "flowlogix/flowlogix",
@@ -3147,7 +3147,7 @@
   "lastknown_version": "4.0.0-rc-5",
   "renamed_to": "",
   "build": "SUCCESS",
-  "build_url": "https://github.com/flowlogix/flowlogix/actions/runs/29386778027"
+  "build_url": "https://github.com/flowlogix/flowlogix/actions/runs/29469215505"
  },
  {
   "repo": "flowlogix/test-arq-suite",
@@ -3161,7 +3161,7 @@
   "lastknown_version": "4",
   "renamed_to": "",
   "build": "SUCCESS",
-  "build_url": "https://github.com/flowlogix/test-arq-suite/actions/runs/29428488120"
+  "build_url": "https://github.com/flowlogix/test-arq-suite/actions/runs/29428488088"
  },
  {
   "repo": "fofola1/CustomCraftingRecipesPlugin",
@@ -3188,8 +3188,8 @@
   "lastknown_signal": "Wrapper",
   "lastknown_version": "4.0.0",
   "renamed_to": "",
-  "build": "FAILURE",
-  "build_url": "https://github.com/fuhouyu/base-framework/actions/runs/19642490151"
+  "build": "SUCCESS",
+  "build_url": "https://github.com/fuhouyu/base-framework/actions/runs/19642426737"
  },
  {
   "repo": "gabmeira/desafioForumHub",
@@ -3216,8 +3216,8 @@
   "lastknown_signal": "Wrapper",
   "lastknown_version": "4.0.0-rc-5",
   "renamed_to": "",
-  "build": "SUCCESS",
-  "build_url": "https://github.com/gitApurv/CanineAI-Server/actions/runs/24736257575"
+  "build": "NONE",
+  "build_url": ""
  },
  {
   "repo": "gnodet/maven-bench",
@@ -3245,7 +3245,7 @@
   "lastknown_version": "4.0.0-rc-3",
   "renamed_to": "",
   "build": "SUCCESS",
-  "build_url": "https://github.com/google/adk-java/actions/runs/29440133543"
+  "build_url": "https://github.com/google/adk-java/actions/runs/29498154397"
  },
  {
   "repo": "grubeninspekteur/iskibal",
@@ -3258,8 +3258,8 @@
   "lastknown_signal": "POM 4.1.0, Wrapper",
   "lastknown_version": "4.1.0",
   "renamed_to": "",
-  "build": "FAILURE",
-  "build_url": "https://github.com/grubeninspekteur/iskibal/actions/runs/23713550668"
+  "build": "SUCCESS",
+  "build_url": "https://github.com/grubeninspekteur/iskibal/actions/runs/22826242207"
  },
  {
   "repo": "guylabs/plexus-utils-merge-xml-reproducer",
@@ -3301,7 +3301,7 @@
   "lastknown_version": "4.0.0-rc-5",
   "renamed_to": "",
   "build": "SUCCESS",
-  "build_url": "https://github.com/hantsy/jakartaee-ddd-example/actions/runs/28363686386"
+  "build_url": "https://github.com/hantsy/jakartaee-ddd-example/actions/runs/28363625326"
  },
  {
   "repo": "hantsy/jakartaee11-sandbox",
@@ -3315,7 +3315,7 @@
   "lastknown_version": "4.0.0",
   "renamed_to": "",
   "build": "SUCCESS",
-  "build_url": "https://github.com/hantsy/jakartaee11-sandbox/actions/runs/28728740912"
+  "build_url": "https://github.com/hantsy/jakartaee11-sandbox/actions/runs/28728734325"
  },
  {
   "repo": "hantsy/jakartaee11-starter-boilerplate",
@@ -3328,8 +3328,8 @@
   "lastknown_signal": "https://github.com/igorcampos-dev/spring-integrations-examples[igorcampos-dev/spring-integrations-examples^]",
   "lastknown_version": "2",
   "renamed_to": "",
-  "build": "FAILURE",
-  "build_url": "https://github.com/hantsy/jakartaee11-starter-boilerplate/actions/runs/29384454447"
+  "build": "SUCCESS",
+  "build_url": "https://github.com/hantsy/jakartaee11-starter-boilerplate/actions/runs/29461268147"
  },
  {
   "repo": "hantsy/spring-puzzles",
@@ -3357,7 +3357,7 @@
   "lastknown_version": "46",
   "renamed_to": "",
   "build": "SUCCESS",
-  "build_url": "https://github.com/hantsy/spring6-sandbox/actions/runs/26429705785"
+  "build_url": "https://github.com/hantsy/spring6-sandbox/actions/runs/26429705784"
  },
  {
   "repo": "hantsy/spring7-sandbox",
@@ -3371,7 +3371,7 @@
   "lastknown_version": "4",
   "renamed_to": "",
   "build": "SUCCESS",
-  "build_url": "https://github.com/hantsy/spring7-sandbox/actions/runs/27923853820"
+  "build_url": "https://github.com/hantsy/spring7-sandbox/actions/runs/27923844971"
  },
  {
   "repo": "hantsy/vertx-sandbox",
@@ -3385,7 +3385,7 @@
   "lastknown_version": "4.0.0",
   "renamed_to": "",
   "build": "SUCCESS",
-  "build_url": "https://github.com/hantsy/vertx-sandbox/actions/runs/29137474856"
+  "build_url": "https://github.com/hantsy/vertx-sandbox/actions/runs/29456409928"
  },
  {
   "repo": "harshal5-dev/scaler-e-commerce-platform",
@@ -3413,7 +3413,7 @@
   "lastknown_version": "1",
   "renamed_to": "",
   "build": "SUCCESS",
-  "build_url": "https://github.com/hellman-and-hero/tdd-demy-hardware-sim/actions/runs/29387987001"
+  "build_url": "https://github.com/hellman-and-hero/tdd-demy-hardware-sim/actions/runs/29470384325"
  },
  {
   "repo": "helpermethod/zip-forge",
@@ -3468,8 +3468,8 @@
   "lastknown_signal": "Wrapper",
   "lastknown_version": "",
   "renamed_to": "",
-  "build": "SUCCESS",
-  "build_url": "https://github.com/himnay/llm-rag/actions/runs/28992472526"
+  "build": "FAILURE",
+  "build_url": "https://github.com/himnay/llm-rag/actions/runs/29469643827"
  },
  {
   "repo": "himnay/llm-rag-pipeline",
@@ -3525,7 +3525,7 @@
   "lastknown_version": "",
   "renamed_to": "",
   "build": "SUCCESS",
-  "build_url": "https://github.com/igorcampos-dev/spring-integrations-examples/actions/runs/28044965511"
+  "build_url": "https://github.com/igorcampos-dev/spring-integrations-examples/actions/runs/16485727315"
  },
  {
   "repo": "ikmdev/build-parent",
@@ -3567,7 +3567,7 @@
   "lastknown_version": "4.1.0",
   "renamed_to": "",
   "build": "SKIPPED",
-  "build_url": "https://github.com/ikmdev/komet/actions/runs/29374710666"
+  "build_url": "https://github.com/ikmdev/komet/actions/runs/29497874331"
  },
  {
   "repo": "ikmdev/komet-desktop",
@@ -3581,7 +3581,7 @@
   "lastknown_version": "1",
   "renamed_to": "",
   "build": "SUCCESS",
-  "build_url": "https://github.com/ikmdev/komet-desktop/actions/runs/29374642680"
+  "build_url": "https://github.com/ikmdev/komet-desktop/actions/runs/29497873359"
  },
  {
   "repo": "ikmdev/rocks-kb",
@@ -3637,7 +3637,7 @@
   "lastknown_version": "4.0.0-rc-5",
   "renamed_to": "",
   "build": "SUCCESS",
-  "build_url": "https://github.com/instancio/instancio/actions/runs/29391330256"
+  "build_url": "https://github.com/instancio/instancio/actions/runs/29468404993"
  },
  {
   "repo": "instancio/instancio-benchmark",
@@ -3818,8 +3818,8 @@
   "lastknown_signal": "Wrapper",
   "lastknown_version": "4.0.0",
   "renamed_to": "",
-  "build": "FAILURE",
-  "build_url": "https://github.com/jabrena/typed-errors/actions/runs/22554526397"
+  "build": "SUCCESS",
+  "build_url": "https://github.com/jabrena/typed-errors/actions/runs/22554516716"
  },
  {
   "repo": "jaguililla/hexagonal_spring",
@@ -3833,7 +3833,7 @@
   "lastknown_version": "4.0.0-rc-5",
   "renamed_to": "",
   "build": "SUCCESS",
-  "build_url": "https://github.com/jaguililla/hexagonal_spring/actions/runs/23333295348"
+  "build_url": "https://github.com/jaguililla/hexagonal_spring/actions/runs/21381266657"
  },
  {
   "repo": "jdrodriguezrodriguez/CreditCore",
@@ -3861,7 +3861,7 @@
   "lastknown_version": "4.0.0",
   "renamed_to": "",
   "build": "SUCCESS",
-  "build_url": "https://github.com/jenkins-infra/plugin-health-scoring/actions/runs/29210419678"
+  "build_url": "https://github.com/jenkins-infra/plugin-health-scoring/actions/runs/29210419651"
  },
  {
   "repo": "jimisola/arconia-composition-demo",
@@ -3902,8 +3902,8 @@
   "lastknown_signal": "\ud83d\uded1 https://github.com/jonisf87/fwk-karateautomulti[jonisf87/fwk-karateautomulti^]",
   "lastknown_version": "0",
   "renamed_to": "",
-  "build": "SUCCESS",
-  "build_url": "https://github.com/jnorthrup/superbikeshed/actions/runs/16900603467"
+  "build": "FAILURE",
+  "build_url": "https://github.com/jnorthrup/superbikeshed/actions/runs/16664980412"
  },
  {
   "repo": "joeribuytaert5-hub/v1-f-swap",
@@ -3931,7 +3931,7 @@
   "lastknown_version": "4.0.0",
   "renamed_to": "",
   "build": "SUCCESS",
-  "build_url": "https://github.com/jonisf87/fwk-karateautomulti/actions/runs/25558961029"
+  "build_url": "https://github.com/jonisf87/fwk-karateautomulti/actions/runs/25558938667"
  },
  {
   "repo": "jonisf87/fwk-karateautomulti-next",
@@ -3944,8 +3944,8 @@
   "lastknown_signal": "Wrapper",
   "lastknown_version": "4.0.0",
   "renamed_to": "",
-  "build": "FAILURE",
-  "build_url": "https://github.com/jonisf87/fwk-karateautomulti-next/actions/runs/25026361866"
+  "build": "NONE",
+  "build_url": ""
  },
  {
   "repo": "js-b2-g11/static-code-analyzer-web",
@@ -4001,7 +4001,7 @@
   "lastknown_version": "4.0.0-rc-5",
   "renamed_to": "",
   "build": "SUCCESS",
-  "build_url": "https://github.com/kbeigl/bm/actions/runs/28652129736"
+  "build_url": "https://github.com/kbeigl/bm/actions/runs/28651687814"
  },
  {
   "repo": "kec/ike-tooling",
@@ -4155,7 +4155,7 @@
   "lastknown_version": "4.0.0",
   "renamed_to": "",
   "build": "SUCCESS",
-  "build_url": "https://github.com/langgraph4j/langgraph4j/actions/runs/29345873299"
+  "build_url": "https://github.com/langgraph4j/langgraph4j/actions/runs/28298062231"
  },
  {
   "repo": "leibrother/qqbot",
@@ -4183,7 +4183,7 @@
   "lastknown_version": "4.0.0-rc-5",
   "renamed_to": "flowlogix/apps",
   "build": "SUCCESS",
-  "build_url": "https://github.com/flowlogix/apps/actions/runs/29373829883"
+  "build_url": "https://github.com/flowlogix/apps/actions/runs/29456255341"
  },
  {
   "repo": "lukas-krecan/ShedLock",
@@ -4239,7 +4239,7 @@
   "lastknown_version": "0",
   "renamed_to": "",
   "build": "SUCCESS",
-  "build_url": "https://github.com/markprimak/maven-starter/actions/runs/29405502059"
+  "build_url": "https://github.com/markprimak/maven-starter/actions/runs/29488139876"
  },
  {
   "repo": "martinezdom/Dom-Car",
@@ -4323,7 +4323,7 @@
   "lastknown_version": "39",
   "renamed_to": "",
   "build": "SUCCESS",
-  "build_url": "https://github.com/maveniverse/mason/actions/runs/29418227448"
+  "build_url": "https://github.com/maveniverse/mason/actions/runs/29501221632"
  },
  {
   "repo": "mayankshrivas/finance-data-backend",
@@ -4365,7 +4365,7 @@
   "lastknown_version": "4.0.0",
   "renamed_to": "",
   "build": "SKIPPED",
-  "build_url": "https://github.com/mend-detection-qa/nx/actions/runs/29449630165"
+  "build_url": "https://github.com/mend-detection-qa/nx/actions/runs/29499604130"
  },
  {
   "repo": "mendirl/drdrools",
@@ -4392,8 +4392,8 @@
   "lastknown_signal": "POM 4.1.0",
   "lastknown_version": "4.1.0",
   "renamed_to": "",
-  "build": "SUCCESS",
-  "build_url": "https://github.com/mendirl/electrix/actions/runs/29410075389"
+  "build": "FAILURE",
+  "build_url": "https://github.com/mendirl/electrix/actions/runs/29457695470"
  },
  {
   "repo": "mendirl/prez_oauth2",
@@ -4449,7 +4449,7 @@
   "lastknown_version": "4.1.0",
   "renamed_to": "",
   "build": "SUCCESS",
-  "build_url": "https://github.com/mirogaudi/product-catalog-service/actions/runs/29199296593"
+  "build_url": "https://github.com/mirogaudi/product-catalog-service/actions/runs/29500234047"
  },
  {
   "repo": "mk868/nullaudit",
@@ -4463,7 +4463,7 @@
   "lastknown_version": "4",
   "renamed_to": "",
   "build": "SUCCESS",
-  "build_url": "https://github.com/mk868/nullaudit/actions/runs/29449302600"
+  "build_url": "https://github.com/mk868/nullaudit/actions/runs/29449302418"
  },
  {
   "repo": "mlfoundations/dev_set_tasks",
@@ -4616,8 +4616,8 @@
   "lastknown_signal": "Wrapper",
   "lastknown_version": "4.0.0-rc-5",
   "renamed_to": "",
-  "build": "WAITING",
-  "build_url": "https://github.com/mthmulders/mcs/actions/runs/29419126737"
+  "build": "SUCCESS",
+  "build_url": "https://github.com/mthmulders/mcs/actions/runs/29470395717"
  },
  {
   "repo": "mtkhawaja/jlama-demo",
@@ -4756,8 +4756,8 @@
   "lastknown_signal": "Wrapper",
   "lastknown_version": "4.0.0-rc-5",
   "renamed_to": "",
-  "build": "SUCCESS",
-  "build_url": "https://github.com/nerain-prakas/azurepipeline/actions/runs/24289866383"
+  "build": "NONE",
+  "build_url": ""
  },
  {
   "repo": "neurallayer/roboquant",
@@ -4813,7 +4813,7 @@
   "lastknown_version": "689",
   "renamed_to": "",
   "build": "SUCCESS",
-  "build_url": "https://github.com/nielsbasjes/yauaa/actions/runs/29341898666"
+  "build_url": "https://github.com/nielsbasjes/yauaa/actions/runs/29341829835"
  },
  {
   "repo": "nikolajbrinch/faz80",
@@ -4868,8 +4868,8 @@
   "lastknown_signal": "Wrapper",
   "lastknown_version": "4.0.0-rc-5",
   "renamed_to": "",
-  "build": "IN_PROGRESS",
-  "build_url": "https://github.com/nrwl/nx/actions/runs/29450907364"
+  "build": "SUCCESS",
+  "build_url": "https://github.com/nrwl/nx/actions/runs/29501167476"
  },
  {
   "repo": "null-object-0000/ai-clash",
@@ -4911,7 +4911,7 @@
   "lastknown_version": "4.1.0",
   "renamed_to": "",
   "build": "SUCCESS",
-  "build_url": "https://github.com/osscameroon/js-generator/actions/runs/19743030307"
+  "build_url": "https://github.com/osscameroon/js-generator/actions/runs/19742779560"
  },
  {
   "repo": "ottlinger/junit-mockito-examples",
@@ -4925,7 +4925,7 @@
   "lastknown_version": "4.0.0-rc-5",
   "renamed_to": "",
   "build": "SUCCESS",
-  "build_url": "https://github.com/ottlinger/junit-mockito-examples/actions/runs/29410829928"
+  "build_url": "https://github.com/ottlinger/junit-mockito-examples/actions/runs/29493590938"
  },
  {
   "repo": "patrickfust/network-simulator",
@@ -4939,7 +4939,7 @@
   "lastknown_version": "4.0.0",
   "renamed_to": "",
   "build": "SUCCESS",
-  "build_url": "https://github.com/patrickfust/network-simulator/actions/runs/27144801048"
+  "build_url": "https://github.com/patrickfust/network-simulator/actions/runs/27144800863"
  },
  {
   "repo": "petr-panteleyev/money-manager",
@@ -4967,7 +4967,7 @@
   "lastknown_version": "4.0.0-rc-5",
   "renamed_to": "",
   "build": "SUCCESS",
-  "build_url": "https://github.com/piotrwalkusz1/task-manager/actions/runs/19990787733"
+  "build_url": "https://github.com/piotrwalkusz1/task-manager/actions/runs/19990675303"
  },
  {
   "repo": "postlundhall/traningsapp",
@@ -5261,7 +5261,7 @@
   "lastknown_version": "4.1.0 (POM model)",
   "renamed_to": "",
   "build": "SUCCESS",
-  "build_url": "https://github.com/snyk/cli/actions/runs/29448151455"
+  "build_url": "https://github.com/snyk/cli/actions/runs/29499652665"
  },
  {
   "repo": "snyk/snyk-mvn-plugin",
@@ -5302,8 +5302,8 @@
   "lastknown_signal": "Wrapper",
   "lastknown_version": "4.0.0",
   "renamed_to": "",
-  "build": "SKIPPED",
-  "build_url": "https://github.com/square/okhttp/actions/runs/29447935284"
+  "build": "SUCCESS",
+  "build_url": "https://github.com/square/okhttp/actions/runs/29500797593"
  },
  {
   "repo": "sscrock/TastyBites",
@@ -5345,7 +5345,7 @@
   "lastknown_version": "0",
   "renamed_to": "",
   "build": "SUCCESS",
-  "build_url": "https://github.com/stefanofornari/nb-ste-plugins/actions/runs/29246301310"
+  "build_url": "https://github.com/stefanofornari/nb-ste-plugins/actions/runs/29246274597"
  },
  {
   "repo": "support-and-care/maven-modular-sources-showcases",
@@ -5456,8 +5456,8 @@
   "lastknown_signal": "https://github.com/symentispl/roadrunner[symentispl/roadrunner^]",
   "lastknown_version": "0",
   "renamed_to": "",
-  "build": "SUCCESS",
-  "build_url": "https://github.com/svmgarg/flowstate/actions/runs/21565449120"
+  "build": "NONE",
+  "build_url": ""
  },
  {
   "repo": "symentispl/roadrunner",
@@ -5471,7 +5471,7 @@
   "lastknown_version": "4.0.0-rc-5",
   "renamed_to": "",
   "build": "SUCCESS",
-  "build_url": "https://github.com/symentispl/roadrunner/actions/runs/29264186085"
+  "build_url": "https://github.com/symentispl/roadrunner/actions/runs/29234441400"
  },
  {
   "repo": "tanmaylohakare/Leetcode-Tracker",
@@ -5513,7 +5513,7 @@
   "lastknown_version": "1",
   "renamed_to": "",
   "build": "SUCCESS",
-  "build_url": "https://github.com/thomcgn/nvg8/actions/runs/23378792133"
+  "build_url": "https://github.com/thomcgn/nvg8/actions/runs/23378072594"
  },
  {
   "repo": "tintwym/novora_backend",
@@ -5652,8 +5652,8 @@
   "lastknown_signal": "POM 4.1.0",
   "lastknown_version": "4.1.0",
   "renamed_to": "",
-  "build": "SUCCESS",
-  "build_url": "https://github.com/valkyria-gk/vppps/actions/runs/17695983417"
+  "build": "NONE",
+  "build_url": ""
  },
  {
   "repo": "veithen/resolver-proxy-maven-plugin",
@@ -5667,7 +5667,7 @@
   "lastknown_version": "4.0.0-rc-5",
   "renamed_to": "",
   "build": "SUCCESS",
-  "build_url": "https://github.com/veithen/resolver-proxy-maven-plugin/actions/runs/29411976542"
+  "build_url": "https://github.com/veithen/resolver-proxy-maven-plugin/actions/runs/29494784356"
  },
  {
   "repo": "verjithRavi/it3030-paf-2026-smart-campus-WE_202_2.1",
@@ -5793,7 +5793,7 @@
   "lastknown_version": "4.0.0",
   "renamed_to": "",
   "build": "SUCCESS",
-  "build_url": "https://github.com/xenoterracide/kalix/actions/runs/29450394856"
+  "build_url": "https://github.com/xenoterracide/kalix/actions/runs/29442852911"
  },
  {
   "repo": "xenoterracide/repro-mvn4-yml",
@@ -5821,7 +5821,7 @@
   "lastknown_version": "4.0.0-rc-5",
   "renamed_to": "",
   "build": "SUCCESS",
-  "build_url": "https://github.com/xenoterracide/semver/actions/runs/29444899601"
+  "build_url": "https://github.com/xenoterracide/semver/actions/runs/29429128754"
  },
  {
   "repo": "xiaomujin/cq-bot",
@@ -5905,7 +5905,7 @@
   "lastknown_version": "12",
   "renamed_to": "",
   "build": "SUCCESS",
-  "build_url": "https://github.com/youngledo/godot-java/actions/runs/26228504734"
+  "build_url": "https://github.com/youngledo/godot-java/actions/runs/26226563310"
  },
  {
   "repo": "youngledo/sdkman-gui",
@@ -5918,8 +5918,8 @@
   "lastknown_signal": "https://github.com/snyk/snyk-mvn-plugin[snyk/snyk-mvn-plugin^]",
   "lastknown_version": "11",
   "renamed_to": "",
-  "build": "SUCCESS",
-  "build_url": "https://github.com/youngledo/sdkman-gui/actions/runs/19506886844"
+  "build": "NONE",
+  "build_url": ""
  },
  {
   "repo": "yupiik/statura",
