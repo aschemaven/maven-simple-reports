@@ -56,12 +56,12 @@ def build_status(f):
     f.pop('build_workflow', None)
     f['build_checked'] = now_iso()
     if f.get('state') == 'gone':
-        f['build'] = 'none'
+        f['build'] = 'NONE'
         return f
     full = f.get('current_full_name') or f['repo']
     st, meta = gh(f"repos/{full}")
     if st != 'ok':
-        f['build'] = 'none'
+        f['build'] = 'NONE'
         return f
     branch = meta.get('default_branch', 'main')
 
@@ -140,7 +140,7 @@ def main():
             if i % 50 == 0:
                 print(f"  {i}/{len(todo)}", file=sys.stderr)
     for e in entries:
-        e.setdefault('build', 'none')
+        e.setdefault('build', 'NONE')
         e.setdefault('build_url', '')
 
     save_registry(args.registry, reg)
