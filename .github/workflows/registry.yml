@@ -1,0 +1,161 @@
+name: Maven 4 Registry
+
+# Two-job registry pipeline that replaces the old daily search sampling:
+#
+#   trigger                     | mode        | discovery                  | re-examination
+#   ----                        | ----        | ---------                  | --------------
+#   cron '13 */2 * * *' (Job B) | incremental | sort=indexed, early-stop   | stalest slice
+#   cron '43 5 * * *'   (Job A) | full        | full sweep + reconciliation| everything
+#   workflow_dispatch           | choice      | per input                  | per input
+#
+# The registry (maven4-registry.json on the data branch) is the durable
+# list of every repo ever seen with a Maven 4 signal; counting happens by
+# re-examining registry entries via the core API (5000/h with a PAT,
+# 1000/h with GITHUB_TOKEN) instead of the rate-limit-flaky code search.
+# The search only discovers NEW candidates, so a throttled search means
+# "no news today", never a collapsed count.
+#
+# Optional secret REGISTRY_TOKEN (classic PAT, public_repo scope) lifts
+# the API budget from 1000/h to 5000/h; without it the scripts' rate-limit
+# guard sleeps across window resets, the jobs just take longer.
+
+on:
+  schedule:
+    - cron: '13 */2 * * *'   # Job B: incremental
+    - cron: '43 5 * * *'     # Job A: full sweep + reconciliation
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: 'Discovery + re-examination mode'
+        required: false
+        default: 'incremental'
+        type: choice
+        options: [incremental, full]
+
+permissions:
+  contents: write   # push registry/history to the data branch
+  actions: write    # dispatch the Publish workflow after data changes
+
+# Job A must not run concurrently with Job B (both rewrite the registry on
+# the data branch): same group, queue instead of cancel.
+concurrency:
+  group: maven4-registry
+  cancel-in-progress: false
+
+env:
+  GH_TOKEN: ${{ secrets.REGISTRY_TOKEN || secrets.GITHUB_TOKEN }}
+
+jobs:
+  registry:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Resolve mode
+        id: mode
+        run: |
+          MODE="incremental"
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            MODE="${{ inputs.mode }}"
+          elif [ "${{ github.event.schedule }}" = "43 5 * * *" ]; then
+            MODE="full"
+          fi
+          echo "mode=$MODE" >> "$GITHUB_OUTPUT"
+          echo "Resolved mode: $MODE"
+
+      - name: Restore registry and history from data branch
+        run: |
+          mkdir -p data
+          if git ls-remote --exit-code --heads origin data >/dev/null 2>&1; then
+            git fetch origin data --depth=1
+            git show FETCH_HEAD:maven4-registry.json > data/maven4-registry.json 2>/dev/null \
+              && echo "Restored registry ($(wc -c < data/maven4-registry.json) bytes)" \
+              || { echo "No registry on data branch yet"; rm -f data/maven4-registry.json; }
+            git show FETCH_HEAD:maven4-adoption-history.json > data/maven4-adoption-history.json 2>/dev/null \
+              && echo "Restored history ($(wc -c < data/maven4-adoption-history.json) bytes)" \
+              || { echo "No history on data branch yet"; rm -f data/maven4-adoption-history.json; }
+          else
+            echo "data branch does not exist yet — starting from scratch"
+          fi
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Discover (${{ steps.mode.outputs.mode }})
+        run: |
+          python scripts/registry_discover.py data/maven4-registry.json \
+            --mode "${{ steps.mode.outputs.mode }}"
+
+      - name: Re-examine registry entries
+        run: |
+          if [ "${{ steps.mode.outputs.mode }}" = "full" ]; then
+            python scripts/registry_reexamine.py data/maven4-registry.json
+          else
+            # stalest slice only: keeps the 2-hourly run inside the API
+            # budget; every entry still gets re-examined a few times a day
+            python scripts/registry_reexamine.py data/maven4-registry.json \
+              --max-checks 100
+          fi
+
+      - name: Refresh build status
+        run: |
+          if [ "${{ steps.mode.outputs.mode }}" = "full" ]; then
+            python scripts/registry_build_status.py data/maven4-registry.json
+          else
+            python scripts/registry_build_status.py data/maven4-registry.json \
+              --max-checks 60
+          fi
+
+      - name: Append adoption history point
+        run: |
+          python scripts/registry_history.py \
+            data/maven4-registry.json data/maven4-adoption-history.json
+
+      - name: Push registry and history to data branch
+        id: push-data
+        run: |
+          WORK=$(mktemp -d)
+          cd "$WORK"
+          REPO_URL="https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
+          for attempt in 1 2 3; do
+            rm -rf "$WORK"/* "$WORK"/.git 2>/dev/null || true
+            if git clone --depth=1 --branch data --single-branch "$REPO_URL" . 2>/dev/null; then
+              echo "Cloned data branch (attempt $attempt)"
+            else
+              git init -q
+              git remote add origin "$REPO_URL"
+              git checkout -q --orphan data
+            fi
+            cp "$GITHUB_WORKSPACE/data/maven4-registry.json" .
+            cp "$GITHUB_WORKSPACE/data/maven4-adoption-history.json" .
+            git add maven4-registry.json maven4-adoption-history.json
+            if git diff --staged --quiet; then
+              echo "No data changes — nothing to commit"
+              echo "changed=false" >> "$GITHUB_OUTPUT"
+              exit 0
+            fi
+            git -c user.name='github-actions[bot]' \
+                -c user.email='41898282+github-actions[bot]@users.noreply.github.com' \
+                commit -q -m "Update Maven 4 registry (${{ steps.mode.outputs.mode }}, $(date -u +%Y-%m-%dT%H:%MZ))"
+            if git push origin HEAD:data; then
+              echo "changed=true" >> "$GITHUB_OUTPUT"
+              exit 0
+            fi
+            echo "Push rejected (concurrent update?), retrying..."
+          done
+          echo "::error::Could not push data branch after 3 attempts"
+          exit 1
+
+      - name: Refresh published report
+        if: steps.push-data.outputs.changed == 'true'
+        run: |
+          # Re-render GitHub Pages from the fresh registry. workflow_dispatch
+          # events are exempt from GITHUB_TOKEN's no-recursion rule.
+          gh workflow run publish.yml --ref main \
+            && echo "Dispatched Publish on main" \
+            || echo "::warning::Could not dispatch Publish (report refreshes on next push/dispatch)"
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
