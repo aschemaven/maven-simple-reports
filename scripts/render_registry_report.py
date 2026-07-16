@@ -36,7 +36,7 @@ def esc(x): return html.escape(str(x if x is not None else ''))
 for f in FINAL:
     f['_sig'] = f.get('live_signal') or 'none'
     f['_runtime'] = f.get('live_version') or 'none'
-    f['_build'] = f.get('build') or 'none'
+    f['_build'] = (f.get('build') or 'NONE').upper()
 
 confirmed = [f for f in FINAL if f.get('live_signal')]
 active_n = sum(1 for f in FINAL if f['state'] == 'active')
@@ -59,7 +59,7 @@ build_c = Counter(f['_build'] for f in FINAL)
 
 BC = {'SUCCESS':'#2a7','FAILURE':'#c33','STARTUP_FAILURE':'#c33','TIMED_OUT':'#c33','AMBIGUOUS':'#a80',
       'ACTION_REQUIRED':'#a80','SKIPPED':'#888','CANCELLED':'#888','IN_PROGRESS':'#39c',
-      'QUEUED':'#39c','none':'#bbb','UNKNOWN':'#bbb','NEUTRAL':'#888'}
+      'QUEUED':'#39c','NONE':'#bbb','UNKNOWN':'#bbb','NEUTRAL':'#888'}
 SC = {'active':'#2a7','archived':'#a80','gone':'#c33'}
 
 def checks(cls, counter, order=None):
@@ -77,8 +77,8 @@ rows = []
 for f in sorted(FINAL, key=lambda x: (x.get('live_signal') is None, -int(x.get('stars') or 0))):
     bcol = BC.get(f['_build'], '#888')
     btitle = f" title=\"{esc(f.get('build_workflow'))}\"" if f.get('build_workflow') else ''
-    build_cell = (f"<a href='{esc(f.get('build_url'))}' target=_blank rel=noreferrer style='color:{bcol}'{btitle}>{esc(f.get('build'))}</a>"
-                  if f.get('build_url') else f"<span style='color:{bcol}'{btitle}>{esc(f.get('build') or '')}</span>")
+    build_cell = (f"<a href='{esc(f.get('build_url'))}' target=_blank rel=noreferrer style='color:{bcol}'{btitle}>{esc(f['_build'])}</a>"
+                  if f.get('build_url') else f"<span style='color:{bcol}'{btitle}>{esc(f['_build'])}</span>")
     src = f.get('source') or ''
     srctag = 'root' if src == 'root' else ('nested' if src.startswith('nested') else '')
     dark = ''
