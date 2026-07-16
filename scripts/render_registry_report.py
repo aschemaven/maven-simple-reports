@@ -27,7 +27,10 @@ from pathlib import Path
 
 IN = Path(sys.argv[1] if len(sys.argv) > 1 else "data/maven4-registry.json")
 OUT = Path(sys.argv[2] if len(sys.argv) > 2 else "public/maven4-adoption.html")
-FINAL = json.loads(IN.read_text())
+_raw = json.loads(IN.read_text())
+# schema 1 registry object, or the legacy bare list
+FINAL = _raw['repos'] if isinstance(_raw, dict) else _raw
+recon = _raw.get('reconciliation') if isinstance(_raw, dict) else None
 def esc(x): return html.escape(str(x if x is not None else ''))
 
 for f in FINAL:
@@ -67,12 +70,6 @@ def checks(cls, counter, order=None):
         out.append(f"<label><input type=checkbox class='f-{cls}' value=\"{esc(k)}\" onchange=flt()> "
                    f"{esc(k)} <span class=ct>{counter[k]}</span></label>")
     return "".join(out)
-
-# adoption_date / last_checked are optional (added by the registry pipeline)
-recon = None
-for f in FINAL:
-    if isinstance(f, dict) and f.get('_recon'):
-        recon = f['_recon']; break
 
 now = datetime.datetime.now(datetime.timezone.utc).strftime('%Y-%m-%d %H:%M UTC')
 

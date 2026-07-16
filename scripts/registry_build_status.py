@@ -14,9 +14,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-"""Re-examine the Last Build status for each alive repo in the registry.
+"""Build-status stage of the Maven 4 adoption registry pipeline.
 
-This is the build-status step of the registry re-examination (Job B).
 "Last Build" means: the most recent COMPLETED run, on the DEFAULT BRANCH,
 of a workflow whose file actually invokes Maven (mvn/mvnw or setup-java).
 
@@ -26,43 +25,37 @@ dynamic "maven in /." update runs match "maven" without being a build.
 Dynamic workflows (path dynamic/...) have no file and are skipped, which
 excludes Dependabot updaters automatically.
 
-Usage: registry_build_status.py <registry.json> [<registry.json out>]
-"""
-import json, re, subprocess, sys
-from concurrent.futures import ThreadPoolExecutor
-from collections import Counter
-from pathlib import Path
+Several Maven workflows with differing decisive results -> AMBIGUOUS,
+linking to the repo's Actions view (we cannot tell which workflow is the
+Maven-4-relevant one). CANCELLED/SKIPPED runs neither confirm nor
+contradict a result, so they do not break agreement.
 
-IN = Path(sys.argv[1])
-OUT = Path(sys.argv[2]) if len(sys.argv) > 2 else IN
+--max-checks N staggers work for the frequent incremental job (Job B):
+only the N stalest entries (by build_checked) are refreshed per run.
+
+Usage: registry_build_status.py <registry.json> [--max-checks N]
+"""
+import argparse
+import sys
+import re
+from collections import Counter
+from concurrent.futures import ThreadPoolExecutor
+
+from registry_lib import gh, load_registry, save_registry, now_iso
+
 # A workflow is a Maven workflow if its file invokes mvn/mvnw or sets up Java.
 MAVEN_CMD = re.compile(r'\bmvnw?\b|actions/setup-java', re.I)
-MAX_WORKFLOWS = 10  # probe at most this many workflow files per repo
-
-
-def gh(endpoint, raw=False):
-    cmd = ['gh', 'api', endpoint]
-    if raw:
-        cmd += ['-H', 'Accept: application/vnd.github.raw']
-    for attempt in range(4):
-        try:
-            r = subprocess.run(cmd, capture_output=True, text=True, check=True)
-            return 'ok', (r.stdout if raw else json.loads(r.stdout))
-        except subprocess.CalledProcessError as e:
-            err = e.stderr or ''
-            if '404' in err:
-                return '404', None
-            if '403' in err or '429' in err or 'rate limit' in err.lower():
-                import time; time.sleep(15 * (attempt + 1)); continue
-            return 'error', None
-        except json.JSONDecodeError:
-            return 'error', None
-    return 'error', None
+MAX_WORKFLOWS = 10   # probe at most this many workflow files per repo
+DECISIVE = {'SUCCESS', 'FAILURE', 'STARTUP_FAILURE', 'TIMED_OUT',
+            'ACTION_REQUIRED'}
 
 
 def build_status(f):
-    f['build'] = 'NONE'; f['build_url'] = ''; f.pop('build_workflow', None)
-    if f['state'] == 'gone':
+    f['build'] = 'NONE'
+    f['build_url'] = ''
+    f.pop('build_workflow', None)
+    f['build_checked'] = now_iso()
+    if f.get('state') == 'gone':
         f['build'] = 'none'
         return f
     full = f.get('current_full_name') or f['repo']
@@ -96,11 +89,11 @@ def build_status(f):
     if not latest:
         return f
 
-    # Only decisive outcomes determine (dis)agreement — a CANCELLED or
-    # SKIPPED run neither confirms nor contradicts a green build.
-    DECISIVE = {'SUCCESS', 'FAILURE', 'STARTUP_FAILURE', 'TIMED_OUT', 'ACTION_REQUIRED'}
     def concl(r):
         return (r.get('conclusion') or 'UNKNOWN').upper()
+
+    # Only decisive outcomes determine (dis)agreement — a CANCELLED or
+    # SKIPPED run neither confirms nor contradicts a green build.
     decisive = [r for r in latest if concl(r) in DECISIVE]
     pool = decisive or latest
     conclusions = {concl(r) for r in pool}
@@ -121,23 +114,41 @@ def build_status(f):
         f['build_url'] = f"https://github.com/{full}/actions"
         counts = Counter(concl(r) for r in latest)
         f['build_workflow'] = (f"{len(latest)} Maven workflows: "
-                               + ", ".join(f"{v} {k}" for k, v in counts.most_common()))
+                               + ", ".join(f"{v} {k}"
+                                           for k, v in counts.most_common()))
     return f
 
 
-data = json.loads(IN.read_text())
-alive = [f for f in data if f['state'] != 'gone']
-print(f"Build status for {len(alive)} alive repos "
-      f"(Maven-invoking workflows, default branch, completed)...", file=sys.stderr)
-with ThreadPoolExecutor(max_workers=8) as ex:
-    for i, _ in enumerate(ex.map(build_status, alive), 1):
-        if i % 50 == 0:
-            print(f"  {i}/{len(alive)}", file=sys.stderr)
-for f in data:
-    f.setdefault('build', 'none'); f.setdefault('build_url', '')
+def main():
+    ap = argparse.ArgumentParser()
+    ap.add_argument('registry')
+    ap.add_argument('--max-checks', type=int, default=0,
+                    help='refresh only the N stalest entries (0 = all)')
+    args = ap.parse_args()
 
-OUT.write_text(json.dumps(data, indent=1))
-confirmed = [f for f in data if f.get('live_signal')]
-print("\n=== Last Build among confirmed adopters (Maven workflows only) ===")
-for k, v in Counter(f['build'] for f in confirmed).most_common():
-    print(f"  {v:4d}  {k}")
+    reg = load_registry(args.registry)
+    entries = reg['repos']
+    todo = [e for e in entries if e.get('state') != 'gone']
+    todo.sort(key=lambda e: e.get('build_checked') or '')
+    if args.max_checks > 0:
+        todo = todo[:args.max_checks]
+    print(f"Build status for {len(todo)} of {len(entries)} entries "
+          f"(Maven-invoking workflows, default branch, completed)...",
+          file=sys.stderr)
+    with ThreadPoolExecutor(max_workers=8) as ex:
+        for i, _ in enumerate(ex.map(build_status, todo), 1):
+            if i % 50 == 0:
+                print(f"  {i}/{len(todo)}", file=sys.stderr)
+    for e in entries:
+        e.setdefault('build', 'none')
+        e.setdefault('build_url', '')
+
+    save_registry(args.registry, reg)
+    confirmed = [e for e in entries if e.get('live_signal')]
+    print("\n=== Last Build among confirmed adopters ===")
+    for k, v in Counter(e['build'] for e in confirmed).most_common():
+        print(f"  {v:4d}  {k}")
+
+
+if __name__ == '__main__':
+    main()
