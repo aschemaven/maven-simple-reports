@@ -4,7 +4,7 @@ name: Maven 4 Registry
 #
 #   trigger                     | mode        | discovery                  | re-examination
 #   ----                        | ----        | ---------                  | --------------
-#   cron '13 */2 * * *' (Job B) | incremental | sort=indexed, early-stop   | stalest slice
+#   cron '13 6,18 * * *' (Job B)| incremental | sort=indexed, early-stop   | stalest slice
 #   cron '43 5 * * *'   (Job A) | full        | full sweep + reconciliation| everything
 #   workflow_dispatch           | choice      | per input                  | per input
 #
@@ -21,7 +21,7 @@ name: Maven 4 Registry
 
 on:
   schedule:
-    - cron: '13 */2 * * *'   # Job B: incremental
+    - cron: '13 6,18 * * *'  # Job B: incremental (2x/day)
     - cron: '43 5 * * *'     # Job A: full sweep + reconciliation
   workflow_dispatch:
     inputs:
@@ -97,7 +97,7 @@ jobs:
             # stalest slice only: keeps the 2-hourly run inside the API
             # budget; every entry still gets re-examined a few times a day
             python scripts/registry_reexamine.py data/maven4-registry.json \
-              --max-checks 100
+              --max-checks 150
           fi
 
       - name: Refresh build status
@@ -106,7 +106,7 @@ jobs:
             python scripts/registry_build_status.py data/maven4-registry.json
           else
             python scripts/registry_build_status.py data/maven4-registry.json \
-              --max-checks 60
+              --max-checks 100
           fi
 
       - name: Append adoption history point
@@ -129,6 +129,9 @@ jobs:
               git remote add origin "$REPO_URL"
               git checkout -q --orphan data
             fi
+            DELTA=$(python "$GITHUB_WORKSPACE/scripts/registry_delta.py" \
+              maven4-registry.json "$GITHUB_WORKSPACE/data/maven4-registry.json" \
+              2>/dev/null || echo "delta unavailable")
             cp "$GITHUB_WORKSPACE/data/maven4-registry.json" .
             cp "$GITHUB_WORKSPACE/data/maven4-adoption-history.json" .
             git add maven4-registry.json maven4-adoption-history.json
@@ -139,7 +142,7 @@ jobs:
             fi
             git -c user.name='github-actions[bot]' \
                 -c user.email='41898282+github-actions[bot]@users.noreply.github.com' \
-                commit -q -m "Update Maven 4 registry (${{ steps.mode.outputs.mode }}, $(date -u +%Y-%m-%dT%H:%MZ))"
+                commit -q -m "Update Maven 4 registry (${{ steps.mode.outputs.mode }}, $(date -u +%Y-%m-%dT%H:%MZ)): $DELTA"
             if git push origin HEAD:data; then
               echo "changed=true" >> "$GITHUB_OUTPUT"
               exit 0
