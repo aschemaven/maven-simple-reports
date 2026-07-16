@@ -1,38 +1,29 @@
 name: Publish
 
-# Single pipeline that handles every build/deploy path:
+# Site build/deploy pipeline:
 #
-#   trigger             | SPA build          | Maven 4 scan  | deploy target
-#   ----                | ---------          | ------------- | -------------
-#   push main           | cached (iff web/)  | iff scripts/  | GitHub Pages
-#   push branch         | cached (iff web/)  | iff scripts/  | Netlify preview
-#   pull_request        | cached (iff web/)  | iff scripts/  | Netlify preview
-#   schedule (06:00)    | cached             | yes           | GitHub Pages
-#   workflow_dispatch   | cached             | yes           | Pages (main) / Netlify (branch)
+#   trigger             | SPA build          | deploy target
+#   ----                | ---------          | -------------
+#   push main           | cached (iff web/)  | GitHub Pages
+#   push branch         | cached (iff web/)  | Netlify preview
+#   pull_request        | cached (iff web/)  | Netlify preview
+#   workflow_dispatch   | cached             | Pages (main) / Netlify (branch)
 #
 # The build-spa job always runs but restores web/dist from the Actions
 # cache (key = hash of web/**); it only rebuilds on a cache miss (web/
-# changed, or the cache was evicted). So every deploy gets a ready SPA
-# without depending on any artifact retention window. The Maven 4 report
-# is regenerated on schedule/dispatch and otherwise falls back to the
-# latest successful run's artifact (renewed daily, so it never expires).
+# changed, or the cache was evicted). The Maven 4 adoption report is
+# rendered from the registry on the data branch, which the Maven 4
+# Registry workflow (registry.yml) keeps fresh — that workflow dispatches
+# this one after each data change, so no cron is needed here.
 
 on:
   push:
     branches: ['**']
   pull_request:
-  schedule:
-    - cron: '0 6 * * *'
   workflow_dispatch:
-    inputs:
-      no_cache:
-        description: 'Disable API response cache (fetch fresh data from GitHub)'
-        required: false
-        default: false
-        type: boolean
 
 permissions:
-  contents: write       # push history to data branch
+  contents: read
   pages: write          # deploy to Pages
   id-token: write       # OIDC for actions/deploy-pages
   pull-requests: write  # Netlify bot PR comment
@@ -52,15 +43,9 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       deploy-target: ${{ steps.ctx.outputs.deploy-target }}
-      need-maven4-scan: ${{ steps.ctx.outputs.need-maven4-scan }}
       is-main: ${{ steps.ctx.outputs.is-main }}
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-
-      - name: Resolve deploy target and rebuild needs
+      - name: Resolve deploy target
         id: ctx
         run: |
           set -e
@@ -73,9 +58,6 @@ jobs:
           # Decide where the run deploys.
           TARGET=none
           case "$EVENT" in
-            schedule)
-              TARGET=pages
-              ;;
             push|workflow_dispatch)
               if [ "$IS_MAIN" = "true" ]; then
                 TARGET=pages
@@ -88,40 +70,9 @@ jobs:
               ;;
           esac
 
-          # Decide whether to rescan the Maven 4 report. Schedule/dispatch
-          # always rescan (the whole point of those triggers); a push
-          # rescans only when the scanner or its config changed. The SPA is
-          # not decided here — build-spa always runs and lets the Actions
-          # cache decide between restore and rebuild.
-          NEED_MAVEN4=false
-          if [ "$EVENT" = "schedule" ] || [ "$EVENT" = "workflow_dispatch" ]; then
-            NEED_MAVEN4=true
-          fi
-
-          if [ "$EVENT" = "pull_request" ] || [ "$EVENT" = "push" ]; then
-            if [ "$EVENT" = "pull_request" ]; then
-              BASE_BRANCH="${{ github.event.pull_request.base.ref }}"
-              git fetch origin "$BASE_BRANCH" --depth=1 || true
-              BASE_REF="origin/$BASE_BRANCH"
-            elif [ "$IS_MAIN" = "true" ]; then
-              BASE_REF="HEAD~1"
-            else
-              git fetch origin main --depth=1 || true
-              BASE_REF="origin/main"
-            fi
-            CHANGED=$(git diff --name-only "$BASE_REF...HEAD" 2>/dev/null || true)
-            echo "Changed files vs $BASE_REF:"
-            echo "$CHANGED"
-
-            if echo "$CHANGED" | grep -qE '^(scripts/(export_maven4_adoption|migrate_history_to_federated)\.py|\.gh-configuration\.yaml)$'; then
-              NEED_MAVEN4=true
-            fi
-          fi
-
           echo "is-main=$IS_MAIN" >> "$GITHUB_OUTPUT"
           echo "deploy-target=$TARGET" >> "$GITHUB_OUTPUT"
-          echo "need-maven4-scan=$NEED_MAVEN4" >> "$GITHUB_OUTPUT"
-          echo "Resolved: target=$TARGET need-maven4=$NEED_MAVEN4 is-main=$IS_MAIN"
+          echo "Resolved: target=$TARGET is-main=$IS_MAIN"
 
   build-spa:
     runs-on: ubuntu-latest
@@ -164,115 +115,6 @@ jobs:
         with:
           name: spa-dist
           path: web/dist/
-          retention-days: 90
-          if-no-files-found: error
-
-  scan-maven4:
-    runs-on: ubuntu-latest
-    needs: context
-    if: needs.context.outputs.need-maven4-scan == 'true'
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      # Restore adoption data from the data branch:
-      #   - per-repo snapshot for every trigger (previews use it as a fast
-      #     read-only path; only main pushes write it back)
-      #   - time series history only on main paths (previews would otherwise
-      #     pollute the daily cadence)
-      # First production run will see no branch yet and start from scratch.
-      - name: Restore adoption data from data branch
-        run: |
-          mkdir -p data
-          if git ls-remote --exit-code --heads origin data >/dev/null 2>&1; then
-            git fetch origin data --depth=1
-            git show FETCH_HEAD:maven4-repos-snapshot.json > data/maven4-repos-snapshot.json 2>/dev/null \
-              && echo "Restored snapshot ($(wc -c < data/maven4-repos-snapshot.json) bytes)" \
-              || echo "No prior snapshot on data branch yet"
-            if [ "${{ needs.context.outputs.is-main }}" = "true" ]; then
-              git show FETCH_HEAD:maven4-adoption-history.json > data/maven4-adoption-history.json 2>/dev/null \
-                && echo "Restored history ($(wc -c < data/maven4-adoption-history.json) bytes)" \
-                || echo "No prior history on data branch yet"
-            fi
-          else
-            echo "data branch does not exist yet — starting from scratch"
-          fi
-
-      - name: Cache GitHub API responses
-        if: ${{ inputs.no_cache != true }}
-        uses: actions/cache@v4
-        with:
-          path: cache/gh_api_cache.json
-          key: maven4-gh-cache-${{ github.run_id }}
-          restore-keys: |
-            maven4-gh-cache-
-
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.x'
-
-      - name: Generate Maven 4 adoption report
-        run: |
-          mkdir -p cache data public
-          FLAGS=""
-          if [ "${{ inputs.no_cache }}" = "true" ]; then
-            FLAGS="$FLAGS --no-cache"
-          fi
-          # Fast-path via the per-repo snapshot for every trigger EXCEPT
-          # the daily scheduled scan (which is the canonical full refresh)
-          # and explicit no_cache dispatches. Previews don't write the
-          # snapshot back (so they don't steal it from main).
-          if [ "${{ github.event_name }}" != "schedule" ] && [ "${{ inputs.no_cache }}" != "true" ]; then
-            FLAGS="$FLAGS --use-snapshot"
-          fi
-          if [ "${{ needs.context.outputs.is-main }}" != "true" ]; then
-            FLAGS="$FLAGS --no-history --no-snapshot-write"
-          fi
-          scripts/export_maven4_adoption.py \
-            --format asciidoc \
-            --output public/maven4-adoption.adoc \
-            $FLAGS
-
-      - name: Push updated adoption data to data branch
-        if: needs.context.outputs.is-main == 'true'
-        run: |
-          files=()
-          [ -f data/maven4-adoption-history.json ] && files+=(maven4-adoption-history.json)
-          [ -f data/maven4-repos-snapshot.json ]  && files+=(maven4-repos-snapshot.json)
-          if [ ${#files[@]} -eq 0 ]; then
-            echo "No data files to push"
-            exit 0
-          fi
-          WORK=$(mktemp -d)
-          cd "$WORK"
-          REPO_URL="https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
-          if git clone --depth=1 --branch data --single-branch "$REPO_URL" . 2>/dev/null; then
-            echo "Cloned existing data branch"
-          else
-            echo "data branch does not exist; initializing orphan"
-            git init -q
-            git remote add origin "$REPO_URL"
-            git checkout --orphan data
-          fi
-          for f in "${files[@]}"; do
-            cp "$GITHUB_WORKSPACE/data/$f" .
-            git add "$f"
-          done
-          if git diff --staged --quiet; then
-            echo "No data changes — nothing to commit"
-            exit 0
-          fi
-          git -c user.name='github-actions[bot]' \
-              -c user.email='41898282+github-actions[bot]@users.noreply.github.com' \
-              commit -m "Update Maven 4 adoption data ($(date -u +%Y-%m-%d))"
-          git push origin HEAD:data
-
-      - name: Upload Maven 4 report artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: maven4-report
-          path: public/maven4-adoption.adoc
           retention-days: 90
           if-no-files-found: error
 
