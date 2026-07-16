@@ -151,7 +151,8 @@
   "lastknown_version": "4.0.0-rc-5",
   "renamed_to": "",
   "build": "SUCCESS",
-  "build_url": "https://github.com/AmosAidoo/akitadb/actions/runs/27448394406"
+  "build_url": "https://github.com/AmosAidoo/akitadb/actions/runs/27448394406",
+  "build_workflow": "CI"
  },
  {
   "repo": "AndreyD2003/NOVA.ing-Atencion_Medica_WS",
@@ -291,7 +292,8 @@
   "lastknown_version": "4.1.0",
   "renamed_to": "",
   "build": "SUCCESS",
-  "build_url": "https://github.com/BenSlabbert/git-version-extension/actions/runs/24692911864"
+  "build_url": "https://github.com/BenSlabbert/git-version-extension/actions/runs/20246259693",
+  "build_workflow": "Build"
  },
  {
   "repo": "BenSlabbert/vertx-dagger-bom",
@@ -305,7 +307,8 @@
   "lastknown_version": "4.0.0",
   "renamed_to": "",
   "build": "SUCCESS",
-  "build_url": "https://github.com/BenSlabbert/vertx-dagger-bom/actions/runs/29469976658"
+  "build_url": "https://github.com/BenSlabbert/vertx-dagger-bom/actions/runs/29304635831",
+  "build_workflow": "Build"
  },
  {
   "repo": "BenSlabbert/vertx-dagger-web",
@@ -319,7 +322,8 @@
   "lastknown_version": "4.1.0",
   "renamed_to": "",
   "build": "SUCCESS",
-  "build_url": "https://github.com/BenSlabbert/vertx-dagger-web/actions/runs/29457724721"
+  "build_url": "https://github.com/BenSlabbert/vertx-dagger-web/actions/runs/20488014715",
+  "build_workflow": "2 Maven workflows, all agree"
  },
  {
   "repo": "Bexerlmao/XCTO",
@@ -361,7 +365,8 @@
   "lastknown_version": "4.1.0",
   "renamed_to": "",
   "build": "SUCCESS",
-  "build_url": "https://github.com/CodeByNajib/billigtshirt-webshop/actions/runs/20817049194"
+  "build_url": "https://github.com/CodeByNajib/billigtshirt-webshop/actions/runs/20817037860",
+  "build_workflow": "CI-Pipeline - Billig T-Shirt"
  },
  {
   "repo": "CodeNameSJ/AirlineReservationSystem",
@@ -375,7 +380,8 @@
   "lastknown_version": "4.0.0-rc-5",
   "renamed_to": "",
   "build": "SUCCESS",
-  "build_url": "https://github.com/CodeNameSJ/AirlineReservationSystem/actions/runs/29184638448"
+  "build_url": "https://github.com/CodeNameSJ/AirlineReservationSystem/actions/runs/24319450099",
+  "build_workflow": "2 Maven workflows, all agree"
  },
  {
   "repo": "Codzs-Architecture/java-admin-service",
@@ -556,8 +562,8 @@
   "lastknown_signal": "https://github.com/DeybyHiguita/pruebasSoftwareJavaProyectoBanco[DeybyHiguita/pruebasSoftwareJavaProyectoBanco^]",
   "lastknown_version": "0",
   "renamed_to": "",
-  "build": "SUCCESS",
-  "build_url": "https://github.com/DeshanDV1003/DEA-Inventory-Management-System/actions/runs/22821693104"
+  "build": "NONE",
+  "build_url": ""
  },
  {
   "repo": "DeybyHiguita/pruebasSoftwareJavaProyectoBanco",
@@ -640,8 +646,8 @@
   "lastknown_signal": "Wrapper",
   "lastknown_version": "4.0.0-rc-5",
   "renamed_to": "",
-  "build": "FAILURE",
-  "build_url": "https://github.com/Entity-Assist/EntityAssistReactive/actions/runs/28694194643"
+  "build": "NONE",
+  "build_url": ""
  },
  {
   "repo": "FelipeRomeroDUOC/DSY1103-011V-Api-Pedidos",
@@ -724,8 +730,9 @@
   "lastknown_signal": "GH Action",
   "lastknown_version": "4.0.0",
   "renamed_to": "",
-  "build": "SUCCESS",
-  "build_url": "https://github.com/GuicedEE/DevelopmentSuite/actions/runs/29187117770"
+  "build": "FAILURE",
+  "build_url": "https://github.com/GuicedEE/DevelopmentSuite/actions/runs/25277114402",
+  "build_workflow": "3 Maven workflows, all agree"
  },
  {
   "repo": "GuicedEE/Workflows",
@@ -738,8 +745,9 @@
   "lastknown_signal": "GH Action",
   "lastknown_version": "",
   "renamed_to": "",
-  "build": "SUCCESS",
-  "build_url": "https://github.com/GuicedEE/Workflows/actions/runs/29304178810"
+  "build": "FAILURE",
+  "build_url": "https://github.com/GuicedEE/Workflows/actions/runs/22636766469",
+  "build_workflow": "2 Maven workflows, all agree"
  },
  {
   "repo": "GuilhermeLuan/junit-teste-de-software",
@@ -753,7 +761,8 @@
   "lastknown_version": "4.0.0-rc-5",
   "renamed_to": "",
   "build": "SUCCESS",
-  "build_url": "https://github.com/GuilhermeLuan/junit-teste-de-software/actions/runs/23745088088"
+  "build_url": "https://github.com/GuilhermeLuan/junit-teste-de-software/actions/runs/23745088088",
+  "build_workflow": "Test Pipeline"
  },
  {
   "repo": "Hariharan15102005/resume-builder-backend",
@@ -781,7 +790,8 @@
   "lastknown_version": "4.0.0-rc-5",
   "renamed_to": "",
   "build": "FAILURE",
-  "build_url": "https://github.com/HarshaTalatala/DevPulseX-Backend/actions/runs/28861847360"
+  "build_url": "https://github.com/HarshaTalatala/DevPulseX-Backend/actions/runs/28861847360",
+  "build_workflow": "Backend CI"
  },
  {
   "repo": "HesychastCs/fabrica_2026S1",
@@ -795,7 +805,8 @@
   "lastknown_version": "0",
   "renamed_to": "",
   "build": "FAILURE",
-  "build_url": "https://github.com/HesychastCs/fabrica_2026S1/actions/runs/26965446026"
+  "build_url": "https://github.com/HesychastCs/fabrica_2026S1/actions/runs/26965446026",
+  "build_workflow": "CI/CD con Render"
  },
  {
   "repo": "HomeOfTheWizard/spring-bridge-maven",
@@ -878,8 +889,8 @@
   "lastknown_signal": "Wrapper",
   "lastknown_version": "4.1.0",
   "renamed_to": "",
-  "build": "FAILURE",
-  "build_url": "https://github.com/IKE-Network/ike-tooling/actions/runs/24012981987"
+  "build": "NONE",
+  "build_url": ""
  },
  {
   "repo": "IgnacioSantanaEN/Proyecto-FullStack-III",
@@ -892,8 +903,8 @@
   "lastknown_signal": "https://github.com/Pedro-areis/web-wallet[Pedro-areis/web-wallet^]",
   "lastknown_version": "1",
   "renamed_to": "",
-  "build": "SUCCESS",
-  "build_url": "https://github.com/IgnacioSantanaEN/Proyecto-FullStack-III/actions/runs/27798918598"
+  "build": "NONE",
+  "build_url": ""
  },
  {
   "repo": "JCrete/jcrete2024",
@@ -1005,7 +1016,8 @@
   "lastknown_version": "4.0.0",
   "renamed_to": "",
   "build": "SUCCESS",
-  "build_url": "https://github.com/Madzi/branch-check-maven-plugin/actions/runs/18477273427"
+  "build_url": "https://github.com/Madzi/branch-check-maven-plugin/actions/runs/18477273427",
+  "build_workflow": "2 Maven workflows, all agree"
  },
  {
   "repo": "Manas0110-01/Recallo",
@@ -1033,7 +1045,8 @@
   "lastknown_version": "4.1.0 (POM model)",
   "renamed_to": "",
   "build": "SUCCESS",
-  "build_url": "https://github.com/MorphiaOrg/morphia/actions/runs/29465702008"
+  "build_url": "https://github.com/MorphiaOrg/morphia/actions/runs/28684267119",
+  "build_workflow": "Build Project"
  },
  {
   "repo": "MukundP13/QwApp",
@@ -1102,8 +1115,8 @@
   "lastknown_signal": "Wrapper",
   "lastknown_version": "4.0.0-rc-5",
   "renamed_to": "",
-  "build": "SUCCESS",
-  "build_url": "https://github.com/Nom-Nom-Now/nom-nom-now-backend/actions/runs/26821031636"
+  "build": "NONE",
+  "build_url": ""
  },
  {
   "repo": "OlivierHermans/gh-actions",
@@ -1131,7 +1144,8 @@
   "lastknown_version": "4.0.0",
   "renamed_to": "",
   "build": "SUCCESS",
-  "build_url": "https://github.com/PAEC07/Kino_Management/actions/runs/22397694670"
+  "build_url": "https://github.com/PAEC07/Kino_Management/actions/runs/22397694670",
+  "build_workflow": "Java CI with Maven"
  },
  {
   "repo": "Pakisan/jarazzo",
@@ -1172,8 +1186,9 @@
   "lastknown_signal": "POM 4.1.0, Wrapper",
   "lastknown_version": "4.1.0",
   "renamed_to": "",
-  "build": "SUCCESS",
-  "build_url": "https://github.com/Pi4J/pi4j/actions/runs/29407618628"
+  "build": "AMBIGUOUS",
+  "build_url": "https://github.com/Pi4J/pi4j/actions",
+  "build_workflow": "2 Maven workflows: 1 FAILURE, 1 SUCCESS"
  },
  {
   "repo": "PieByter/springboot-healthcare-api",
@@ -1228,8 +1243,8 @@
   "lastknown_signal": "POM 4.1.0",
   "lastknown_version": "4.1.0",
   "renamed_to": "",
-  "build": "FAILURE",
-  "build_url": "https://github.com/RalfNaujokat/xui/actions/runs/17953371897"
+  "build": "NONE",
+  "build_url": ""
  },
  {
   "repo": "Ranjith-2005289/PeSocial",
@@ -1256,8 +1271,8 @@
   "lastknown_signal": "Wrapper",
   "lastknown_version": "4.0.0-rc-5",
   "renamed_to": "",
-  "build": "FAILURE",
-  "build_url": "https://github.com/RobertMeissner/JavaLearning/actions/runs/23591900082"
+  "build": "NONE",
+  "build_url": ""
  },
  {
   "repo": "Roman-Anikin/java-explore-with-me",
@@ -1313,7 +1328,8 @@
   "lastknown_version": "4.1.0",
   "renamed_to": "",
   "build": "SUCCESS",
-  "build_url": "https://github.com/SAP/olingo-jpa-processor-v4/actions/runs/27621461131"
+  "build_url": "https://github.com/SAP/olingo-jpa-processor-v4/actions/runs/27064804061",
+  "build_workflow": "4 Maven workflows, all agree"
  },
  {
   "repo": "SUMIT74184/WolfDire-Central-Infra",
@@ -1355,7 +1371,8 @@
   "lastknown_version": "0",
   "renamed_to": "",
   "build": "FAILURE",
-  "build_url": "https://github.com/SandeebAdhikari/taskflow/actions/runs/27139320137"
+  "build_url": "https://github.com/SandeebAdhikari/taskflow/actions/runs/27139320137",
+  "build_workflow": "CI"
  },
  {
   "repo": "Shashika12917/it3030-paf-2026-smart-campus",
@@ -1424,8 +1441,8 @@
   "lastknown_signal": "https://github.com/mgzu/dubbo-samples[mgzu/dubbo-samples^]",
   "lastknown_version": "4",
   "renamed_to": "",
-  "build": "SUCCESS",
-  "build_url": "https://github.com/Shubhambhagat3226/github-activity-cli/actions/runs/23499413312"
+  "build": "NONE",
+  "build_url": ""
  },
  {
   "repo": "Siddd-hrr/QPrint-Extension",
@@ -1439,7 +1456,8 @@
   "lastknown_version": "4.0.0-rc-5",
   "renamed_to": "",
   "build": "SUCCESS",
-  "build_url": "https://github.com/Siddd-hrr/QPrint-Extension/actions/runs/23937163742"
+  "build_url": "https://github.com/Siddd-hrr/QPrint-Extension/actions/runs/23937163742",
+  "build_workflow": "CI"
  },
  {
   "repo": "Siomai0-hi/CafeWeb",
@@ -1467,7 +1485,8 @@
   "lastknown_version": "4.0.0",
   "renamed_to": "",
   "build": "SUCCESS",
-  "build_url": "https://github.com/Stephen-Agyemang/Zork-v2/actions/runs/29444898665"
+  "build_url": "https://github.com/Stephen-Agyemang/Zork-v2/actions/runs/29444898665",
+  "build_workflow": "CI"
  },
  {
   "repo": "SylvieHoareau/livranoo",
@@ -1508,8 +1527,8 @@
   "lastknown_signal": null,
   "lastknown_version": null,
   "renamed_to": "",
-  "build": "SUCCESS",
-  "build_url": "https://github.com/TheSphynxoid/Esprit-PIDEV-4SE1-2526-EspritMarket/actions/runs/27095549421"
+  "build": "NONE",
+  "build_url": ""
  },
  {
   "repo": "Thejuampi/training-coach",
@@ -1523,7 +1542,8 @@
   "lastknown_version": "4.0.0",
   "renamed_to": "",
   "build": "FAILURE",
-  "build_url": "https://github.com/Thejuampi/training-coach/actions/runs/21439201274"
+  "build_url": "https://github.com/Thejuampi/training-coach/actions/runs/21439201274",
+  "build_workflow": "CI"
  },
  {
   "repo": "Thiez703/PointTrack_BE",
@@ -1649,7 +1669,8 @@
   "lastknown_version": "4.0.0",
   "renamed_to": "",
   "build": "SUCCESS",
-  "build_url": "https://github.com/Workday/spin.build/actions/runs/29491035185"
+  "build_url": "https://github.com/Workday/spin.build/actions/runs/29491035185",
+  "build_workflow": "2 Maven workflows, all agree"
  },
  {
   "repo": "XLaiHuy/Back-spring-NCKH",
@@ -1788,8 +1809,8 @@
   "lastknown_signal": "Wrapper",
   "lastknown_version": "4.0.0",
   "renamed_to": "",
-  "build": "SUCCESS",
-  "build_url": "https://github.com/adaamortiiz/Somax/actions/runs/25997774490"
+  "build": "NONE",
+  "build_url": ""
  },
  {
   "repo": "adityasagar1125-lgtm/iwt-demo",
@@ -1887,7 +1908,8 @@
   "lastknown_version": "4.0.0",
   "renamed_to": "",
   "build": "SUCCESS",
-  "build_url": "https://github.com/alefHugo03/Projeto_Adega_UMC/actions/runs/27446403818"
+  "build_url": "https://github.com/alefHugo03/Projeto_Adega_UMC/actions/runs/27446403818",
+  "build_workflow": "CI"
  },
  {
   "repo": "alexdutescu/movies-app",
@@ -1998,8 +2020,8 @@
   "lastknown_signal": "https://github.com/osscameroon/js-generator[osscameroon/js-generator^]",
   "lastknown_version": "22",
   "renamed_to": "",
-  "build": "SUCCESS",
-  "build_url": "https://github.com/apache/maven-hocon-extension/actions/runs/24020613189"
+  "build": "NONE",
+  "build_url": ""
  },
  {
   "repo": "apache/maven-xinclude-extension",
@@ -2012,8 +2034,8 @@
   "lastknown_signal": "POM 4.1.0, Wrapper",
   "lastknown_version": "4.1.0",
   "renamed_to": "",
-  "build": "SUCCESS",
-  "build_url": "https://github.com/apache/maven-xinclude-extension/actions/runs/29494777797"
+  "build": "NONE",
+  "build_url": ""
  },
  {
   "repo": "apache/plc4x",
@@ -2026,8 +2048,9 @@
   "lastknown_signal": null,
   "lastknown_version": null,
   "renamed_to": "",
-  "build": "FAILURE",
-  "build_url": "https://github.com/apache/plc4x/actions/runs/29489834910"
+  "build": "AMBIGUOUS",
+  "build_url": "https://github.com/apache/plc4x/actions",
+  "build_workflow": "4 Maven workflows: 3 SUCCESS, 1 FAILURE"
  },
  {
   "repo": "apache/plc4x-build-tools",
@@ -2040,8 +2063,9 @@
   "lastknown_signal": "https://github.com/ikmdev/komet[ikmdev/komet^]",
   "lastknown_version": "19",
   "renamed_to": "",
-  "build": "FAILURE",
-  "build_url": "https://github.com/apache/plc4x-build-tools/actions/runs/29445616676"
+  "build": "SUCCESS",
+  "build_url": "https://github.com/apache/plc4x-build-tools/actions/runs/29096217697",
+  "build_workflow": "Platform compatibility"
  },
  {
   "repo": "apache/plc4x-extras",
@@ -2055,7 +2079,8 @@
   "lastknown_version": "4.1.0",
   "renamed_to": "",
   "build": "SUCCESS",
-  "build_url": "https://github.com/apache/plc4x-extras/actions/runs/29467601452"
+  "build_url": "https://github.com/apache/plc4x-extras/actions/runs/29449527369",
+  "build_workflow": "3 Maven workflows, all agree"
  },
  {
   "repo": "apetrozzelli/jaus",
@@ -2069,7 +2094,8 @@
   "lastknown_version": "0",
   "renamed_to": "",
   "build": "SUCCESS",
-  "build_url": "https://github.com/apetrozzelli/jaus/actions/runs/26280611345"
+  "build_url": "https://github.com/apetrozzelli/jaus/actions/runs/19901076226",
+  "build_workflow": "Java CI with Maven"
  },
  {
   "repo": "apetrozzelli/truelayer-pokedex",
@@ -2083,7 +2109,8 @@
   "lastknown_version": "4.0.0",
   "renamed_to": "",
   "build": "SUCCESS",
-  "build_url": "https://github.com/apetrozzelli/truelayer-pokedex/actions/runs/24643097890"
+  "build_url": "https://github.com/apetrozzelli/truelayer-pokedex/actions/runs/21284431600",
+  "build_workflow": "Java CI with Maven"
  },
  {
   "repo": "aschemaven/maven-modular-sources-showcases",
@@ -2181,7 +2208,8 @@
   "lastknown_version": "0",
   "renamed_to": "",
   "build": "SUCCESS",
-  "build_url": "https://github.com/awnonbhowmik/LogShield/actions/runs/24612514606"
+  "build_url": "https://github.com/awnonbhowmik/LogShield/actions/runs/24612514606",
+  "build_workflow": "Backend CI"
  },
  {
   "repo": "axonivy/branding-images",
@@ -2223,7 +2251,8 @@
   "lastknown_version": "4.0.0",
   "renamed_to": "",
   "build": "SUCCESS",
-  "build_url": "https://github.com/beatngu13/playground/actions/runs/28778177755"
+  "build_url": "https://github.com/beatngu13/playground/actions/runs/28778177755",
+  "build_workflow": ".github/workflows/build.yml"
  },
  {
   "repo": "binkley/kotlin-shopping-cart",
@@ -2278,8 +2307,9 @@
   "lastknown_signal": "https://github.com/brunoborges/jlib-inspector[brunoborges/jlib-inspector^]",
   "lastknown_version": "45",
   "renamed_to": "",
-  "build": "SUCCESS",
-  "build_url": "https://github.com/bmarwell/jfmt/actions/runs/29458846589"
+  "build": "AMBIGUOUS",
+  "build_url": "https://github.com/bmarwell/jfmt/actions",
+  "build_workflow": "4 Maven workflows: 3 SUCCESS, 1 FAILURE"
  },
  {
   "repo": "bmarwell/proximo-pitido",
@@ -2293,7 +2323,8 @@
   "lastknown_version": "0",
   "renamed_to": "",
   "build": "SUCCESS",
-  "build_url": "https://github.com/bmarwell/proximo-pitido/actions/runs/29400009596"
+  "build_url": "https://github.com/bmarwell/proximo-pitido/actions/runs/29221933723",
+  "build_workflow": "5 Maven workflows, all agree"
  },
  {
   "repo": "bones0xab/event-sourcing-cqrs-spring-axon-app",
@@ -2307,7 +2338,8 @@
   "lastknown_version": "0",
   "renamed_to": "",
   "build": "FAILURE",
-  "build_url": "https://github.com/bones0xab/event-sourcing-cqrs-spring-axon-app/actions/runs/19826425532"
+  "build_url": "https://github.com/bones0xab/event-sourcing-cqrs-spring-axon-app/actions/runs/19826425532",
+  "build_workflow": "ci-pipeline.yml"
  },
  {
   "repo": "bowbahdoe/color",
@@ -2321,7 +2353,8 @@
   "lastknown_version": "4.0.0-beta-3",
   "renamed_to": "",
   "build": "SUCCESS",
-  "build_url": "https://github.com/bowbahdoe/color/actions/runs/24293915141"
+  "build_url": "https://github.com/bowbahdoe/color/actions/runs/24293915141",
+  "build_workflow": "Tests"
  },
  {
   "repo": "bowbahdoe/color-awt",
@@ -2447,7 +2480,8 @@
   "lastknown_version": "4.0.0",
   "renamed_to": "",
   "build": "SUCCESS",
-  "build_url": "https://github.com/bowbahdoe/module_info/actions/runs/18330112011"
+  "build_url": "https://github.com/bowbahdoe/module_info/actions/runs/18330112011",
+  "build_workflow": "Tests"
  },
  {
   "repo": "bowbahdoe/ppm",
@@ -2516,8 +2550,9 @@
   "lastknown_signal": "Wrapper",
   "lastknown_version": "4.1.0",
   "renamed_to": "",
-  "build": "SUCCESS",
-  "build_url": "https://github.com/brunoborges/jlib-inspector/actions/runs/27389487890"
+  "build": "AMBIGUOUS",
+  "build_url": "https://github.com/brunoborges/jlib-inspector/actions",
+  "build_workflow": "2 Maven workflows: 1 SUCCESS, 1 FAILURE"
  },
  {
   "repo": "brunoborges/rockpaperscissors-java25",
@@ -2531,7 +2566,8 @@
   "lastknown_version": "4.0.0-rc-5",
   "renamed_to": "",
   "build": "SUCCESS",
-  "build_url": "https://github.com/brunoborges/rockpaperscissors-java25/actions/runs/19457234241"
+  "build_url": "https://github.com/brunoborges/rockpaperscissors-java25/actions/runs/19457234241",
+  "build_workflow": "CICD"
  },
  {
   "repo": "brunokarpo/subscriptions",
@@ -2601,7 +2637,8 @@
   "lastknown_version": "4.0.0-rc-5",
   "renamed_to": "",
   "build": "SUCCESS",
-  "build_url": "https://github.com/carlspring/idempotence/actions/runs/29464690699"
+  "build_url": "https://github.com/carlspring/idempotence/actions/runs/29464690699",
+  "build_workflow": "3 Maven workflows, all agree"
  },
  {
   "repo": "chosenking1/MautonLaundryJava",
@@ -2643,7 +2680,8 @@
   "lastknown_version": "4",
   "renamed_to": "",
   "build": "SUCCESS",
-  "build_url": "https://github.com/conorheffron/hl7-hapi-fhir-obs-api/actions/runs/29379478734"
+  "build_url": "https://github.com/conorheffron/hl7-hapi-fhir-obs-api/actions/runs/27871878788",
+  "build_workflow": "Java CI with Maven"
  },
  {
   "repo": "conorheffron/simple-calculator",
@@ -2657,7 +2695,8 @@
   "lastknown_version": "3",
   "renamed_to": "",
   "build": "SUCCESS",
-  "build_url": "https://github.com/conorheffron/simple-calculator/actions/runs/18892709762"
+  "build_url": "https://github.com/conorheffron/simple-calculator/actions/runs/18892691910",
+  "build_workflow": "Java CI with Maven"
  },
  {
   "repo": "conorheffron/weather-data",
@@ -2671,7 +2710,8 @@
   "lastknown_version": "4.0.0",
   "renamed_to": "",
   "build": "SUCCESS",
-  "build_url": "https://github.com/conorheffron/weather-data/actions/runs/18925775016"
+  "build_url": "https://github.com/conorheffron/weather-data/actions/runs/18925753926",
+  "build_workflow": "Java CI with Maven"
  },
  {
   "repo": "cowwoc/styler",
@@ -2713,7 +2753,8 @@
   "lastknown_version": "4.0.0-rc-5",
   "renamed_to": "",
   "build": "SUCCESS",
-  "build_url": "https://github.com/danalderslade/FinCEN_SAR/actions/runs/23213021166"
+  "build_url": "https://github.com/danalderslade/FinCEN_SAR/actions/runs/23213021166",
+  "build_workflow": "CI/CD Pipeline"
  },
  {
   "repo": "danhdev/lms-system",
@@ -2727,7 +2768,8 @@
   "lastknown_version": "4.0.0-rc-5",
   "renamed_to": "",
   "build": "FAILURE",
-  "build_url": "https://github.com/danhdev/lms-system/actions/runs/27113011701"
+  "build_url": "https://github.com/danhdev/lms-system/actions/runs/27113011701",
+  "build_workflow": "Build and Deploy Core LMS application"
  },
  {
   "repo": "danielzayas/danielzayas__okhttp.8e0cc1b3",
@@ -2783,7 +2825,8 @@
   "lastknown_version": "1",
   "renamed_to": "",
   "build": "FAILURE",
-  "build_url": "https://github.com/darshangm1/Smart-Service-Platform/actions/runs/24019588220"
+  "build_url": "https://github.com/darshangm1/Smart-Service-Platform/actions/runs/24019588220",
+  "build_workflow": "CI"
  },
  {
   "repo": "delanym/MENFORCER-475",
@@ -2810,8 +2853,8 @@
   "lastknown_signal": "POM 4.1.0",
   "lastknown_version": "4.1.0",
   "renamed_to": "",
-  "build": "SUCCESS",
-  "build_url": "https://github.com/devhalos/genesis/actions/runs/29106436447"
+  "build": "NONE",
+  "build_url": ""
  },
  {
   "repo": "dhinojosa/nfjs-java-tdd",
@@ -2881,7 +2924,8 @@
   "lastknown_version": "4.0.0-rc-4",
   "renamed_to": "",
   "build": "SUCCESS",
-  "build_url": "https://github.com/dolartand/innowise-user-service/actions/runs/22169872644"
+  "build_url": "https://github.com/dolartand/innowise-user-service/actions/runs/22169872644",
+  "build_workflow": "User Service CI Pipeline"
  },
  {
   "repo": "ducthin/LetCookGear",
@@ -2923,7 +2967,8 @@
   "lastknown_version": "4.0.0",
   "renamed_to": "",
   "build": "SUCCESS",
-  "build_url": "https://github.com/duwaragie/it3030-paf-2026-smart-campus-group188/actions/runs/24929184609"
+  "build_url": "https://github.com/duwaragie/it3030-paf-2026-smart-campus-group188/actions/runs/24929184608",
+  "build_workflow": "2 Maven workflows, all agree"
  },
  {
   "repo": "edwarddn/dinosaur-edward-game",
@@ -2965,7 +3010,8 @@
   "lastknown_version": "0",
   "renamed_to": "",
   "build": "SUCCESS",
-  "build_url": "https://github.com/elide-dev/native-maven/actions/runs/28826625363"
+  "build_url": "https://github.com/elide-dev/native-maven/actions/runs/27770987019",
+  "build_workflow": "2 Maven workflows, all agree"
  },
  {
   "repo": "elveahuang/examples",
@@ -2993,7 +3039,8 @@
   "lastknown_version": "459",
   "renamed_to": "",
   "build": "FAILURE",
-  "build_url": "https://github.com/entropy-cloud/nop-entropy/actions/runs/29423130356"
+  "build_url": "https://github.com/entropy-cloud/nop-entropy/actions/runs/29423130356",
+  "build_workflow": "Java CI with Maven"
  },
  {
   "repo": "eugenp/tutorials",
@@ -3076,8 +3123,8 @@
   "lastknown_signal": "https://github.com/flowlogix/cdi-tck-reproducer[flowlogix/cdi-tck-reproducer^]",
   "lastknown_version": "0",
   "renamed_to": "",
-  "build": "SUCCESS",
-  "build_url": "https://github.com/flowlogix/arq-reproducers/actions/runs/29488131089"
+  "build": "NONE",
+  "build_url": ""
  },
  {
   "repo": "flowlogix/cdi-tck-reproducer",
@@ -3090,8 +3137,8 @@
   "lastknown_signal": "https://github.com/flowlogix/cdi-tck-reproducer-appcontext[flowlogix/cdi-tck-reproducer-appcontext^]",
   "lastknown_version": "0",
   "renamed_to": "",
-  "build": "SUCCESS",
-  "build_url": "https://github.com/flowlogix/cdi-tck-reproducer/actions/runs/29483235940"
+  "build": "NONE",
+  "build_url": ""
  },
  {
   "repo": "flowlogix/cdi-tck-reproducer-appcontext",
@@ -3104,8 +3151,8 @@
   "lastknown_signal": "https://github.com/grubeninspekteur/iskibal[grubeninspekteur/iskibal^]",
   "lastknown_version": "0",
   "renamed_to": "",
-  "build": "SUCCESS",
-  "build_url": "https://github.com/flowlogix/cdi-tck-reproducer-appcontext/actions/runs/29499856500"
+  "build": "NONE",
+  "build_url": ""
  },
  {
   "repo": "flowlogix/container-deploy-plugin",
@@ -3118,8 +3165,8 @@
   "lastknown_signal": "Wrapper",
   "lastknown_version": "4.0.0-rc-4",
   "renamed_to": "",
-  "build": "SUCCESS",
-  "build_url": "https://github.com/flowlogix/container-deploy-plugin/actions/runs/29442318588"
+  "build": "NONE",
+  "build_url": ""
  },
  {
   "repo": "flowlogix/ear-sample",
@@ -3132,8 +3179,8 @@
   "lastknown_signal": "Wrapper",
   "lastknown_version": "4.0.0-rc-5",
   "renamed_to": "",
-  "build": "SUCCESS",
-  "build_url": "https://github.com/flowlogix/ear-sample/actions/runs/29497873977"
+  "build": "NONE",
+  "build_url": ""
  },
  {
   "repo": "flowlogix/flowlogix",
@@ -3147,7 +3194,8 @@
   "lastknown_version": "4.0.0-rc-5",
   "renamed_to": "",
   "build": "SUCCESS",
-  "build_url": "https://github.com/flowlogix/flowlogix/actions/runs/29469215505"
+  "build_url": "https://github.com/flowlogix/flowlogix/actions/runs/29222945014",
+  "build_workflow": "CodeQL"
  },
  {
   "repo": "flowlogix/test-arq-suite",
@@ -3160,8 +3208,8 @@
   "lastknown_signal": "https://github.com/mgzu/dubbo-samples[mgzu/dubbo-samples^]",
   "lastknown_version": "4",
   "renamed_to": "",
-  "build": "SUCCESS",
-  "build_url": "https://github.com/flowlogix/test-arq-suite/actions/runs/29428488088"
+  "build": "NONE",
+  "build_url": ""
  },
  {
   "repo": "fofola1/CustomCraftingRecipesPlugin",
@@ -3189,7 +3237,8 @@
   "lastknown_version": "4.0.0",
   "renamed_to": "",
   "build": "SUCCESS",
-  "build_url": "https://github.com/fuhouyu/base-framework/actions/runs/19642426737"
+  "build_url": "https://github.com/fuhouyu/base-framework/actions/runs/19610677646",
+  "build_workflow": "ci"
  },
  {
   "repo": "gabmeira/desafioForumHub",
@@ -3231,7 +3280,8 @@
   "lastknown_version": "",
   "renamed_to": "",
   "build": "FAILURE",
-  "build_url": "https://github.com/gnodet/maven-bench/actions/runs/17937991763"
+  "build_url": "https://github.com/gnodet/maven-bench/actions/runs/17937991763",
+  "build_workflow": "CI"
  },
  {
   "repo": "google/adk-java",
@@ -3244,8 +3294,9 @@
   "lastknown_signal": "Wrapper",
   "lastknown_version": "4.0.0-rc-3",
   "renamed_to": "",
-  "build": "SUCCESS",
-  "build_url": "https://github.com/google/adk-java/actions/runs/29498154397"
+  "build": "AMBIGUOUS",
+  "build_url": "https://github.com/google/adk-java/actions",
+  "build_workflow": "5 Maven workflows: 4 SUCCESS, 1 FAILURE"
  },
  {
   "repo": "grubeninspekteur/iskibal",
@@ -3259,7 +3310,8 @@
   "lastknown_version": "4.1.0",
   "renamed_to": "",
   "build": "SUCCESS",
-  "build_url": "https://github.com/grubeninspekteur/iskibal/actions/runs/22826242207"
+  "build_url": "https://github.com/grubeninspekteur/iskibal/actions/runs/22826242207",
+  "build_workflow": "CI"
  },
  {
   "repo": "guylabs/plexus-utils-merge-xml-reproducer",
@@ -3300,8 +3352,9 @@
   "lastknown_signal": "Wrapper",
   "lastknown_version": "4.0.0-rc-5",
   "renamed_to": "",
-  "build": "SUCCESS",
-  "build_url": "https://github.com/hantsy/jakartaee-ddd-example/actions/runs/28363625326"
+  "build": "AMBIGUOUS",
+  "build_url": "https://github.com/hantsy/jakartaee-ddd-example/actions",
+  "build_workflow": "3 Maven workflows: 2 SUCCESS, 1 FAILURE"
  },
  {
   "repo": "hantsy/jakartaee11-sandbox",
@@ -3314,8 +3367,9 @@
   "lastknown_signal": "Wrapper",
   "lastknown_version": "4.0.0",
   "renamed_to": "",
-  "build": "SUCCESS",
-  "build_url": "https://github.com/hantsy/jakartaee11-sandbox/actions/runs/28728734325"
+  "build": "AMBIGUOUS",
+  "build_url": "https://github.com/hantsy/jakartaee11-sandbox/actions",
+  "build_workflow": "9 Maven workflows: 5 SUCCESS, 4 FAILURE"
  },
  {
   "repo": "hantsy/jakartaee11-starter-boilerplate",
@@ -3328,8 +3382,9 @@
   "lastknown_signal": "https://github.com/igorcampos-dev/spring-integrations-examples[igorcampos-dev/spring-integrations-examples^]",
   "lastknown_version": "2",
   "renamed_to": "",
-  "build": "SUCCESS",
-  "build_url": "https://github.com/hantsy/jakartaee11-starter-boilerplate/actions/runs/29461268147"
+  "build": "AMBIGUOUS",
+  "build_url": "https://github.com/hantsy/jakartaee11-starter-boilerplate/actions",
+  "build_workflow": "5 Maven workflows: 3 SUCCESS, 2 FAILURE"
  },
  {
   "repo": "hantsy/spring-puzzles",
@@ -3343,7 +3398,8 @@
   "lastknown_version": "83",
   "renamed_to": "",
   "build": "FAILURE",
-  "build_url": "https://github.com/hantsy/spring-puzzles/actions/runs/29219359283"
+  "build_url": "https://github.com/hantsy/spring-puzzles/actions/runs/16015203533",
+  "build_workflow": "6 Maven workflows, all agree"
  },
  {
   "repo": "hantsy/spring6-sandbox",
@@ -3356,8 +3412,9 @@
   "lastknown_signal": "https://github.com/maveniverse/mason[maveniverse/mason^]",
   "lastknown_version": "46",
   "renamed_to": "",
-  "build": "SUCCESS",
-  "build_url": "https://github.com/hantsy/spring6-sandbox/actions/runs/26429705784"
+  "build": "AMBIGUOUS",
+  "build_url": "https://github.com/hantsy/spring6-sandbox/actions",
+  "build_workflow": "10 Maven workflows: 8 SUCCESS, 2 FAILURE"
  },
  {
   "repo": "hantsy/spring7-sandbox",
@@ -3371,7 +3428,8 @@
   "lastknown_version": "4",
   "renamed_to": "",
   "build": "SUCCESS",
-  "build_url": "https://github.com/hantsy/spring7-sandbox/actions/runs/27923844971"
+  "build_url": "https://github.com/hantsy/spring7-sandbox/actions/runs/24021603781",
+  "build_workflow": "10 Maven workflows, all agree"
  },
  {
   "repo": "hantsy/vertx-sandbox",
@@ -3384,8 +3442,9 @@
   "lastknown_signal": "Wrapper",
   "lastknown_version": "4.0.0",
   "renamed_to": "",
-  "build": "SUCCESS",
-  "build_url": "https://github.com/hantsy/vertx-sandbox/actions/runs/29456409928"
+  "build": "AMBIGUOUS",
+  "build_url": "https://github.com/hantsy/vertx-sandbox/actions",
+  "build_workflow": "8 Maven workflows: 7 SUCCESS, 1 FAILURE"
  },
  {
   "repo": "harshal5-dev/scaler-e-commerce-platform",
@@ -3413,7 +3472,8 @@
   "lastknown_version": "1",
   "renamed_to": "",
   "build": "SUCCESS",
-  "build_url": "https://github.com/hellman-and-hero/tdd-demy-hardware-sim/actions/runs/29470384325"
+  "build_url": "https://github.com/hellman-and-hero/tdd-demy-hardware-sim/actions/runs/29232000854",
+  "build_workflow": "Java CI with Maven"
  },
  {
   "repo": "helpermethod/zip-forge",
@@ -3427,7 +3487,8 @@
   "lastknown_version": "32",
   "renamed_to": "",
   "build": "SUCCESS",
-  "build_url": "https://github.com/helpermethod/zip-forge/actions/runs/27818322694"
+  "build_url": "https://github.com/helpermethod/zip-forge/actions/runs/27818322694",
+  "build_workflow": "2 Maven workflows, all agree"
  },
  {
   "repo": "hereandnowai/web-scraper-java",
@@ -3454,8 +3515,9 @@
   "lastknown_signal": "Wrapper",
   "lastknown_version": "4.0.0-rc-5",
   "renamed_to": "",
-  "build": "SUCCESS",
-  "build_url": "https://github.com/himnay/llm-chat/actions/runs/29385169505"
+  "build": "FAILURE",
+  "build_url": "https://github.com/himnay/llm-chat/actions/runs/29335581401",
+  "build_workflow": "CI"
  },
  {
   "repo": "himnay/llm-rag",
@@ -3468,8 +3530,8 @@
   "lastknown_signal": "Wrapper",
   "lastknown_version": "",
   "renamed_to": "",
-  "build": "FAILURE",
-  "build_url": "https://github.com/himnay/llm-rag/actions/runs/29469643827"
+  "build": "NONE",
+  "build_url": ""
  },
  {
   "repo": "himnay/llm-rag-pipeline",
@@ -3511,7 +3573,8 @@
   "lastknown_version": "0",
   "renamed_to": "",
   "build": "SUCCESS",
-  "build_url": "https://github.com/ibraheemd47/Ticket_Management_System_/actions/runs/28300583176"
+  "build_url": "https://github.com/ibraheemd47/Ticket_Management_System_/actions/runs/28300583176",
+  "build_workflow": "Java CI with Maven"
  },
  {
   "repo": "igorcampos-dev/spring-integrations-examples",
@@ -3525,7 +3588,8 @@
   "lastknown_version": "",
   "renamed_to": "",
   "build": "SUCCESS",
-  "build_url": "https://github.com/igorcampos-dev/spring-integrations-examples/actions/runs/16485727315"
+  "build_url": "https://github.com/igorcampos-dev/spring-integrations-examples/actions/runs/16485727315",
+  "build_workflow": "spring-kafka-example CI Build"
  },
  {
   "repo": "ikmdev/build-parent",
@@ -3538,8 +3602,8 @@
   "lastknown_signal": "POM 4.1.0",
   "lastknown_version": "4.1.0",
   "renamed_to": "",
-  "build": "SUCCESS",
-  "build_url": "https://github.com/ikmdev/build-parent/actions/runs/19827474125"
+  "build": "NONE",
+  "build_url": ""
  },
  {
   "repo": "ikmdev/github_actions_test",
@@ -3552,8 +3616,8 @@
   "lastknown_signal": "POM 4.1.0, Wrapper",
   "lastknown_version": "4.1.0",
   "renamed_to": "",
-  "build": "SKIPPED",
-  "build_url": "https://github.com/ikmdev/github_actions_test/actions/runs/20107068192"
+  "build": "NONE",
+  "build_url": ""
  },
  {
   "repo": "ikmdev/komet",
@@ -3566,8 +3630,9 @@
   "lastknown_signal": "POM 4.1.0",
   "lastknown_version": "4.1.0",
   "renamed_to": "",
-  "build": "SKIPPED",
-  "build_url": "https://github.com/ikmdev/komet/actions/runs/29497874331"
+  "build": "FAILURE",
+  "build_url": "https://github.com/ikmdev/komet/actions/runs/29497827488",
+  "build_workflow": "Build Workflow -- main"
  },
  {
   "repo": "ikmdev/komet-desktop",
@@ -3580,8 +3645,8 @@
   "lastknown_signal": "https://github.com/jabrena/daily-epsilon[jabrena/daily-epsilon^]",
   "lastknown_version": "1",
   "renamed_to": "",
-  "build": "SUCCESS",
-  "build_url": "https://github.com/ikmdev/komet-desktop/actions/runs/29497873359"
+  "build": "NONE",
+  "build_url": ""
  },
  {
   "repo": "ikmdev/rocks-kb",
@@ -3594,8 +3659,8 @@
   "lastknown_signal": "https://github.com/iuliana/jdk25-parent-project[iuliana/jdk25-parent-project^]",
   "lastknown_version": "0",
   "renamed_to": "",
-  "build": "SKIPPED",
-  "build_url": "https://github.com/ikmdev/rocks-kb/actions/runs/29224074591"
+  "build": "NONE",
+  "build_url": ""
  },
  {
   "repo": "ikmdev/tinkar-composer",
@@ -3608,8 +3673,8 @@
   "lastknown_signal": "https://github.com/jabrena/daily-epsilon[jabrena/daily-epsilon^]",
   "lastknown_version": "1",
   "renamed_to": "",
-  "build": "SKIPPED",
-  "build_url": "https://github.com/ikmdev/tinkar-composer/actions/runs/29224071947"
+  "build": "NONE",
+  "build_url": ""
  },
  {
   "repo": "ikmdev/tinkar-core",
@@ -3622,8 +3687,8 @@
   "lastknown_signal": "POM 4.1.0",
   "lastknown_version": "4.1.0",
   "renamed_to": "",
-  "build": "SKIPPED",
-  "build_url": "https://github.com/ikmdev/tinkar-core/actions/runs/29339882098"
+  "build": "NONE",
+  "build_url": ""
  },
  {
   "repo": "instancio/instancio",
@@ -3637,7 +3702,8 @@
   "lastknown_version": "4.0.0-rc-5",
   "renamed_to": "",
   "build": "SUCCESS",
-  "build_url": "https://github.com/instancio/instancio/actions/runs/29468404993"
+  "build_url": "https://github.com/instancio/instancio/actions/runs/29391038907",
+  "build_workflow": "2 Maven workflows, all agree"
  },
  {
   "repo": "instancio/instancio-benchmark",
@@ -3678,8 +3744,8 @@
   "lastknown_signal": "https://github.com/jabrena/advent-of-code[jabrena/advent-of-code^]",
   "lastknown_version": "0",
   "renamed_to": "",
-  "build": "FAILURE",
-  "build_url": "https://github.com/isp-insoft-gmbh/isp-insoft-ai-skills/actions/runs/29418323466"
+  "build": "NONE",
+  "build_url": ""
  },
  {
   "repo": "iuliana/jdk25-parent-project",
@@ -3721,7 +3787,8 @@
   "lastknown_version": "4.0.0",
   "renamed_to": "",
   "build": "SUCCESS",
-  "build_url": "https://github.com/jabrena/advent-of-code/actions/runs/23729213531"
+  "build_url": "https://github.com/jabrena/advent-of-code/actions/runs/20581475563",
+  "build_workflow": "4 Maven workflows, all agree"
  },
  {
   "repo": "jabrena/daily-epsilon",
@@ -3818,8 +3885,8 @@
   "lastknown_signal": "Wrapper",
   "lastknown_version": "4.0.0",
   "renamed_to": "",
-  "build": "SUCCESS",
-  "build_url": "https://github.com/jabrena/typed-errors/actions/runs/22554516716"
+  "build": "NONE",
+  "build_url": ""
  },
  {
   "repo": "jaguililla/hexagonal_spring",
@@ -3833,7 +3900,8 @@
   "lastknown_version": "4.0.0-rc-5",
   "renamed_to": "",
   "build": "SUCCESS",
-  "build_url": "https://github.com/jaguililla/hexagonal_spring/actions/runs/21381266657"
+  "build_url": "https://github.com/jaguililla/hexagonal_spring/actions/runs/21381266657",
+  "build_workflow": "2 Maven workflows, all agree"
  },
  {
   "repo": "jdrodriguezrodriguez/CreditCore",
@@ -3860,8 +3928,8 @@
   "lastknown_signal": "Wrapper",
   "lastknown_version": "4.0.0",
   "renamed_to": "",
-  "build": "SUCCESS",
-  "build_url": "https://github.com/jenkins-infra/plugin-health-scoring/actions/runs/29210419651"
+  "build": "NONE",
+  "build_url": ""
  },
  {
   "repo": "jimisola/arconia-composition-demo",
@@ -3903,7 +3971,8 @@
   "lastknown_version": "0",
   "renamed_to": "",
   "build": "FAILURE",
-  "build_url": "https://github.com/jnorthrup/superbikeshed/actions/runs/16664980412"
+  "build_url": "https://github.com/jnorthrup/superbikeshed/actions/runs/16664980412",
+  "build_workflow": "4 Maven workflows, all agree"
  },
  {
   "repo": "joeribuytaert5-hub/v1-f-swap",
@@ -3916,8 +3985,8 @@
   "lastknown_signal": "Wrapper",
   "lastknown_version": "4.1.0",
   "renamed_to": "",
-  "build": "FAILURE",
-  "build_url": "https://github.com/joeribuytaert5-hub/v1-f-swap/actions/runs/22086906299"
+  "build": "NONE",
+  "build_url": ""
  },
  {
   "repo": "jonisf87/fwk-karateautomulti",
@@ -3930,8 +3999,8 @@
   "lastknown_signal": "Wrapper",
   "lastknown_version": "4.0.0",
   "renamed_to": "",
-  "build": "SUCCESS",
-  "build_url": "https://github.com/jonisf87/fwk-karateautomulti/actions/runs/25558938667"
+  "build": "NONE",
+  "build_url": ""
  },
  {
   "repo": "jonisf87/fwk-karateautomulti-next",
@@ -4001,7 +4070,8 @@
   "lastknown_version": "4.0.0-rc-5",
   "renamed_to": "",
   "build": "SUCCESS",
-  "build_url": "https://github.com/kbeigl/bm/actions/runs/28651687814"
+  "build_url": "https://github.com/kbeigl/bm/actions/runs/28651687814",
+  "build_workflow": "2 Maven workflows, all agree"
  },
  {
   "repo": "kec/ike-tooling",
@@ -4042,8 +4112,8 @@
   "lastknown_signal": "Wrapper",
   "lastknown_version": "4.0.0",
   "renamed_to": "",
-  "build": "SUCCESS",
-  "build_url": "https://github.com/kevin6191015/new_app/actions/runs/18290095727"
+  "build": "NONE",
+  "build_url": ""
  },
  {
   "repo": "khdour17/Smart-Healthcare-Appointment-System",
@@ -4141,7 +4211,8 @@
   "lastknown_version": "2",
   "renamed_to": "",
   "build": "SUCCESS",
-  "build_url": "https://github.com/kojder/photo-map-app/actions/runs/19595835441"
+  "build_url": "https://github.com/kojder/photo-map-app/actions/runs/19595835441",
+  "build_workflow": "CI: Build, Test & SonarCloud Analysis"
  },
  {
   "repo": "langgraph4j/langgraph4j",
@@ -4155,7 +4226,8 @@
   "lastknown_version": "4.0.0",
   "renamed_to": "",
   "build": "SUCCESS",
-  "build_url": "https://github.com/langgraph4j/langgraph4j/actions/runs/28298062231"
+  "build_url": "https://github.com/langgraph4j/langgraph4j/actions/runs/28298062231",
+  "build_workflow": "2 Maven workflows, all agree"
  },
  {
   "repo": "leibrother/qqbot",
@@ -4182,8 +4254,8 @@
   "lastknown_signal": "Wrapper",
   "lastknown_version": "4.0.0-rc-5",
   "renamed_to": "flowlogix/apps",
-  "build": "SUCCESS",
-  "build_url": "https://github.com/flowlogix/apps/actions/runs/29456255341"
+  "build": "NONE",
+  "build_url": ""
  },
  {
   "repo": "lukas-krecan/ShedLock",
@@ -4197,7 +4269,8 @@
   "lastknown_version": "4.0.0-rc-5",
   "renamed_to": "",
   "build": "SUCCESS",
-  "build_url": "https://github.com/lukas-krecan/ShedLock/actions/runs/29428656041"
+  "build_url": "https://github.com/lukas-krecan/ShedLock/actions/runs/29428656041",
+  "build_workflow": "CI"
  },
  {
   "repo": "manikmagar/maven-build-cache-example",
@@ -4238,8 +4311,8 @@
   "lastknown_signal": "https://github.com/martinezdom/Dom-Car[martinezdom/Dom-Car^]",
   "lastknown_version": "0",
   "renamed_to": "",
-  "build": "SUCCESS",
-  "build_url": "https://github.com/markprimak/maven-starter/actions/runs/29488139876"
+  "build": "NONE",
+  "build_url": ""
  },
  {
   "repo": "martinezdom/Dom-Car",
@@ -4323,7 +4396,8 @@
   "lastknown_version": "39",
   "renamed_to": "",
   "build": "SUCCESS",
-  "build_url": "https://github.com/maveniverse/mason/actions/runs/29501221632"
+  "build_url": "https://github.com/maveniverse/mason/actions/runs/28018583682",
+  "build_workflow": "CI"
  },
  {
   "repo": "mayankshrivas/finance-data-backend",
@@ -4364,8 +4438,8 @@
   "lastknown_signal": "Wrapper",
   "lastknown_version": "4.0.0",
   "renamed_to": "",
-  "build": "SKIPPED",
-  "build_url": "https://github.com/mend-detection-qa/nx/actions/runs/29499604130"
+  "build": "NONE",
+  "build_url": ""
  },
  {
   "repo": "mendirl/drdrools",
@@ -4392,8 +4466,9 @@
   "lastknown_signal": "POM 4.1.0",
   "lastknown_version": "4.1.0",
   "renamed_to": "",
-  "build": "FAILURE",
-  "build_url": "https://github.com/mendirl/electrix/actions/runs/29457695470"
+  "build": "SUCCESS",
+  "build_url": "https://github.com/mendirl/electrix/actions/runs/27059972283",
+  "build_workflow": "Java CI with Maven"
  },
  {
   "repo": "mendirl/prez_oauth2",
@@ -4448,8 +4523,9 @@
   "lastknown_signal": "POM 4.1.0",
   "lastknown_version": "4.1.0",
   "renamed_to": "",
-  "build": "SUCCESS",
-  "build_url": "https://github.com/mirogaudi/product-catalog-service/actions/runs/29500234047"
+  "build": "FAILURE",
+  "build_url": "https://github.com/mirogaudi/product-catalog-service/actions/runs/29504516879",
+  "build_workflow": "Java_CI_with_Maven"
  },
  {
   "repo": "mk868/nullaudit",
@@ -4463,7 +4539,8 @@
   "lastknown_version": "4",
   "renamed_to": "",
   "build": "SUCCESS",
-  "build_url": "https://github.com/mk868/nullaudit/actions/runs/29449302418"
+  "build_url": "https://github.com/mk868/nullaudit/actions/runs/29397254276",
+  "build_workflow": "4 Maven workflows, all agree"
  },
  {
   "repo": "mlfoundations/dev_set_tasks",
@@ -4476,8 +4553,8 @@
   "lastknown_signal": "https://github.com/IFML2/ifml3[IFML2/ifml3^]",
   "lastknown_version": "4",
   "renamed_to": "",
-  "build": "SUCCESS",
-  "build_url": "https://github.com/mlfoundations/dev_set_tasks/actions/runs/22211524172"
+  "build": "NONE",
+  "build_url": ""
  },
  {
   "repo": "mm70773-2/VueRefactor",
@@ -4519,7 +4596,8 @@
   "lastknown_version": "1",
   "renamed_to": "",
   "build": "SUCCESS",
-  "build_url": "https://github.com/mohammedrattia/Hypermarket-Management-System/actions/runs/21186059927"
+  "build_url": "https://github.com/mohammedrattia/Hypermarket-Management-System/actions/runs/21186059927",
+  "build_workflow": "Test & Build"
  },
  {
   "repo": "mojohaus/tidy-maven-plugin",
@@ -4532,8 +4610,8 @@
   "lastknown_signal": "POM 4.1.0",
   "lastknown_version": "4.1.0",
   "renamed_to": "",
-  "build": "SUCCESS",
-  "build_url": "https://github.com/mojohaus/tidy-maven-plugin/actions/runs/29440919434"
+  "build": "NONE",
+  "build_url": ""
  },
  {
   "repo": "momisore/fxpurchase",
@@ -4560,8 +4638,8 @@
   "lastknown_signal": "Wrapper",
   "lastknown_version": "4.0.0",
   "renamed_to": "",
-  "build": "SUCCESS",
-  "build_url": "https://github.com/mongodb/mongo-hibernate/actions/runs/29440304865"
+  "build": "NONE",
+  "build_url": ""
  },
  {
   "repo": "mosbahiibtihel/planning-service",
@@ -4589,7 +4667,8 @@
   "lastknown_version": "4.0.0-rc-4",
   "renamed_to": "",
   "build": "FAILURE",
-  "build_url": "https://github.com/mpichler94/browser-from-scratch/actions/runs/21541907316"
+  "build_url": "https://github.com/mpichler94/browser-from-scratch/actions/runs/21541907316",
+  "build_workflow": "Run Tests"
  },
  {
   "repo": "mthmulders/maven4-examples",
@@ -4617,7 +4696,8 @@
   "lastknown_version": "4.0.0-rc-5",
   "renamed_to": "",
   "build": "SUCCESS",
-  "build_url": "https://github.com/mthmulders/mcs/actions/runs/29470395717"
+  "build_url": "https://github.com/mthmulders/mcs/actions/runs/28744060177",
+  "build_workflow": "2 Maven workflows, all agree"
  },
  {
   "repo": "mtkhawaja/jlama-demo",
@@ -4631,7 +4711,8 @@
   "lastknown_version": "0",
   "renamed_to": "",
   "build": "SUCCESS",
-  "build_url": "https://github.com/mtkhawaja/jlama-demo/actions/runs/20018303452"
+  "build_url": "https://github.com/mtkhawaja/jlama-demo/actions/runs/20018303452",
+  "build_workflow": "tests"
  },
  {
   "repo": "mtkhawaja/polyglot-jvm",
@@ -4645,7 +4726,8 @@
   "lastknown_version": "0",
   "renamed_to": "",
   "build": "SUCCESS",
-  "build_url": "https://github.com/mtkhawaja/polyglot-jvm/actions/runs/19980748014"
+  "build_url": "https://github.com/mtkhawaja/polyglot-jvm/actions/runs/19980748014",
+  "build_workflow": "tests"
  },
  {
   "repo": "mtkhawaja/spring-boot-4-openapi-archetype",
@@ -4659,7 +4741,8 @@
   "lastknown_version": "4.1.0",
   "renamed_to": "",
   "build": "SUCCESS",
-  "build_url": "https://github.com/mtkhawaja/spring-boot-4-openapi-archetype/actions/runs/20054254549"
+  "build_url": "https://github.com/mtkhawaja/spring-boot-4-openapi-archetype/actions/runs/20054254549",
+  "build_workflow": "2 Maven workflows, all agree"
  },
  {
   "repo": "mtkhawaja/testing-cookbook",
@@ -4673,7 +4756,8 @@
   "lastknown_version": "4.1.0",
   "renamed_to": "",
   "build": "SUCCESS",
-  "build_url": "https://github.com/mtkhawaja/testing-cookbook/actions/runs/27874802320"
+  "build_url": "https://github.com/mtkhawaja/testing-cookbook/actions/runs/27874802320",
+  "build_workflow": "tests"
  },
  {
   "repo": "muhammadd-danyal/turing-SBwithJunit5",
@@ -4714,8 +4798,8 @@
   "lastknown_signal": "https://github.com/nerain-prakas/azurepipeline[nerain-prakas/azurepipeline^]",
   "lastknown_version": "0",
   "renamed_to": "",
-  "build": "SUCCESS",
-  "build_url": "https://github.com/mvitz/adventofcode/actions/runs/22514857041"
+  "build": "NONE",
+  "build_url": ""
  },
  {
   "repo": "mzingg/zems",
@@ -4771,7 +4855,8 @@
   "lastknown_version": "4.1.0 (POM model)",
   "renamed_to": "",
   "build": "SUCCESS",
-  "build_url": "https://github.com/neurallayer/roboquant/actions/runs/29275693906"
+  "build_url": "https://github.com/neurallayer/roboquant/actions/runs/29275693906",
+  "build_workflow": "CI"
  },
  {
   "repo": "nfrankel/library",
@@ -4813,7 +4898,8 @@
   "lastknown_version": "689",
   "renamed_to": "",
   "build": "SUCCESS",
-  "build_url": "https://github.com/nielsbasjes/yauaa/actions/runs/29341829835"
+  "build_url": "https://github.com/nielsbasjes/yauaa/actions/runs/29341829352",
+  "build_workflow": "Yauaa"
  },
  {
   "repo": "nikolajbrinch/faz80",
@@ -4855,7 +4941,8 @@
   "lastknown_version": "0",
   "renamed_to": "",
   "build": "SUCCESS",
-  "build_url": "https://github.com/nostra/mcalert/actions/runs/29148291271"
+  "build_url": "https://github.com/nostra/mcalert/actions/runs/29148291271",
+  "build_workflow": "Build branch"
  },
  {
   "repo": "nrwl/nx",
@@ -4868,8 +4955,8 @@
   "lastknown_signal": "Wrapper",
   "lastknown_version": "4.0.0-rc-5",
   "renamed_to": "",
-  "build": "SUCCESS",
-  "build_url": "https://github.com/nrwl/nx/actions/runs/29501167476"
+  "build": "NONE",
+  "build_url": ""
  },
  {
   "repo": "null-object-0000/ai-clash",
@@ -4882,8 +4969,8 @@
   "lastknown_signal": "https://github.com/Apress/Java-23-for-Absolute-Beginners[Apress/Java-23-for-Absolute-Beginners^]",
   "lastknown_version": "18",
   "renamed_to": "",
-  "build": "SUCCESS",
-  "build_url": "https://github.com/null-object-0000/ai-clash/actions/runs/29137637130"
+  "build": "NONE",
+  "build_url": ""
  },
  {
   "repo": "open-thoughts/OpenThoughts-TBLite",
@@ -4911,7 +4998,8 @@
   "lastknown_version": "4.1.0",
   "renamed_to": "",
   "build": "SUCCESS",
-  "build_url": "https://github.com/osscameroon/js-generator/actions/runs/19742779560"
+  "build_url": "https://github.com/osscameroon/js-generator/actions/runs/19742779560",
+  "build_workflow": "2 Maven workflows, all agree"
  },
  {
   "repo": "ottlinger/junit-mockito-examples",
@@ -4925,7 +5013,8 @@
   "lastknown_version": "4.0.0-rc-5",
   "renamed_to": "",
   "build": "SUCCESS",
-  "build_url": "https://github.com/ottlinger/junit-mockito-examples/actions/runs/29493590938"
+  "build_url": "https://github.com/ottlinger/junit-mockito-examples/actions/runs/28709450696",
+  "build_workflow": "GitHub CI"
  },
  {
   "repo": "patrickfust/network-simulator",
@@ -4939,7 +5028,8 @@
   "lastknown_version": "4.0.0",
   "renamed_to": "",
   "build": "SUCCESS",
-  "build_url": "https://github.com/patrickfust/network-simulator/actions/runs/27144800863"
+  "build_url": "https://github.com/patrickfust/network-simulator/actions/runs/27144800863",
+  "build_workflow": "Build Backend"
  },
  {
   "repo": "petr-panteleyev/money-manager",
@@ -4952,8 +5042,8 @@
   "lastknown_signal": "POM 4.1.0",
   "lastknown_version": "4.1.0",
   "renamed_to": "",
-  "build": "SUCCESS",
-  "build_url": "https://github.com/petr-panteleyev/money-manager/actions/runs/28722745039"
+  "build": "NONE",
+  "build_url": ""
  },
  {
   "repo": "piotrwalkusz1/task-manager",
@@ -4967,7 +5057,8 @@
   "lastknown_version": "4.0.0-rc-5",
   "renamed_to": "",
   "build": "SUCCESS",
-  "build_url": "https://github.com/piotrwalkusz1/task-manager/actions/runs/19990675303"
+  "build_url": "https://github.com/piotrwalkusz1/task-manager/actions/runs/19990675303",
+  "build_workflow": "CI"
  },
  {
   "repo": "postlundhall/traningsapp",
@@ -4981,7 +5072,8 @@
   "lastknown_version": "0",
   "renamed_to": "",
   "build": "SUCCESS",
-  "build_url": "https://github.com/postlundhall/traningsapp/actions/runs/19133702589"
+  "build_url": "https://github.com/postlundhall/traningsapp/actions/runs/19133702589",
+  "build_workflow": "Pages"
  },
  {
   "repo": "ppablolds/API-de-Atendimentos",
@@ -4995,7 +5087,8 @@
   "lastknown_version": "4.0.0",
   "renamed_to": "",
   "build": "SUCCESS",
-  "build_url": "https://github.com/ppablolds/API-de-Atendimentos/actions/runs/15401098423"
+  "build_url": "https://github.com/ppablolds/API-de-Atendimentos/actions/runs/15401098423",
+  "build_workflow": "Spring Boot CI/CD"
  },
  {
   "repo": "pretsadev/scm-version-maven-extension",
@@ -5009,7 +5102,8 @@
   "lastknown_version": "4.1.0",
   "renamed_to": "",
   "build": "SUCCESS",
-  "build_url": "https://github.com/pretsadev/scm-version-maven-extension/actions/runs/17170941853"
+  "build_url": "https://github.com/pretsadev/scm-version-maven-extension/actions/runs/17170941853",
+  "build_workflow": "2 Maven workflows, all agree"
  },
  {
   "repo": "radughiorma/maven-flatten-plugin-multimodule-issue",
@@ -5050,8 +5144,8 @@
   "lastknown_signal": "https://github.com/reddy615/doctors-farms[reddy615/doctors-farms^]",
   "lastknown_version": "0",
   "renamed_to": "",
-  "build": "SUCCESS",
-  "build_url": "https://github.com/raghuporumamila/event-hub/actions/runs/23665824566"
+  "build": "NONE",
+  "build_url": ""
  },
  {
   "repo": "rainbowdashlabs/sql-java",
@@ -5064,8 +5158,8 @@
   "lastknown_signal": "Wrapper",
   "lastknown_version": "4.0.0",
   "renamed_to": "",
-  "build": "SUCCESS",
-  "build_url": "https://github.com/rainbowdashlabs/sql-java/actions/runs/29200654417"
+  "build": "NONE",
+  "build_url": ""
  },
  {
   "repo": "reddy615/doctors-farms",
@@ -5093,7 +5187,8 @@
   "lastknown_version": "4.0.0-beta-3",
   "renamed_to": "",
   "build": "FAILURE",
-  "build_url": "https://github.com/renato-brito/teste-cep/actions/runs/20416444281"
+  "build_url": "https://github.com/renato-brito/teste-cep/actions/runs/20416444281",
+  "build_workflow": "CI"
  },
  {
   "repo": "rmannibucau/fusion-mcp-demo",
@@ -5120,8 +5215,8 @@
   "lastknown_signal": "\u26a0\ufe0f https://github.com/ru4nlucas/MeuRitmo[ru4nlucas/MeuRitmo^]",
   "lastknown_version": "0",
   "renamed_to": "",
-  "build": "SUCCESS",
-  "build_url": "https://github.com/roskenet/alchemy/actions/runs/25632933095"
+  "build": "NONE",
+  "build_url": ""
  },
  {
   "repo": "ru4nlucas/MeuRitmo",
@@ -5204,8 +5299,9 @@
   "lastknown_signal": "https://github.com/shivangp0208/apache-maven-guru[shivangp0208/apache-maven-guru^]",
   "lastknown_version": "0",
   "renamed_to": "",
-  "build": "FAILURE",
-  "build_url": "https://github.com/shahart/heb-bible/actions/runs/29286103295"
+  "build": "SUCCESS",
+  "build_url": "https://github.com/shahart/heb-bible/actions/runs/29080871180",
+  "build_workflow": "2 Maven workflows, all agree"
  },
  {
   "repo": "shivangp0208/apache-maven-guru",
@@ -5260,8 +5356,8 @@
   "lastknown_signal": "POM 4.1.0",
   "lastknown_version": "4.1.0 (POM model)",
   "renamed_to": "",
-  "build": "SUCCESS",
-  "build_url": "https://github.com/snyk/cli/actions/runs/29499652665"
+  "build": "NONE",
+  "build_url": ""
  },
  {
   "repo": "snyk/snyk-mvn-plugin",
@@ -5302,8 +5398,9 @@
   "lastknown_signal": "Wrapper",
   "lastknown_version": "4.0.0",
   "renamed_to": "",
-  "build": "SUCCESS",
-  "build_url": "https://github.com/square/okhttp/actions/runs/29500797593"
+  "build": "AMBIGUOUS",
+  "build_url": "https://github.com/square/okhttp/actions",
+  "build_workflow": "3 Maven workflows: 2 SUCCESS, 1 FAILURE"
  },
  {
   "repo": "sscrock/TastyBites",
@@ -5345,7 +5442,8 @@
   "lastknown_version": "0",
   "renamed_to": "",
   "build": "SUCCESS",
-  "build_url": "https://github.com/stefanofornari/nb-ste-plugins/actions/runs/29246274597"
+  "build_url": "https://github.com/stefanofornari/nb-ste-plugins/actions/runs/29246274597",
+  "build_workflow": "Deploy NetBeans update site to GitHub Pages"
  },
  {
   "repo": "support-and-care/maven-modular-sources-showcases",
@@ -5400,8 +5498,8 @@
   "lastknown_signal": "Wrapper",
   "lastknown_version": "4.0.0-rc-5",
   "renamed_to": "",
-  "build": "SUCCESS",
-  "build_url": "https://github.com/svenruppert/dependencies/actions/runs/24836927274"
+  "build": "NONE",
+  "build_url": ""
  },
  {
   "repo": "svenruppert/eBook-Java-Design-Patterns-Extreme",
@@ -5471,7 +5569,8 @@
   "lastknown_version": "4.0.0-rc-5",
   "renamed_to": "",
   "build": "SUCCESS",
-  "build_url": "https://github.com/symentispl/roadrunner/actions/runs/29234441400"
+  "build_url": "https://github.com/symentispl/roadrunner/actions/runs/29234441400",
+  "build_workflow": "2 Maven workflows, all agree"
  },
  {
   "repo": "tanmaylohakare/Leetcode-Tracker",
@@ -5512,8 +5611,8 @@
   "lastknown_signal": "https://github.com/ursaj/maven-4-bom-template[ursaj/maven-4-bom-template^]",
   "lastknown_version": "1",
   "renamed_to": "",
-  "build": "SUCCESS",
-  "build_url": "https://github.com/thomcgn/nvg8/actions/runs/23378072594"
+  "build": "NONE",
+  "build_url": ""
  },
  {
   "repo": "tintwym/novora_backend",
@@ -5554,8 +5653,8 @@
   "lastknown_signal": "https://github.com/top-dev-bln/aiproject[top-dev-bln/aiproject^]",
   "lastknown_version": "0",
   "renamed_to": "",
-  "build": "FAILURE",
-  "build_url": "https://github.com/tobese/internet-bank-case-study/actions/runs/24878280365"
+  "build": "NONE",
+  "build_url": ""
  },
  {
   "repo": "top-dev-bln/aiproject",
@@ -5611,7 +5710,8 @@
   "lastknown_version": "4.1.0",
   "renamed_to": "",
   "build": "SUCCESS",
-  "build_url": "https://github.com/ursaj/maven-4-bom-template/actions/runs/25642556689"
+  "build_url": "https://github.com/ursaj/maven-4-bom-template/actions/runs/25642556689",
+  "build_workflow": "Java CI with Maven"
  },
  {
   "repo": "vRUZIx/Lab-Deploying-to-Render",
@@ -5638,8 +5738,8 @@
   "lastknown_signal": "Wrapper",
   "lastknown_version": "4.0.0",
   "renamed_to": "",
-  "build": "SUCCESS",
-  "build_url": "https://github.com/vaadin-developer/security-for-flow/actions/runs/29013277131"
+  "build": "NONE",
+  "build_url": ""
  },
  {
   "repo": "valkyria-gk/vppps",
@@ -5667,7 +5767,8 @@
   "lastknown_version": "4.0.0-rc-5",
   "renamed_to": "",
   "build": "SUCCESS",
-  "build_url": "https://github.com/veithen/resolver-proxy-maven-plugin/actions/runs/29494784356"
+  "build_url": "https://github.com/veithen/resolver-proxy-maven-plugin/actions/runs/29170175109",
+  "build_workflow": "Continuous Integration"
  },
  {
   "repo": "verjithRavi/it3030-paf-2026-smart-campus-WE_202_2.1",
@@ -5736,8 +5837,8 @@
   "lastknown_signal": "Wrapper",
   "lastknown_version": "4.0.0-rc-4",
   "renamed_to": "",
-  "build": "FAILURE",
-  "build_url": "https://github.com/whysixmift/warehouse-management-system/actions/runs/19914816638"
+  "build": "NONE",
+  "build_url": ""
  },
  {
   "repo": "woaibiancheng111/Enterprise-AI-Agent",
@@ -5778,8 +5879,8 @@
   "lastknown_signal": "https://github.com/zahura0/it3030-paf-2026-smart-campus-Y3S2-WE-54[zahura0/it3030-paf-2026-smart-campus-Y3S2-WE-54^]",
   "lastknown_version": "0",
   "renamed_to": "",
-  "build": "SUCCESS",
-  "build_url": "https://github.com/xenoterracide/java-commons/actions/runs/29438088903"
+  "build": "NONE",
+  "build_url": ""
  },
  {
   "repo": "xenoterracide/kalix",
@@ -5793,7 +5894,8 @@
   "lastknown_version": "4.0.0",
   "renamed_to": "",
   "build": "SUCCESS",
-  "build_url": "https://github.com/xenoterracide/kalix/actions/runs/29442852911"
+  "build_url": "https://github.com/xenoterracide/kalix/actions/runs/29442852333",
+  "build_workflow": "build"
  },
  {
   "repo": "xenoterracide/repro-mvn4-yml",
@@ -5821,7 +5923,8 @@
   "lastknown_version": "4.0.0-rc-5",
   "renamed_to": "",
   "build": "SUCCESS",
-  "build_url": "https://github.com/xenoterracide/semver/actions/runs/29429128754"
+  "build_url": "https://github.com/xenoterracide/semver/actions/runs/29429128552",
+  "build_workflow": "build"
  },
  {
   "repo": "xiaomujin/cq-bot",
@@ -5834,8 +5937,8 @@
   "lastknown_signal": "https://github.com/JCrete/jcrete2024[JCrete/jcrete2024^]",
   "lastknown_version": "8",
   "renamed_to": "",
-  "build": "SUCCESS",
-  "build_url": "https://github.com/xiaomujin/cq-bot/actions/runs/24812957802"
+  "build": "NONE",
+  "build_url": ""
  },
  {
   "repo": "xxCoderforlife/zdeatharcade",
@@ -5877,7 +5980,8 @@
   "lastknown_version": "4.0.0-rc-4",
   "renamed_to": "",
   "build": "FAILURE",
-  "build_url": "https://github.com/yashsiwacha/Real-Time-Notification-System/actions/runs/26343852954"
+  "build_url": "https://github.com/yashsiwacha/Real-Time-Notification-System/actions/runs/26343852954",
+  "build_workflow": "CI-CD"
  },
  {
   "repo": "yersonluna/gestion-polizas",
@@ -5904,8 +6008,9 @@
   "lastknown_signal": "https://github.com/youngledo/sdkman-gui[youngledo/sdkman-gui^]",
   "lastknown_version": "12",
   "renamed_to": "",
-  "build": "SUCCESS",
-  "build_url": "https://github.com/youngledo/godot-java/actions/runs/26226563310"
+  "build": "AMBIGUOUS",
+  "build_url": "https://github.com/youngledo/godot-java/actions",
+  "build_workflow": "2 Maven workflows: 1 SUCCESS, 1 FAILURE"
  },
  {
   "repo": "youngledo/sdkman-gui",
@@ -5933,7 +6038,8 @@
   "lastknown_version": "4.0.0-rc-5",
   "renamed_to": "",
   "build": "SUCCESS",
-  "build_url": "https://github.com/yupiik/statura/actions/runs/27617374743"
+  "build_url": "https://github.com/yupiik/statura/actions/runs/27617374743",
+  "build_workflow": "Github CI"
  },
  {
   "repo": "yupiik/yupiik-chords",
@@ -5947,7 +6053,8 @@
   "lastknown_version": "0",
   "renamed_to": "",
   "build": "SUCCESS",
-  "build_url": "https://github.com/yupiik/yupiik-chords/actions/runs/22806357866"
+  "build_url": "https://github.com/yupiik/yupiik-chords/actions/runs/22806357866",
+  "build_workflow": "Github CI"
  },
  {
   "repo": "zahura0/it3030-paf-2026-smart-campus-Y3S2-WE-54",
@@ -5960,8 +6067,8 @@
   "lastknown_signal": "Wrapper",
   "lastknown_version": "4.0.0",
   "renamed_to": "",
-  "build": "FAILURE",
-  "build_url": "https://github.com/zahura0/it3030-paf-2026-smart-campus-Y3S2-WE-54/actions/runs/24929110288"
+  "build": "NONE",
+  "build_url": ""
  },
  {
   "repo": "zhaoyunxing92/incremental-compilation-lombok",
@@ -5989,6 +6096,7 @@
   "lastknown_version": "4.1.0",
   "renamed_to": "",
   "build": "SUCCESS",
-  "build_url": "https://github.com/zhoozhoo/spring-load-development/actions/runs/29172256163"
+  "build_url": "https://github.com/zhoozhoo/spring-load-development/actions/runs/24011640187",
+  "build_workflow": "Continuous Integration"
  }
 ]
