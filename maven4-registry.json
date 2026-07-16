@@ -1,6 +1,6 @@
 {
  "schema_version": 1,
- "updated": "2026-07-16T14:30:12Z",
+ "updated": "2026-07-16T16:23:36Z",
  "reconciliation": null,
  "repos": [
   {
@@ -229,7 +229,8 @@
    "build_url": "",
    "last_checked": "2026-07-16T14:29:46Z",
    "current_full_name": "AntonioST/jNeuroCarto",
-   "build_checked": "2026-07-16T14:30:04Z"
+   "build_checked": "2026-07-16T14:30:04Z",
+   "last_seen": "2026-07-16"
   },
   {
    "repo": "Anujyadav911/github-org-access-report",
@@ -299,7 +300,8 @@
    "build_url": "",
    "last_checked": "2026-07-16T14:29:47Z",
    "current_full_name": "Apress/Java-23-for-Absolute-Beginners",
-   "build_checked": "2026-07-16T14:30:05Z"
+   "build_checked": "2026-07-16T14:30:05Z",
+   "last_seen": "2026-07-16"
   },
   {
    "repo": "Arisgav/uamApp",
@@ -512,7 +514,8 @@
    "build_url": "",
    "last_checked": "2026-07-16T14:29:50Z",
    "current_full_name": "Codzs-Architecture/java-authorization-service",
-   "build_checked": "2026-07-16T14:30:06Z"
+   "build_checked": "2026-07-16T14:30:06Z",
+   "last_seen": "2026-07-16"
   },
   {
    "repo": "Codzs-Architecture/java-client-resource-service",
@@ -686,7 +689,8 @@
    "build_url": "",
    "last_checked": "2026-07-16T14:29:52Z",
    "current_full_name": "DeniDo11a/educational_equipment_accounting_system",
-   "build_checked": "2026-07-16T14:30:07Z"
+   "build_checked": "2026-07-16T14:30:07Z",
+   "last_seen": "2026-07-16"
   },
   {
    "repo": "DeshanDV1003/DEA-Inventory-Management-System",
@@ -1077,7 +1081,8 @@
    "build": "NONE",
    "build_url": "",
    "last_checked": "2026-07-16T14:29:55Z",
-   "current_full_name": "IFML2/ifml3"
+   "current_full_name": "IFML2/ifml3",
+   "build_checked": "2026-07-16T16:23:25Z"
   },
   {
    "repo": "IKE-Network/ike-base-parent",
@@ -1093,7 +1098,8 @@
    "build": "NONE",
    "build_url": "",
    "last_checked": "2026-07-16T14:29:56Z",
-   "current_full_name": "IKE-Network/ike-base-parent"
+   "current_full_name": "IKE-Network/ike-base-parent",
+   "build_checked": "2026-07-16T16:23:25Z"
   },
   {
    "repo": "IKE-Network/ike-tooling",
@@ -1110,7 +1116,8 @@
    "build_url": "",
    "last_seen": "2026-07-16",
    "last_checked": "2026-07-16T14:29:56Z",
-   "current_full_name": "IKE-Network/ike-tooling"
+   "current_full_name": "IKE-Network/ike-tooling",
+   "build_checked": "2026-07-16T16:23:25Z"
   },
   {
    "repo": "IgnacioSantanaEN/Proyecto-FullStack-III",
@@ -1126,7 +1133,8 @@
    "build": "NONE",
    "build_url": "",
    "last_checked": "2026-07-16T14:29:56Z",
-   "current_full_name": "IgnacioSantanaEN/Proyecto-FullStack-III"
+   "current_full_name": "IgnacioSantanaEN/Proyecto-FullStack-III",
+   "build_checked": "2026-07-16T16:23:25Z"
   },
   {
    "repo": "JCrete/jcrete2024",
@@ -1143,7 +1151,8 @@
    "build_url": "",
    "last_seen": "2026-07-16",
    "last_checked": "2026-07-16T14:29:56Z",
-   "current_full_name": "JCrete/jcrete2024"
+   "current_full_name": "JCrete/jcrete2024",
+   "build_checked": "2026-07-16T16:23:25Z"
   },
   {
    "repo": "JLGomezEncinar/ProyectoMaven",
@@ -1160,7 +1169,8 @@
    "build_url": "",
    "last_seen": "2026-07-16",
    "last_checked": "2026-07-16T14:29:56Z",
-   "current_full_name": "JLGomezEncinar/ProyectoMaven"
+   "current_full_name": "JLGomezEncinar/ProyectoMaven",
+   "build_checked": "2026-07-16T16:23:25Z"
   },
   {
    "repo": "KiritanFoundation/AntiKotlin",
@@ -1176,7 +1186,9 @@
    "build": "NONE",
    "build_url": "",
    "last_checked": "2026-07-16T14:29:56Z",
-   "current_full_name": "KiritanFoundation/AntiKotlin"
+   "current_full_name": "KiritanFoundation/AntiKotlin",
+   "last_seen": "2026-07-16",
+   "build_checked": "2026-07-16T16:23:25Z"
   },
   {
    "repo": "KotexChick00/atg-academy",
@@ -1193,7 +1205,8 @@
    "build_url": "",
    "last_seen": "2026-07-16",
    "last_checked": "2026-07-16T14:29:56Z",
-   "current_full_name": "KotexChick00/atg-academy"
+   "current_full_name": "KotexChick00/atg-academy",
+   "build_checked": "2026-07-16T16:23:25Z"
   },
   {
    "repo": "Lubrum/dsdeliver-sds-backend",
@@ -1210,7 +1223,8 @@
    "build_url": "",
    "last_seen": "2026-07-16",
    "last_checked": "2026-07-16T14:29:57Z",
-   "current_full_name": "Lubrum/dsdeliver-sds-backend"
+   "current_full_name": "Lubrum/dsdeliver-sds-backend",
+   "build_checked": "2026-07-16T16:23:26Z"
   },
   {
    "repo": "LuisFelipeRC1/desafio-sistema-de-transferencia",
@@ -1226,7 +1240,8 @@
    "build": "NONE",
    "build_url": "",
    "last_checked": "2026-07-16T14:29:57Z",
-   "current_full_name": "LuisFelipeRC1/desafio-sistema-de-transferencia"
+   "current_full_name": "LuisFelipeRC1/desafio-sistema-de-transferencia",
+   "build_checked": "2026-07-16T16:23:26Z"
   },
   {
    "repo": "M4gic1540/GrupoCordillera",
@@ -1243,7 +1258,8 @@
    "build_url": "",
    "last_seen": "2026-07-16",
    "last_checked": "2026-07-16T14:29:57Z",
-   "current_full_name": "M4gic1540/GrupoCordillera"
+   "current_full_name": "M4gic1540/GrupoCordillera",
+   "build_checked": "2026-07-16T16:23:26Z"
   },
   {
    "repo": "Madzi/branch-check-maven-plugin",
@@ -1258,9 +1274,10 @@
    "renamed_to": "",
    "build": "SUCCESS",
    "build_url": "https://github.com/Madzi/branch-check-maven-plugin/actions/runs/18477273427",
-   "build_workflow": "2 Maven workflows, all agree",
    "last_checked": "2026-07-16T14:29:58Z",
-   "current_full_name": "Madzi/branch-check-maven-plugin"
+   "current_full_name": "Madzi/branch-check-maven-plugin",
+   "build_checked": "2026-07-16T16:23:26Z",
+   "build_workflow": "2 Maven workflows, all agree"
   },
   {
    "repo": "Manas0110-01/Recallo",
@@ -1276,7 +1293,8 @@
    "build": "NONE",
    "build_url": "",
    "last_checked": "2026-07-16T14:29:58Z",
-   "current_full_name": "Manas0110-01/Recallo"
+   "current_full_name": "Manas0110-01/Recallo",
+   "build_checked": "2026-07-16T16:23:26Z"
   },
   {
    "repo": "MorphiaOrg/morphia",
@@ -1291,10 +1309,11 @@
    "renamed_to": "",
    "build": "SUCCESS",
    "build_url": "https://github.com/MorphiaOrg/morphia/actions/runs/28684267119",
-   "build_workflow": "Build Project",
    "last_seen": "2026-07-16",
    "last_checked": "2026-07-16T14:29:58Z",
-   "current_full_name": "MorphiaOrg/morphia"
+   "current_full_name": "MorphiaOrg/morphia",
+   "build_checked": "2026-07-16T16:23:26Z",
+   "build_workflow": "Build Project"
   },
   {
    "repo": "MukundP13/QwApp",
@@ -1310,7 +1329,8 @@
    "build": "NONE",
    "build_url": "",
    "last_checked": "2026-07-16T14:29:58Z",
-   "current_full_name": "MukundP13/QwApp"
+   "current_full_name": "MukundP13/QwApp",
+   "build_checked": "2026-07-16T16:23:27Z"
   },
   {
    "repo": "MunSunch/VacationPayServiceVar2",
@@ -1327,7 +1347,8 @@
    "build_url": "",
    "last_seen": "2026-07-16",
    "last_checked": "2026-07-16T14:29:59Z",
-   "current_full_name": "MunSunch/VacationPayServiceVar2"
+   "current_full_name": "MunSunch/VacationPayServiceVar2",
+   "build_checked": "2026-07-16T16:23:27Z"
   },
   {
    "repo": "Navoda18/3yp-project-railway",
@@ -1343,7 +1364,9 @@
    "build": "NONE",
    "build_url": "",
    "last_checked": "2026-07-16T14:29:58Z",
-   "current_full_name": "Navoda18/3yp-project-railway"
+   "current_full_name": "Navoda18/3yp-project-railway",
+   "last_seen": "2026-07-16",
+   "build_checked": "2026-07-16T16:23:27Z"
   },
   {
    "repo": "Nicolascuervor/VeterinaryCUE-API-Backend",
@@ -1359,7 +1382,9 @@
    "build": "NONE",
    "build_url": "",
    "last_checked": "2026-07-16T14:29:59Z",
-   "current_full_name": "Nicolascuervor/VeterinaryCUE-API-Backend"
+   "current_full_name": "Nicolascuervor/VeterinaryCUE-API-Backend",
+   "last_seen": "2026-07-16",
+   "build_checked": "2026-07-16T16:23:27Z"
   },
   {
    "repo": "Nom-Nom-Now/nom-nom-now-backend",
@@ -1375,7 +1400,8 @@
    "build": "NONE",
    "build_url": "",
    "last_checked": "2026-07-16T14:29:59Z",
-   "current_full_name": "Nom-Nom-Now/nom-nom-now-backend"
+   "current_full_name": "Nom-Nom-Now/nom-nom-now-backend",
+   "build_checked": "2026-07-16T16:23:27Z"
   },
   {
    "repo": "OlivierHermans/gh-actions",
@@ -1392,7 +1418,8 @@
    "build_url": "",
    "last_seen": "2026-07-16",
    "last_checked": "2026-07-16T14:29:59Z",
-   "current_full_name": "OlivierHermans/gh-actions"
+   "current_full_name": "OlivierHermans/gh-actions",
+   "build_checked": "2026-07-16T16:23:28Z"
   },
   {
    "repo": "PAEC07/Kino_Management",
@@ -1407,10 +1434,11 @@
    "renamed_to": "",
    "build": "SUCCESS",
    "build_url": "https://github.com/PAEC07/Kino_Management/actions/runs/22397694670",
-   "build_workflow": "Java CI with Maven",
    "last_seen": "2026-07-16",
    "last_checked": "2026-07-16T14:29:59Z",
-   "current_full_name": "PAEC07/Kino_Management"
+   "current_full_name": "PAEC07/Kino_Management",
+   "build_checked": "2026-07-16T16:23:28Z",
+   "build_workflow": "Java CI with Maven"
   },
   {
    "repo": "Pakisan/jarazzo",
@@ -1426,7 +1454,8 @@
    "build": "NONE",
    "build_url": "",
    "last_checked": "2026-07-16T14:29:59Z",
-   "current_full_name": "Pakisan/jarazzo"
+   "current_full_name": "Pakisan/jarazzo",
+   "build_checked": "2026-07-16T16:23:28Z"
   },
   {
    "repo": "Pedro-areis/web-wallet",
@@ -1443,7 +1472,8 @@
    "build_url": "",
    "last_seen": "2026-07-16",
    "last_checked": "2026-07-16T14:29:59Z",
-   "current_full_name": "Pedro-areis/web-wallet"
+   "current_full_name": "Pedro-areis/web-wallet",
+   "build_checked": "2026-07-16T16:23:29Z"
   },
   {
    "repo": "Pi4J/pi4j",
@@ -1458,10 +1488,11 @@
    "renamed_to": "",
    "build": "AMBIGUOUS",
    "build_url": "https://github.com/Pi4J/pi4j/actions",
-   "build_workflow": "2 Maven workflows: 1 FAILURE, 1 SUCCESS",
    "last_seen": "2026-07-16",
    "last_checked": "2026-07-16T14:29:59Z",
-   "current_full_name": "Pi4J/pi4j"
+   "current_full_name": "Pi4J/pi4j",
+   "build_checked": "2026-07-16T16:23:29Z",
+   "build_workflow": "2 Maven workflows: 1 FAILURE, 1 SUCCESS"
   },
   {
    "repo": "PieByter/springboot-healthcare-api",
@@ -1477,7 +1508,8 @@
    "build": "NONE",
    "build_url": "",
    "last_checked": "2026-07-16T14:29:59Z",
-   "current_full_name": "PieByter/springboot-healthcare-api"
+   "current_full_name": "PieByter/springboot-healthcare-api",
+   "build_checked": "2026-07-16T16:23:29Z"
   },
   {
    "repo": "Prionto2405012/PokemonBattle",
@@ -1494,7 +1526,8 @@
    "build_url": "",
    "last_seen": "2026-07-16",
    "last_checked": "2026-07-16T14:30:00Z",
-   "current_full_name": "Prionto2405012/PokemonBattle"
+   "current_full_name": "Prionto2405012/PokemonBattle",
+   "build_checked": "2026-07-16T16:23:29Z"
   },
   {
    "repo": "RITHISHM2696/Compilix-AI-Powered-Code-Execution-Platform",
@@ -1511,7 +1544,8 @@
    "build_url": "",
    "last_seen": "2026-07-16",
    "last_checked": "2026-07-16T14:30:00Z",
-   "current_full_name": "RITHISHM2696/Compilix-AI-Powered-Code-Execution-Platform"
+   "current_full_name": "RITHISHM2696/Compilix-AI-Powered-Code-Execution-Platform",
+   "build_checked": "2026-07-16T16:23:29Z"
   },
   {
    "repo": "RalfNaujokat/xui",
@@ -1527,7 +1561,8 @@
    "build": "NONE",
    "build_url": "",
    "last_checked": "2026-07-16T14:30:00Z",
-   "current_full_name": "RalfNaujokat/xui"
+   "current_full_name": "RalfNaujokat/xui",
+   "build_checked": "2026-07-16T16:23:29Z"
   },
   {
    "repo": "Ranjith-2005289/PeSocial",
@@ -1543,7 +1578,8 @@
    "build": "NONE",
    "build_url": "",
    "last_checked": "2026-07-16T14:30:00Z",
-   "current_full_name": "Ranjith-2005289/PeSocial"
+   "current_full_name": "Ranjith-2005289/PeSocial",
+   "build_checked": "2026-07-16T16:23:29Z"
   },
   {
    "repo": "RobertMeissner/JavaLearning",
@@ -1559,7 +1595,8 @@
    "build": "NONE",
    "build_url": "",
    "last_checked": "2026-07-16T14:30:00Z",
-   "current_full_name": "RobertMeissner/JavaLearning"
+   "current_full_name": "RobertMeissner/JavaLearning",
+   "build_checked": "2026-07-16T16:23:29Z"
   },
   {
    "repo": "Roman-Anikin/java-explore-with-me",
@@ -1575,7 +1612,8 @@
    "build": "NONE",
    "build_url": "",
    "last_checked": "2026-07-16T14:30:00Z",
-   "current_full_name": "Roman-Anikin/java-explore-with-me"
+   "current_full_name": "Roman-Anikin/java-explore-with-me",
+   "build_checked": "2026-07-16T16:23:29Z"
   },
   {
    "repo": "Roman-Anikin/java-fullstack-games",
@@ -1591,7 +1629,8 @@
    "build": "NONE",
    "build_url": "",
    "last_checked": "2026-07-16T14:30:00Z",
-   "current_full_name": "Roman-Anikin/java-fullstack-games"
+   "current_full_name": "Roman-Anikin/java-fullstack-games",
+   "build_checked": "2026-07-16T16:23:30Z"
   },
   {
    "repo": "Roman-Anikin/java-shareit",
@@ -1607,7 +1646,8 @@
    "build": "NONE",
    "build_url": "",
    "last_checked": "2026-07-16T14:30:01Z",
-   "current_full_name": "Roman-Anikin/java-shareit"
+   "current_full_name": "Roman-Anikin/java-shareit",
+   "build_checked": "2026-07-16T16:23:30Z"
   },
   {
    "repo": "SAP/olingo-jpa-processor-v4",
@@ -1622,10 +1662,11 @@
    "renamed_to": "",
    "build": "SUCCESS",
    "build_url": "https://github.com/SAP/olingo-jpa-processor-v4/actions/runs/27064804061",
-   "build_workflow": "4 Maven workflows, all agree",
    "last_seen": "2026-07-16",
    "last_checked": "2026-07-16T14:30:01Z",
-   "current_full_name": "SAP/olingo-jpa-processor-v4"
+   "current_full_name": "SAP/olingo-jpa-processor-v4",
+   "build_checked": "2026-07-16T16:23:30Z",
+   "build_workflow": "4 Maven workflows, all agree"
   },
   {
    "repo": "SUMIT74184/WolfDire-Central-Infra",
@@ -1641,7 +1682,9 @@
    "build": "NONE",
    "build_url": "",
    "last_checked": "2026-07-16T14:30:01Z",
-   "current_full_name": "SUMIT74184/WolfDire-Central-Infra"
+   "current_full_name": "SUMIT74184/WolfDire-Central-Infra",
+   "last_seen": "2026-07-16",
+   "build_checked": "2026-07-16T16:23:30Z"
   },
   {
    "repo": "SabrinaFurtado/blog_pessoal-server",
@@ -1658,7 +1701,8 @@
    "build_url": "",
    "last_seen": "2026-07-16",
    "last_checked": "2026-07-16T14:30:01Z",
-   "current_full_name": "SabrinaFurtado/blog_pessoal-server"
+   "current_full_name": "SabrinaFurtado/blog_pessoal-server",
+   "build_checked": "2026-07-16T16:23:30Z"
   },
   {
    "repo": "SandeebAdhikari/taskflow",
@@ -1673,9 +1717,10 @@
    "renamed_to": "",
    "build": "FAILURE",
    "build_url": "https://github.com/SandeebAdhikari/taskflow/actions/runs/27139320137",
-   "build_workflow": "CI",
    "last_checked": "2026-07-16T14:30:01Z",
-   "current_full_name": "SandeebAdhikari/taskflow"
+   "current_full_name": "SandeebAdhikari/taskflow",
+   "build_checked": "2026-07-16T16:23:30Z",
+   "build_workflow": "CI"
   },
   {
    "repo": "Shashika12917/it3030-paf-2026-smart-campus",
@@ -1692,7 +1737,8 @@
    "build_url": "",
    "last_seen": "2026-07-16",
    "last_checked": "2026-07-16T14:30:01Z",
-   "current_full_name": "Shashika12917/it3030-paf-2026-smart-campus"
+   "current_full_name": "Shashika12917/it3030-paf-2026-smart-campus",
+   "build_checked": "2026-07-16T16:23:30Z"
   },
   {
    "repo": "Shegitu/ChatApp",
@@ -1708,7 +1754,8 @@
    "build": "NONE",
    "build_url": "",
    "last_checked": "2026-07-16T14:30:02Z",
-   "current_full_name": "Shegitu/ChatApp"
+   "current_full_name": "Shegitu/ChatApp",
+   "build_checked": "2026-07-16T16:23:30Z"
   },
   {
    "repo": "Shegitu/OOP-Projects",
@@ -1725,7 +1772,8 @@
    "build_url": "",
    "last_seen": "2026-07-16",
    "last_checked": "2026-07-16T14:30:02Z",
-   "current_full_name": "Shegitu/OOP-Projects"
+   "current_full_name": "Shegitu/OOP-Projects",
+   "build_checked": "2026-07-16T16:23:31Z"
   },
   {
    "repo": "ShreyPan/Billr",
@@ -1736,11 +1784,14 @@
    "live_version": "4.0.0-rc-5",
    "source": "nested:billr-backend/.mvn/wrapper/maven-wrapper.properties",
    "lastknown_signal": "Wrapper",
-   "lastknown_version": "4.0.0",
+   "lastknown_version": "4.0.0-rc-5",
    "renamed_to": "",
    "build": "NONE",
    "build_url": "",
-   "last_seen": "2026-07-16"
+   "last_seen": "2026-07-16",
+   "last_checked": "2026-07-16T16:23:04Z",
+   "current_full_name": "ShreyPan/Billr",
+   "build_checked": "2026-07-16T16:23:31Z"
   },
   {
    "repo": "Shubhambhagat3226/github-activity-cli",
@@ -1750,12 +1801,15 @@
    "live_signal": "Wrapper",
    "live_version": "4.0.0-rc-5",
    "source": "root",
-   "lastknown_signal": "https://github.com/mgzu/dubbo-samples[mgzu/dubbo-samples^]",
-   "lastknown_version": "4",
+   "lastknown_signal": "Wrapper",
+   "lastknown_version": "4.0.0-rc-5",
    "renamed_to": "",
    "build": "NONE",
    "build_url": "",
-   "last_seen": "2026-07-16"
+   "last_seen": "2026-07-16",
+   "last_checked": "2026-07-16T16:23:05Z",
+   "current_full_name": "Shubhambhagat3226/github-activity-cli",
+   "build_checked": "2026-07-16T16:23:31Z"
   },
   {
    "repo": "Siddd-hrr/QPrint-Extension",
@@ -1770,6 +1824,9 @@
    "renamed_to": "",
    "build": "SUCCESS",
    "build_url": "https://github.com/Siddd-hrr/QPrint-Extension/actions/runs/23937163742",
+   "last_checked": "2026-07-16T16:23:04Z",
+   "current_full_name": "Siddd-hrr/QPrint-Extension",
+   "build_checked": "2026-07-16T16:23:31Z",
    "build_workflow": "CI"
   },
   {
@@ -1785,7 +1842,10 @@
    "renamed_to": "",
    "build": "NONE",
    "build_url": "",
-   "last_seen": "2026-07-16"
+   "last_seen": "2026-07-16",
+   "last_checked": "2026-07-16T16:23:04Z",
+   "current_full_name": "Siomai0-hi/CafeWeb",
+   "build_checked": "2026-07-16T16:23:31Z"
   },
   {
    "repo": "Stephen-Agyemang/Zork-v2",
@@ -1796,12 +1856,15 @@
    "live_version": "4.0.0-rc-5",
    "source": "nested:myproject/.mvn/wrapper/maven-wrapper.properties",
    "lastknown_signal": "Wrapper",
-   "lastknown_version": "4.0.0",
+   "lastknown_version": "4.0.0-rc-5",
    "renamed_to": "",
    "build": "SUCCESS",
    "build_url": "https://github.com/Stephen-Agyemang/Zork-v2/actions/runs/29444898665",
-   "build_workflow": "CI",
-   "last_seen": "2026-07-16"
+   "last_seen": "2026-07-16",
+   "last_checked": "2026-07-16T16:23:04Z",
+   "current_full_name": "Stephen-Agyemang/Zork-v2",
+   "build_checked": "2026-07-16T16:23:31Z",
+   "build_workflow": "CI"
   },
   {
    "repo": "SylvieHoareau/livranoo",
@@ -1812,11 +1875,14 @@
    "live_version": "4.0.0-rc-5",
    "source": "nested:api/.mvn/wrapper/maven-wrapper.properties",
    "lastknown_signal": "Wrapper",
-   "lastknown_version": "4.0.0",
+   "lastknown_version": "4.0.0-rc-5",
    "renamed_to": "",
    "build": "NONE",
    "build_url": "",
-   "last_seen": "2026-07-16"
+   "last_seen": "2026-07-16",
+   "last_checked": "2026-07-16T16:23:04Z",
+   "current_full_name": "SylvieHoareau/livranoo",
+   "build_checked": "2026-07-16T16:23:31Z"
   },
   {
    "repo": "Tanmayakaranth/OOAD_Smart-Restaurant-",
@@ -1830,7 +1896,10 @@
    "lastknown_version": "4.0.0-rc-5",
    "renamed_to": "",
    "build": "NONE",
-   "build_url": ""
+   "build_url": "",
+   "last_checked": "2026-07-16T16:23:04Z",
+   "current_full_name": "Tanmayakaranth/OOAD_Smart-Restaurant-",
+   "build_checked": "2026-07-16T16:23:31Z"
   },
   {
    "repo": "TheSphynxoid/Esprit-PIDEV-4SE1-2526-EspritMarket",
@@ -1840,11 +1909,14 @@
    "live_signal": "Wrapper",
    "live_version": "4.0.0-rc-5",
    "source": "nested:backend/.mvn/wrapper/maven-wrapper.properties",
-   "lastknown_signal": null,
-   "lastknown_version": null,
+   "lastknown_signal": "Wrapper",
+   "lastknown_version": "4.0.0-rc-5",
    "renamed_to": "",
    "build": "NONE",
-   "build_url": ""
+   "build_url": "",
+   "last_checked": "2026-07-16T16:23:04Z",
+   "current_full_name": "TheSphynxoid/Esprit-PIDEV-4SE1-2526-EspritMarket",
+   "build_checked": "2026-07-16T16:23:32Z"
   },
   {
    "repo": "Thejuampi/training-coach",
@@ -1855,12 +1927,15 @@
    "live_version": "4.0.0-rc-5",
    "source": "root",
    "lastknown_signal": "Wrapper",
-   "lastknown_version": "4.0.0",
+   "lastknown_version": "4.0.0-rc-5",
    "renamed_to": "",
    "build": "FAILURE",
    "build_url": "https://github.com/Thejuampi/training-coach/actions/runs/21439201274",
-   "build_workflow": "CI",
-   "last_seen": "2026-07-16"
+   "last_seen": "2026-07-16",
+   "last_checked": "2026-07-16T16:23:05Z",
+   "current_full_name": "Thejuampi/training-coach",
+   "build_checked": "2026-07-16T16:23:32Z",
+   "build_workflow": "CI"
   },
   {
    "repo": "Thiez703/PointTrack_BE",
@@ -1871,11 +1946,14 @@
    "live_version": "4.0.0-rc-5",
    "source": "root",
    "lastknown_signal": "Wrapper",
-   "lastknown_version": "4.0.0",
+   "lastknown_version": "4.0.0-rc-5",
    "renamed_to": "",
    "build": "NONE",
    "build_url": "",
-   "last_seen": "2026-07-16"
+   "last_seen": "2026-07-16",
+   "last_checked": "2026-07-16T16:23:06Z",
+   "current_full_name": "Thiez703/PointTrack_BE",
+   "build_checked": "2026-07-16T16:23:32Z"
   },
   {
    "repo": "Thomasramos02/MpFitnessBack",
@@ -1886,11 +1964,14 @@
    "live_version": "4.0.0-rc-5",
    "source": "root",
    "lastknown_signal": "Wrapper",
-   "lastknown_version": "4.0.0",
+   "lastknown_version": "4.0.0-rc-5",
    "renamed_to": "",
    "build": "NONE",
    "build_url": "",
-   "last_seen": "2026-07-16"
+   "last_seen": "2026-07-16",
+   "last_checked": "2026-07-16T16:23:06Z",
+   "current_full_name": "Thomasramos02/MpFitnessBack",
+   "build_checked": "2026-07-16T16:23:32Z"
   },
   {
    "repo": "Timongcraft/Tgc-OutlineBackup",
@@ -1905,7 +1986,10 @@
    "renamed_to": "",
    "build": "NONE",
    "build_url": "",
-   "last_seen": "2026-07-16"
+   "last_seen": "2026-07-16",
+   "last_checked": "2026-07-16T16:23:06Z",
+   "current_full_name": "Timongcraft/Tgc-OutlineBackup",
+   "build_checked": "2026-07-16T16:23:32Z"
   },
   {
    "repo": "ToanNguyen13025/SnmpMonitoring",
@@ -1916,10 +2000,14 @@
    "live_version": "4.0.0-rc-3",
    "source": "nested:backend/.mvn/wrapper/maven-wrapper.properties",
    "lastknown_signal": "Wrapper",
-   "lastknown_version": "4.0.0",
+   "lastknown_version": "4.0.0-rc-3",
    "renamed_to": "",
    "build": "NONE",
-   "build_url": ""
+   "build_url": "",
+   "last_seen": "2026-07-16",
+   "last_checked": "2026-07-16T16:23:06Z",
+   "current_full_name": "ToanNguyen13025/SnmpMonitoring",
+   "build_checked": "2026-07-16T16:23:33Z"
   },
   {
    "repo": "TokimuneFIN/Elektroniikkakauppa",
@@ -1930,11 +2018,14 @@
    "live_version": "4.0.0-rc-5",
    "source": "root",
    "lastknown_signal": "Wrapper",
-   "lastknown_version": "4.0.0",
+   "lastknown_version": "4.0.0-rc-5",
    "renamed_to": "",
    "build": "NONE",
    "build_url": "",
-   "last_seen": "2026-07-16"
+   "last_seen": "2026-07-16",
+   "last_checked": "2026-07-16T16:23:06Z",
+   "current_full_name": "TokimuneFIN/Elektroniikkakauppa",
+   "build_checked": "2026-07-16T16:23:33Z"
   },
   {
    "repo": "UrieLara/Reservation-API",
@@ -1949,7 +2040,10 @@
    "renamed_to": "",
    "build": "NONE",
    "build_url": "",
-   "last_seen": "2026-07-16"
+   "last_seen": "2026-07-16",
+   "last_checked": "2026-07-16T16:23:06Z",
+   "current_full_name": "UrieLara/Reservation-API",
+   "build_checked": "2026-07-16T16:23:33Z"
   },
   {
    "repo": "Utsav-633/PasswordManager",
@@ -1963,7 +2057,10 @@
    "lastknown_version": "4.0.0-rc-5",
    "renamed_to": "",
    "build": "NONE",
-   "build_url": ""
+   "build_url": "",
+   "last_checked": "2026-07-16T16:23:07Z",
+   "current_full_name": "Utsav-633/PasswordManager",
+   "build_checked": "2026-07-16T16:23:33Z"
   },
   {
    "repo": "VG-Correa/sugflora-api",
@@ -1974,26 +2071,32 @@
    "live_version": "4.0.0-alpha-13",
    "source": "root",
    "lastknown_signal": "Wrapper",
-   "lastknown_version": "4.0.0",
+   "lastknown_version": "4.0.0-alpha-13",
    "renamed_to": "",
    "build": "NONE",
-   "build_url": ""
+   "build_url": "",
+   "last_checked": "2026-07-16T16:23:07Z",
+   "current_full_name": "VG-Correa/sugflora-api",
+   "build_checked": "2026-07-16T16:23:33Z"
   },
   {
    "repo": "Workday/spin.build",
    "state": "active",
    "stars": 2,
-   "pushed_at": "2026-07-15",
-   "live_signal": "Wrapper",
-   "live_version": "4.0.0-rc-5",
-   "source": "nested:fixtures/maven/maven4-upgrade/.mvn/wrapper/maven-wrapper.properties",
+   "pushed_at": "2026-07-16",
+   "live_signal": null,
+   "live_version": null,
+   "source": null,
    "lastknown_signal": "Wrapper",
    "lastknown_version": "4.0.0",
    "renamed_to": "",
    "build": "SUCCESS",
    "build_url": "https://github.com/Workday/spin.build/actions/runs/29491035185",
-   "build_workflow": "2 Maven workflows, all agree",
-   "last_seen": "2026-07-16"
+   "last_seen": "2026-07-16",
+   "last_checked": "2026-07-16T16:23:07Z",
+   "current_full_name": "Workday/spin.build",
+   "build_checked": "2026-07-16T16:23:33Z",
+   "build_workflow": "2 Maven workflows, all agree"
   },
   {
    "repo": "XLaiHuy/Back-spring-NCKH",
@@ -2003,12 +2106,15 @@
    "live_signal": "Wrapper",
    "live_version": "4.0.0-rc-4",
    "source": "nested:src/back-spring/.mvn/wrapper/maven-wrapper.properties",
-   "lastknown_signal": "https://github.com/XLaiHuy/FullStack-SciencetTificProducts-Mangament[XLaiHuy/FullStack-SciencetTificProducts-Mangament^]",
-   "lastknown_version": "0",
+   "lastknown_signal": "Wrapper",
+   "lastknown_version": "4.0.0-rc-4",
    "renamed_to": "",
    "build": "NONE",
    "build_url": "",
-   "last_seen": "2026-07-16"
+   "last_seen": "2026-07-16",
+   "last_checked": "2026-07-16T16:23:07Z",
+   "current_full_name": "XLaiHuy/Back-spring-NCKH",
+   "build_checked": "2026-07-16T16:23:33Z"
   },
   {
    "repo": "XLaiHuy/FullStack-SciencetTificProducts-Mangament",
@@ -2019,11 +2125,14 @@
    "live_version": "4.0.0-rc-4",
    "source": "nested:src/back-spring/.mvn/wrapper/maven-wrapper.properties",
    "lastknown_signal": "Wrapper",
-   "lastknown_version": "4.0.0",
+   "lastknown_version": "4.0.0-rc-4",
    "renamed_to": "",
    "build": "NONE",
    "build_url": "",
-   "last_seen": "2026-07-16"
+   "last_seen": "2026-07-16",
+   "last_checked": "2026-07-16T16:23:07Z",
+   "current_full_name": "XLaiHuy/FullStack-SciencetTificProducts-Mangament",
+   "build_checked": "2026-07-16T16:23:33Z"
   },
   {
    "repo": "XiaoTie123/Dental_POS",
@@ -2034,11 +2143,13 @@
    "live_version": "4.0.0-rc-2",
    "source": "root",
    "lastknown_signal": "Wrapper",
-   "lastknown_version": "4.0.0",
+   "lastknown_version": "4.0.0-rc-2",
    "renamed_to": "",
    "build": "NONE",
    "build_url": "",
-   "last_seen": "2026-07-16"
+   "last_seen": "2026-07-16",
+   "last_checked": "2026-07-16T16:23:08Z",
+   "current_full_name": "XiaoTie123/Dental_POS"
   },
   {
    "repo": "YaminoJakkaru/java-filmorate",
@@ -2049,11 +2160,13 @@
    "live_version": "4.0.0-alpha-2",
    "source": "root",
    "lastknown_signal": "Wrapper",
-   "lastknown_version": "4.0.0",
+   "lastknown_version": "4.0.0-alpha-2",
    "renamed_to": "",
    "build": "NONE",
    "build_url": "",
-   "last_seen": "2026-07-16"
+   "last_seen": "2026-07-16",
+   "last_checked": "2026-07-16T16:23:08Z",
+   "current_full_name": "YaminoJakkaru/java-filmorate"
   },
   {
    "repo": "ZaHyirrr/NCKH",
@@ -2064,11 +2177,13 @@
    "live_version": "4.0.0-rc-4",
    "source": "nested:src/back-spring/.mvn/wrapper/maven-wrapper.properties",
    "lastknown_signal": "Wrapper",
-   "lastknown_version": "4.0.0",
+   "lastknown_version": "4.0.0-rc-4",
    "renamed_to": "",
    "build": "NONE",
    "build_url": "",
-   "last_seen": "2026-07-16"
+   "last_seen": "2026-07-16",
+   "last_checked": "2026-07-16T16:23:08Z",
+   "current_full_name": "ZaHyirrr/NCKH"
   },
   {
    "repo": "ZaHyirrr/NCKH-new",
@@ -2079,11 +2194,13 @@
    "live_version": "4.0.0-rc-4",
    "source": "nested:src/back-spring/.mvn/wrapper/maven-wrapper.properties",
    "lastknown_signal": "Wrapper",
-   "lastknown_version": "4.0.0",
+   "lastknown_version": "4.0.0-rc-4",
    "renamed_to": "",
    "build": "NONE",
    "build_url": "",
-   "last_seen": "2026-07-16"
+   "last_seen": "2026-07-16",
+   "last_checked": "2026-07-16T16:23:08Z",
+   "current_full_name": "ZaHyirrr/NCKH-new"
   },
   {
    "repo": "a114mc/old-a114-klassmaster",
@@ -2097,7 +2214,9 @@
    "lastknown_version": "4.0.0-rc-5",
    "renamed_to": "",
    "build": "NONE",
-   "build_url": ""
+   "build_url": "",
+   "last_checked": "2026-07-16T16:23:08Z",
+   "current_full_name": "a114mc/old-a114-klassmaster"
   },
   {
    "repo": "aahona-16/UPI_Without_Internet",
@@ -2108,11 +2227,13 @@
    "live_version": "4.0.0-rc-4",
    "source": "root",
    "lastknown_signal": "Wrapper",
-   "lastknown_version": "4.0.0",
+   "lastknown_version": "4.0.0-rc-4",
    "renamed_to": "",
    "build": "NONE",
    "build_url": "",
-   "last_seen": "2026-07-16"
+   "last_seen": "2026-07-16",
+   "last_checked": "2026-07-16T16:23:09Z",
+   "current_full_name": "aahona-16/UPI_Without_Internet"
   },
   {
    "repo": "abdulazimkhan26/hrms_backend",
@@ -2126,7 +2247,8 @@
    "lastknown_version": "4.1.0 (POM model)",
    "renamed_to": "",
    "build": "",
-   "build_url": ""
+   "build_url": "",
+   "last_checked": "2026-07-16T16:23:09Z"
   },
   {
    "repo": "adaamortiiz/Somax",
@@ -2137,11 +2259,13 @@
    "live_version": "4.0.0-rc-5",
    "source": "nested:backend/.mvn/wrapper/maven-wrapper.properties",
    "lastknown_signal": "Wrapper",
-   "lastknown_version": "4.0.0",
+   "lastknown_version": "4.0.0-rc-5",
    "renamed_to": "",
    "build": "NONE",
    "build_url": "",
-   "last_seen": "2026-07-16"
+   "last_seen": "2026-07-16",
+   "last_checked": "2026-07-16T16:23:09Z",
+   "current_full_name": "adaamortiiz/Somax"
   },
   {
    "repo": "adityasagar1125-lgtm/iwt-demo",
@@ -2155,7 +2279,9 @@
    "lastknown_version": "4.0.0-rc-5",
    "renamed_to": "",
    "build": "NONE",
-   "build_url": ""
+   "build_url": "",
+   "last_checked": "2026-07-16T16:23:10Z",
+   "current_full_name": "adityasagar1125-lgtm/iwt-demo"
   },
   {
    "repo": "ajavageek/flatten-kotlin-recipe",
@@ -2166,10 +2292,12 @@
    "live_version": "4.0.0-rc-3",
    "source": "root",
    "lastknown_signal": "Wrapper",
-   "lastknown_version": "4.0.0",
+   "lastknown_version": "4.0.0-rc-3",
    "renamed_to": "",
    "build": "NONE",
-   "build_url": ""
+   "build_url": "",
+   "last_checked": "2026-07-16T16:23:09Z",
+   "current_full_name": "ajavageek/flatten-kotlin-recipe"
   },
   {
    "repo": "ajavageek/otel-jvm",
@@ -2180,11 +2308,13 @@
    "live_version": "4.0.0-rc-3",
    "source": "nested:otel-boot-agent/.mvn/wrapper/maven-wrapper.properties",
    "lastknown_signal": "Wrapper",
-   "lastknown_version": "4.0.0",
+   "lastknown_version": "4.0.0-rc-3",
    "renamed_to": "",
    "build": "NONE",
    "build_url": "",
-   "last_seen": "2026-07-16"
+   "last_seen": "2026-07-16",
+   "last_checked": "2026-07-16T16:23:09Z",
+   "current_full_name": "ajavageek/otel-jvm"
   },
   {
    "repo": "akannkereuwem1/LatencyLab",
@@ -2199,7 +2329,9 @@
    "renamed_to": "",
    "build": "NONE",
    "build_url": "",
-   "last_seen": "2026-07-16"
+   "last_seen": "2026-07-16",
+   "last_checked": "2026-07-16T16:23:10Z",
+   "current_full_name": "akannkereuwem1/LatencyLab"
   },
   {
    "repo": "akdukaan/DrMap",
@@ -2210,10 +2342,12 @@
    "live_version": "4.1.0 (POM model)",
    "source": "root",
    "lastknown_signal": "POM 4.1.0",
-   "lastknown_version": "4.1.0",
+   "lastknown_version": "4.1.0 (POM model)",
    "renamed_to": "",
    "build": "NONE",
-   "build_url": ""
+   "build_url": "",
+   "last_checked": "2026-07-16T16:23:10Z",
+   "current_full_name": "akdukaan/DrMap"
   },
   {
    "repo": "akmalaqim74/UI_Automation_Testing",
@@ -2224,10 +2358,12 @@
    "live_version": "4.0.0-alpha-13",
    "source": "root",
    "lastknown_signal": "Wrapper",
-   "lastknown_version": "4.0.0",
+   "lastknown_version": "4.0.0-alpha-13",
    "renamed_to": "",
    "build": "NONE",
-   "build_url": ""
+   "build_url": "",
+   "last_checked": "2026-07-16T16:23:10Z",
+   "current_full_name": "akmalaqim74/UI_Automation_Testing"
   },
   {
    "repo": "alefHugo03/Projeto_Adega_UMC",
@@ -2238,11 +2374,13 @@
    "live_version": "4.0.0-rc-5",
    "source": "nested:adega/.mvn/wrapper/maven-wrapper.properties",
    "lastknown_signal": "Wrapper",
-   "lastknown_version": "4.0.0",
+   "lastknown_version": "4.0.0-rc-5",
    "renamed_to": "",
    "build": "SUCCESS",
    "build_url": "https://github.com/alefHugo03/Projeto_Adega_UMC/actions/runs/27446403818",
-   "build_workflow": "CI"
+   "build_workflow": "CI",
+   "last_checked": "2026-07-16T16:23:11Z",
+   "current_full_name": "alefHugo03/Projeto_Adega_UMC"
   },
   {
    "repo": "alexdutescu/movies-app",
@@ -2253,11 +2391,13 @@
    "live_version": "4.0.0-alpha-13",
    "source": "root",
    "lastknown_signal": "Wrapper",
-   "lastknown_version": "4.0.0",
+   "lastknown_version": "4.0.0-alpha-13",
    "renamed_to": "",
    "build": "NONE",
    "build_url": "",
-   "last_seen": "2026-07-16"
+   "last_seen": "2026-07-16",
+   "last_checked": "2026-07-16T16:23:11Z",
+   "current_full_name": "alexdutescu/movies-app"
   },
   {
    "repo": "amansinha11-dev/SAP-Project",
@@ -2268,11 +2408,13 @@
    "live_version": "4.0.0-rc-5",
    "source": "nested:pharmacy-billing/backend/.mvn/wrapper/maven-wrapper.properties",
    "lastknown_signal": "Wrapper",
-   "lastknown_version": "4.0.0",
+   "lastknown_version": "4.0.0-rc-5",
    "renamed_to": "",
    "build": "NONE",
    "build_url": "",
-   "last_seen": "2026-07-16"
+   "last_seen": "2026-07-16",
+   "last_checked": "2026-07-16T16:23:11Z",
+   "current_full_name": "amansinha11-dev/SAP-Project"
   },
   {
    "repo": "amiraz014/Sirius-ing2-hopital",
@@ -2283,11 +2425,13 @@
    "live_version": "4.0.0-beta-4",
    "source": "nested:Ing2-proto/epital-server/.mvn/wrapper/maven-wrapper.properties",
    "lastknown_signal": "Wrapper",
-   "lastknown_version": "4.0.0",
+   "lastknown_version": "4.0.0-beta-4",
    "renamed_to": "",
    "build": "NONE",
    "build_url": "",
-   "last_seen": "2026-07-16"
+   "last_seen": "2026-07-16",
+   "last_checked": "2026-07-16T16:23:11Z",
+   "current_full_name": "amiraz014/Sirius-ing2-hopital"
   },
   {
    "repo": "andrepenteado/aproove",
@@ -2298,10 +2442,12 @@
    "live_version": "4.1.0 (POM model)",
    "source": "nested:backend/pom.xml",
    "lastknown_signal": "POM 4.1.0",
-   "lastknown_version": "4.1.0",
+   "lastknown_version": "4.1.0 (POM model)",
    "renamed_to": "",
    "build": "NONE",
-   "build_url": ""
+   "build_url": "",
+   "last_checked": "2026-07-16T16:23:11Z",
+   "current_full_name": "andrepenteado/aproove"
   },
   {
    "repo": "andrushakhudyk/java-training",
@@ -2312,11 +2458,13 @@
    "live_version": "4.0.0",
    "source": "nested:java-training-spring-boot/demo/.mvn/wrapper/maven-wrapper.properties",
    "lastknown_signal": "Wrapper",
-   "lastknown_version": "",
+   "lastknown_version": "4.0.0",
    "renamed_to": "",
    "build": "NONE",
    "build_url": "",
-   "last_seen": "2026-07-16"
+   "last_seen": "2026-07-16",
+   "last_checked": "2026-07-16T16:23:11Z",
+   "current_full_name": "andrushakhudyk/java-training"
   },
   {
    "repo": "anshulvyasa/Spring-Boot",
@@ -2331,7 +2479,9 @@
    "renamed_to": "",
    "build": "NONE",
    "build_url": "",
-   "last_seen": "2026-07-16"
+   "last_seen": "2026-07-16",
+   "last_checked": "2026-07-16T16:23:11Z",
+   "current_full_name": "anshulvyasa/Spring-Boot"
   },
   {
    "repo": "anuskagupta123/Library-Management-System",
@@ -2342,11 +2492,13 @@
    "live_version": "4.0.0-rc-5",
    "source": "nested:backend/.mvn/wrapper/maven-wrapper.properties",
    "lastknown_signal": "Wrapper",
-   "lastknown_version": "4.0.0",
+   "lastknown_version": "4.0.0-rc-5",
    "renamed_to": "",
    "build": "NONE",
    "build_url": "",
-   "last_seen": "2026-07-16"
+   "last_seen": "2026-07-16",
+   "last_checked": "2026-07-16T16:23:12Z",
+   "current_full_name": "anuskagupta123/Library-Management-System"
   },
   {
    "repo": "apache/maven-hocon-extension",
@@ -2356,12 +2508,14 @@
    "live_signal": "POM 4.1.0",
    "live_version": "4.1.0 (POM model)",
    "source": "root",
-   "lastknown_signal": "https://github.com/osscameroon/js-generator[osscameroon/js-generator^]",
-   "lastknown_version": "22",
+   "lastknown_signal": "POM 4.1.0",
+   "lastknown_version": "4.1.0 (POM model)",
    "renamed_to": "",
    "build": "NONE",
    "build_url": "",
-   "last_seen": "2026-07-16"
+   "last_seen": "2026-07-16",
+   "last_checked": "2026-07-16T16:23:12Z",
+   "current_full_name": "apache/maven-hocon-extension"
   },
   {
    "repo": "apache/maven-xinclude-extension",
@@ -2371,28 +2525,32 @@
    "live_signal": "POM 4.1.0",
    "live_version": "4.1.0 (POM model)",
    "source": "root",
-   "lastknown_signal": "POM 4.1.0, Wrapper",
-   "lastknown_version": "4.1.0",
+   "lastknown_signal": "POM 4.1.0",
+   "lastknown_version": "4.1.0 (POM model)",
    "renamed_to": "",
    "build": "NONE",
    "build_url": "",
-   "last_seen": "2026-07-16"
+   "last_seen": "2026-07-16",
+   "last_checked": "2026-07-16T16:23:12Z",
+   "current_full_name": "apache/maven-xinclude-extension"
   },
   {
    "repo": "apache/plc4x",
    "state": "active",
-   "stars": 1682,
-   "pushed_at": "2026-07-15",
+   "stars": 1683,
+   "pushed_at": "2026-07-16",
    "live_signal": "POM 4.1.0",
    "live_version": "4.1.0 (POM model)",
    "source": "root",
-   "lastknown_signal": null,
-   "lastknown_version": null,
+   "lastknown_signal": "POM 4.1.0",
+   "lastknown_version": "4.1.0 (POM model)",
    "renamed_to": "",
    "build": "AMBIGUOUS",
    "build_url": "https://github.com/apache/plc4x/actions",
    "build_workflow": "4 Maven workflows: 3 SUCCESS, 1 FAILURE",
-   "last_seen": "2026-07-16"
+   "last_seen": "2026-07-16",
+   "last_checked": "2026-07-16T16:23:12Z",
+   "current_full_name": "apache/plc4x"
   },
   {
    "repo": "apache/plc4x-build-tools",
@@ -2402,13 +2560,15 @@
    "live_signal": "POM 4.1.0",
    "live_version": "4.1.0 (POM model)",
    "source": "root",
-   "lastknown_signal": "https://github.com/ikmdev/komet[ikmdev/komet^]",
-   "lastknown_version": "19",
+   "lastknown_signal": "POM 4.1.0",
+   "lastknown_version": "4.1.0 (POM model)",
    "renamed_to": "",
    "build": "SUCCESS",
    "build_url": "https://github.com/apache/plc4x-build-tools/actions/runs/29096217697",
    "build_workflow": "Platform compatibility",
-   "last_seen": "2026-07-16"
+   "last_seen": "2026-07-16",
+   "last_checked": "2026-07-16T16:23:13Z",
+   "current_full_name": "apache/plc4x-build-tools"
   },
   {
    "repo": "apache/plc4x-extras",
@@ -2418,13 +2578,15 @@
    "live_signal": "POM 4.1.0",
    "live_version": "4.1.0 (POM model)",
    "source": "root",
-   "lastknown_signal": "Wrapper",
-   "lastknown_version": "4.1.0",
+   "lastknown_signal": "POM 4.1.0",
+   "lastknown_version": "4.1.0 (POM model)",
    "renamed_to": "",
    "build": "SUCCESS",
    "build_url": "https://github.com/apache/plc4x-extras/actions/runs/29449527369",
    "build_workflow": "3 Maven workflows, all agree",
-   "last_seen": "2026-07-16"
+   "last_seen": "2026-07-16",
+   "last_checked": "2026-07-16T16:23:13Z",
+   "current_full_name": "apache/plc4x-extras"
   },
   {
    "repo": "apetrozzelli/jaus",
@@ -2434,13 +2596,15 @@
    "live_signal": "Wrapper",
    "live_version": "4.0.0-rc-5",
    "source": "root",
-   "lastknown_signal": "https://github.com/apetrozzelli/truelayer-pokedex[apetrozzelli/truelayer-pokedex^]",
-   "lastknown_version": "0",
+   "lastknown_signal": "Wrapper",
+   "lastknown_version": "4.0.0-rc-5",
    "renamed_to": "",
    "build": "SUCCESS",
    "build_url": "https://github.com/apetrozzelli/jaus/actions/runs/19901076226",
    "build_workflow": "Java CI with Maven",
-   "last_seen": "2026-07-16"
+   "last_seen": "2026-07-16",
+   "last_checked": "2026-07-16T16:23:13Z",
+   "current_full_name": "apetrozzelli/jaus"
   },
   {
    "repo": "apetrozzelli/truelayer-pokedex",
@@ -2451,12 +2615,14 @@
    "live_version": "4.0.0-rc-5",
    "source": "root",
    "lastknown_signal": "Wrapper",
-   "lastknown_version": "4.0.0",
+   "lastknown_version": "4.0.0-rc-5",
    "renamed_to": "",
    "build": "SUCCESS",
    "build_url": "https://github.com/apetrozzelli/truelayer-pokedex/actions/runs/21284431600",
    "build_workflow": "Java CI with Maven",
-   "last_seen": "2026-07-16"
+   "last_seen": "2026-07-16",
+   "last_checked": "2026-07-16T16:23:14Z",
+   "current_full_name": "apetrozzelli/truelayer-pokedex"
   },
   {
    "repo": "aschemaven/maven-modular-sources-showcases",
@@ -2467,11 +2633,13 @@
    "live_version": "4.1.0 (POM model)",
    "source": "root",
    "lastknown_signal": "POM 4.1.0",
-   "lastknown_version": "4.1.0",
+   "lastknown_version": "4.1.0 (POM model)",
    "renamed_to": "",
    "build": "NONE",
    "build_url": "",
-   "last_seen": "2026-07-16"
+   "last_seen": "2026-07-16",
+   "last_checked": "2026-07-16T16:23:13Z",
+   "current_full_name": "aschemaven/maven-modular-sources-showcases"
   },
   {
    "repo": "ashiishhh9/E-Attendence-System",
@@ -2485,7 +2653,8 @@
    "lastknown_version": "4.0.0",
    "renamed_to": "",
    "build": "",
-   "build_url": ""
+   "build_url": "",
+   "last_checked": "2026-07-16T16:23:13Z"
   },
   {
    "repo": "athkalia/maven-build-cache-forked-executions",
@@ -2500,22 +2669,26 @@
    "renamed_to": "",
    "build": "NONE",
    "build_url": "",
-   "last_seen": "2026-07-16"
+   "last_seen": "2026-07-16",
+   "last_checked": "2026-07-16T16:23:14Z",
+   "current_full_name": "athkalia/maven-build-cache-forked-executions"
   },
   {
    "repo": "attiand/experiments",
    "state": "active",
    "stars": 0,
    "pushed_at": "2026-03-09",
-   "live_signal": "Wrapper",
-   "live_version": "4.0.0-alpha-13",
-   "source": "nested:maven/maven4/.mvn/wrapper/maven-wrapper.properties",
+   "live_signal": null,
+   "live_version": null,
+   "source": null,
    "lastknown_signal": "Wrapper",
    "lastknown_version": "4.0.0",
    "renamed_to": "",
    "build": "NONE",
    "build_url": "",
-   "last_seen": "2026-07-16"
+   "last_seen": "2026-07-16",
+   "last_checked": "2026-07-16T16:23:14Z",
+   "current_full_name": "attiand/experiments"
   },
   {
    "repo": "atulkumar2/distributedsystems",
@@ -2529,7 +2702,9 @@
    "lastknown_version": "4.0.0",
    "renamed_to": "",
    "build": "NONE",
-   "build_url": ""
+   "build_url": "",
+   "last_checked": "2026-07-16T16:23:14Z",
+   "current_full_name": "atulkumar2/distributedsystems"
   },
   {
    "repo": "avaje/avaje-maven4-mixins",
@@ -2539,12 +2714,14 @@
    "live_signal": "Wrapper",
    "live_version": "4.1.0-20260119.191527-253",
    "source": "nested:avaje/avaje-nima/.mvn/wrapper/maven-wrapper.properties",
-   "lastknown_signal": "POM 4.1.0",
-   "lastknown_version": "4.1.0",
+   "lastknown_signal": "Wrapper",
+   "lastknown_version": "4.1.0-20260119.191527-253",
    "renamed_to": "",
    "build": "NONE",
    "build_url": "",
-   "last_seen": "2026-07-16"
+   "last_seen": "2026-07-16",
+   "last_checked": "2026-07-16T16:23:14Z",
+   "current_full_name": "avaje/avaje-maven4-mixins"
   },
   {
    "repo": "awnonbhowmik/LogShield",
@@ -2554,13 +2731,15 @@
    "live_signal": "Wrapper",
    "live_version": "4.0.0-rc-5",
    "source": "nested:backend/.mvn/wrapper/maven-wrapper.properties",
-   "lastknown_signal": "https://github.com/barisbasaran/mymarket[barisbasaran/mymarket^]",
-   "lastknown_version": "0",
+   "lastknown_signal": "Wrapper",
+   "lastknown_version": "4.0.0-rc-5",
    "renamed_to": "",
    "build": "SUCCESS",
    "build_url": "https://github.com/awnonbhowmik/LogShield/actions/runs/24612514606",
    "build_workflow": "Backend CI",
-   "last_seen": "2026-07-16"
+   "last_seen": "2026-07-16",
+   "last_checked": "2026-07-16T16:23:14Z",
+   "current_full_name": "awnonbhowmik/LogShield"
   },
   {
    "repo": "axonivy/branding-images",
@@ -2571,10 +2750,12 @@
    "live_version": "4.1.0 (POM model)",
    "source": "root",
    "lastknown_signal": "POM 4.1.0",
-   "lastknown_version": "4.1.0",
+   "lastknown_version": "4.1.0 (POM model)",
    "renamed_to": "",
    "build": "NONE",
-   "build_url": ""
+   "build_url": "",
+   "last_checked": "2026-07-16T16:23:14Z",
+   "current_full_name": "axonivy/branding-images"
   },
   {
    "repo": "barisbasaran/mymarket",
@@ -2585,11 +2766,13 @@
    "live_version": "4.0.0-rc-3",
    "source": "root",
    "lastknown_signal": "Wrapper",
-   "lastknown_version": "4.0.0",
+   "lastknown_version": "4.0.0-rc-3",
    "renamed_to": "",
    "build": "NONE",
    "build_url": "",
-   "last_seen": "2026-07-16"
+   "last_seen": "2026-07-16",
+   "last_checked": "2026-07-16T16:23:15Z",
+   "current_full_name": "barisbasaran/mymarket"
   },
   {
    "repo": "beatngu13/playground",
@@ -2600,12 +2783,14 @@
    "live_version": "4.0.0-rc-5",
    "source": "root",
    "lastknown_signal": "Wrapper",
-   "lastknown_version": "4.0.0",
+   "lastknown_version": "4.0.0-rc-5",
    "renamed_to": "",
    "build": "SUCCESS",
    "build_url": "https://github.com/beatngu13/playground/actions/runs/28778177755",
    "build_workflow": ".github/workflows/build.yml",
-   "last_seen": "2026-07-16"
+   "last_seen": "2026-07-16",
+   "last_checked": "2026-07-16T16:23:15Z",
+   "current_full_name": "beatngu13/playground"
   },
   {
    "repo": "binkley/kotlin-shopping-cart",
@@ -2616,11 +2801,13 @@
    "live_version": "4.0.0-beta-3",
    "source": "root",
    "lastknown_signal": "Wrapper",
-   "lastknown_version": "4.0.0",
+   "lastknown_version": "4.0.0-beta-3",
    "renamed_to": "",
    "build": "NONE",
    "build_url": "",
-   "last_seen": "2026-07-16"
+   "last_seen": "2026-07-16",
+   "last_checked": "2026-07-16T16:23:15Z",
+   "current_full_name": "binkley/kotlin-shopping-cart"
   },
   {
    "repo": "blendonl/ttlivescore-api",
@@ -2635,7 +2822,9 @@
    "renamed_to": "",
    "build": "NONE",
    "build_url": "",
-   "last_seen": "2026-07-16"
+   "last_seen": "2026-07-16",
+   "last_checked": "2026-07-16T16:23:15Z",
+   "current_full_name": "blendonl/ttlivescore-api"
   },
   {
    "repo": "bmarwell/aktienfinder-scraper",
@@ -2646,26 +2835,30 @@
    "live_version": "4.0.0-beta-4",
    "source": "root",
    "lastknown_signal": "Wrapper",
-   "lastknown_version": "4.0.0",
+   "lastknown_version": "4.0.0-beta-4",
    "renamed_to": "",
    "build": "NONE",
    "build_url": "",
-   "last_seen": "2026-07-16"
+   "last_seen": "2026-07-16",
+   "last_checked": "2026-07-16T16:23:16Z",
+   "current_full_name": "bmarwell/aktienfinder-scraper"
   },
   {
    "repo": "bmarwell/jfmt",
    "state": "active",
    "stars": 51,
-   "pushed_at": "2026-07-08",
+   "pushed_at": "2026-07-15",
    "live_signal": "POM 4.1.0",
    "live_version": "4.1.0 (POM model)",
    "source": "root",
-   "lastknown_signal": "https://github.com/brunoborges/jlib-inspector[brunoborges/jlib-inspector^]",
-   "lastknown_version": "45",
+   "lastknown_signal": "POM 4.1.0",
+   "lastknown_version": "4.1.0 (POM model)",
    "renamed_to": "",
    "build": "AMBIGUOUS",
    "build_url": "https://github.com/bmarwell/jfmt/actions",
-   "build_workflow": "4 Maven workflows: 3 SUCCESS, 1 FAILURE"
+   "build_workflow": "4 Maven workflows: 3 SUCCESS, 1 FAILURE",
+   "last_checked": "2026-07-16T16:23:16Z",
+   "current_full_name": "bmarwell/jfmt"
   },
   {
    "repo": "bmarwell/proximo-pitido",
@@ -2675,13 +2868,15 @@
    "live_signal": "POM 4.1.0",
    "live_version": "4.1.0 (POM model)",
    "source": "root",
-   "lastknown_signal": "https://github.com/c-guntur/maven4[c-guntur/maven4^]",
-   "lastknown_version": "0",
+   "lastknown_signal": "POM 4.1.0",
+   "lastknown_version": "4.1.0 (POM model)",
    "renamed_to": "",
    "build": "SUCCESS",
    "build_url": "https://github.com/bmarwell/proximo-pitido/actions/runs/29221933723",
    "build_workflow": "5 Maven workflows, all agree",
-   "last_seen": "2026-07-16"
+   "last_seen": "2026-07-16",
+   "last_checked": "2026-07-16T16:23:16Z",
+   "current_full_name": "bmarwell/proximo-pitido"
   },
   {
    "repo": "bones0xab/event-sourcing-cqrs-spring-axon-app",
@@ -2697,7 +2892,9 @@
    "build": "FAILURE",
    "build_url": "https://github.com/bones0xab/event-sourcing-cqrs-spring-axon-app/actions/runs/19826425532",
    "build_workflow": "ci-pipeline.yml",
-   "last_seen": "2026-07-16"
+   "last_seen": "2026-07-16",
+   "last_checked": "2026-07-16T16:23:16Z",
+   "current_full_name": "bones0xab/event-sourcing-cqrs-spring-axon-app"
   },
   {
    "repo": "bowbahdoe/color",
@@ -2712,7 +2909,10 @@
    "renamed_to": "",
    "build": "SUCCESS",
    "build_url": "https://github.com/bowbahdoe/color/actions/runs/24293915141",
-   "build_workflow": "Tests"
+   "build_workflow": "Tests",
+   "last_seen": "2026-07-16",
+   "last_checked": "2026-07-16T16:23:16Z",
+   "current_full_name": "bowbahdoe/color"
   },
   {
    "repo": "bowbahdoe/color-awt",
@@ -2723,10 +2923,12 @@
    "live_version": "4.0.0-beta-3",
    "source": "root",
    "lastknown_signal": "Wrapper",
-   "lastknown_version": "4.0.0",
+   "lastknown_version": "4.0.0-beta-3",
    "renamed_to": "",
    "build": "NONE",
-   "build_url": ""
+   "build_url": "",
+   "last_checked": "2026-07-16T16:23:16Z",
+   "current_full_name": "bowbahdoe/color-awt"
   },
   {
    "repo": "bowbahdoe/color-terminal",
@@ -2740,7 +2942,9 @@
    "lastknown_version": "4.0.0-beta-3",
    "renamed_to": "",
    "build": "NONE",
-   "build_url": ""
+   "build_url": "",
+   "last_checked": "2026-07-16T16:23:16Z",
+   "current_full_name": "bowbahdoe/color-terminal"
   },
   {
    "repo": "bowbahdoe/flake",
@@ -2751,10 +2955,12 @@
    "live_version": "4.0.0-beta-3",
    "source": "root",
    "lastknown_signal": "Wrapper",
-   "lastknown_version": "4.0.0",
+   "lastknown_version": "4.0.0-beta-3",
    "renamed_to": "",
    "build": "NONE",
-   "build_url": ""
+   "build_url": "",
+   "last_checked": "2026-07-16T16:23:17Z",
+   "current_full_name": "bowbahdoe/flake"
   },
   {
    "repo": "bowbahdoe/jdk-httpserver-fileupload",
@@ -2769,7 +2975,9 @@
    "renamed_to": "",
    "build": "NONE",
    "build_url": "",
-   "last_seen": "2026-07-16"
+   "last_seen": "2026-07-16",
+   "last_checked": "2026-07-16T16:23:17Z",
+   "current_full_name": "bowbahdoe/jdk-httpserver-fileupload"
   },
   {
    "repo": "bowbahdoe/jdk-httpserver-mustache",
@@ -2780,10 +2988,12 @@
    "live_version": "4.0.0-beta-3",
    "source": "root",
    "lastknown_signal": "Wrapper",
-   "lastknown_version": "4.0.0",
+   "lastknown_version": "4.0.0-beta-3",
    "renamed_to": "",
    "build": "NONE",
-   "build_url": ""
+   "build_url": "",
+   "last_checked": "2026-07-16T16:23:17Z",
+   "current_full_name": "bowbahdoe/jdk-httpserver-mustache"
   },
   {
    "repo": "bowbahdoe/jdk-httpserver-realworld",
@@ -2797,7 +3007,9 @@
    "lastknown_version": "4.0.0-beta-3",
    "renamed_to": "",
    "build": "NONE",
-   "build_url": ""
+   "build_url": "",
+   "last_checked": "2026-07-16T16:23:17Z",
+   "current_full_name": "bowbahdoe/jdk-httpserver-realworld"
   },
   {
    "repo": "bowbahdoe/jdk-httpserver-rutrouter",
@@ -2808,11 +3020,13 @@
    "live_version": "4.0.0-beta-3",
    "source": "root",
    "lastknown_signal": "Wrapper",
-   "lastknown_version": "4.0.0",
+   "lastknown_version": "4.0.0-beta-3",
    "renamed_to": "",
    "build": "NONE",
    "build_url": "",
-   "last_seen": "2026-07-16"
+   "last_seen": "2026-07-16",
+   "last_checked": "2026-07-16T16:23:17Z",
+   "current_full_name": "bowbahdoe/jdk-httpserver-rutrouter"
   },
   {
    "repo": "bowbahdoe/mjml",
@@ -2826,7 +3040,9 @@
    "lastknown_version": "4.0.0-beta-3",
    "renamed_to": "",
    "build": "NONE",
-   "build_url": ""
+   "build_url": "",
+   "last_checked": "2026-07-16T16:23:18Z",
+   "current_full_name": "bowbahdoe/mjml"
   },
   {
    "repo": "bowbahdoe/module_info",
@@ -2837,11 +3053,13 @@
    "live_version": "4.0.0-beta-3",
    "source": "root",
    "lastknown_signal": "Wrapper",
-   "lastknown_version": "4.0.0",
+   "lastknown_version": "4.0.0-beta-3",
    "renamed_to": "",
    "build": "SUCCESS",
    "build_url": "https://github.com/bowbahdoe/module_info/actions/runs/18330112011",
-   "build_workflow": "Tests"
+   "build_workflow": "Tests",
+   "last_checked": "2026-07-16T16:23:18Z",
+   "current_full_name": "bowbahdoe/module_info"
   },
   {
    "repo": "bowbahdoe/ppm",
@@ -2856,7 +3074,9 @@
    "renamed_to": "",
    "build": "NONE",
    "build_url": "",
-   "last_seen": "2026-07-16"
+   "last_seen": "2026-07-16",
+   "last_checked": "2026-07-16T16:23:18Z",
+   "current_full_name": "bowbahdoe/ppm"
   },
   {
    "repo": "bowbahdoe/the-great-link",
@@ -2867,10 +3087,12 @@
    "live_version": "4.0.0-beta-3",
    "source": "root",
    "lastknown_signal": "Wrapper",
-   "lastknown_version": "4.0.0",
+   "lastknown_version": "4.0.0-beta-3",
    "renamed_to": "",
    "build": "NONE",
-   "build_url": ""
+   "build_url": "",
+   "last_checked": "2026-07-16T16:23:18Z",
+   "current_full_name": "bowbahdoe/the-great-link"
   },
   {
    "repo": "bowbahdoe/tui",
@@ -2884,7 +3106,9 @@
    "lastknown_version": "4.0.0-beta-3",
    "renamed_to": "",
    "build": "NONE",
-   "build_url": ""
+   "build_url": "",
+   "last_checked": "2026-07-16T16:23:18Z",
+   "current_full_name": "bowbahdoe/tui"
   },
   {
    "repo": "breun/spring-grpc-demo",
@@ -2895,11 +3119,13 @@
    "live_version": "4.0.0-rc-5",
    "source": "root",
    "lastknown_signal": "Wrapper",
-   "lastknown_version": "4.0.0",
+   "lastknown_version": "4.0.0-rc-5",
    "renamed_to": "",
    "build": "NONE",
    "build_url": "",
-   "last_seen": "2026-07-16"
+   "last_seen": "2026-07-16",
+   "last_checked": "2026-07-16T16:23:18Z",
+   "current_full_name": "breun/spring-grpc-demo"
   },
   {
    "repo": "brunoborges/jlib-inspector",
@@ -2909,13 +3135,15 @@
    "live_signal": "POM 4.1.0",
    "live_version": "4.1.0 (POM model)",
    "source": "root",
-   "lastknown_signal": "Wrapper",
-   "lastknown_version": "4.1.0",
+   "lastknown_signal": "POM 4.1.0",
+   "lastknown_version": "4.1.0 (POM model)",
    "renamed_to": "",
    "build": "AMBIGUOUS",
    "build_url": "https://github.com/brunoborges/jlib-inspector/actions",
    "build_workflow": "2 Maven workflows: 1 SUCCESS, 1 FAILURE",
-   "last_seen": "2026-07-16"
+   "last_seen": "2026-07-16",
+   "last_checked": "2026-07-16T16:23:18Z",
+   "current_full_name": "brunoborges/jlib-inspector"
   },
   {
    "repo": "brunoborges/rockpaperscissors-java25",
@@ -2930,7 +3158,9 @@
    "renamed_to": "",
    "build": "SUCCESS",
    "build_url": "https://github.com/brunoborges/rockpaperscissors-java25/actions/runs/19457234241",
-   "build_workflow": "CICD"
+   "build_workflow": "CICD",
+   "last_checked": "2026-07-16T16:23:19Z",
+   "current_full_name": "brunoborges/rockpaperscissors-java25"
   },
   {
    "repo": "brunokarpo/subscriptions",
@@ -2941,11 +3171,13 @@
    "live_version": "4.0.0-rc-4",
    "source": "root",
    "lastknown_signal": "Wrapper",
-   "lastknown_version": "4.0.0",
+   "lastknown_version": "4.0.0-rc-4",
    "renamed_to": "",
    "build": "NONE",
    "build_url": "",
-   "last_seen": "2026-07-16"
+   "last_seen": "2026-07-16",
+   "last_checked": "2026-07-16T16:23:19Z",
+   "current_full_name": "brunokarpo/subscriptions"
   },
   {
    "repo": "c-guntur/maven-4-is-awesome",
@@ -2956,11 +3188,13 @@
    "live_version": "4.1.0 (POM model)",
    "source": "nested:maven4/bom/pom.xml",
    "lastknown_signal": "POM 4.1.0",
-   "lastknown_version": "4.1.0",
+   "lastknown_version": "4.1.0 (POM model)",
    "renamed_to": "",
    "build": "NONE",
    "build_url": "",
-   "last_seen": "2026-07-16"
+   "last_seen": "2026-07-16",
+   "last_checked": "2026-07-16T16:23:19Z",
+   "current_full_name": "c-guntur/maven-4-is-awesome"
   },
   {
    "repo": "c-guntur/maven4",
@@ -2971,11 +3205,13 @@
    "live_version": "4.1.0 (POM model)",
    "source": "nested:maven-multi4/datetime-fetcher/pom.xml",
    "lastknown_signal": "POM 4.1.0",
-   "lastknown_version": "4.1.0",
+   "lastknown_version": "4.1.0 (POM model)",
    "renamed_to": "",
    "build": "NONE",
    "build_url": "",
-   "last_seen": "2026-07-16"
+   "last_seen": "2026-07-16",
+   "last_checked": "2026-07-16T16:23:19Z",
+   "current_full_name": "c-guntur/maven4"
   },
   {
    "repo": "c00ler/maven-dependency-analyze-npe",
@@ -2986,11 +3222,13 @@
    "live_version": "4.0.0-alpha-4",
    "source": "root",
    "lastknown_signal": "Wrapper",
-   "lastknown_version": "4.0.0",
+   "lastknown_version": "4.0.0-alpha-4",
    "renamed_to": "",
    "build": "NONE",
    "build_url": "",
-   "last_seen": "2026-07-16"
+   "last_seen": "2026-07-16",
+   "last_checked": "2026-07-16T16:23:19Z",
+   "current_full_name": "c00ler/maven-dependency-analyze-npe"
   },
   {
    "repo": "carlspring/idempotence",
@@ -3005,21 +3243,26 @@
    "renamed_to": "",
    "build": "SUCCESS",
    "build_url": "https://github.com/carlspring/idempotence/actions/runs/29464690699",
-   "build_workflow": "3 Maven workflows, all agree"
+   "build_workflow": "3 Maven workflows, all agree",
+   "last_checked": "2026-07-16T16:23:19Z",
+   "current_full_name": "carlspring/idempotence"
   },
   {
    "repo": "chosenking1/MautonLaundryJava",
    "state": "active",
    "stars": 0,
-   "pushed_at": "2026-06-09",
+   "pushed_at": "2026-07-16",
    "live_signal": "Wrapper",
    "live_version": "4.0.0",
    "source": "root",
-   "lastknown_signal": "https://github.com/cstamas/MNG-8486[cstamas/MNG-8486^]",
-   "lastknown_version": "0",
+   "lastknown_signal": "Wrapper",
+   "lastknown_version": "4.0.0",
    "renamed_to": "",
    "build": "NONE",
-   "build_url": ""
+   "build_url": "",
+   "last_seen": "2026-07-16",
+   "last_checked": "2026-07-16T16:23:19Z",
+   "current_full_name": "chosenking1/MautonLaundryJava"
   },
   {
    "repo": "codacy-open-source-projects-scans/maven",
@@ -3034,7 +3277,9 @@
    "renamed_to": "",
    "build": "NONE",
    "build_url": "",
-   "last_seen": "2026-07-16"
+   "last_seen": "2026-07-16",
+   "last_checked": "2026-07-16T16:23:20Z",
+   "current_full_name": "codacy-open-source-projects-scans/maven"
   },
   {
    "repo": "conorheffron/hl7-hapi-fhir-obs-api",
@@ -3044,12 +3289,14 @@
    "live_signal": "Wrapper",
    "live_version": "4.0.0-rc-2",
    "source": "root",
-   "lastknown_signal": "https://github.com/cowwoc/styler[cowwoc/styler^]",
-   "lastknown_version": "4",
+   "lastknown_signal": "Wrapper",
+   "lastknown_version": "4.0.0-rc-2",
    "renamed_to": "",
    "build": "SUCCESS",
    "build_url": "https://github.com/conorheffron/hl7-hapi-fhir-obs-api/actions/runs/27871878788",
-   "build_workflow": "Java CI with Maven"
+   "build_workflow": "Java CI with Maven",
+   "last_checked": "2026-07-16T16:23:20Z",
+   "current_full_name": "conorheffron/hl7-hapi-fhir-obs-api"
   },
   {
    "repo": "conorheffron/simple-calculator",
@@ -3059,12 +3306,14 @@
    "live_signal": "Wrapper",
    "live_version": "4.0.0-rc-2",
    "source": "root",
-   "lastknown_signal": "https://github.com/conorheffron/weather-data[conorheffron/weather-data^]",
-   "lastknown_version": "3",
+   "lastknown_signal": "Wrapper",
+   "lastknown_version": "4.0.0-rc-2",
    "renamed_to": "",
    "build": "SUCCESS",
    "build_url": "https://github.com/conorheffron/simple-calculator/actions/runs/18892691910",
-   "build_workflow": "Java CI with Maven"
+   "build_workflow": "Java CI with Maven",
+   "last_checked": "2026-07-16T16:23:20Z",
+   "current_full_name": "conorheffron/simple-calculator"
   },
   {
    "repo": "conorheffron/weather-data",
@@ -3075,11 +3324,13 @@
    "live_version": "4.0.0-rc-2",
    "source": "root",
    "lastknown_signal": "Wrapper",
-   "lastknown_version": "4.0.0",
+   "lastknown_version": "4.0.0-rc-2",
    "renamed_to": "",
    "build": "SUCCESS",
    "build_url": "https://github.com/conorheffron/weather-data/actions/runs/18925753926",
-   "build_workflow": "Java CI with Maven"
+   "build_workflow": "Java CI with Maven",
+   "last_checked": "2026-07-16T16:23:20Z",
+   "current_full_name": "conorheffron/weather-data"
   },
   {
    "repo": "cowwoc/styler",
@@ -3090,10 +3341,12 @@
    "live_version": "4.0.0-rc-4",
    "source": "root",
    "lastknown_signal": "Wrapper",
-   "lastknown_version": "4.0.0",
+   "lastknown_version": "4.0.0-rc-4",
    "renamed_to": "",
    "build": "NONE",
-   "build_url": ""
+   "build_url": "",
+   "last_checked": "2026-07-16T16:23:20Z",
+   "current_full_name": "cowwoc/styler"
   },
   {
    "repo": "cstamas/MNG-8486",
@@ -3104,10 +3357,12 @@
    "live_version": "4.0.0-rc-2",
    "source": "root",
    "lastknown_signal": "Wrapper",
-   "lastknown_version": "4.0.0",
+   "lastknown_version": "4.0.0-rc-2",
    "renamed_to": "",
    "build": "NONE",
-   "build_url": ""
+   "build_url": "",
+   "last_checked": "2026-07-16T16:23:21Z",
+   "current_full_name": "cstamas/MNG-8486"
   },
   {
    "repo": "danalderslade/FinCEN_SAR",
@@ -3122,7 +3377,9 @@
    "renamed_to": "",
    "build": "SUCCESS",
    "build_url": "https://github.com/danalderslade/FinCEN_SAR/actions/runs/23213021166",
-   "build_workflow": "CI/CD Pipeline"
+   "build_workflow": "CI/CD Pipeline",
+   "last_checked": "2026-07-16T16:23:21Z",
+   "current_full_name": "danalderslade/FinCEN_SAR"
   },
   {
    "repo": "danhdev/lms-system",
@@ -3137,7 +3394,9 @@
    "renamed_to": "",
    "build": "FAILURE",
    "build_url": "https://github.com/danhdev/lms-system/actions/runs/27113011701",
-   "build_workflow": "Build and Deploy Core LMS application"
+   "build_workflow": "Build and Deploy Core LMS application",
+   "last_checked": "2026-07-16T16:23:21Z",
+   "current_full_name": "danhdev/lms-system"
   },
   {
    "repo": "danielzayas/danielzayas__okhttp.8e0cc1b3",
@@ -3148,10 +3407,12 @@
    "live_version": "4.0.0-rc-5",
    "source": "nested:maven-tests/.mvn/wrapper/maven-wrapper.properties",
    "lastknown_signal": "Wrapper",
-   "lastknown_version": "",
+   "lastknown_version": "4.0.0-rc-5",
    "renamed_to": "",
    "build": "NONE",
-   "build_url": ""
+   "build_url": "",
+   "last_checked": "2026-07-16T16:23:21Z",
+   "current_full_name": "danielzayas/danielzayas__okhttp.8e0cc1b3"
   },
   {
    "repo": "danielzayas/square__okhttp.8e0cc1b3",
@@ -3162,10 +3423,12 @@
    "live_version": "4.0.0-rc-5",
    "source": "nested:maven-tests/.mvn/wrapper/maven-wrapper.properties",
    "lastknown_signal": "Wrapper",
-   "lastknown_version": "4.0.0",
+   "lastknown_version": "4.0.0-rc-5",
    "renamed_to": "",
    "build": "NONE",
-   "build_url": ""
+   "build_url": "",
+   "last_checked": "2026-07-16T16:23:21Z",
+   "current_full_name": "danielzayas/square__okhttp.8e0cc1b3"
   },
   {
    "repo": "danthe1st/maven-repro",
@@ -3176,11 +3439,13 @@
    "live_version": "4.0.0-beta-4",
    "source": "nested:.github/workflows/build.yaml",
    "lastknown_signal": "GH Action",
-   "lastknown_version": "4.0.0",
+   "lastknown_version": "4.0.0-beta-4",
    "renamed_to": "",
    "build": "NONE",
    "build_url": "",
-   "last_seen": "2026-07-16"
+   "last_seen": "2026-07-16",
+   "last_checked": "2026-07-16T16:23:22Z",
+   "current_full_name": "danthe1st/maven-repro"
   },
   {
    "repo": "darshangm1/Smart-Service-Platform",
@@ -3190,12 +3455,15 @@
    "live_signal": "Wrapper",
    "live_version": "4.0.0-rc-5",
    "source": "nested:Backend/.mvn/wrapper/maven-wrapper.properties",
-   "lastknown_signal": "https://github.com/eelcodevlieger/mapimage[eelcodevlieger/mapimage^]",
-   "lastknown_version": "1",
+   "lastknown_signal": "Wrapper",
+   "lastknown_version": "4.0.0-rc-5",
    "renamed_to": "",
    "build": "FAILURE",
    "build_url": "https://github.com/darshangm1/Smart-Service-Platform/actions/runs/24019588220",
-   "build_workflow": "CI"
+   "build_workflow": "CI",
+   "last_seen": "2026-07-16",
+   "last_checked": "2026-07-16T16:23:22Z",
+   "current_full_name": "darshangm1/Smart-Service-Platform"
   },
   {
    "repo": "delanym/MENFORCER-475",
@@ -3206,11 +3474,13 @@
    "live_version": "4.0.0-alpha-5",
    "source": "root",
    "lastknown_signal": "Wrapper",
-   "lastknown_version": "4.0.0",
+   "lastknown_version": "4.0.0-alpha-5",
    "renamed_to": "",
    "build": "NONE",
    "build_url": "",
-   "last_seen": "2026-07-16"
+   "last_seen": "2026-07-16",
+   "last_checked": "2026-07-16T16:23:22Z",
+   "current_full_name": "delanym/MENFORCER-475"
   },
   {
    "repo": "devhalos/genesis",
@@ -3224,7 +3494,8 @@
    "lastknown_version": "4.1.0",
    "renamed_to": "",
    "build": "NONE",
-   "build_url": ""
+   "build_url": "",
+   "last_seen": "2026-07-16"
   },
   {
    "repo": "dhinojosa/nfjs-java-tdd",
@@ -3313,7 +3584,8 @@
    "lastknown_version": "4.0.0",
    "renamed_to": "",
    "build": "NONE",
-   "build_url": ""
+   "build_url": "",
+   "last_seen": "2026-07-16"
   },
   {
    "repo": "dungtq2k5/ams-backend",
@@ -3479,7 +3751,8 @@
    "lastknown_version": "4.0.0",
    "renamed_to": "",
    "build": "NONE",
-   "build_url": ""
+   "build_url": "",
+   "last_seen": "2026-07-16"
   },
   {
    "repo": "faermanj/cloud-daleks",
@@ -3553,7 +3826,8 @@
    "lastknown_version": "4.0.0-rc-4",
    "renamed_to": "",
    "build": "NONE",
-   "build_url": ""
+   "build_url": "",
+   "last_seen": "2026-07-16"
   },
   {
    "repo": "flowlogix/ear-sample",
@@ -3887,7 +4161,8 @@
    "renamed_to": "",
    "build": "SUCCESS",
    "build_url": "https://github.com/helpermethod/zip-forge/actions/runs/27818322694",
-   "build_workflow": "2 Maven workflows, all agree"
+   "build_workflow": "2 Maven workflows, all agree",
+   "last_seen": "2026-07-16"
   },
   {
    "repo": "hereandnowai/web-scraper-java",
@@ -4018,7 +4293,8 @@
    "lastknown_version": "4.1.0",
    "renamed_to": "",
    "build": "NONE",
-   "build_url": ""
+   "build_url": "",
+   "last_seen": "2026-07-16"
   },
   {
    "repo": "ikmdev/komet",
@@ -4239,7 +4515,8 @@
    "lastknown_version": "4.0.0",
    "renamed_to": "",
    "build": "NONE",
-   "build_url": ""
+   "build_url": "",
+   "last_seen": "2026-07-16"
   },
   {
    "repo": "jabrena/spring-boot-and-r-language",
@@ -4268,7 +4545,8 @@
    "lastknown_version": "4.0.0",
    "renamed_to": "",
    "build": "NONE",
-   "build_url": ""
+   "build_url": "",
+   "last_seen": "2026-07-16"
   },
   {
    "repo": "jabrena/spring-modulith-events-kafka-example",
@@ -4384,7 +4662,8 @@
    "renamed_to": "",
    "build": "FAILURE",
    "build_url": "https://github.com/jnorthrup/superbikeshed/actions/runs/16664980412",
-   "build_workflow": "4 Maven workflows, all agree"
+   "build_workflow": "4 Maven workflows, all agree",
+   "last_seen": "2026-07-16"
   },
   {
    "repo": "joeribuytaert5-hub/v1-f-swap",
@@ -5186,7 +5465,8 @@
    "renamed_to": "",
    "build": "SUCCESS",
    "build_url": "https://github.com/mtkhawaja/spring-boot-4-openapi-archetype/actions/runs/20054254549",
-   "build_workflow": "2 Maven workflows, all agree"
+   "build_workflow": "2 Maven workflows, all agree",
+   "last_seen": "2026-07-16"
   },
   {
    "repo": "mtkhawaja/testing-cookbook",
@@ -5377,7 +5657,8 @@
    "lastknown_version": "4.0.0",
    "renamed_to": "",
    "build": "NONE",
-   "build_url": ""
+   "build_url": "",
+   "last_seen": "2026-07-16"
   },
   {
    "repo": "nostra/mcalert",
@@ -5559,7 +5840,8 @@
    "renamed_to": "",
    "build": "SUCCESS",
    "build_url": "https://github.com/pretsadev/scm-version-maven-extension/actions/runs/17170941853",
-   "build_workflow": "2 Maven workflows, all agree"
+   "build_workflow": "2 Maven workflows, all agree",
+   "last_seen": "2026-07-16"
   },
   {
    "repo": "radughiorma/maven-flatten-plugin-multimodule-issue",
@@ -5721,7 +6003,8 @@
    "lastknown_version": "4.0.0",
    "renamed_to": "",
    "build": "NONE",
-   "build_url": ""
+   "build_url": "",
+   "last_seen": "2026-07-16"
   },
   {
    "repo": "schoenked/evangeliumstaucher",
@@ -5885,7 +6168,8 @@
    "lastknown_version": "4.0.0",
    "renamed_to": "",
    "build": "NONE",
-   "build_url": ""
+   "build_url": "",
+   "last_seen": "2026-07-16"
   },
   {
    "repo": "ssegifred/leadmanagement",
@@ -6031,7 +6315,8 @@
    "lastknown_version": "0",
    "renamed_to": "",
    "build": "NONE",
-   "build_url": ""
+   "build_url": "",
+   "last_seen": "2026-07-16"
   },
   {
    "repo": "symentispl/roadrunner",
@@ -6060,7 +6345,8 @@
    "lastknown_version": "4.0.0",
    "renamed_to": "",
    "build": "NONE",
-   "build_url": ""
+   "build_url": "",
+   "last_seen": "2026-07-16"
   },
   {
    "repo": "thenameisvir/Shop_Sphere",
@@ -6176,7 +6462,8 @@
    "lastknown_version": "4.1.0",
    "renamed_to": "",
    "build": "NONE",
-   "build_url": ""
+   "build_url": "",
+   "last_seen": "2026-07-16"
   },
   {
    "repo": "ursaj/maven-4-bom-template",
@@ -6235,7 +6522,8 @@
    "lastknown_version": "4.1.0",
    "renamed_to": "",
    "build": "NONE",
-   "build_url": ""
+   "build_url": "",
+   "last_seen": "2026-07-16"
   },
   {
    "repo": "veithen/resolver-proxy-maven-plugin",
