@@ -54,7 +54,7 @@ sig_c = Counter(f['_sig'] for f in FINAL)
 run_c = Counter(f['_runtime'] for f in FINAL)
 build_c = Counter(f['_build'] for f in FINAL)
 
-BC = {'SUCCESS':'#2a7','FAILURE':'#c33','STARTUP_FAILURE':'#c33','TIMED_OUT':'#c33',
+BC = {'SUCCESS':'#2a7','FAILURE':'#c33','STARTUP_FAILURE':'#c33','TIMED_OUT':'#c33','AMBIGUOUS':'#a80',
       'ACTION_REQUIRED':'#a80','SKIPPED':'#888','CANCELLED':'#888','IN_PROGRESS':'#39c',
       'QUEUED':'#39c','none':'#bbb','UNKNOWN':'#bbb','NEUTRAL':'#888'}
 SC = {'active':'#2a7','archived':'#a80','gone':'#c33'}
@@ -79,8 +79,9 @@ now = datetime.datetime.now(datetime.timezone.utc).strftime('%Y-%m-%d %H:%M UTC'
 rows = []
 for f in sorted(FINAL, key=lambda x: (x.get('live_signal') is None, -int(x.get('stars') or 0))):
     bcol = BC.get(f['_build'], '#888')
-    build_cell = (f"<a href='{esc(f.get('build_url'))}' target=_blank rel=noreferrer style='color:{bcol}'>{esc(f.get('build'))}</a>"
-                  if f.get('build_url') else f"<span style='color:{bcol}'>{esc(f.get('build') or '')}</span>")
+    btitle = f" title=\"{esc(f.get('build_workflow'))}\"" if f.get('build_workflow') else ''
+    build_cell = (f"<a href='{esc(f.get('build_url'))}' target=_blank rel=noreferrer style='color:{bcol}'{btitle}>{esc(f.get('build'))}</a>"
+                  if f.get('build_url') else f"<span style='color:{bcol}'{btitle}>{esc(f.get('build') or '')}</span>")
     src = f.get('source') or ''
     srctag = 'root' if src == 'root' else ('nested' if src.startswith('nested') else '')
     dark = ''
@@ -174,7 +175,7 @@ repos with no locatable signal (likely reverted, or a truncated tree). The stati
  <dt>Maven Runtime</dt><dd>Maven CLI version pinned in the wrapper or workflow (e.g. <code>4.0.0-rc-5</code>); <code>4.1.0 (POM model)</code> for POM-only repos.</dd>
  <dt>Src</dt><dd>Where the signal was found on re-examination: <code>root</code> (root <code>pom.xml</code>/<code>.mvn</code>) or <code>nested</code> (below the repo root, via git-tree walk).</dd>
  <dt>Pushed</dt><dd>Date of the most recent push to the default branch — tells active projects apart from dormant ones. <em>Not a Maven 4 signal.</em></dd>
- <dt>Last Build</dt><dd>Conclusion of the repo's most recent GitHub Actions workflow run (any workflow, not necessarily a Maven build); <code>none</code> = no runs found. <em>Not a Maven 4 signal.</em></dd>
+ <dt>Last Build</dt><dd>Conclusion of the most recent <em>completed</em> run, on the <em>default branch</em>, of a workflow that actually invokes Maven (<code>mvn</code>/<code>mvnw</code> or <code>setup-java</code>). <code>AMBIGUOUS</code> = several Maven workflows disagree and we cannot tell which one is the Maven-4-relevant build — the link goes to the repo's Actions view (hover for the breakdown). <code>NONE</code> = no Maven-invoking workflow with a completed default-branch run. <em>Not a Maven 4 signal.</em></dd>
  <dt>Last-known</dt><dd>For a "signal not found" active repo: the signal/runtime last recorded in the CI artifacts, to aid triage of possible reverts.</dd>
 </dl>
 </details>
