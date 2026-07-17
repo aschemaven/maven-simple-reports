@@ -101,6 +101,28 @@ for f in sorted(FINAL, key=lambda x: (x.get('live_signal') is None, -int(x.get('
 def stat_tbl(counter):
     return "".join(f"<tr><td>{esc(k)}</td><td style='text-align:right'>{v}</td></tr>" for k, v in counter.most_common())
 
+# mouse-over explanations, derived from the legend entries
+TIP = {
+    'repo': 'GitHub repository (owner/name); an arrow marks a detected rename',
+    'state': 'active = repo reachable / archived = read-only (adoption frozen) / gone = deleted, private or inaccessible. Not a Maven 4 signal.',
+    'stars': 'GitHub stargazer count',
+    'pushed': 'Date of the most recent push to the default branch — tells active projects apart from dormant ones. Not a Maven 4 signal.',
+    'signal': 'Which Maven 4 detection signal is present: POM 4.1.0 (a pom.xml with the new namespace), Wrapper (a maven-wrapper.properties referencing apache-maven-4), GH Action (a workflow installing Maven 4)',
+    'runtime': 'Maven CLI version pinned in the wrapper or workflow (e.g. 4.0.0-rc-5); 4.1.0 (POM model) for POM-only repos',
+    'src': 'Where the signal was found on re-examination: root (root pom.xml/.mvn) or nested (below the repo root, via git-tree walk)',
+    'build': 'Conclusion of the most recent completed run, on the default branch, of a workflow that actually invokes Maven (mvn/mvnw or setup-java). AMBIGUOUS = several Maven workflows disagree (hover the cell for the breakdown). NONE = no Maven-invoking workflow with a completed default-branch run. Not a Maven 4 signal.',
+    'lastknown': 'For a signal-not-found active repo: the signal/runtime last recorded in the CI artifacts, to aid triage of possible reverts',
+    'tracked': 'Every repo ever seen by discovery, kept forever: active + archived + gone',
+    'active': 'Repo reachable and not archived',
+    'archived': 'Read-only on GitHub — adoption state frozen',
+    'gone': 'Deleted, private or otherwise inaccessible',
+    'confirmed': 'Reachable repos with a live Maven 4 signal (POM 4.1.0, Wrapper or GH Action)',
+    'green': 'Confirmed adopters whose last completed default-branch Maven workflow run succeeded',
+    'red': 'Confirmed adopters whose last completed default-branch Maven workflow run failed, had a startup failure or timed out',
+    'dark': 'Active repos where no signal is currently locatable (likely reverted, or a truncated git tree)',
+}
+def tip(k): return f' title="{esc(TIP[k])}"'
+
 recon_html = ""
 if recon:
     recon_html = (f"<div class=recon>🔄 Last full reconciliation {esc(recon.get('date'))}: "
@@ -132,23 +154,46 @@ doc = f"""<!doctype html><meta charset=utf-8>
  .fg label{{font-size:13px;white-space:nowrap}} .ct{{color:#999;font-size:11px}}
  .fbar{{display:flex;gap:.6rem;align-items:center;margin-bottom:.4rem}}
  input[type=search]{{padding:5px 8px;min-width:220px}} button{{padding:4px 10px}}
+ #topnav{{position:sticky;top:0;z-index:20;background:#fffffff2;backdrop-filter:blur(2px);
+  border-bottom:1px solid #e3e3e3;margin:0 -2rem .8rem;padding:.45rem 2rem;font-size:13px}}
+ #topnav a{{color:#3b62c4;text-decoration:none;margin-right:.9rem}}
+ #topnav a:hover{{text-decoration:underline}}
+ #topnav .lbl{{color:#888;margin-right:.6rem}}
+ section{{scroll-margin-top:3rem}}
+ #toc{{display:none}}
+ @media(min-width:1420px){{
+  body{{margin-left:210px}}
+  #toc{{display:block;position:fixed;top:5rem;left:1rem;width:150px;font-size:13px;
+   border-left:2px solid #e3e3e3;padding-left:.8rem;line-height:2}}
+  #toc a{{display:block;color:#777;text-decoration:none;border-left:2px solid transparent;
+   margin-left:calc(-.8rem - 2px);padding-left:.8rem}}
+  #toc a:hover{{color:#1c1c1c}}
+  #toc a.cur{{color:#1c1c1c;font-weight:600;border-left-color:#3b62c4}}
+ }}
 </style>
 <h1>Maven 4 Adoption — Registry</h1>
 <p class=sub>Generated {now}</p>
+<nav id=topnav><span class=lbl>Jump to:</span><a href=#summary>Summary</a><a href=#statistics>Statistics</a><a href=#projects><b>Projects</b></a></nav>
+<nav id=toc aria-label="Contents">
+ <a href=#summary>Summary</a>
+ <a href=#statistics>Statistics</a>
+ <a href=#projects>Projects</a>
+</nav>
 {recon_html}
+<section id=summary>
 <p class=grouplbl>Registry state <span class=eq>({len(FINAL)} = active + archived + gone)</span></p>
 <div class=cards>
- <div class=card><b>{len(FINAL)}</b>tracked (union)</div>
- <div class=card><b style='color:#2a7'>{active_n}</b>active</div>
- <div class=card><b style='color:#a80'>{arch}</b>archived</div>
- <div class=card><b style='color:#c33'>{gone}</b>gone</div>
+ <div class=card{tip('tracked')}><b>{len(FINAL)}</b>tracked (union)</div>
+ <div class=card{tip('active')}><b style='color:#2a7'>{active_n}</b>active</div>
+ <div class=card{tip('archived')}><b style='color:#a80'>{arch}</b>archived</div>
+ <div class=card{tip('gone')}><b style='color:#c33'>{gone}</b>gone</div>
 </div>
 <p class=grouplbl>Maven 4 &amp; CI <span class=eq>(among the {alive_n} reachable)</span></p>
 <div class=cards>
- <div class=card><b>{len(confirmed)}</b>confirmed M4 signal</div>
- <div class=card><b style='color:#2a7'>{green}</b>CI green</div>
- <div class=card><b style='color:#c33'>{red}</b>CI failing</div>
- <div class=card><b style='color:#bbb'>{dark_n}</b>signal not found</div>
+ <div class=card{tip('confirmed')}><b>{len(confirmed)}</b>confirmed M4 signal</div>
+ <div class=card{tip('green')}><b style='color:#2a7'>{green}</b>CI green</div>
+ <div class=card{tip('red')}><b style='color:#c33'>{red}</b>CI failing</div>
+ <div class=card{tip('dark')}><b style='color:#bbb'>{dark_n}</b>signal not found</div>
 </div>
 
 <div class=note><b>Method:</b> Maven 4 adopters are <b>discovered</b> via GitHub code search and then
@@ -158,13 +203,18 @@ daily search. Signals below the repo root are resolved via a git-tree walk. This
 candidates, of which {alive_n} reachable and {len(confirmed)} with a confirmed signal; {dark_n} active
 repos with no locatable signal (likely reverted, or a truncated tree). The statistics below cover the
 {len(confirmed)} confirmed adopters.</div>
+</section>
 
+<section id=statistics>
 <div class=two>
- <div><h3>Signals</h3><table><tr><th>Signal</th><th>Count</th></tr>{stat_tbl(sigs)}</table></div>
- <div><h3>Maven Runtime</h3><table><tr><th>Maven Runtime</th><th>Count</th></tr>{stat_tbl(vers)}</table></div>
- <div><h3>Last Build</h3><table><tr><th>Last Build</th><th>Count</th></tr>{stat_tbl(builds)}</table></div>
+ <div><h3{tip('signal')}>Signals</h3><table><tr><th{tip('signal')}>Signal</th><th>Count</th></tr>{stat_tbl(sigs)}</table></div>
+ <div><h3{tip('runtime')}>Maven Runtime</h3><table><tr><th{tip('runtime')}>Maven Runtime</th><th>Count</th></tr>{stat_tbl(vers)}</table></div>
+ <div><h3{tip('build')}>Last Build</h3><table><tr><th{tip('build')}>Last Build</th><th>Count</th></tr>{stat_tbl(builds)}</table></div>
 </div>
+</section>
 
+<section id=projects>
+<h2>Repositories ({len(FINAL)})</h2>
 <details><summary>Legend</summary>
 <dl class=legend>
  <dt>State</dt><dd><code>active</code> repo reachable · <code>archived</code> read-only (adoption frozen) · <code>gone</code> deleted/private/inaccessible. <em>Not a Maven 4 signal.</em></dd>
@@ -176,8 +226,6 @@ repos with no locatable signal (likely reverted, or a truncated tree). The stati
  <dt>Last-known</dt><dd>For a "signal not found" active repo: the signal/runtime last recorded in the CI artifacts, to aid triage of possible reverts.</dd>
 </dl>
 </details>
-
-<h2>Repositories ({len(FINAL)})</h2>
 <div class=fbar>
  <input type=search id=q placeholder='search repo…' oninput=flt()>
  <button onclick=clearf()>clear filters</button>
@@ -190,12 +238,23 @@ repos with no locatable signal (likely reverted, or a truncated tree). The stati
  <div class=fg><b>Last Build</b><div class=box>{checks('build', build_c)}</div></div>
 </div>
 <table id=t><thead><tr>
- <th onclick=srt(0)>Repository</th><th onclick=srt(1)>State</th><th onclick=srt(2)>Stars</th>
- <th onclick=srt(3)>Pushed</th><th onclick=srt(4)>Signal</th><th onclick=srt(5)>Maven Runtime</th>
- <th onclick=srt(6)>Src</th><th onclick=srt(7)>Last Build</th><th>Last-known (if dark)</th></tr></thead>
+ <th onclick=srt(0){tip('repo')}>Repository</th><th onclick=srt(1){tip('state')}>State</th><th onclick=srt(2){tip('stars')}>Stars</th>
+ <th onclick=srt(3){tip('pushed')}>Pushed</th><th onclick=srt(4){tip('signal')}>Signal</th><th onclick=srt(5){tip('runtime')}>Maven Runtime</th>
+ <th onclick=srt(6){tip('src')}>Src</th><th onclick=srt(7){tip('build')}>Last Build</th><th{tip('lastknown')}>Last-known (if dark)</th></tr></thead>
 <tbody>
 {''.join(rows)}
 </tbody></table>
+</section>
+<script>
+ // scroll-spy for the right-rail contents list
+ const tocLinks=[...document.querySelectorAll('#toc a')];
+ const spy=new IntersectionObserver(es=>{{
+  for(const e of es) if(e.isIntersecting){{
+   tocLinks.forEach(a=>a.classList.toggle('cur',a.hash==='#'+e.target.id));
+  }}
+ }},{{rootMargin:'-10% 0px -70% 0px'}});
+ document.querySelectorAll('section[id]').forEach(s=>spy.observe(s));
+</script>
 <script>
  const tb=document.querySelector('#t tbody');
  const groups=['state','sig','runtime','build'];
