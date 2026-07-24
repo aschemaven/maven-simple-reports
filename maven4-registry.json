@@ -1,6 +1,6 @@
 {
  "schema_version": 1,
- "updated": "2026-07-24T08:40:36Z",
+ "updated": "2026-07-24T19:45:04Z",
  "reconciliation": {
   "date": "2026-07-24",
   "missed": 0,
@@ -1873,7 +1873,7 @@
    "last_seen": "2026-07-24",
    "last_checked": "2026-07-24T08:40:10Z",
    "current_full_name": "Siomai0-hi/CafeWeb",
-   "build_checked": "2026-07-24T08:00:56Z"
+   "build_checked": "2026-07-24T19:44:42Z"
   },
   {
    "repo": "Stephen-Agyemang/Zork-v2",
@@ -1891,7 +1891,7 @@
    "last_seen": "2026-07-24",
    "last_checked": "2026-07-24T08:40:11Z",
    "current_full_name": "Stephen-Agyemang/Zork-v2",
-   "build_checked": "2026-07-24T08:00:56Z",
+   "build_checked": "2026-07-24T19:44:42Z",
    "build_workflow": "CI"
   },
   {
@@ -1910,7 +1910,7 @@
    "last_seen": "2026-07-24",
    "last_checked": "2026-07-24T08:40:11Z",
    "current_full_name": "SylvieHoareau/livranoo",
-   "build_checked": "2026-07-24T08:00:56Z"
+   "build_checked": "2026-07-24T19:44:42Z"
   },
   {
    "repo": "Tanmayakaranth/OOAD_Smart-Restaurant-",
@@ -1927,7 +1927,7 @@
    "build_url": "",
    "last_checked": "2026-07-24T08:40:11Z",
    "current_full_name": "Tanmayakaranth/OOAD_Smart-Restaurant-",
-   "build_checked": "2026-07-24T08:00:56Z"
+   "build_checked": "2026-07-24T19:44:42Z"
   },
   {
    "repo": "TheSphynxoid/Esprit-PIDEV-4SE1-2526-EspritMarket",
@@ -1944,7 +1944,7 @@
    "build_url": "",
    "last_checked": "2026-07-24T08:40:11Z",
    "current_full_name": "TheSphynxoid/Esprit-PIDEV-4SE1-2526-EspritMarket",
-   "build_checked": "2026-07-24T08:00:56Z",
+   "build_checked": "2026-07-24T19:44:42Z",
    "last_seen": "2026-07-24"
   },
   {
@@ -1963,7 +1963,7 @@
    "last_seen": "2026-07-24",
    "last_checked": "2026-07-24T08:40:11Z",
    "current_full_name": "Thejuampi/training-coach",
-   "build_checked": "2026-07-24T08:00:56Z",
+   "build_checked": "2026-07-24T19:44:42Z",
    "build_workflow": "CI"
   },
   {
@@ -2001,7 +2001,7 @@
    "last_seen": "2026-07-24",
    "last_checked": "2026-07-24T08:40:11Z",
    "current_full_name": "Thomasramos02/MpFitnessBack",
-   "build_checked": "2026-07-24T08:00:56Z"
+   "build_checked": "2026-07-24T19:44:42Z"
   },
   {
    "repo": "Timongcraft/Tgc-OutlineBackup",
@@ -2019,7 +2019,7 @@
    "last_seen": "2026-07-20",
    "last_checked": "2026-07-24T08:40:11Z",
    "current_full_name": "Timongcraft/Tgc-OutlineBackup",
-   "build_checked": "2026-07-24T08:00:56Z"
+   "build_checked": "2026-07-24T19:44:42Z"
   },
   {
    "repo": "ToanNguyen13025/SnmpMonitoring",
@@ -2037,7 +2037,7 @@
    "last_seen": "2026-07-24",
    "last_checked": "2026-07-24T08:40:11Z",
    "current_full_name": "ToanNguyen13025/SnmpMonitoring",
-   "build_checked": "2026-07-24T08:00:56Z"
+   "build_checked": "2026-07-24T19:44:43Z"
   },
   {
    "repo": "TokimuneFIN/Elektroniikkakauppa",
@@ -2055,7 +2055,7 @@
    "last_seen": "2026-07-24",
    "last_checked": "2026-07-24T08:40:11Z",
    "current_full_name": "TokimuneFIN/Elektroniikkakauppa",
-   "build_checked": "2026-07-24T08:00:57Z"
+   "build_checked": "2026-07-24T19:44:43Z"
   },
   {
    "repo": "UrieLara/Reservation-API",
@@ -2091,7 +2091,7 @@
    "build_url": "",
    "last_checked": "2026-07-24T08:40:12Z",
    "current_full_name": "Utsav-633/PasswordManager",
-   "build_checked": "2026-07-24T08:00:57Z"
+   "build_checked": "2026-07-24T19:44:43Z"
   },
   {
    "repo": "VG-Correa/sugflora-api",
@@ -2108,7 +2108,7 @@
    "build_url": "",
    "last_checked": "2026-07-24T08:40:12Z",
    "current_full_name": "VG-Correa/sugflora-api",
-   "build_checked": "2026-07-24T08:00:57Z",
+   "build_checked": "2026-07-24T19:44:43Z",
    "last_seen": "2026-07-24"
   },
   {
@@ -2127,7 +2127,7 @@
    "last_seen": "2026-07-24",
    "last_checked": "2026-07-24T08:40:12Z",
    "current_full_name": "Workday/spin.build",
-   "build_checked": "2026-07-24T08:00:57Z",
+   "build_checked": "2026-07-24T19:44:43Z",
    "build_workflow": "2 Maven workflows, all agree"
   },
   {
@@ -2146,7 +2146,7 @@
    "last_seen": "2026-07-24",
    "last_checked": "2026-07-24T08:40:12Z",
    "current_full_name": "XLaiHuy/Back-spring-NCKH",
-   "build_checked": "2026-07-24T08:00:57Z"
+   "build_checked": "2026-07-24T19:44:43Z"
   },
   {
    "repo": "XLaiHuy/FullStack-SciencetTificProducts-Mangament",
@@ -2164,7 +2164,7 @@
    "last_seen": "2026-07-24",
    "last_checked": "2026-07-24T08:40:12Z",
    "current_full_name": "XLaiHuy/FullStack-SciencetTificProducts-Mangament",
-   "build_checked": "2026-07-24T08:00:57Z"
+   "build_checked": "2026-07-24T19:44:44Z"
   },
   {
    "repo": "XiaoTie123/Dental_POS",
@@ -2182,7 +2182,7 @@
    "last_seen": "2026-07-24",
    "last_checked": "2026-07-24T08:40:12Z",
    "current_full_name": "XiaoTie123/Dental_POS",
-   "build_checked": "2026-07-24T08:00:57Z"
+   "build_checked": "2026-07-24T19:44:44Z"
   },
   {
    "repo": "YaminoJakkaru/java-filmorate",
@@ -2200,7 +2200,7 @@
    "last_seen": "2026-07-24",
    "last_checked": "2026-07-24T08:40:13Z",
    "current_full_name": "YaminoJakkaru/java-filmorate",
-   "build_checked": "2026-07-24T08:00:57Z"
+   "build_checked": "2026-07-24T19:44:44Z"
   },
   {
    "repo": "ZaHyirrr/NCKH",
@@ -2218,7 +2218,7 @@
    "last_seen": "2026-07-24",
    "last_checked": "2026-07-24T08:40:12Z",
    "current_full_name": "ZaHyirrr/NCKH",
-   "build_checked": "2026-07-24T08:00:57Z"
+   "build_checked": "2026-07-24T19:44:44Z"
   },
   {
    "repo": "ZaHyirrr/NCKH-new",
@@ -2236,7 +2236,7 @@
    "last_seen": "2026-07-24",
    "last_checked": "2026-07-24T08:40:13Z",
    "current_full_name": "ZaHyirrr/NCKH-new",
-   "build_checked": "2026-07-24T08:00:57Z"
+   "build_checked": "2026-07-24T19:44:44Z"
   },
   {
    "repo": "a114mc/old-a114-klassmaster",
@@ -2253,7 +2253,7 @@
    "build_url": "",
    "last_checked": "2026-07-24T08:40:13Z",
    "current_full_name": "a114mc/old-a114-klassmaster",
-   "build_checked": "2026-07-24T08:00:58Z"
+   "build_checked": "2026-07-24T19:44:44Z"
   },
   {
    "repo": "aahona-16/UPI_Without_Internet",
@@ -2271,7 +2271,7 @@
    "last_seen": "2026-07-24",
    "last_checked": "2026-07-24T08:40:13Z",
    "current_full_name": "aahona-16/UPI_Without_Internet",
-   "build_checked": "2026-07-24T08:00:58Z"
+   "build_checked": "2026-07-24T19:44:44Z"
   },
   {
    "repo": "abdulazimkhan26/hrms_backend",
@@ -2304,7 +2304,7 @@
    "last_seen": "2026-07-24",
    "last_checked": "2026-07-24T08:40:13Z",
    "current_full_name": "adaamortiiz/Somax",
-   "build_checked": "2026-07-24T08:00:58Z"
+   "build_checked": "2026-07-24T19:44:45Z"
   },
   {
    "repo": "adityasagar1125-lgtm/iwt-demo",
@@ -2322,7 +2322,7 @@
    "last_checked": "2026-07-24T08:40:14Z",
    "current_full_name": "adityasagar1125-lgtm/iwt-demo",
    "last_seen": "2026-07-20",
-   "build_checked": "2026-07-24T08:00:58Z"
+   "build_checked": "2026-07-24T19:44:45Z"
   },
   {
    "repo": "ajavageek/flatten-kotlin-recipe",
@@ -2339,7 +2339,7 @@
    "build_url": "",
    "last_checked": "2026-07-24T08:40:14Z",
    "current_full_name": "ajavageek/flatten-kotlin-recipe",
-   "build_checked": "2026-07-24T08:00:58Z"
+   "build_checked": "2026-07-24T19:44:45Z"
   },
   {
    "repo": "ajavageek/otel-jvm",
@@ -2357,7 +2357,7 @@
    "last_seen": "2026-07-24",
    "last_checked": "2026-07-24T08:40:14Z",
    "current_full_name": "ajavageek/otel-jvm",
-   "build_checked": "2026-07-24T08:00:58Z"
+   "build_checked": "2026-07-24T19:44:45Z"
   },
   {
    "repo": "akannkereuwem1/LatencyLab",
@@ -2375,7 +2375,7 @@
    "last_seen": "2026-07-20",
    "last_checked": "2026-07-24T08:40:14Z",
    "current_full_name": "akannkereuwem1/LatencyLab",
-   "build_checked": "2026-07-24T08:00:58Z"
+   "build_checked": "2026-07-24T19:44:45Z"
   },
   {
    "repo": "akdukaan/DrMap",
@@ -2393,7 +2393,7 @@
    "last_checked": "2026-07-24T08:40:14Z",
    "current_full_name": "akdukaan/DrMap",
    "last_seen": "2026-07-24",
-   "build_checked": "2026-07-24T08:00:58Z"
+   "build_checked": "2026-07-24T19:44:45Z"
   },
   {
    "repo": "akmalaqim74/UI_Automation_Testing",
@@ -2410,7 +2410,7 @@
    "build_url": "",
    "last_checked": "2026-07-24T08:40:14Z",
    "current_full_name": "akmalaqim74/UI_Automation_Testing",
-   "build_checked": "2026-07-24T08:00:58Z",
+   "build_checked": "2026-07-24T19:44:45Z",
    "last_seen": "2026-07-24"
   },
   {
@@ -2428,7 +2428,7 @@
    "build_url": "https://github.com/alefHugo03/Projeto_Adega_UMC/actions/runs/27446403818",
    "last_checked": "2026-07-24T08:40:14Z",
    "current_full_name": "alefHugo03/Projeto_Adega_UMC",
-   "build_checked": "2026-07-24T08:00:58Z",
+   "build_checked": "2026-07-24T19:44:45Z",
    "last_seen": "2026-07-24",
    "build_workflow": "CI"
   },
@@ -2448,7 +2448,7 @@
    "last_seen": "2026-07-24",
    "last_checked": "2026-07-24T08:40:14Z",
    "current_full_name": "alexdutescu/movies-app",
-   "build_checked": "2026-07-24T08:00:58Z"
+   "build_checked": "2026-07-24T19:44:46Z"
   },
   {
    "repo": "amansinha11-dev/SAP-Project",
@@ -2466,7 +2466,7 @@
    "last_seen": "2026-07-24",
    "last_checked": "2026-07-24T08:40:15Z",
    "current_full_name": "amansinha11-dev/SAP-Project",
-   "build_checked": "2026-07-24T08:00:58Z"
+   "build_checked": "2026-07-24T19:44:46Z"
   },
   {
    "repo": "amiraz014/Sirius-ing2-hopital",
@@ -2484,7 +2484,7 @@
    "last_seen": "2026-07-24",
    "last_checked": "2026-07-24T08:40:15Z",
    "current_full_name": "amiraz014/Sirius-ing2-hopital",
-   "build_checked": "2026-07-24T08:00:58Z"
+   "build_checked": "2026-07-24T19:44:46Z"
   },
   {
    "repo": "andrepenteado/aproove",
@@ -2501,7 +2501,7 @@
    "build_url": "",
    "last_checked": "2026-07-24T08:40:15Z",
    "current_full_name": "andrepenteado/aproove",
-   "build_checked": "2026-07-24T08:00:58Z",
+   "build_checked": "2026-07-24T19:44:46Z",
    "last_seen": "2026-07-24"
   },
   {
@@ -2520,7 +2520,7 @@
    "last_seen": "2026-07-24",
    "last_checked": "2026-07-24T08:40:15Z",
    "current_full_name": "andrushakhudyk/java-training",
-   "build_checked": "2026-07-24T08:00:59Z"
+   "build_checked": "2026-07-24T19:44:46Z"
   },
   {
    "repo": "anshulvyasa/Spring-Boot",
@@ -2538,7 +2538,7 @@
    "last_seen": "2026-07-24",
    "last_checked": "2026-07-24T08:40:15Z",
    "current_full_name": "anshulvyasa/Spring-Boot",
-   "build_checked": "2026-07-24T08:00:59Z"
+   "build_checked": "2026-07-24T19:44:46Z"
   },
   {
    "repo": "anuskagupta123/Library-Management-System",
@@ -2556,7 +2556,7 @@
    "last_seen": "2026-07-24",
    "last_checked": "2026-07-24T08:40:15Z",
    "current_full_name": "anuskagupta123/Library-Management-System",
-   "build_checked": "2026-07-24T08:00:59Z"
+   "build_checked": "2026-07-24T19:44:46Z"
   },
   {
    "repo": "apache/maven-hocon-extension",
@@ -2574,7 +2574,7 @@
    "last_seen": "2026-07-24",
    "last_checked": "2026-07-24T08:40:16Z",
    "current_full_name": "apache/maven-hocon-extension",
-   "build_checked": "2026-07-24T08:00:59Z"
+   "build_checked": "2026-07-24T19:44:46Z"
   },
   {
    "repo": "apache/maven-xinclude-extension",
@@ -2592,7 +2592,7 @@
    "last_seen": "2026-07-24",
    "last_checked": "2026-07-24T08:40:16Z",
    "current_full_name": "apache/maven-xinclude-extension",
-   "build_checked": "2026-07-24T08:00:59Z"
+   "build_checked": "2026-07-24T19:44:47Z"
   },
   {
    "repo": "apache/plc4x",
@@ -2610,7 +2610,7 @@
    "last_seen": "2026-07-24",
    "last_checked": "2026-07-24T08:40:16Z",
    "current_full_name": "apache/plc4x",
-   "build_checked": "2026-07-24T08:00:59Z",
+   "build_checked": "2026-07-24T19:44:47Z",
    "build_workflow": "4 Maven workflows: 3 SUCCESS, 1 FAILURE"
   },
   {
@@ -2629,7 +2629,7 @@
    "last_seen": "2026-07-24",
    "last_checked": "2026-07-24T08:40:16Z",
    "current_full_name": "apache/plc4x-build-tools",
-   "build_checked": "2026-07-24T08:00:59Z",
+   "build_checked": "2026-07-24T19:44:47Z",
    "build_workflow": "Platform compatibility"
   },
   {
@@ -2648,7 +2648,7 @@
    "last_seen": "2026-07-24",
    "last_checked": "2026-07-24T08:40:16Z",
    "current_full_name": "apache/plc4x-extras",
-   "build_checked": "2026-07-24T08:00:59Z",
+   "build_checked": "2026-07-24T19:44:47Z",
    "build_workflow": "3 Maven workflows, all agree"
   },
   {
@@ -2667,7 +2667,7 @@
    "last_seen": "2026-07-24",
    "last_checked": "2026-07-24T08:40:16Z",
    "current_full_name": "apetrozzelli/jaus",
-   "build_checked": "2026-07-24T08:00:59Z",
+   "build_checked": "2026-07-24T19:44:47Z",
    "build_workflow": "Java CI with Maven"
   },
   {
@@ -2686,7 +2686,7 @@
    "last_seen": "2026-07-24",
    "last_checked": "2026-07-24T08:40:16Z",
    "current_full_name": "apetrozzelli/truelayer-pokedex",
-   "build_checked": "2026-07-24T08:00:59Z",
+   "build_checked": "2026-07-24T19:44:47Z",
    "build_workflow": "Java CI with Maven"
   },
   {
@@ -2705,7 +2705,7 @@
    "last_seen": "2026-07-24",
    "last_checked": "2026-07-24T08:40:17Z",
    "current_full_name": "aschemaven/maven-modular-sources-showcases",
-   "build_checked": "2026-07-24T08:00:59Z"
+   "build_checked": "2026-07-24T19:44:47Z"
   },
   {
    "repo": "ashiishhh9/E-Attendence-System",
@@ -2738,7 +2738,7 @@
    "last_seen": "2026-07-24",
    "last_checked": "2026-07-24T08:40:17Z",
    "current_full_name": "athkalia/maven-build-cache-forked-executions",
-   "build_checked": "2026-07-24T08:01:00Z"
+   "build_checked": "2026-07-24T19:44:48Z"
   },
   {
    "repo": "attiand/experiments",
@@ -2756,7 +2756,7 @@
    "last_seen": "2026-07-24",
    "last_checked": "2026-07-24T08:40:17Z",
    "current_full_name": "attiand/experiments",
-   "build_checked": "2026-07-24T08:01:00Z"
+   "build_checked": "2026-07-24T19:44:48Z"
   },
   {
    "repo": "atulkumar2/distributedsystems",
@@ -2773,7 +2773,7 @@
    "build_url": "",
    "last_checked": "2026-07-24T08:40:17Z",
    "current_full_name": "atulkumar2/distributedsystems",
-   "build_checked": "2026-07-24T08:01:00Z",
+   "build_checked": "2026-07-24T19:44:48Z",
    "last_seen": "2026-07-24"
   },
   {
@@ -2792,7 +2792,7 @@
    "last_seen": "2026-07-24",
    "last_checked": "2026-07-24T08:40:17Z",
    "current_full_name": "avaje/avaje-maven4-mixins",
-   "build_checked": "2026-07-24T08:01:00Z"
+   "build_checked": "2026-07-24T19:44:48Z"
   },
   {
    "repo": "awnonbhowmik/LogShield",
@@ -2810,7 +2810,7 @@
    "last_seen": "2026-07-24",
    "last_checked": "2026-07-24T08:40:17Z",
    "current_full_name": "awnonbhowmik/LogShield",
-   "build_checked": "2026-07-24T08:01:00Z",
+   "build_checked": "2026-07-24T19:44:49Z",
    "build_workflow": "Backend CI"
   },
   {
@@ -2828,7 +2828,7 @@
    "build_url": "",
    "last_checked": "2026-07-24T08:40:17Z",
    "current_full_name": "axonivy/branding-images",
-   "build_checked": "2026-07-24T08:01:00Z"
+   "build_checked": "2026-07-24T19:44:49Z"
   },
   {
    "repo": "barisbasaran/mymarket",
@@ -2846,7 +2846,7 @@
    "last_seen": "2026-07-24",
    "last_checked": "2026-07-24T08:40:17Z",
    "current_full_name": "barisbasaran/mymarket",
-   "build_checked": "2026-07-24T08:01:00Z"
+   "build_checked": "2026-07-24T19:44:49Z"
   },
   {
    "repo": "beatngu13/playground",
@@ -2864,7 +2864,7 @@
    "last_seen": "2026-07-24",
    "last_checked": "2026-07-24T08:40:17Z",
    "current_full_name": "beatngu13/playground",
-   "build_checked": "2026-07-24T08:01:00Z",
+   "build_checked": "2026-07-24T19:44:49Z",
    "build_workflow": ".github/workflows/build.yml"
   },
   {
@@ -2883,7 +2883,7 @@
    "last_seen": "2026-07-24",
    "last_checked": "2026-07-24T08:40:18Z",
    "current_full_name": "binkley/kotlin-shopping-cart",
-   "build_checked": "2026-07-24T08:01:01Z"
+   "build_checked": "2026-07-24T19:44:49Z"
   },
   {
    "repo": "blendonl/ttlivescore-api",
@@ -2901,7 +2901,7 @@
    "last_seen": "2026-07-24",
    "last_checked": "2026-07-24T08:40:18Z",
    "current_full_name": "blendonl/ttlivescore-api",
-   "build_checked": "2026-07-24T08:01:01Z"
+   "build_checked": "2026-07-24T19:44:50Z"
   },
   {
    "repo": "bmarwell/aktienfinder-scraper",
@@ -2919,7 +2919,7 @@
    "last_seen": "2026-07-24",
    "last_checked": "2026-07-24T08:40:18Z",
    "current_full_name": "bmarwell/aktienfinder-scraper",
-   "build_checked": "2026-07-24T08:01:01Z"
+   "build_checked": "2026-07-24T19:44:50Z"
   },
   {
    "repo": "bmarwell/jfmt",
@@ -2936,7 +2936,7 @@
    "build_url": "https://github.com/bmarwell/jfmt/actions",
    "last_checked": "2026-07-24T08:40:18Z",
    "current_full_name": "bmarwell/jfmt",
-   "build_checked": "2026-07-24T08:01:01Z",
+   "build_checked": "2026-07-24T19:44:50Z",
    "last_seen": "2026-07-24",
    "build_workflow": "4 Maven workflows: 3 SUCCESS, 1 FAILURE"
   },
@@ -2956,7 +2956,7 @@
    "last_seen": "2026-07-24",
    "last_checked": "2026-07-24T08:40:18Z",
    "current_full_name": "bmarwell/proximo-pitido",
-   "build_checked": "2026-07-24T08:01:01Z",
+   "build_checked": "2026-07-24T19:44:51Z",
    "build_workflow": "5 Maven workflows, all agree"
   },
   {
@@ -2975,7 +2975,7 @@
    "last_seen": "2026-07-24",
    "last_checked": "2026-07-24T08:40:19Z",
    "current_full_name": "bones0xab/event-sourcing-cqrs-spring-axon-app",
-   "build_checked": "2026-07-24T08:01:01Z",
+   "build_checked": "2026-07-24T19:44:51Z",
    "build_workflow": "ci-pipeline.yml"
   },
   {
@@ -2994,7 +2994,7 @@
    "last_seen": "2026-07-24",
    "last_checked": "2026-07-24T08:40:19Z",
    "current_full_name": "bowbahdoe/color",
-   "build_checked": "2026-07-24T08:01:02Z",
+   "build_checked": "2026-07-24T19:44:51Z",
    "build_workflow": "Tests"
   },
   {
@@ -3012,7 +3012,7 @@
    "build_url": "",
    "last_checked": "2026-07-24T08:40:19Z",
    "current_full_name": "bowbahdoe/color-awt",
-   "build_checked": "2026-07-24T08:01:02Z"
+   "build_checked": "2026-07-24T19:44:51Z"
   },
   {
    "repo": "bowbahdoe/color-terminal",
@@ -3030,7 +3030,7 @@
    "last_checked": "2026-07-24T08:40:19Z",
    "current_full_name": "bowbahdoe/color-terminal",
    "last_seen": "2026-07-20",
-   "build_checked": "2026-07-24T08:01:02Z"
+   "build_checked": "2026-07-24T19:44:51Z"
   },
   {
    "repo": "bowbahdoe/flake",
@@ -3047,7 +3047,7 @@
    "build_url": "",
    "last_checked": "2026-07-24T08:40:19Z",
    "current_full_name": "bowbahdoe/flake",
-   "build_checked": "2026-07-24T08:01:02Z"
+   "build_checked": "2026-07-24T19:44:53Z"
   },
   {
    "repo": "bowbahdoe/jdk-httpserver-fileupload",
@@ -3065,7 +3065,7 @@
    "last_seen": "2026-07-16",
    "last_checked": "2026-07-24T08:40:19Z",
    "current_full_name": "bowbahdoe/jdk-httpserver-fileupload",
-   "build_checked": "2026-07-24T08:01:02Z"
+   "build_checked": "2026-07-24T19:44:53Z"
   },
   {
    "repo": "bowbahdoe/jdk-httpserver-mustache",
@@ -3082,7 +3082,7 @@
    "build_url": "",
    "last_checked": "2026-07-24T08:40:19Z",
    "current_full_name": "bowbahdoe/jdk-httpserver-mustache",
-   "build_checked": "2026-07-24T08:01:03Z",
+   "build_checked": "2026-07-24T19:44:54Z",
    "last_seen": "2026-07-24"
   },
   {
@@ -3100,7 +3100,7 @@
    "build_url": "",
    "last_checked": "2026-07-24T08:40:19Z",
    "current_full_name": "bowbahdoe/jdk-httpserver-realworld",
-   "build_checked": "2026-07-24T08:01:03Z"
+   "build_checked": "2026-07-24T19:44:54Z"
   },
   {
    "repo": "bowbahdoe/jdk-httpserver-rutrouter",
@@ -3116,9 +3116,9 @@
    "build": "NONE",
    "build_url": "",
    "last_seen": "2026-07-20",
-   "last_checked": "2026-07-24T08:00:00Z",
+   "last_checked": "2026-07-24T19:44:06Z",
    "current_full_name": "bowbahdoe/jdk-httpserver-rutrouter",
-   "build_checked": "2026-07-24T08:01:03Z"
+   "build_checked": "2026-07-24T19:44:54Z"
   },
   {
    "repo": "bowbahdoe/mjml",
@@ -3133,9 +3133,9 @@
    "renamed_to": "",
    "build": "NONE",
    "build_url": "",
-   "last_checked": "2026-07-24T08:00:00Z",
+   "last_checked": "2026-07-24T19:44:06Z",
    "current_full_name": "bowbahdoe/mjml",
-   "build_checked": "2026-07-24T08:01:03Z"
+   "build_checked": "2026-07-24T19:44:54Z"
   },
   {
    "repo": "bowbahdoe/module_info",
@@ -3150,9 +3150,9 @@
    "renamed_to": "",
    "build": "SUCCESS",
    "build_url": "https://github.com/bowbahdoe/module_info/actions/runs/18330112011",
-   "last_checked": "2026-07-24T08:00:00Z",
+   "last_checked": "2026-07-24T19:44:06Z",
    "current_full_name": "bowbahdoe/module_info",
-   "build_checked": "2026-07-24T08:01:03Z",
+   "build_checked": "2026-07-24T19:44:54Z",
    "build_workflow": "Tests"
   },
   {
@@ -3169,9 +3169,9 @@
    "build": "NONE",
    "build_url": "",
    "last_seen": "2026-07-16",
-   "last_checked": "2026-07-24T08:00:00Z",
+   "last_checked": "2026-07-24T19:44:06Z",
    "current_full_name": "bowbahdoe/ppm",
-   "build_checked": "2026-07-24T08:01:04Z"
+   "build_checked": "2026-07-24T19:44:55Z"
   },
   {
    "repo": "bowbahdoe/the-great-link",
@@ -3186,9 +3186,9 @@
    "renamed_to": "",
    "build": "NONE",
    "build_url": "",
-   "last_checked": "2026-07-24T08:00:00Z",
+   "last_checked": "2026-07-24T19:44:06Z",
    "current_full_name": "bowbahdoe/the-great-link",
-   "build_checked": "2026-07-24T08:01:04Z"
+   "build_checked": "2026-07-24T19:44:55Z"
   },
   {
    "repo": "bowbahdoe/tui",
@@ -3203,9 +3203,9 @@
    "renamed_to": "",
    "build": "NONE",
    "build_url": "",
-   "last_checked": "2026-07-24T08:00:01Z",
+   "last_checked": "2026-07-24T19:44:06Z",
    "current_full_name": "bowbahdoe/tui",
-   "build_checked": "2026-07-24T08:01:04Z"
+   "build_checked": "2026-07-24T19:44:55Z"
   },
   {
    "repo": "breun/spring-grpc-demo",
@@ -3221,9 +3221,9 @@
    "build": "NONE",
    "build_url": "",
    "last_seen": "2026-07-24",
-   "last_checked": "2026-07-24T08:00:01Z",
+   "last_checked": "2026-07-24T19:44:06Z",
    "current_full_name": "breun/spring-grpc-demo",
-   "build_checked": "2026-07-24T08:01:04Z"
+   "build_checked": "2026-07-24T19:44:55Z"
   },
   {
    "repo": "brunoborges/jlib-inspector",
@@ -3239,9 +3239,9 @@
    "build": "AMBIGUOUS",
    "build_url": "https://github.com/brunoborges/jlib-inspector/actions",
    "last_seen": "2026-07-24",
-   "last_checked": "2026-07-24T08:00:01Z",
+   "last_checked": "2026-07-24T19:44:06Z",
    "current_full_name": "brunoborges/jlib-inspector",
-   "build_checked": "2026-07-24T08:01:04Z",
+   "build_checked": "2026-07-24T19:44:56Z",
    "build_workflow": "2 Maven workflows: 1 SUCCESS, 1 FAILURE"
   },
   {
@@ -3257,9 +3257,9 @@
    "renamed_to": "",
    "build": "SUCCESS",
    "build_url": "https://github.com/brunoborges/rockpaperscissors-java25/actions/runs/19457234241",
-   "last_checked": "2026-07-24T08:00:01Z",
+   "last_checked": "2026-07-24T19:44:07Z",
    "current_full_name": "brunoborges/rockpaperscissors-java25",
-   "build_checked": "2026-07-24T08:01:04Z",
+   "build_checked": "2026-07-24T19:44:56Z",
    "build_workflow": "CICD"
   },
   {
@@ -3276,9 +3276,9 @@
    "build": "NONE",
    "build_url": "",
    "last_seen": "2026-07-24",
-   "last_checked": "2026-07-24T08:00:01Z",
+   "last_checked": "2026-07-24T19:44:08Z",
    "current_full_name": "brunokarpo/subscriptions",
-   "build_checked": "2026-07-24T08:01:05Z"
+   "build_checked": "2026-07-24T19:44:56Z"
   },
   {
    "repo": "c-guntur/maven-4-is-awesome",
@@ -3294,9 +3294,9 @@
    "build": "NONE",
    "build_url": "",
    "last_seen": "2026-07-24",
-   "last_checked": "2026-07-24T08:00:01Z",
+   "last_checked": "2026-07-24T19:44:07Z",
    "current_full_name": "c-guntur/maven-4-is-awesome",
-   "build_checked": "2026-07-24T08:01:05Z"
+   "build_checked": "2026-07-24T19:44:56Z"
   },
   {
    "repo": "c-guntur/maven4",
@@ -3312,9 +3312,9 @@
    "build": "NONE",
    "build_url": "",
    "last_seen": "2026-07-24",
-   "last_checked": "2026-07-24T08:00:01Z",
+   "last_checked": "2026-07-24T19:44:07Z",
    "current_full_name": "c-guntur/maven4",
-   "build_checked": "2026-07-24T08:01:05Z"
+   "build_checked": "2026-07-24T19:44:57Z"
   },
   {
    "repo": "c00ler/maven-dependency-analyze-npe",
@@ -3330,9 +3330,9 @@
    "build": "NONE",
    "build_url": "",
    "last_seen": "2026-07-24",
-   "last_checked": "2026-07-24T08:00:02Z",
+   "last_checked": "2026-07-24T19:44:07Z",
    "current_full_name": "c00ler/maven-dependency-analyze-npe",
-   "build_checked": "2026-07-24T08:01:05Z"
+   "build_checked": "2026-07-24T19:44:57Z"
   },
   {
    "repo": "carlspring/idempotence",
@@ -3347,9 +3347,9 @@
    "renamed_to": "",
    "build": "SUCCESS",
    "build_url": "https://github.com/carlspring/idempotence/actions/runs/30059589788",
-   "last_checked": "2026-07-24T08:00:02Z",
+   "last_checked": "2026-07-24T19:44:07Z",
    "current_full_name": "carlspring/idempotence",
-   "build_checked": "2026-07-24T08:01:05Z",
+   "build_checked": "2026-07-24T19:44:57Z",
    "build_workflow": "3 Maven workflows, all agree"
   },
   {
@@ -3366,9 +3366,9 @@
    "build": "NONE",
    "build_url": "",
    "last_seen": "2026-07-24",
-   "last_checked": "2026-07-24T08:00:02Z",
+   "last_checked": "2026-07-24T19:44:07Z",
    "current_full_name": "chosenking1/MautonLaundryJava",
-   "build_checked": "2026-07-24T08:01:05Z"
+   "build_checked": "2026-07-24T19:44:57Z"
   },
   {
    "repo": "codacy-open-source-projects-scans/maven",
@@ -3384,9 +3384,9 @@
    "build": "NONE",
    "build_url": "",
    "last_seen": "2026-07-24",
-   "last_checked": "2026-07-24T08:00:02Z",
+   "last_checked": "2026-07-24T19:44:07Z",
    "current_full_name": "codacy-open-source-projects-scans/maven",
-   "build_checked": "2026-07-24T08:01:05Z"
+   "build_checked": "2026-07-24T19:44:57Z"
   },
   {
    "repo": "conorheffron/hl7-hapi-fhir-obs-api",
@@ -3401,9 +3401,9 @@
    "renamed_to": "",
    "build": "SUCCESS",
    "build_url": "https://github.com/conorheffron/hl7-hapi-fhir-obs-api/actions/runs/29837838482",
-   "last_checked": "2026-07-24T08:00:02Z",
+   "last_checked": "2026-07-24T19:44:08Z",
    "current_full_name": "conorheffron/hl7-hapi-fhir-obs-api",
-   "build_checked": "2026-07-24T08:01:05Z",
+   "build_checked": "2026-07-24T19:44:57Z",
    "last_seen": "2026-07-24",
    "build_workflow": "Java CI with Maven"
   },
@@ -3420,9 +3420,9 @@
    "renamed_to": "",
    "build": "SUCCESS",
    "build_url": "https://github.com/conorheffron/simple-calculator/actions/runs/18892691910",
-   "last_checked": "2026-07-24T08:00:02Z",
+   "last_checked": "2026-07-24T19:44:09Z",
    "current_full_name": "conorheffron/simple-calculator",
-   "build_checked": "2026-07-24T08:01:05Z",
+   "build_checked": "2026-07-24T19:44:57Z",
    "last_seen": "2026-07-24",
    "build_workflow": "Java CI with Maven"
   },
@@ -3439,9 +3439,9 @@
    "renamed_to": "",
    "build": "SUCCESS",
    "build_url": "https://github.com/conorheffron/weather-data/actions/runs/18925753926",
-   "last_checked": "2026-07-24T08:00:03Z",
+   "last_checked": "2026-07-24T19:44:09Z",
    "current_full_name": "conorheffron/weather-data",
-   "build_checked": "2026-07-24T08:01:05Z",
+   "build_checked": "2026-07-24T19:44:58Z",
    "last_seen": "2026-07-24",
    "build_workflow": "Java CI with Maven"
   },
@@ -3458,9 +3458,9 @@
    "renamed_to": "",
    "build": "NONE",
    "build_url": "",
-   "last_checked": "2026-07-24T08:00:02Z",
+   "last_checked": "2026-07-24T19:44:09Z",
    "current_full_name": "cowwoc/styler",
-   "build_checked": "2026-07-24T08:01:05Z",
+   "build_checked": "2026-07-24T19:44:58Z",
    "last_seen": "2026-07-24"
   },
   {
@@ -3476,10 +3476,10 @@
    "renamed_to": "",
    "build": "NONE",
    "build_url": "",
-   "last_checked": "2026-07-24T08:00:03Z",
+   "last_checked": "2026-07-24T19:44:09Z",
    "current_full_name": "cstamas/MNG-8486",
    "last_seen": "2026-07-24",
-   "build_checked": "2026-07-24T08:01:06Z"
+   "build_checked": "2026-07-24T19:44:58Z"
   },
   {
    "repo": "danalderslade/FinCEN_SAR",
@@ -3494,9 +3494,9 @@
    "renamed_to": "",
    "build": "SUCCESS",
    "build_url": "https://github.com/danalderslade/FinCEN_SAR/actions/runs/23213021166",
-   "last_checked": "2026-07-24T08:00:03Z",
+   "last_checked": "2026-07-24T19:44:10Z",
    "current_full_name": "danalderslade/FinCEN_SAR",
-   "build_checked": "2026-07-24T08:01:06Z",
+   "build_checked": "2026-07-24T19:44:58Z",
    "build_workflow": "CI/CD Pipeline"
   },
   {
@@ -3512,9 +3512,9 @@
    "renamed_to": "",
    "build": "FAILURE",
    "build_url": "https://github.com/danhdev/lms-system/actions/runs/27113011701",
-   "last_checked": "2026-07-24T08:00:03Z",
+   "last_checked": "2026-07-24T19:44:10Z",
    "current_full_name": "danhdev/lms-system",
-   "build_checked": "2026-07-24T08:01:06Z",
+   "build_checked": "2026-07-24T19:44:59Z",
    "build_workflow": "Build and Deploy Core LMS application"
   },
   {
@@ -3530,9 +3530,9 @@
    "renamed_to": "",
    "build": "NONE",
    "build_url": "",
-   "last_checked": "2026-07-24T08:00:03Z",
+   "last_checked": "2026-07-24T19:44:10Z",
    "current_full_name": "danielzayas/danielzayas__okhttp.8e0cc1b3",
-   "build_checked": "2026-07-24T08:01:06Z",
+   "build_checked": "2026-07-24T19:44:59Z",
    "last_seen": "2026-07-24"
   },
   {
@@ -3548,9 +3548,9 @@
    "renamed_to": "",
    "build": "NONE",
    "build_url": "",
-   "last_checked": "2026-07-24T08:00:03Z",
+   "last_checked": "2026-07-24T19:44:10Z",
    "current_full_name": "danielzayas/square__okhttp.8e0cc1b3",
-   "build_checked": "2026-07-24T08:01:06Z",
+   "build_checked": "2026-07-24T19:44:59Z",
    "last_seen": "2026-07-24"
   },
   {
@@ -3567,9 +3567,9 @@
    "build": "NONE",
    "build_url": "",
    "last_seen": "2026-07-24",
-   "last_checked": "2026-07-24T08:00:03Z",
+   "last_checked": "2026-07-24T19:44:10Z",
    "current_full_name": "danthe1st/maven-repro",
-   "build_checked": "2026-07-24T08:01:06Z"
+   "build_checked": "2026-07-24T19:44:59Z"
   },
   {
    "repo": "darshangm1/Smart-Service-Platform",
@@ -3585,9 +3585,9 @@
    "build": "FAILURE",
    "build_url": "https://github.com/darshangm1/Smart-Service-Platform/actions/runs/24019588220",
    "last_seen": "2026-07-24",
-   "last_checked": "2026-07-24T08:00:04Z",
+   "last_checked": "2026-07-24T19:44:11Z",
    "current_full_name": "darshangm1/Smart-Service-Platform",
-   "build_checked": "2026-07-24T08:01:06Z",
+   "build_checked": "2026-07-24T19:44:59Z",
    "build_workflow": "CI"
   },
   {
@@ -3604,9 +3604,9 @@
    "build": "NONE",
    "build_url": "",
    "last_seen": "2026-07-24",
-   "last_checked": "2026-07-24T08:00:04Z",
+   "last_checked": "2026-07-24T19:44:11Z",
    "current_full_name": "delanym/MENFORCER-475",
-   "build_checked": "2026-07-24T08:01:07Z"
+   "build_checked": "2026-07-24T19:44:59Z"
   },
   {
    "repo": "devhalos/genesis",
@@ -3622,9 +3622,9 @@
    "build": "NONE",
    "build_url": "",
    "last_seen": "2026-07-24",
-   "last_checked": "2026-07-24T08:00:04Z",
+   "last_checked": "2026-07-24T19:44:12Z",
    "current_full_name": "devhalos/genesis",
-   "build_checked": "2026-07-24T08:01:07Z"
+   "build_checked": "2026-07-24T19:45:00Z"
   },
   {
    "repo": "dhinojosa/nfjs-java-tdd",
@@ -3640,9 +3640,9 @@
    "build": "NONE",
    "build_url": "",
    "last_seen": "2026-07-24",
-   "last_checked": "2026-07-24T08:00:04Z",
+   "last_checked": "2026-07-24T19:44:12Z",
    "current_full_name": "dhinojosa/nfjs-java-tdd",
-   "build_checked": "2026-07-24T08:01:07Z"
+   "build_checked": "2026-07-24T19:45:00Z"
   },
   {
    "repo": "diegri/maven-basic-example",
@@ -3658,9 +3658,9 @@
    "build": "NONE",
    "build_url": "",
    "last_seen": "2026-07-24",
-   "last_checked": "2026-07-24T08:00:04Z",
+   "last_checked": "2026-07-24T19:44:12Z",
    "current_full_name": "diegri/maven-basic-example",
-   "build_checked": "2026-07-24T08:01:07Z"
+   "build_checked": "2026-07-24T19:45:00Z"
   },
   {
    "repo": "dnnnt/Web-Service-REST",
@@ -3676,9 +3676,9 @@
    "build": "NONE",
    "build_url": "",
    "last_seen": "2026-07-16",
-   "last_checked": "2026-07-24T08:00:05Z",
+   "last_checked": "2026-07-24T19:44:12Z",
    "current_full_name": "dnnnt/Web-Service-REST",
-   "build_checked": "2026-07-24T08:01:07Z"
+   "build_checked": "2026-07-24T19:45:00Z"
   },
   {
    "repo": "doggentle/doggentle",
@@ -3694,9 +3694,9 @@
    "build": "NONE",
    "build_url": "",
    "last_seen": "2026-07-24",
-   "last_checked": "2026-07-24T08:00:05Z",
+   "last_checked": "2026-07-24T19:44:12Z",
    "current_full_name": "doggentle/doggentle",
-   "build_checked": "2026-07-24T08:01:07Z"
+   "build_checked": "2026-07-24T19:45:00Z"
   },
   {
    "repo": "dolartand/innowise-user-service",
@@ -3711,9 +3711,9 @@
    "renamed_to": "",
    "build": "SUCCESS",
    "build_url": "https://github.com/dolartand/innowise-user-service/actions/runs/22169872644",
-   "last_checked": "2026-07-24T08:00:05Z",
+   "last_checked": "2026-07-24T19:44:13Z",
    "current_full_name": "dolartand/innowise-user-service",
-   "build_checked": "2026-07-24T08:01:07Z",
+   "build_checked": "2026-07-24T19:45:01Z",
    "build_workflow": "User Service CI Pipeline"
   },
   {
@@ -3730,9 +3730,9 @@
    "build": "NONE",
    "build_url": "",
    "last_seen": "2026-07-24",
-   "last_checked": "2026-07-24T08:00:05Z",
+   "last_checked": "2026-07-24T19:44:13Z",
    "current_full_name": "ducthin/LetCookGear",
-   "build_checked": "2026-07-24T08:01:07Z"
+   "build_checked": "2026-07-24T19:45:01Z"
   },
   {
    "repo": "dungtq2k5/ams-backend",
@@ -3747,7 +3747,7 @@
    "renamed_to": "",
    "build": "NONE",
    "build_url": "",
-   "last_checked": "2026-07-24T08:00:05Z",
+   "last_checked": "2026-07-24T19:44:13Z",
    "current_full_name": "dungtq2k5/ams-backend",
    "build_checked": "2026-07-24T08:01:07Z"
   },
@@ -3765,7 +3765,7 @@
    "build": "SUCCESS",
    "build_url": "https://github.com/duwaragie/it3030-paf-2026-smart-campus-group188/actions/runs/24929184608",
    "last_seen": "2026-07-24",
-   "last_checked": "2026-07-24T08:00:05Z",
+   "last_checked": "2026-07-24T19:44:13Z",
    "current_full_name": "duwaragie/it3030-paf-2026-smart-campus-group188",
    "build_checked": "2026-07-24T08:01:08Z",
    "build_workflow": "2 Maven workflows, all agree"
@@ -3784,7 +3784,7 @@
    "build": "NONE",
    "build_url": "",
    "last_seen": "2026-07-23",
-   "last_checked": "2026-07-24T08:00:05Z",
+   "last_checked": "2026-07-24T19:44:14Z",
    "current_full_name": "edwarddn/dinosaur-edward-game",
    "build_checked": "2026-07-24T08:01:08Z"
   },
@@ -3802,7 +3802,7 @@
    "build": "NONE",
    "build_url": "",
    "last_seen": "2026-07-24",
-   "last_checked": "2026-07-24T08:00:05Z",
+   "last_checked": "2026-07-24T19:44:14Z",
    "current_full_name": "eelcodevlieger/mapimage",
    "build_checked": "2026-07-24T08:01:08Z"
   },
@@ -3820,7 +3820,7 @@
    "build": "SUCCESS",
    "build_url": "https://github.com/elide-dev/native-maven/actions/runs/27770987019",
    "last_seen": "2026-07-24",
-   "last_checked": "2026-07-24T08:00:06Z",
+   "last_checked": "2026-07-24T19:44:14Z",
    "current_full_name": "elide-dev/native-maven",
    "build_checked": "2026-07-24T08:01:08Z",
    "build_workflow": "2 Maven workflows, all agree"
@@ -3839,7 +3839,7 @@
    "build": "NONE",
    "build_url": "",
    "last_seen": "2026-07-24",
-   "last_checked": "2026-07-24T08:00:06Z",
+   "last_checked": "2026-07-24T19:44:14Z",
    "current_full_name": "elveahuang/examples",
    "build_checked": "2026-07-24T08:01:08Z"
   },
@@ -3857,7 +3857,7 @@
    "build": "FAILURE",
    "build_url": "https://github.com/entropy-cloud/nop-entropy/actions/runs/29968869251",
    "last_seen": "2026-07-24",
-   "last_checked": "2026-07-24T08:00:06Z",
+   "last_checked": "2026-07-24T19:44:14Z",
    "current_full_name": "entropy-cloud/nop-entropy",
    "build_checked": "2026-07-24T08:01:08Z",
    "build_workflow": "Java CI with Maven"
@@ -3865,7 +3865,7 @@
   {
    "repo": "eugenp/tutorials",
    "state": "active",
-   "stars": 37331,
+   "stars": 37332,
    "pushed_at": "2026-07-23",
    "live_signal": null,
    "live_version": null,
@@ -3876,7 +3876,7 @@
    "build": "NONE",
    "build_url": "",
    "last_seen": "2026-07-24",
-   "last_checked": "2026-07-24T08:00:06Z",
+   "last_checked": "2026-07-24T19:44:15Z",
    "current_full_name": "eugenp/tutorials",
    "build_checked": "2026-07-24T08:01:08Z"
   },
@@ -3894,7 +3894,7 @@
    "build": "NONE",
    "build_url": "",
    "last_seen": "2026-07-24",
-   "last_checked": "2026-07-24T08:00:06Z",
+   "last_checked": "2026-07-24T19:44:15Z",
    "current_full_name": "evanchooly/graven",
    "build_checked": "2026-07-24T08:01:08Z"
   },
@@ -3912,7 +3912,7 @@
    "build": "NONE",
    "build_url": "",
    "last_seen": "2026-07-24",
-   "last_checked": "2026-07-24T08:00:06Z",
+   "last_checked": "2026-07-24T19:44:15Z",
    "current_full_name": "extact-io/jjug-ccc-2026-spring",
    "build_checked": "2026-07-24T08:01:09Z"
   },
@@ -3930,7 +3930,7 @@
    "build": "NONE",
    "build_url": "",
    "last_seen": "2026-07-24",
-   "last_checked": "2026-07-24T08:00:06Z",
+   "last_checked": "2026-07-24T19:44:15Z",
    "current_full_name": "faermanj/anonymaise",
    "build_checked": "2026-07-24T08:01:09Z"
   },
@@ -3948,7 +3948,7 @@
    "build": "NONE",
    "build_url": "",
    "last_seen": "2026-07-24",
-   "last_checked": "2026-07-24T08:00:06Z",
+   "last_checked": "2026-07-24T19:44:16Z",
    "current_full_name": "faermanj/cloud-daleks",
    "build_checked": "2026-07-24T08:01:09Z"
   },
@@ -3966,7 +3966,7 @@
    "build": "NONE",
    "build_url": "",
    "last_seen": "2026-07-16",
-   "last_checked": "2026-07-24T08:00:06Z",
+   "last_checked": "2026-07-24T19:44:16Z",
    "current_full_name": "flowlogix/arq-reproducers",
    "build_checked": "2026-07-24T08:01:09Z"
   },
@@ -3984,7 +3984,7 @@
    "build": "NONE",
    "build_url": "",
    "last_seen": "2026-07-24",
-   "last_checked": "2026-07-24T08:00:07Z",
+   "last_checked": "2026-07-24T19:44:16Z",
    "current_full_name": "flowlogix/cdi-tck-reproducer",
    "build_checked": "2026-07-24T08:01:09Z"
   },
@@ -4002,7 +4002,7 @@
    "build": "NONE",
    "build_url": "",
    "last_seen": "2026-07-24",
-   "last_checked": "2026-07-24T08:00:07Z",
+   "last_checked": "2026-07-24T19:44:16Z",
    "current_full_name": "flowlogix/cdi-tck-reproducer-appcontext",
    "build_checked": "2026-07-24T08:01:09Z"
   },
@@ -4020,7 +4020,7 @@
    "build": "NONE",
    "build_url": "",
    "last_seen": "2026-07-24",
-   "last_checked": "2026-07-24T08:00:07Z",
+   "last_checked": "2026-07-24T19:44:17Z",
    "current_full_name": "flowlogix/container-deploy-plugin",
    "build_checked": "2026-07-24T08:01:09Z"
   },
@@ -4037,7 +4037,7 @@
    "renamed_to": "",
    "build": "NONE",
    "build_url": "",
-   "last_checked": "2026-07-24T08:00:07Z",
+   "last_checked": "2026-07-24T19:44:17Z",
    "current_full_name": "flowlogix/ear-sample",
    "build_checked": "2026-07-24T08:01:09Z"
   },
@@ -4054,7 +4054,7 @@
    "renamed_to": "",
    "build": "SUCCESS",
    "build_url": "https://github.com/flowlogix/flowlogix/actions/runs/29977399381",
-   "last_checked": "2026-07-24T08:00:07Z",
+   "last_checked": "2026-07-24T19:44:17Z",
    "current_full_name": "flowlogix/flowlogix",
    "build_checked": "2026-07-24T08:01:10Z",
    "build_workflow": "CodeQL"
@@ -4072,7 +4072,7 @@
    "renamed_to": "",
    "build": "NONE",
    "build_url": "",
-   "last_checked": "2026-07-24T08:00:07Z",
+   "last_checked": "2026-07-24T19:44:17Z",
    "current_full_name": "flowlogix/test-arq-suite",
    "build_checked": "2026-07-24T08:01:10Z",
    "last_seen": "2026-07-24"
@@ -4091,7 +4091,7 @@
    "build": "NONE",
    "build_url": "",
    "last_seen": "2026-07-24",
-   "last_checked": "2026-07-24T08:00:07Z",
+   "last_checked": "2026-07-24T19:44:18Z",
    "current_full_name": "fofola1/CustomCraftingRecipesPlugin",
    "build_checked": "2026-07-24T08:01:10Z"
   },
@@ -4108,7 +4108,7 @@
    "renamed_to": "",
    "build": "SUCCESS",
    "build_url": "https://github.com/fuhouyu/base-framework/actions/runs/19610677646",
-   "last_checked": "2026-07-24T08:00:08Z",
+   "last_checked": "2026-07-24T19:44:18Z",
    "current_full_name": "fuhouyu/base-framework",
    "build_checked": "2026-07-24T08:01:10Z",
    "last_seen": "2026-07-24",
@@ -4128,7 +4128,7 @@
    "build": "NONE",
    "build_url": "",
    "last_seen": "2026-07-16",
-   "last_checked": "2026-07-24T08:00:08Z",
+   "last_checked": "2026-07-24T19:44:18Z",
    "current_full_name": "gabmeira/desafioForumHub",
    "build_checked": "2026-07-24T08:01:10Z"
   },
@@ -4145,7 +4145,7 @@
    "renamed_to": "",
    "build": "NONE",
    "build_url": "",
-   "last_checked": "2026-07-24T08:00:08Z",
+   "last_checked": "2026-07-24T19:44:18Z",
    "current_full_name": "gitApurv/CanineAI-Server",
    "build_checked": "2026-07-24T08:01:10Z"
   },
@@ -4163,7 +4163,7 @@
    "build": "FAILURE",
    "build_url": "https://github.com/gnodet/maven-bench/actions/runs/17937991763",
    "last_seen": "2026-07-24",
-   "last_checked": "2026-07-24T08:00:08Z",
+   "last_checked": "2026-07-24T19:44:19Z",
    "current_full_name": "gnodet/maven-bench",
    "build_checked": "2026-07-24T08:01:10Z",
    "build_workflow": "CI"
@@ -4171,8 +4171,8 @@
   {
    "repo": "google/adk-java",
    "state": "active",
-   "stars": 1659,
-   "pushed_at": "2026-07-23",
+   "stars": 1660,
+   "pushed_at": "2026-07-24",
    "live_signal": "Wrapper",
    "live_version": "4.0.0-rc-3",
    "source": "root",
@@ -4181,7 +4181,7 @@
    "renamed_to": "",
    "build": "AMBIGUOUS",
    "build_url": "https://github.com/google/adk-java/actions",
-   "last_checked": "2026-07-24T08:00:09Z",
+   "last_checked": "2026-07-24T19:44:19Z",
    "current_full_name": "google/adk-java",
    "build_checked": "2026-07-24T08:01:10Z",
    "build_workflow": "5 Maven workflows: 4 SUCCESS, 1 FAILURE"
@@ -4200,7 +4200,7 @@
    "build": "SUCCESS",
    "build_url": "https://github.com/grubeninspekteur/iskibal/actions/runs/22826242207",
    "last_seen": "2026-07-24",
-   "last_checked": "2026-07-24T08:00:09Z",
+   "last_checked": "2026-07-24T19:44:19Z",
    "current_full_name": "grubeninspekteur/iskibal",
    "build_checked": "2026-07-24T08:01:10Z",
    "build_workflow": "CI"
@@ -4218,7 +4218,7 @@
    "renamed_to": "",
    "build": "NONE",
    "build_url": "",
-   "last_checked": "2026-07-24T08:00:09Z",
+   "last_checked": "2026-07-24T19:44:19Z",
    "current_full_name": "guylabs/plexus-utils-merge-xml-reproducer",
    "build_checked": "2026-07-24T08:01:11Z",
    "last_seen": "2026-07-24"
@@ -4237,7 +4237,7 @@
    "build": "NONE",
    "build_url": "",
    "last_seen": "2026-07-24",
-   "last_checked": "2026-07-24T08:00:09Z",
+   "last_checked": "2026-07-24T19:44:20Z",
    "current_full_name": "handicraftsman/UUIDj47",
    "build_checked": "2026-07-24T08:01:11Z"
   },
@@ -4254,7 +4254,7 @@
    "renamed_to": "",
    "build": "AMBIGUOUS",
    "build_url": "https://github.com/hantsy/jakartaee-ddd-example/actions",
-   "last_checked": "2026-07-24T08:00:09Z",
+   "last_checked": "2026-07-24T19:44:20Z",
    "current_full_name": "hantsy/jakartaee-ddd-example",
    "build_checked": "2026-07-24T08:01:11Z",
    "build_workflow": "3 Maven workflows: 2 SUCCESS, 1 FAILURE"
@@ -4273,7 +4273,7 @@
    "build": "AMBIGUOUS",
    "build_url": "https://github.com/hantsy/jakartaee11-sandbox/actions",
    "last_seen": "2026-07-24",
-   "last_checked": "2026-07-24T08:00:09Z",
+   "last_checked": "2026-07-24T19:44:20Z",
    "current_full_name": "hantsy/jakartaee11-sandbox",
    "build_checked": "2026-07-24T08:01:11Z",
    "build_workflow": "9 Maven workflows: 5 SUCCESS, 4 FAILURE"
@@ -4291,7 +4291,7 @@
    "renamed_to": "",
    "build": "AMBIGUOUS",
    "build_url": "https://github.com/hantsy/jakartaee11-starter-boilerplate/actions",
-   "last_checked": "2026-07-24T08:00:09Z",
+   "last_checked": "2026-07-24T19:44:21Z",
    "current_full_name": "hantsy/jakartaee11-starter-boilerplate",
    "build_checked": "2026-07-24T08:01:11Z",
    "last_seen": "2026-07-24",
@@ -4311,7 +4311,7 @@
    "build": "FAILURE",
    "build_url": "https://github.com/hantsy/spring-puzzles/actions/runs/16015203533",
    "last_seen": "2026-07-24",
-   "last_checked": "2026-07-24T08:00:09Z",
+   "last_checked": "2026-07-24T19:44:20Z",
    "current_full_name": "hantsy/spring-puzzles",
    "build_checked": "2026-07-24T08:01:11Z",
    "build_workflow": "6 Maven workflows, all agree"
@@ -4330,7 +4330,7 @@
    "build": "AMBIGUOUS",
    "build_url": "https://github.com/hantsy/spring6-sandbox/actions",
    "last_seen": "2026-07-24",
-   "last_checked": "2026-07-24T08:00:09Z",
+   "last_checked": "2026-07-24T19:44:21Z",
    "current_full_name": "hantsy/spring6-sandbox",
    "build_checked": "2026-07-24T08:01:11Z",
    "build_workflow": "10 Maven workflows: 8 SUCCESS, 2 FAILURE"
@@ -4349,7 +4349,7 @@
    "build": "SUCCESS",
    "build_url": "https://github.com/hantsy/spring7-sandbox/actions/runs/24021603781",
    "last_seen": "2026-07-24",
-   "last_checked": "2026-07-24T08:00:10Z",
+   "last_checked": "2026-07-24T19:44:21Z",
    "current_full_name": "hantsy/spring7-sandbox",
    "build_checked": "2026-07-24T08:01:11Z",
    "build_workflow": "10 Maven workflows, all agree"
@@ -4368,7 +4368,7 @@
    "build": "AMBIGUOUS",
    "build_url": "https://github.com/hantsy/vertx-sandbox/actions",
    "last_seen": "2026-07-24",
-   "last_checked": "2026-07-24T08:00:10Z",
+   "last_checked": "2026-07-24T19:44:22Z",
    "current_full_name": "hantsy/vertx-sandbox",
    "build_checked": "2026-07-24T08:01:11Z",
    "build_workflow": "8 Maven workflows: 7 SUCCESS, 1 FAILURE"
@@ -4387,7 +4387,7 @@
    "build": "NONE",
    "build_url": "",
    "last_seen": "2026-07-24",
-   "last_checked": "2026-07-24T08:00:10Z",
+   "last_checked": "2026-07-24T19:44:22Z",
    "current_full_name": "harshal5-dev/scaler-e-commerce-platform",
    "build_checked": "2026-07-24T08:01:13Z"
   },
@@ -4405,7 +4405,7 @@
    "build": "SUCCESS",
    "build_url": "https://github.com/hellman-and-hero/tdd-demy-hardware-sim/actions/runs/29232000854",
    "last_seen": "2026-07-24",
-   "last_checked": "2026-07-24T08:00:10Z",
+   "last_checked": "2026-07-24T19:44:22Z",
    "current_full_name": "hellman-and-hero/tdd-demy-hardware-sim",
    "build_checked": "2026-07-24T08:01:14Z",
    "build_workflow": "Java CI with Maven"
@@ -4424,7 +4424,7 @@
    "build": "SUCCESS",
    "build_url": "https://github.com/helpermethod/zip-forge/actions/runs/27818322694",
    "last_seen": "2026-07-24",
-   "last_checked": "2026-07-24T08:00:11Z",
+   "last_checked": "2026-07-24T19:44:23Z",
    "current_full_name": "helpermethod/zip-forge",
    "build_checked": "2026-07-24T08:01:14Z",
    "build_workflow": "2 Maven workflows, all agree"
@@ -4443,7 +4443,7 @@
    "build": "NONE",
    "build_url": "",
    "last_seen": "2026-07-24",
-   "last_checked": "2026-07-24T08:00:11Z",
+   "last_checked": "2026-07-24T19:44:23Z",
    "current_full_name": "hereandnowai/web-scraper-java",
    "build_checked": "2026-07-24T08:01:15Z"
   },
@@ -4460,7 +4460,7 @@
    "renamed_to": "",
    "build": "FAILURE",
    "build_url": "https://github.com/himnay/llm-chat/actions/runs/29335581401",
-   "last_checked": "2026-07-24T08:00:11Z",
+   "last_checked": "2026-07-24T19:44:23Z",
    "current_full_name": "himnay/llm-chat",
    "build_checked": "2026-07-24T08:01:15Z",
    "build_workflow": "CI"
@@ -4478,7 +4478,7 @@
    "renamed_to": "",
    "build": "NONE",
    "build_url": "",
-   "last_checked": "2026-07-24T08:00:12Z",
+   "last_checked": "2026-07-24T19:44:24Z",
    "current_full_name": "himnay/llm-rag",
    "build_checked": "2026-07-24T08:01:15Z"
   },
@@ -4495,7 +4495,7 @@
    "renamed_to": "",
    "build": "",
    "build_url": "",
-   "last_checked": "2026-07-24T08:00:11Z"
+   "last_checked": "2026-07-24T19:44:23Z"
   },
   {
    "repo": "huu24/comic-be",
@@ -4510,7 +4510,7 @@
    "renamed_to": "",
    "build": "NONE",
    "build_url": "",
-   "last_checked": "2026-07-24T08:00:12Z",
+   "last_checked": "2026-07-24T19:44:24Z",
    "current_full_name": "huu24/comic-be",
    "build_checked": "2026-07-24T08:01:16Z"
   },
@@ -4528,7 +4528,7 @@
    "build": "SUCCESS",
    "build_url": "https://github.com/ibraheemd47/Ticket_Management_System_/actions/runs/28300583176",
    "last_seen": "2026-07-24",
-   "last_checked": "2026-07-24T08:00:12Z",
+   "last_checked": "2026-07-24T19:44:24Z",
    "current_full_name": "ibraheemd47/Ticket_Management_System_",
    "build_checked": "2026-07-24T08:01:16Z",
    "build_workflow": "Java CI with Maven"
@@ -4546,7 +4546,7 @@
    "renamed_to": "",
    "build": "SUCCESS",
    "build_url": "https://github.com/igorcampos-dev/spring-integrations-examples/actions/runs/16485727315",
-   "last_checked": "2026-07-24T08:00:12Z",
+   "last_checked": "2026-07-24T19:44:24Z",
    "current_full_name": "igorcampos-dev/spring-integrations-examples",
    "build_checked": "2026-07-24T08:01:16Z",
    "last_seen": "2026-07-24",
@@ -4566,7 +4566,7 @@
    "build": "NONE",
    "build_url": "",
    "last_seen": "2026-07-24",
-   "last_checked": "2026-07-24T08:00:12Z",
+   "last_checked": "2026-07-24T19:44:25Z",
    "current_full_name": "ikmdev/build-parent",
    "build_checked": "2026-07-24T08:01:16Z"
   },
@@ -4584,7 +4584,7 @@
    "build": "NONE",
    "build_url": "",
    "last_seen": "2026-07-24",
-   "last_checked": "2026-07-24T08:00:12Z",
+   "last_checked": "2026-07-24T19:44:25Z",
    "current_full_name": "ikmdev/github_actions_test",
    "build_checked": "2026-07-24T08:01:16Z"
   },
@@ -4602,7 +4602,7 @@
    "build": "FAILURE",
    "build_url": "https://github.com/ikmdev/komet/actions/runs/29976919806",
    "last_seen": "2026-07-24",
-   "last_checked": "2026-07-24T08:00:13Z",
+   "last_checked": "2026-07-24T19:44:25Z",
    "current_full_name": "ikmdev/komet",
    "build_checked": "2026-07-24T08:01:16Z",
    "build_workflow": "Build Workflow -- main"
@@ -4621,7 +4621,7 @@
    "build": "NONE",
    "build_url": "",
    "last_seen": "2026-07-24",
-   "last_checked": "2026-07-24T08:00:13Z",
+   "last_checked": "2026-07-24T19:44:25Z",
    "current_full_name": "ikmdev/komet-desktop",
    "build_checked": "2026-07-24T08:01:17Z"
   },
@@ -4639,7 +4639,7 @@
    "build": "NONE",
    "build_url": "",
    "last_seen": "2026-07-24",
-   "last_checked": "2026-07-24T08:00:13Z",
+   "last_checked": "2026-07-24T19:44:26Z",
    "current_full_name": "ikmdev/rocks-kb",
    "build_checked": "2026-07-24T08:01:17Z"
   },
@@ -4657,7 +4657,7 @@
    "build": "NONE",
    "build_url": "",
    "last_seen": "2026-07-24",
-   "last_checked": "2026-07-24T08:00:13Z",
+   "last_checked": "2026-07-24T19:44:26Z",
    "current_full_name": "ikmdev/tinkar-composer",
    "build_checked": "2026-07-24T08:01:17Z"
   },
@@ -4675,7 +4675,7 @@
    "build": "NONE",
    "build_url": "",
    "last_seen": "2026-07-24",
-   "last_checked": "2026-07-24T08:00:13Z",
+   "last_checked": "2026-07-24T19:44:27Z",
    "current_full_name": "ikmdev/tinkar-core",
    "build_checked": "2026-07-24T08:01:17Z"
   },
@@ -4692,7 +4692,7 @@
    "renamed_to": "",
    "build": "SUCCESS",
    "build_url": "https://github.com/instancio/instancio/actions/runs/30070367573",
-   "last_checked": "2026-07-24T08:00:14Z",
+   "last_checked": "2026-07-24T19:44:26Z",
    "current_full_name": "instancio/instancio",
    "build_checked": "2026-07-24T08:01:17Z",
    "last_seen": "2026-07-24",
@@ -4711,7 +4711,7 @@
    "renamed_to": "",
    "build": "NONE",
    "build_url": "",
-   "last_checked": "2026-07-24T08:00:14Z",
+   "last_checked": "2026-07-24T19:44:27Z",
    "current_full_name": "instancio/instancio-benchmark",
    "build_checked": "2026-07-24T08:01:17Z"
   },
@@ -4728,7 +4728,7 @@
    "renamed_to": "",
    "build": "NONE",
    "build_url": "",
-   "last_checked": "2026-07-24T08:00:14Z",
+   "last_checked": "2026-07-24T19:44:27Z",
    "current_full_name": "iprasuk/smartserve-ai-booking-platform",
    "build_checked": "2026-07-24T08:01:18Z"
   },
@@ -4745,7 +4745,7 @@
    "renamed_to": "",
    "build": "NONE",
    "build_url": "",
-   "last_checked": "2026-07-24T08:00:14Z",
+   "last_checked": "2026-07-24T19:44:27Z",
    "current_full_name": "isp-insoft-gmbh/isp-insoft-ai-skills",
    "build_checked": "2026-07-24T08:01:18Z",
    "last_seen": "2026-07-24"
@@ -4764,7 +4764,7 @@
    "build": "NONE",
    "build_url": "",
    "last_seen": "2026-07-24",
-   "last_checked": "2026-07-24T08:00:14Z",
+   "last_checked": "2026-07-24T19:44:27Z",
    "current_full_name": "iuliana/jdk25-parent-project",
    "build_checked": "2026-07-24T08:01:18Z"
   },
@@ -4782,7 +4782,7 @@
    "build": "NONE",
    "build_url": "",
    "last_seen": "2026-07-24",
-   "last_checked": "2026-07-24T08:00:14Z",
+   "last_checked": "2026-07-24T19:44:28Z",
    "current_full_name": "j-bisew/spring-quiz-app",
    "build_checked": "2026-07-24T08:01:18Z"
   },
@@ -4800,7 +4800,7 @@
    "build": "SUCCESS",
    "build_url": "https://github.com/jabrena/advent-of-code/actions/runs/20581475563",
    "last_seen": "2026-07-24",
-   "last_checked": "2026-07-24T08:00:14Z",
+   "last_checked": "2026-07-24T19:44:28Z",
    "current_full_name": "jabrena/advent-of-code",
    "build_checked": "2026-07-24T08:01:18Z",
    "build_workflow": "4 Maven workflows, all agree"
@@ -4819,7 +4819,7 @@
    "build": "NONE",
    "build_url": "",
    "last_seen": "2026-07-24",
-   "last_checked": "2026-07-24T08:00:15Z",
+   "last_checked": "2026-07-24T19:44:28Z",
    "current_full_name": "jabrena/daily-epsilon",
    "build_checked": "2026-07-24T08:01:19Z"
   },
@@ -4837,7 +4837,7 @@
    "build": "NONE",
    "build_url": "",
    "last_seen": "2026-07-24",
-   "last_checked": "2026-07-24T08:00:15Z",
+   "last_checked": "2026-07-24T19:44:28Z",
    "current_full_name": "jabrena/exceptions-in-java",
    "build_checked": "2026-07-24T08:01:19Z"
   },
@@ -4855,7 +4855,7 @@
    "build": "NONE",
    "build_url": "",
    "last_seen": "2026-07-24",
-   "last_checked": "2026-07-24T08:00:15Z",
+   "last_checked": "2026-07-24T19:44:29Z",
    "current_full_name": "jabrena/playlist-generators",
    "build_checked": "2026-07-24T08:01:19Z"
   },
@@ -4873,7 +4873,7 @@
    "build": "NONE",
    "build_url": "",
    "last_seen": "2026-07-24",
-   "last_checked": "2026-07-24T08:00:15Z",
+   "last_checked": "2026-07-24T19:44:29Z",
    "current_full_name": "jabrena/spring-boot-and-r-language",
    "build_checked": "2026-07-24T08:01:19Z"
   },
@@ -4891,7 +4891,7 @@
    "build": "NONE",
    "build_url": "",
    "last_seen": "2026-07-24",
-   "last_checked": "2026-07-24T08:00:15Z",
+   "last_checked": "2026-07-24T19:44:29Z",
    "current_full_name": "jabrena/spring-boot-relational-database-poc",
    "build_checked": "2026-07-24T08:01:19Z"
   },
@@ -4908,7 +4908,7 @@
    "renamed_to": "",
    "build": "NONE",
    "build_url": "",
-   "last_checked": "2026-07-24T08:00:15Z",
+   "last_checked": "2026-07-24T19:44:29Z",
    "current_full_name": "jabrena/spring-modulith-events-kafka-example",
    "build_checked": "2026-07-24T08:01:19Z",
    "last_seen": "2026-07-24"
@@ -4927,7 +4927,7 @@
    "build": "NONE",
    "build_url": "",
    "last_seen": "2026-07-24",
-   "last_checked": "2026-07-24T08:00:15Z",
+   "last_checked": "2026-07-24T19:44:30Z",
    "current_full_name": "jabrena/typed-errors",
    "build_checked": "2026-07-24T08:01:20Z"
   },
@@ -4944,7 +4944,7 @@
    "renamed_to": "",
    "build": "SUCCESS",
    "build_url": "https://github.com/jaguililla/hexagonal_spring/actions/runs/21381266657",
-   "last_checked": "2026-07-24T08:00:15Z",
+   "last_checked": "2026-07-24T19:44:30Z",
    "current_full_name": "jaguililla/hexagonal_spring",
    "build_checked": "2026-07-24T08:01:20Z",
    "build_workflow": "2 Maven workflows, all agree"
@@ -4962,7 +4962,7 @@
    "renamed_to": "",
    "build": "NONE",
    "build_url": "",
-   "last_checked": "2026-07-24T08:00:15Z",
+   "last_checked": "2026-07-24T19:44:30Z",
    "current_full_name": "jdrodriguezrodriguez/CreditCore",
    "build_checked": "2026-07-24T08:01:20Z"
   },
@@ -4979,7 +4979,7 @@
    "renamed_to": "",
    "build": "NONE",
    "build_url": "",
-   "last_checked": "2026-07-24T08:00:16Z",
+   "last_checked": "2026-07-24T19:44:30Z",
    "current_full_name": "jenkins-infra/plugin-health-scoring",
    "build_checked": "2026-07-24T08:01:20Z",
    "last_seen": "2026-07-24"
@@ -4998,7 +4998,7 @@
    "build": "NONE",
    "build_url": "",
    "last_seen": "2026-07-24",
-   "last_checked": "2026-07-24T08:00:16Z",
+   "last_checked": "2026-07-24T19:44:31Z",
    "current_full_name": "jimisola/arconia-composition-demo",
    "build_checked": "2026-07-24T08:01:20Z"
   },
@@ -5016,7 +5016,7 @@
    "build": "NONE",
    "build_url": "",
    "last_seen": "2026-07-20",
-   "last_checked": "2026-07-24T08:00:16Z",
+   "last_checked": "2026-07-24T19:44:31Z",
    "current_full_name": "jnorthrup/moneyfan",
    "build_checked": "2026-07-24T08:01:20Z"
   },
@@ -5034,7 +5034,7 @@
    "build": "FAILURE",
    "build_url": "https://github.com/jnorthrup/superbikeshed/actions/runs/16664980412",
    "last_seen": "2026-07-24",
-   "last_checked": "2026-07-24T08:00:16Z",
+   "last_checked": "2026-07-24T19:44:31Z",
    "current_full_name": "jnorthrup/superbikeshed",
    "build_checked": "2026-07-24T08:01:20Z",
    "build_workflow": "4 Maven workflows, all agree"
@@ -5053,7 +5053,7 @@
    "build": "NONE",
    "build_url": "",
    "last_seen": "2026-07-24",
-   "last_checked": "2026-07-24T08:00:16Z",
+   "last_checked": "2026-07-24T19:44:31Z",
    "current_full_name": "joeribuytaert5-hub/v1-f-swap",
    "build_checked": "2026-07-24T08:01:20Z"
   },
@@ -5071,7 +5071,7 @@
    "build": "NONE",
    "build_url": "",
    "last_seen": "2026-07-24",
-   "last_checked": "2026-07-24T08:00:16Z",
+   "last_checked": "2026-07-24T19:44:31Z",
    "current_full_name": "jonisf87/fwk-karateautomulti",
    "build_checked": "2026-07-24T08:01:20Z"
   },
@@ -5089,7 +5089,7 @@
    "build": "NONE",
    "build_url": "",
    "last_seen": "2026-07-24",
-   "last_checked": "2026-07-24T08:00:16Z",
+   "last_checked": "2026-07-24T19:44:32Z",
    "current_full_name": "jonisf87/fwk-karateautomulti-next",
    "build_checked": "2026-07-24T08:01:20Z"
   },
@@ -5106,7 +5106,7 @@
    "renamed_to": "",
    "build": "NONE",
    "build_url": "",
-   "last_checked": "2026-07-24T08:00:17Z",
+   "last_checked": "2026-07-24T19:44:32Z",
    "current_full_name": "js-b2-g11/static-code-analyzer-web",
    "build_checked": "2026-07-24T08:01:21Z",
    "last_seen": "2026-07-24"
@@ -5125,7 +5125,7 @@
    "build": "NONE",
    "build_url": "",
    "last_seen": "2026-07-24",
-   "last_checked": "2026-07-24T08:00:17Z",
+   "last_checked": "2026-07-24T19:44:32Z",
    "current_full_name": "juancollante/entregablesBaseDeDatos",
    "build_checked": "2026-07-24T08:01:21Z"
   },
@@ -5143,7 +5143,7 @@
    "build": "NONE",
    "build_url": "",
    "last_seen": "2026-07-24",
-   "last_checked": "2026-07-24T08:00:17Z",
+   "last_checked": "2026-07-24T19:44:32Z",
    "current_full_name": "kaiohs333/lab02-experimentacao-software",
    "build_checked": "2026-07-24T08:01:21Z"
   },
@@ -5160,7 +5160,7 @@
    "renamed_to": "",
    "build": "SUCCESS",
    "build_url": "https://github.com/kbeigl/bm/actions/runs/28651687814",
-   "last_checked": "2026-07-24T08:00:17Z",
+   "last_checked": "2026-07-24T19:44:33Z",
    "current_full_name": "kbeigl/bm",
    "build_checked": "2026-07-24T08:01:21Z",
    "build_workflow": "2 Maven workflows, all agree"
@@ -5179,7 +5179,7 @@
    "build": "NONE",
    "build_url": "",
    "last_seen": "2026-07-24",
-   "last_checked": "2026-07-24T08:00:18Z",
+   "last_checked": "2026-07-24T19:44:34Z",
    "current_full_name": "kec/ike-tooling",
    "build_checked": "2026-07-24T08:01:22Z"
   },
@@ -5197,7 +5197,7 @@
    "build": "NONE",
    "build_url": "",
    "last_seen": "2026-07-24",
-   "last_checked": "2026-07-24T08:00:18Z",
+   "last_checked": "2026-07-24T19:44:34Z",
    "current_full_name": "kec/tinkar-komet-desktop-ws",
    "build_checked": "2026-07-24T08:01:22Z"
   },
@@ -5215,7 +5215,7 @@
    "build": "NONE",
    "build_url": "",
    "last_seen": "2026-07-24",
-   "last_checked": "2026-07-24T08:00:18Z",
+   "last_checked": "2026-07-24T19:44:34Z",
    "current_full_name": "kevin6191015/new_app",
    "build_checked": "2026-07-24T08:01:22Z"
   },
@@ -5232,7 +5232,7 @@
    "renamed_to": "",
    "build": "NONE",
    "build_url": "",
-   "last_checked": "2026-07-24T08:00:18Z",
+   "last_checked": "2026-07-24T19:44:34Z",
    "current_full_name": "khdour17/Smart-Healthcare-Appointment-System",
    "build_checked": "2026-07-24T08:01:22Z"
   },
@@ -5250,7 +5250,7 @@
    "build": "NONE",
    "build_url": "",
    "last_seen": "2026-07-24",
-   "last_checked": "2026-07-24T08:00:18Z",
+   "last_checked": "2026-07-24T19:44:34Z",
    "current_full_name": "khmarbaise/maven-bugs",
    "build_checked": "2026-07-24T08:01:22Z"
   },
@@ -5268,7 +5268,7 @@
    "build": "NONE",
    "build_url": "",
    "last_seen": "2026-07-24",
-   "last_checked": "2026-07-24T08:00:18Z",
+   "last_checked": "2026-07-24T19:44:34Z",
    "current_full_name": "khmarbaise/maven400-rc4-bug-i",
    "build_checked": "2026-07-24T08:01:22Z"
   },
@@ -5286,7 +5286,7 @@
    "build": "NONE",
    "build_url": "",
    "last_seen": "2026-07-24",
-   "last_checked": "2026-07-24T08:00:18Z",
+   "last_checked": "2026-07-24T19:44:35Z",
    "current_full_name": "kmgbrc/gestione-unisp",
    "build_checked": "2026-07-24T08:01:22Z"
   },
@@ -5304,7 +5304,7 @@
    "build": "NONE",
    "build_url": "",
    "last_seen": "2026-07-24",
-   "last_checked": "2026-07-24T08:00:19Z",
+   "last_checked": "2026-07-24T19:44:35Z",
    "current_full_name": "knowledge-graphlet/ike-maven-plugin",
    "build_checked": "2026-07-24T08:01:23Z"
   },
@@ -5321,7 +5321,7 @@
    "renamed_to": "",
    "build": "NONE",
    "build_url": "",
-   "last_checked": "2026-07-24T08:00:19Z",
+   "last_checked": "2026-07-24T19:44:35Z",
    "current_full_name": "kny78/functional-transactions",
    "build_checked": "2026-07-24T08:01:23Z"
   },
@@ -5339,7 +5339,7 @@
    "build": "SUCCESS",
    "build_url": "https://github.com/kojder/photo-map-app/actions/runs/19595835441",
    "last_seen": "2026-07-20",
-   "last_checked": "2026-07-24T08:00:19Z",
+   "last_checked": "2026-07-24T19:44:35Z",
    "current_full_name": "kojder/photo-map-app",
    "build_checked": "2026-07-24T08:01:23Z",
    "build_workflow": "CI: Build, Test & SonarCloud Analysis"
@@ -5347,7 +5347,7 @@
   {
    "repo": "langgraph4j/langgraph4j",
    "state": "active",
-   "stars": 1839,
+   "stars": 1841,
    "pushed_at": "2026-07-21",
    "live_signal": "Wrapper",
    "live_version": "4.0.0-rc-3",
@@ -5358,7 +5358,7 @@
    "build": "SUCCESS",
    "build_url": "https://github.com/langgraph4j/langgraph4j/actions/runs/28298062231",
    "last_seen": "2026-07-24",
-   "last_checked": "2026-07-24T08:00:19Z",
+   "last_checked": "2026-07-24T19:44:35Z",
    "current_full_name": "langgraph4j/langgraph4j",
    "build_checked": "2026-07-24T08:01:23Z",
    "build_workflow": "2 Maven workflows, all agree"
@@ -5377,7 +5377,7 @@
    "build": "NONE",
    "build_url": "",
    "last_seen": "2026-07-24",
-   "last_checked": "2026-07-24T08:00:19Z",
+   "last_checked": "2026-07-24T19:44:36Z",
    "current_full_name": "leibrother/qqbot",
    "build_checked": "2026-07-24T08:01:23Z"
   },
@@ -5394,15 +5394,15 @@
    "renamed_to": "flowlogix/apps",
    "build": "NONE",
    "build_url": "",
-   "last_checked": "2026-07-24T08:00:19Z",
+   "last_checked": "2026-07-24T19:44:36Z",
    "current_full_name": "flowlogix/apps",
    "build_checked": "2026-07-24T08:01:23Z"
   },
   {
    "repo": "lukas-krecan/ShedLock",
    "state": "active",
-   "stars": 4197,
-   "pushed_at": "2026-07-23",
+   "stars": 4198,
+   "pushed_at": "2026-07-24",
    "live_signal": "Wrapper",
    "live_version": "4.0.0-rc-5",
    "source": "root",
@@ -5411,7 +5411,7 @@
    "renamed_to": "",
    "build": "SUCCESS",
    "build_url": "https://github.com/lukas-krecan/ShedLock/actions/runs/30040685030",
-   "last_checked": "2026-07-24T08:00:19Z",
+   "last_checked": "2026-07-24T19:44:36Z",
    "current_full_name": "lukas-krecan/ShedLock",
    "build_checked": "2026-07-24T08:01:23Z",
    "build_workflow": "CI"
@@ -5429,7 +5429,7 @@
    "renamed_to": "",
    "build": "NONE",
    "build_url": "",
-   "last_checked": "2026-07-24T08:00:20Z",
+   "last_checked": "2026-07-24T19:44:36Z",
    "current_full_name": "manikmagar/maven-build-cache-example",
    "build_checked": "2026-07-24T08:01:24Z",
    "last_seen": "2026-07-24"
@@ -5447,7 +5447,7 @@
    "renamed_to": "",
    "build": "NONE",
    "build_url": "",
-   "last_checked": "2026-07-24T08:00:20Z",
+   "last_checked": "2026-07-24T19:44:37Z",
    "current_full_name": "manofval0r/budgetfit-sim",
    "build_checked": "2026-07-24T08:01:24Z"
   },
@@ -5464,7 +5464,7 @@
    "renamed_to": "",
    "build": "NONE",
    "build_url": "",
-   "last_checked": "2026-07-24T08:00:20Z",
+   "last_checked": "2026-07-24T19:44:37Z",
    "current_full_name": "markprimak/maven-starter",
    "build_checked": "2026-07-24T08:01:24Z",
    "last_seen": "2026-07-24"
@@ -5483,7 +5483,7 @@
    "build": "NONE",
    "build_url": "",
    "last_seen": "2026-07-24",
-   "last_checked": "2026-07-24T08:00:20Z",
+   "last_checked": "2026-07-24T19:44:37Z",
    "current_full_name": "martinezdom/Dom-Car",
    "build_checked": "2026-07-24T08:01:24Z"
   },
@@ -5500,7 +5500,7 @@
    "renamed_to": "",
    "build": "NONE",
    "build_url": "",
-   "last_checked": "2026-07-24T08:00:20Z",
+   "last_checked": "2026-07-24T19:44:37Z",
    "current_full_name": "maryemmaatallah/Restaurant-",
    "build_checked": "2026-07-24T08:01:24Z"
   },
@@ -5518,7 +5518,7 @@
    "build": "NONE",
    "build_url": "",
    "last_seen": "2026-07-24",
-   "last_checked": "2026-07-24T08:00:20Z",
+   "last_checked": "2026-07-24T19:44:38Z",
    "current_full_name": "mat1520/Task-Manager-Springboot",
    "build_checked": "2026-07-24T08:01:24Z"
   },
@@ -5536,7 +5536,7 @@
    "build": "NONE",
    "build_url": "",
    "last_seen": "2026-07-24",
-   "last_checked": "2026-07-24T08:00:20Z",
+   "last_checked": "2026-07-24T19:44:38Z",
    "current_full_name": "matelat-daw/JAVA",
    "build_checked": "2026-07-24T08:01:24Z"
   },
@@ -5554,7 +5554,7 @@
    "build": "NONE",
    "build_url": "",
    "last_seen": "2026-07-24",
-   "last_checked": "2026-07-24T08:00:20Z",
+   "last_checked": "2026-07-24T19:44:38Z",
    "current_full_name": "matelat-daw/NEW",
    "build_checked": "2026-07-24T08:01:24Z"
   },
@@ -5572,7 +5572,7 @@
    "build": "SUCCESS",
    "build_url": "https://github.com/maveniverse/mason/actions/runs/28018583682",
    "last_seen": "2026-07-24",
-   "last_checked": "2026-07-24T08:00:21Z",
+   "last_checked": "2026-07-24T19:44:38Z",
    "current_full_name": "maveniverse/mason",
    "build_checked": "2026-07-24T08:01:24Z",
    "build_workflow": "CI"
@@ -5591,7 +5591,7 @@
    "build": "NONE",
    "build_url": "",
    "last_seen": "2026-07-16",
-   "last_checked": "2026-07-24T08:00:21Z",
+   "last_checked": "2026-07-24T19:44:38Z",
    "current_full_name": "mayankshrivas/finance-data-backend",
    "build_checked": "2026-07-24T08:01:24Z"
   },
@@ -5609,7 +5609,7 @@
    "build": "NONE",
    "build_url": "",
    "last_seen": "2026-07-24",
-   "last_checked": "2026-07-24T08:00:21Z",
+   "last_checked": "2026-07-24T19:44:39Z",
    "current_full_name": "mbennett-labs/CMSC495",
    "build_checked": "2026-07-24T08:01:24Z"
   },
@@ -5617,7 +5617,7 @@
    "repo": "mend-detection-qa/nx",
    "state": "active",
    "stars": 0,
-   "pushed_at": "2026-07-22",
+   "pushed_at": "2026-07-24",
    "live_signal": "Wrapper",
    "live_version": "4.0.0-rc-5",
    "source": "root",
@@ -5627,7 +5627,7 @@
    "build": "NONE",
    "build_url": "",
    "last_seen": "2026-07-24",
-   "last_checked": "2026-07-24T08:00:21Z",
+   "last_checked": "2026-07-24T19:44:39Z",
    "current_full_name": "mend-detection-qa/nx",
    "build_checked": "2026-07-24T08:01:25Z"
   },
@@ -5645,7 +5645,7 @@
    "build": "NONE",
    "build_url": "",
    "last_seen": "2026-07-24",
-   "last_checked": "2026-07-24T08:00:21Z",
+   "last_checked": "2026-07-24T19:44:39Z",
    "current_full_name": "mendirl/drdrools",
    "build_checked": "2026-07-24T08:01:25Z"
   },
@@ -5663,7 +5663,7 @@
    "build": "SUCCESS",
    "build_url": "https://github.com/mendirl/electrix/actions/runs/27059972283",
    "last_seen": "2026-07-24",
-   "last_checked": "2026-07-24T08:00:22Z",
+   "last_checked": "2026-07-24T19:44:39Z",
    "current_full_name": "mendirl/electrix",
    "build_checked": "2026-07-24T08:01:25Z",
    "build_workflow": "Java CI with Maven"
@@ -5682,7 +5682,7 @@
    "build": "NONE",
    "build_url": "",
    "last_seen": "2026-07-24",
-   "last_checked": "2026-07-24T08:00:22Z",
+   "last_checked": "2026-07-24T19:44:39Z",
    "current_full_name": "mendirl/prez_oauth2",
    "build_checked": "2026-07-24T08:01:25Z"
   },
@@ -5700,7 +5700,7 @@
    "build": "NONE",
    "build_url": "",
    "last_seen": "2026-07-24",
-   "last_checked": "2026-07-24T08:00:22Z",
+   "last_checked": "2026-07-24T19:44:39Z",
    "current_full_name": "mgzu/dubbo-samples",
    "build_checked": "2026-07-24T08:01:25Z"
   },
@@ -5718,7 +5718,7 @@
    "build": "NONE",
    "build_url": "",
    "last_seen": "2026-07-24",
-   "last_checked": "2026-07-24T08:00:22Z",
+   "last_checked": "2026-07-24T19:44:40Z",
    "current_full_name": "mikekistler/mcp-session-experiments",
    "build_checked": "2026-07-24T08:01:25Z"
   },
@@ -5736,7 +5736,7 @@
    "build": "SUCCESS",
    "build_url": "https://github.com/mirogaudi/product-catalog-service/actions/runs/29987364305",
    "last_seen": "2026-07-24",
-   "last_checked": "2026-07-24T08:00:22Z",
+   "last_checked": "2026-07-24T19:44:40Z",
    "current_full_name": "mirogaudi/product-catalog-service",
    "build_checked": "2026-07-24T08:01:25Z",
    "build_workflow": "Java_CI_with_Maven"
@@ -5754,7 +5754,7 @@
    "renamed_to": "",
    "build": "SUCCESS",
    "build_url": "https://github.com/mk868/nullaudit/actions/runs/29570898001",
-   "last_checked": "2026-07-24T08:00:22Z",
+   "last_checked": "2026-07-24T19:44:40Z",
    "current_full_name": "mk868/nullaudit",
    "build_checked": "2026-07-24T08:01:25Z",
    "last_seen": "2026-07-24",
@@ -5774,7 +5774,7 @@
    "build": "NONE",
    "build_url": "",
    "last_seen": "2026-07-24",
-   "last_checked": "2026-07-24T08:00:22Z",
+   "last_checked": "2026-07-24T19:44:40Z",
    "current_full_name": "mlfoundations/dev_set_tasks",
    "build_checked": "2026-07-24T08:01:25Z"
   },
@@ -5792,7 +5792,7 @@
    "build": "NONE",
    "build_url": "",
    "last_seen": "2026-07-24",
-   "last_checked": "2026-07-24T08:00:22Z",
+   "last_checked": "2026-07-24T19:44:40Z",
    "current_full_name": "mm70773-2/VueRefactor",
    "build_checked": "2026-07-24T08:01:26Z"
   },
@@ -5809,7 +5809,7 @@
    "renamed_to": "",
    "build": "NONE",
    "build_url": "",
-   "last_checked": "2026-07-24T08:00:22Z",
+   "last_checked": "2026-07-24T19:44:40Z",
    "current_full_name": "mnk/my-app",
    "build_checked": "2026-07-24T08:01:26Z"
   },
