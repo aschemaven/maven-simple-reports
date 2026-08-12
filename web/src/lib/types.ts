@@ -27,6 +27,12 @@ export interface RateLimitInfo {
   resetAt: number // ms epoch
 }
 
+export interface PrAssignee {
+  login: string
+  avatarUrl: string
+  htmlUrl: string
+}
+
 export interface DependabotPr {
   repo: string
   number: number
@@ -41,6 +47,17 @@ export interface DependabotPr {
   headSha: string
   buildState: BuildState
   buildStateFetchedAt: number | null
+  /**
+   * Optional because results persisted by earlier versions predate this field.
+   * Read it via `assigneesOf()` rather than directly, so cached entries degrade
+   * to "unassigned" instead of crashing the render.
+   */
+  assignees?: PrAssignee[]
+}
+
+/** Null-safe accessor tolerating pre-assignee entries from `localStorage`. */
+export function assigneesOf(pr: DependabotPr): PrAssignee[] {
+  return pr.assignees ?? []
 }
 
 export interface RepoFetchResult {

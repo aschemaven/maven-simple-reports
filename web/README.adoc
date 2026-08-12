@@ -74,6 +74,14 @@ Revoke the token on GitHub if the browser profile is shared.
 The Netlify functions keep the GitHub App *client secret* server-side; only the short-lived user-to-server access token and refresh token live in the browser.
 ====
 
+Assignee column::
+Shows who a Dependabot PR is assigned to on GitHub, so it is visible at a glance that someone has already looked at it and claimed it.
+Each entry links to the assignee's GitHub profile; unassigned PRs show a dash.
+Multiple assignees are all listed.
+The collapsed repo header additionally carries a `👤 <n>` count of assigned PRs.
++
+The data comes from the `assignees` field of the pull-request list response the dashboard already fetches, so the column costs *no* additional API requests and does not affect the rate-limit budget.
+
 Repo filter::
 A regex input narrows the fetch cycle to a subset of `apache/maven-*` repos.
 The pattern is persisted in `localStorage` and applied immediately: previously fetched repos that no longer match are hidden, newly matching repos are queued for the next fetch.
