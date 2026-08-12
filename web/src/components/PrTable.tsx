@@ -15,7 +15,8 @@
  */
 
 import { useState } from 'react'
-import type { DependabotPr, RepoFetchResult } from '../lib/types'
+import type { DependabotPr, PrAssignee, RepoFetchResult } from '../lib/types'
+import { assigneesOf } from '../lib/types'
 import { MAVEN_OWNER } from '../lib/repos'
 import { readHideEmpty, writeHideEmpty } from '../lib/cache'
 import { StatusBadge } from './StatusBadge'
@@ -73,6 +74,10 @@ function countBuildStates(prs: DependabotPr[]): BuildCounts {
     }
   }
   return c
+}
+
+function countAssigned(prs: DependabotPr[]): number {
+  return prs.filter((pr) => assigneesOf(pr).length > 0).length
 }
 
 interface Props {
@@ -149,6 +154,7 @@ export function PrTable({ allRepos, results, inFlight }: Props) {
           <tr>
             <th>Title</th>
             <th>Date</th>
+            <th>Assignee</th>
             <th>Build status</th>
             <th>PR</th>
           </tr>
@@ -191,7 +197,7 @@ function RepoRows({ repo, result, isInFlight, collapsed, onToggle }: RepoRowsPro
   return (
     <>
       <tr className={className}>
-        <td colSpan={4}>
+        <td colSpan={5}>
           <button
             type="button"
             className="repo-toggle"
@@ -206,7 +212,13 @@ function RepoRows({ repo, result, isInFlight, collapsed, onToggle }: RepoRowsPro
           <a href={repoUrl} target="_blank" rel="noreferrer">
             {repo}
           </a>
-          <RepoMeta result={result} isInFlight={isInFlight} counts={counts} prCount={prs.length} />
+          <RepoMeta
+            result={result}
+            isInFlight={isInFlight}
+            counts={counts}
+            prCount={prs.length}
+            assignedCount={countAssigned(prs)}
+          />
         </td>
       </tr>
       {!collapsed && prs.map((pr) => <PrRow key={pr.number} pr={pr} />)}
@@ -219,9 +231,10 @@ interface RepoMetaProps {
   isInFlight: boolean
   counts: BuildCounts
   prCount: number
+  assignedCount: number
 }
 
-function RepoMeta({ result, isInFlight, counts, prCount }: RepoMetaProps) {
+function RepoMeta({ result, isInFlight, counts, prCount, assignedCount }: RepoMetaProps) {
   if (isInFlight) return <span className="muted"> · fetching…</span>
   if (!result) return <span className="muted"> · pending</span>
   if (result.error) return <span className="muted"> · error: {result.error}</span>
@@ -254,8 +267,61 @@ function RepoMeta({ result, isInFlight, counts, prCount }: RepoMetaProps) {
           · ⏳ {counts.pending}
         </span>
       )}
+      {assignedCount > 0 && (
+        <span
+          className="count count-assigned"
+          title={`${assignedCount} of ${prCount} already assigned`}
+        >
+          {' '}
+          · 👤 {assignedCount}
+        </span>
+      )}
       <span className="muted"> · {fetched}</span>
     </>
+  )
+}
+
+const AVATAR_PX = 18
+
+/**
+ * GitHub avatar URLs already carry a `?v=4` query, so the size hint has to be
+ * appended rather than set. Request 2× for crisp rendering on HiDPI displays.
+ */
+function avatarSrc(url: string): string {
+  return `${url}${url.includes('?') ? '&' : '?'}s=${AVATAR_PX * 2}`
+}
+
+function AssigneeCell({ assignees }: { assignees: PrAssignee[] }) {
+  if (assignees.length === 0) {
+    return (
+      <span className="muted" title="Nobody has claimed this PR yet">
+        —
+      </span>
+    )
+  }
+  return (
+    <span className="assignee-list">
+      {assignees.map((a) => (
+        <a
+          key={a.login}
+          className="assignee"
+          href={a.htmlUrl}
+          target="_blank"
+          rel="noreferrer"
+          title={`Assigned to ${a.login}`}
+        >
+          <img
+            className="assignee-avatar"
+            src={avatarSrc(a.avatarUrl)}
+            alt=""
+            width={AVATAR_PX}
+            height={AVATAR_PX}
+            loading="lazy"
+          />
+          {a.login}
+        </a>
+      ))}
+    </span>
   )
 }
 
@@ -268,6 +334,9 @@ function PrRow({ pr }: { pr: DependabotPr }) {
         {pr.title}
       </td>
       <td className="nowrap">{formatPrDate(pr.createdAt)}</td>
+      <td className="nowrap">
+        <AssigneeCell assignees={assigneesOf(pr)} />
+      </td>
       <td>
         <a href={pr.checksUrl} target="_blank" rel="noreferrer">
           <StatusBadge state={pr.buildState} />

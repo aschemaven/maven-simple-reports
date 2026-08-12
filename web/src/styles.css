@@ -462,6 +462,36 @@ code {
   font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
 }
 
+.assignee-list {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.assignee {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+  text-decoration: none;
+}
+
+.assignee:hover {
+  text-decoration: underline;
+}
+
+.assignee-avatar {
+  flex: 0 0 auto;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: var(--row-alt);
+}
+
+.count-assigned {
+  color: var(--muted);
+}
+
 footer {
   margin-top: 32px;
   font-size: 12px;

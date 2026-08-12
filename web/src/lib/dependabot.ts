@@ -22,10 +22,16 @@ import {
 } from './buildStatus'
 import { MAVEN_OWNER } from './repos'
 import { readArchived, writeArchived, writeResult } from './cache'
-import type { DependabotPr, RepoFetchResult } from './types'
+import type { DependabotPr, PrAssignee, RepoFetchResult } from './types'
 
 interface RepoMetadata {
   archived: boolean
+}
+
+interface RestUser {
+  login: string
+  avatar_url: string
+  html_url: string
 }
 
 interface RestPullRequest {
@@ -38,6 +44,11 @@ interface RestPullRequest {
   html_url: string
   head: { sha: string }
   base: { ref: string }
+  // Both are part of the list payload already — no extra request needed.
+  // `assignee` is the deprecated single-assignee field; `assignees` supersedes
+  // it and is a superset, so we only fall back when the array is absent.
+  assignees: RestUser[] | null
+  assignee: RestUser | null
 }
 
 const DEPENDABOT_LOGIN_PATTERNS = [/^dependabot(\[bot\])?$/i, /^app\/dependabot$/i]
@@ -45,6 +56,15 @@ const DEPENDABOT_LOGIN_PATTERNS = [/^dependabot(\[bot\])?$/i, /^app\/dependabot$
 function isDependabotAuthor(login: string | undefined | null): boolean {
   if (!login) return false
   return DEPENDABOT_LOGIN_PATTERNS.some((re) => re.test(login))
+}
+
+function toAssignees(pr: RestPullRequest): PrAssignee[] {
+  const raw = pr.assignees ?? (pr.assignee ? [pr.assignee] : [])
+  return raw.map((u) => ({
+    login: u.login,
+    avatarUrl: u.avatar_url,
+    htmlUrl: u.html_url,
+  }))
 }
 
 export interface FetchRepoOptions {
@@ -107,6 +127,7 @@ export async function fetchRepoPrs(repo: string, opts: FetchRepoOptions = {}): P
         headSha: pr.head.sha,
         buildState: 'UNKNOWN',
         buildStateFetchedAt: null,
+        assignees: toAssignees(pr),
       }
 
       if (!opts.skipChecks) {
