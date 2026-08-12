@@ -46,9 +46,15 @@ class SerialQueue {
     return new Promise<T>((resolve, reject) => {
       const item: QueueItem = {
         run: async () => {
-          const wait = this.backoffUntil - Date.now()
-          if (wait > 0) {
-            await sleep(wait)
+          // Re-read the deadline on every slice instead of sleeping it out in
+          // one go: clearBackoff() (a token was added, "Refresh now" pressed)
+          // must take effect immediately. Sleeping the full span would serve
+          // out a backoff of up to an hour that the user has already lifted,
+          // with nothing on screen explaining the wait.
+          for (;;) {
+            const wait = this.backoffUntil - Date.now()
+            if (wait <= 0) break
+            await sleep(Math.min(wait, 500))
           }
           try {
             resolve(await work())
@@ -101,6 +107,32 @@ function parseRateLimit(headers: Headers): RateLimitInfo | null {
   }
 }
 
+/**
+ * Distinguish a genuine quota/abuse throttle from an authorization 403.
+ * 429 is always a throttle; for 403 we trust the rate-limit headers GitHub
+ * sets on quota rejections (`x-ratelimit-remaining: 0`, `retry-after` on
+ * secondary limits) and fall back to the message body. Anything else — most
+ * importantly "Resource not accessible by integration" — is a permission
+ * problem the user needs to see, not something to wait out.
+ */
+function isRateLimited(res: Response, body: string): boolean {
+  if (res.status === 429) return true
+  if (res.headers.get('retry-after')) return true
+  if (res.headers.get('x-ratelimit-remaining') === '0') return true
+  return /rate limit|abuse detection/i.test(body)
+}
+
+/** Pull GitHub's `message` field out of an error body, falling back to raw text. */
+function extractMessage(body: string): string {
+  try {
+    const parsed = JSON.parse(body) as { message?: string }
+    if (parsed.message) return parsed.message
+  } catch {
+    // not JSON — fall through
+  }
+  return body.slice(0, 200) || 'no message'
+}
+
 function computeBackoff(res: Response): number {
   const retryAfter = res.headers.get('retry-after')
   if (retryAfter) {
@@ -150,10 +182,22 @@ export async function ghFetch<T>(path: string, opts: GhFetchOptions = {}): Promi
     }
 
     if (res.status === 403 || res.status === 429) {
-      const until = computeBackoff(res)
-      queue.setBackoff(until)
-      const message = `GitHub API ${res.status} (backoff until ${new Date(until).toLocaleTimeString()})`
-      throw new GhRateLimitError(message, until, res.status)
+      // GitHub overloads 403: quota exhausted *and* plain authorization
+      // failures ("Resource not accessible by integration" when a GitHub App
+      // token hits repos the App isn't installed on). Backing off on the
+      // latter turns a permission problem into a silent multi-minute wait
+      // with no error anywhere — so classify before deciding.
+      const body = await res.text().catch(() => '')
+      if (isRateLimited(res, body)) {
+        const until = computeBackoff(res)
+        queue.setBackoff(until)
+        const message = `GitHub API ${res.status} (backoff until ${new Date(until).toLocaleTimeString()})`
+        throw new GhRateLimitError(message, until, res.status)
+      }
+      throw new GhAccessError(
+        `GitHub API ${res.status}: ${extractMessage(body)}`,
+        res.status,
+      )
     }
 
     if (!res.ok) {
@@ -172,5 +216,17 @@ export class GhRateLimitError extends Error {
   constructor(message: string, public readonly until: number, public readonly status: number) {
     super(message)
     this.name = 'GhRateLimitError'
+  }
+}
+
+/**
+ * A 403 that is *not* a quota rejection: bad or insufficiently scoped
+ * credentials. Deliberately not a GhRateLimitError, so the fetch loop records
+ * it as a per-repo error the user can read instead of pausing on it.
+ */
+export class GhAccessError extends Error {
+  constructor(message: string, public readonly status: number) {
+    super(message)
+    this.name = 'GhAccessError'
   }
 }
