@@ -16,9 +16,14 @@
 
 import { useState } from 'react'
 import type { DependabotPr, PrAssignee, RepoFetchResult } from '../lib/types'
-import { assigneesOf } from '../lib/types'
+import { assigneesOf, hasAssigneeData } from '../lib/types'
 import { MAVEN_OWNER } from '../lib/repos'
-import { readHideEmpty, writeHideEmpty } from '../lib/cache'
+import {
+  readAssigneeFilter,
+  readHideEmpty,
+  writeAssigneeFilter,
+  writeHideEmpty,
+} from '../lib/cache'
 import { StatusBadge } from './StatusBadge'
 
 const STALE_THRESHOLD_MS = 60 * 60_000
@@ -80,6 +85,38 @@ function countAssigned(prs: DependabotPr[]): number {
   return prs.filter((pr) => assigneesOf(pr).length > 0).length
 }
 
+/** Sentinel values for the assignee dropdown; anything else is a GitHub login. */
+const ASSIGNEE_ALL = 'all'
+const ASSIGNEE_ANY = '__any__'
+const ASSIGNEE_NONE = '__none__'
+
+function matchesAssignee(pr: DependabotPr, filter: string): boolean {
+  if (filter === ASSIGNEE_ALL) return true
+  // A PR whose entry predates the column is *unknown*, not unassigned — it
+  // must not show up under "Unassigned" and claim nobody has picked it up.
+  if (!hasAssigneeData(pr)) return false
+  const assignees = assigneesOf(pr)
+  if (filter === ASSIGNEE_ANY) return assignees.length > 0
+  if (filter === ASSIGNEE_NONE) return assignees.length === 0
+  return assignees.some((a) => a.login === filter)
+}
+
+function filterPrs(prs: DependabotPr[], assigneeFilter: string): DependabotPr[] {
+  if (assigneeFilter === ASSIGNEE_ALL) return prs
+  return prs.filter((pr) => matchesAssignee(pr, assigneeFilter))
+}
+
+/** Distinct logins across everything fetched so far, for the dropdown. */
+function collectAssignees(results: Record<string, RepoFetchResult>): string[] {
+  const logins = new Set<string>()
+  for (const result of Object.values(results)) {
+    for (const pr of result.prs) {
+      for (const a of assigneesOf(pr)) logins.add(a.login)
+    }
+  }
+  return [...logins].sort((a, b) => a.localeCompare(b))
+}
+
 interface Props {
   allRepos: readonly string[]
   results: Record<string, RepoFetchResult>
@@ -92,9 +129,19 @@ export function PrTable({ allRepos, results, inFlight }: Props) {
   // has at least one PR.
   const [collapsed, setCollapsed] = useState<Record<string, boolean>>({})
   const [hideEmpty, setHideEmpty] = useState<boolean>(() => readHideEmpty())
+  const [assigneeFilter, setAssigneeFilter] = useState<string>(() => readAssigneeFilter())
+
+  const knownAssignees = collectAssignees(results)
+  const filtering = assigneeFilter !== ASSIGNEE_ALL
+
+  const prsFor = (repo: string): DependabotPr[] =>
+    filterPrs(results[repo]?.prs ?? [], assigneeFilter)
 
   const isCollapsed = (repo: string): boolean => {
     if (repo in collapsed) return collapsed[repo]
+    // While filtering, a matching repo is worth showing open — the whole point
+    // of the filter is to see the matches without clicking through 99 repos.
+    if (filtering) return prsFor(repo).length === 0
     const result = results[repo]
     return !result || result.prs.length === 0
   }
@@ -114,18 +161,32 @@ export function PrTable({ allRepos, results, inFlight }: Props) {
     writeHideEmpty(value)
   }
 
-  // Hide only fully-fetched repos with zero PRs. Keep pending and errored
-  // entries visible so the user can still see fetch state.
-  const visible = hideEmpty
-    ? sorted.filter((repo) => {
-        const r = results[repo]
-        if (!r) return true
-        if (r.error) return true
-        return r.prs.length > 0
-      })
-    : sorted
+  const updateAssigneeFilter = (value: string) => {
+    setAssigneeFilter(value)
+    writeAssigneeFilter(value)
+    // Drop manual collapse overrides so the new filter decides what is open.
+    setCollapsed({})
+  }
+
+  // An active assignee filter hides non-matching repos outright — otherwise
+  // the answer to "what is this person working on?" is buried in 90+ headers.
+  // Without it, hide only fully-fetched repos with zero PRs, keeping pending
+  // and errored entries visible so fetch state stays observable.
+  const visible = filtering
+    ? sorted.filter((repo) => prsFor(repo).length > 0)
+    : hideEmpty
+      ? sorted.filter((repo) => {
+          const r = results[repo]
+          if (!r) return true
+          if (r.error) return true
+          return r.prs.length > 0
+        })
+      : sorted
 
   const hiddenCount = sorted.length - visible.length
+  const matchCount = filtering
+    ? visible.reduce((n, repo) => n + prsFor(repo).length, 0)
+    : 0
 
   return (
     <div className="pr-table-wrap">
@@ -134,11 +195,39 @@ export function PrTable({ allRepos, results, inFlight }: Props) {
           <input
             type="checkbox"
             checked={hideEmpty}
+            disabled={filtering}
             onChange={(e) => updateHideEmpty(e.target.checked)}
           />
           Hide repos without PRs
-          {hideEmpty && hiddenCount > 0 && (
+          {!filtering && hideEmpty && hiddenCount > 0 && (
             <span className="muted"> ({hiddenCount} hidden)</span>
+          )}
+        </label>
+        <label className="assignee-filter">
+          Assignee{' '}
+          <select
+            value={assigneeFilter}
+            onChange={(e) => updateAssigneeFilter(e.target.value)}
+          >
+            <option value={ASSIGNEE_ALL}>All</option>
+            <option value={ASSIGNEE_ANY}>Assigned (anyone)</option>
+            <option value={ASSIGNEE_NONE}>Unassigned</option>
+            {knownAssignees.length > 0 && (
+              <optgroup label="Assigned to">
+                {knownAssignees.map((login) => (
+                  <option key={login} value={login}>
+                    {login}
+                  </option>
+                ))}
+              </optgroup>
+            )}
+          </select>
+          {filtering && (
+            <span className="muted">
+              {' '}
+              ({matchCount} PR{matchCount === 1 ? '' : 's'} in {visible.length} repo
+              {visible.length === 1 ? '' : 's'})
+            </span>
           )}
         </label>
         <span className="pr-table-controls-spacer" />
@@ -164,6 +253,7 @@ export function PrTable({ allRepos, results, inFlight }: Props) {
             <RepoRows
               key={repo}
               repo={repo}
+              prs={prsFor(repo)}
               result={results[repo]}
               isInFlight={inFlight === repo}
               collapsed={isCollapsed(repo)}
@@ -178,15 +268,17 @@ export function PrTable({ allRepos, results, inFlight }: Props) {
 
 interface RepoRowsProps {
   repo: string
+  /** Already narrowed by the assignee filter; may be a subset of result.prs. */
+  prs: DependabotPr[]
   result: RepoFetchResult | undefined
   isInFlight: boolean
   collapsed: boolean
   onToggle: () => void
 }
 
-function RepoRows({ repo, result, isInFlight, collapsed, onToggle }: RepoRowsProps) {
+function RepoRows({ repo, prs: input, result, isInFlight, collapsed, onToggle }: RepoRowsProps) {
   const repoUrl = `https://github.com/${MAVEN_OWNER}/${repo}/pulls`
-  const prs = result ? [...result.prs].sort((a, b) => b.createdAt.localeCompare(a.createdAt)) : []
+  const prs = [...input].sort((a, b) => b.createdAt.localeCompare(a.createdAt))
   const counts = countBuildStates(prs)
   const empty = prs.length === 0
   const className = `repo-header${empty ? ' repo-header-empty' : ''}${
@@ -291,7 +383,18 @@ function avatarSrc(url: string): string {
   return `${url}${url.includes('?') ? '&' : '?'}s=${AVATAR_PX * 2}`
 }
 
-function AssigneeCell({ assignees }: { assignees: PrAssignee[] }) {
+function AssigneeCell({ pr }: { pr: DependabotPr }) {
+  if (!hasAssigneeData(pr)) {
+    return (
+      <span
+        className="muted"
+        title="Not known yet — this entry was cached before the column existed. It fills in on the next refresh of this repo."
+      >
+        ?
+      </span>
+    )
+  }
+  const assignees: PrAssignee[] = assigneesOf(pr)
   if (assignees.length === 0) {
     return (
       <span className="muted" title="Nobody has claimed this PR yet">
@@ -335,7 +438,7 @@ function PrRow({ pr }: { pr: DependabotPr }) {
       </td>
       <td className="nowrap">{formatPrDate(pr.createdAt)}</td>
       <td className="nowrap">
-        <AssigneeCell assignees={assigneesOf(pr)} />
+        <AssigneeCell pr={pr} />
       </td>
       <td>
         <a href={pr.checksUrl} target="_blank" rel="noreferrer">
