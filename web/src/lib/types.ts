@@ -48,11 +48,25 @@ export interface DependabotPr {
   buildState: BuildState
   buildStateFetchedAt: number | null
   /**
-   * Optional because results persisted by earlier versions predate this field.
-   * Read it via `assigneesOf()` rather than directly, so cached entries degrade
-   * to "unassigned" instead of crashing the render.
+   * Optional on purpose: results persisted by earlier versions predate this
+   * field, and we want them to keep working rather than force a cache version
+   * bump (which would discard every repo's last known state and burn a full
+   * refetch cycle against the rate limit).
+   *
+   * `undefined` therefore means "this cached entry was written before the
+   * column existed" — *not* "nobody is assigned". Use `hasAssigneeData()` to
+   * tell the two apart and `assigneesOf()` to read the list safely.
    */
   assignees?: PrAssignee[]
+}
+
+/**
+ * True once a PR has been fetched by a version that knows about assignees.
+ * Distinguishes a genuinely unassigned PR from a stale cache entry, so the UI
+ * never claims "unassigned" about data it simply does not have yet.
+ */
+export function hasAssigneeData(pr: DependabotPr): boolean {
+  return pr.assignees !== undefined
 }
 
 /** Null-safe accessor tolerating pre-assignee entries from `localStorage`. */

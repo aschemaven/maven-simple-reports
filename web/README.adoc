@@ -76,11 +76,24 @@ The Netlify functions keep the GitHub App *client secret* server-side; only the 
 
 Assignee column::
 Shows who a Dependabot PR is assigned to on GitHub, so it is visible at a glance that someone has already looked at it and claimed it.
-Each entry links to the assignee's GitHub profile; unassigned PRs show a dash.
+Each entry links to the assignee's GitHub profile; unassigned PRs show a dash, and a `?` marks a PR whose cached entry predates the column (it fills in on the next refresh of that repo).
 Multiple assignees are all listed.
 The collapsed repo header additionally carries a `👤 <n>` count of assigned PRs.
 +
 The data comes from the `assignees` field of the pull-request list response the dashboard already fetches, so the column costs *no* additional API requests and does not affect the rate-limit budget.
++
+[NOTE]
+====
+New PR fields are added *without* breaking the persisted cache.
+`assignees` is declared optional on `DependabotPr`, so entries written by earlier versions stay readable instead of forcing a `gh-result:` version bump — a bump would discard every repo's last known state and burn a full refetch cycle against the rate limit.
+An absent field means "not known yet", which `hasAssigneeData()` keeps distinct from "nobody assigned"; the UI and the filter both honour that distinction rather than claiming a PR is unassigned when the data simply has not been fetched yet.
+====
+
+Assignee filter::
+A dropdown next to _Hide repos without PRs_ narrows the table to *Assigned (anyone)*, *Unassigned*, or one specific assignee (the list is built from whoever appears in the PRs fetched so far).
+While a filter is active, repos without a matching PR are hidden entirely and matching repos are auto-expanded, so selecting a login answers "what is that person sitting on?" in one glance.
+The selection is persisted in `localStorage`.
+Filtering is purely client-side over already fetched data — it costs no API requests, but it can only match repos the current cycle has actually reached.
 
 Repo filter::
 A regex input narrows the fetch cycle to a subset of `apache/maven-*` repos.

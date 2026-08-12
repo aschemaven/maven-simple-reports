@@ -317,6 +317,29 @@ code {
   cursor: pointer;
 }
 
+.pr-table-controls .hide-empty input:disabled,
+.pr-table-controls .hide-empty:has(input:disabled) {
+  cursor: default;
+  opacity: 0.5;
+}
+
+.pr-table-controls .assignee-filter {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  font-size: 12px;
+}
+
+.pr-table-controls .assignee-filter select {
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--fg);
+  padding: 3px 6px;
+  border-radius: 4px;
+  font: inherit;
+  cursor: pointer;
+}
+
 .pr-table-controls button {
   border: 1px solid var(--border);
   background: var(--bg);

@@ -21,6 +21,7 @@ const FILTER_KEY = 'gh-filter:v1'
 const TOKEN_KEY = 'gh-token:v1'
 const TOKEN_PERSIST_KEY = 'gh-token-persist:v1'
 const HIDE_EMPTY_KEY = 'gh-hide-empty:v1'
+const ASSIGNEE_FILTER_KEY = 'gh-assignee-filter:v1'
 const OAUTH_KEY = 'gh-oauth:v1'
 
 const ARCHIVED_TTL_MS = 7 * 24 * 60 * 60_000
@@ -166,6 +167,28 @@ export function writeHideEmpty(hide: boolean): void {
   try {
     if (hide) localStorage.setItem(HIDE_EMPTY_KEY, '1')
     else localStorage.removeItem(HIDE_EMPTY_KEY)
+  } catch {
+    // ignore
+  }
+}
+
+/**
+ * Assignee filter: 'all' (no filtering), 'any', 'none', or a GitHub login.
+ * Stored as a plain string; unknown logins simply match nothing until the
+ * next fetch cycle repopulates the option list.
+ */
+export function readAssigneeFilter(): string {
+  try {
+    return localStorage.getItem(ASSIGNEE_FILTER_KEY) ?? 'all'
+  } catch {
+    return 'all'
+  }
+}
+
+export function writeAssigneeFilter(value: string): void {
+  try {
+    if (value && value !== 'all') localStorage.setItem(ASSIGNEE_FILTER_KEY, value)
+    else localStorage.removeItem(ASSIGNEE_FILTER_KEY)
   } catch {
     // ignore
   }
