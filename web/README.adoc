@@ -117,6 +117,28 @@ That degraded mode is tolerable because:
 
 Either authenticated path documented above (OAuth or PAT) lifts the limit to ~5 000/h per token, and is the recommended setup for anything beyond a quick look.
 
+== Tests
+
+[source,bash]
+----
+npm test          # vitest, single run
+npm run test:watch
+npm run typecheck # app sources and tests, separate tsconfigs
+----
+
+Unit tests cover the pure logic, with no network and no React rendering: build-state derivation, the ETag/rate-limit/backoff behaviour of `ghFetch` (including the 403 classification), the Dependabot fetch and assignee mapping, the assignee filter, the storage layer in `cache.ts`, the OAuth refresh thresholds, and `originAllowed()` in the Netlify functions.
+That last one is a security boundary rather than a convenience — `auth-callback` redirects to the origin it decodes from the OAuth `state`, so a gap in the allowlist would make it an open redirect.
+
+Two environment notes:
+
+* jsdom refuses Web Storage on opaque origins, so `vitest.config.ts` pins a `http://localhost` document URL.
+* Node 26 ships an experimental global `localStorage` that is undefined without `--localstorage-file` and shadows the jsdom one. `tests/setup.ts` installs a spec-shaped in-memory `Storage` where one is missing, and steps aside when the environment provides a real implementation.
+
+Tests are typechecked through `tsconfig.test.json` rather than the app config: they import the Netlify helpers by their `.mts` path, which the app config forbids via `allowImportingTsExtensions: false`.
+
+CI runs typecheck and tests in their own `test` job on every push and pull request.
+The job is deliberately independent of `build-spa`, which skips its Node setup on a cache hit and would therefore silently skip the tests whenever `web/` was unchanged.
+
 == Local development
 
 [source,bash]
