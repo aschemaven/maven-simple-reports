@@ -1,0 +1,10 @@
+{
+  "//": "Tests are typechecked separately from the app build: they import the Netlify function helpers by their .mts path, which the app config deliberately forbids via allowImportingTsExtensions: false.",
+  "extends": "./tsconfig.app.json",
+  "compilerOptions": {
+    "allowImportingTsExtensions": true,
+    "noEmit": true
+  },
+  "include": ["src/**/*.test.ts", "src/vite-env.d.ts", "tests", "vitest.config.ts"],
+  "exclude": []
+}

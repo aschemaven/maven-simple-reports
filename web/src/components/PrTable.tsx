@@ -17,6 +17,14 @@
 import { useState } from 'react'
 import type { DependabotPr, PrAssignee, RepoFetchResult } from '../lib/types'
 import { assigneesOf, hasAssigneeData } from '../lib/types'
+import {
+  ASSIGNEE_ALL,
+  ASSIGNEE_ANY,
+  ASSIGNEE_NONE,
+  collectAssignees,
+  countAssigned,
+  filterPrs,
+} from '../lib/assignees'
 import { MAVEN_OWNER } from '../lib/repos'
 import {
   readAssigneeFilter,
@@ -79,42 +87,6 @@ function countBuildStates(prs: DependabotPr[]): BuildCounts {
     }
   }
   return c
-}
-
-function countAssigned(prs: DependabotPr[]): number {
-  return prs.filter((pr) => assigneesOf(pr).length > 0).length
-}
-
-/** Sentinel values for the assignee dropdown; anything else is a GitHub login. */
-const ASSIGNEE_ALL = 'all'
-const ASSIGNEE_ANY = '__any__'
-const ASSIGNEE_NONE = '__none__'
-
-function matchesAssignee(pr: DependabotPr, filter: string): boolean {
-  if (filter === ASSIGNEE_ALL) return true
-  // A PR whose entry predates the column is *unknown*, not unassigned — it
-  // must not show up under "Unassigned" and claim nobody has picked it up.
-  if (!hasAssigneeData(pr)) return false
-  const assignees = assigneesOf(pr)
-  if (filter === ASSIGNEE_ANY) return assignees.length > 0
-  if (filter === ASSIGNEE_NONE) return assignees.length === 0
-  return assignees.some((a) => a.login === filter)
-}
-
-function filterPrs(prs: DependabotPr[], assigneeFilter: string): DependabotPr[] {
-  if (assigneeFilter === ASSIGNEE_ALL) return prs
-  return prs.filter((pr) => matchesAssignee(pr, assigneeFilter))
-}
-
-/** Distinct logins across everything fetched so far, for the dropdown. */
-function collectAssignees(results: Record<string, RepoFetchResult>): string[] {
-  const logins = new Set<string>()
-  for (const result of Object.values(results)) {
-    for (const pr of result.prs) {
-      for (const a of assigneesOf(pr)) logins.add(a.login)
-    }
-  }
-  return [...logins].sort((a, b) => a.localeCompare(b))
 }
 
 interface Props {
