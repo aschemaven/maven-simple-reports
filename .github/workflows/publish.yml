@@ -9,6 +9,9 @@ name: Publish
 #   pull_request        | cached (iff web/)  | Netlify preview
 #   workflow_dispatch   | cached             | Pages (main) / Netlify (branch)
 #
+# Deploys are gated on the test job: if typecheck or the unit tests fail,
+# publish-pages and publish-netlify are skipped and nothing ships.
+#
 # The build-spa job always runs but restores web/dist from the Actions
 # cache (key = hash of web/**); it only rebuilds on a cache miss (web/
 # changed, or the cache was evicted). The Maven 4 adoption report is
@@ -148,11 +151,12 @@ jobs:
 
   publish-pages:
     runs-on: ubuntu-latest
-    needs: [context, build-spa]
+    needs: [context, build-spa, test]
     if: |
       always()
       && needs.context.outputs.deploy-target == 'pages'
       && needs.build-spa.result == 'success'
+      && needs.test.result == 'success'
     environment:
       name: github-pages
       url: ${{ steps.deploy.outputs.page_url }}
@@ -219,11 +223,12 @@ jobs:
 
   publish-netlify:
     runs-on: ubuntu-latest
-    needs: [context, build-spa]
+    needs: [context, build-spa, test]
     if: |
       always()
       && needs.context.outputs.deploy-target == 'netlify'
       && needs.build-spa.result == 'success'
+      && needs.test.result == 'success'
     steps:
       - name: Checkout
         uses: actions/checkout@v4

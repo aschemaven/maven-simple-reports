@@ -138,6 +138,7 @@ Tests are typechecked through `tsconfig.test.json` rather than the app config: t
 
 CI runs typecheck and tests in their own `test` job on every push and pull request.
 The job is deliberately independent of `build-spa`, which skips its Node setup on a cache hit and would therefore silently skip the tests whenever `web/` was unchanged.
+Deployment is gated on it: a failing typecheck or test run skips both `publish-pages` and `publish-netlify`, so nothing ships.
 
 == Local development
 
