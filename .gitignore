@@ -16,3 +16,8 @@ data/
 
 # Netlify Functions deps — installed by CI before deploy
 netlify/node_modules/
+work/
+cases/
+
+# Python bytecode from the report scripts
+__pycache__/
