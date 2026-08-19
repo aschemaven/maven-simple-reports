@@ -173,9 +173,10 @@ export function writeHideEmpty(hide: boolean): void {
 }
 
 /**
- * Assignee filter: 'all' (no filtering), 'any', 'none', or a GitHub login.
- * Stored as a plain string; unknown logins simply match nothing until the
- * next fetch cycle repopulates the option list.
+ * Assignee filter: the sentinels defined in `lib/assignees.ts` — 'all' (no
+ * filtering), '__any__', '__none__' — or a GitHub login. Stored as a plain
+ * string; unknown logins simply match nothing until the next fetch cycle
+ * repopulates the option list.
  */
 export function readAssigneeFilter(): string {
   try {
