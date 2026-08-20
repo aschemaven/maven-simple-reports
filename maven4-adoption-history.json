@@ -7905,14 +7905,14 @@
   "date": "2026-08-20",
   "by_forge": {
    "github": {
-    "total": 414,
+    "total": 415,
     "signals": {
-     "POM 4.1.0": 95,
+     "POM 4.1.0": 96,
      "Wrapper": 310,
      "GH Action": 9
     },
     "pom_models": {
-     "4.1.0": 95
+     "4.1.0": 96
     },
     "runtimes": {
      "4.0.0-rc-5": 144,
@@ -7942,7 +7942,7 @@
      "4.0.5": 1
     },
     "versions": {
-     "4.1.0 (POM model)": 95,
+     "4.1.0 (POM model)": 96,
      "4.0.0-rc-5": 144,
      "4.0.3": 1,
      "4.0.0": 21,
@@ -7970,21 +7970,21 @@
      "4.0.5": 1
     },
     "registry": {
-     "tracked": 457,
-     "active": 440,
+     "tracked": 458,
+     "active": 441,
      "archived": 3,
      "gone": 14
     }
    }
   },
-  "total": 414,
+  "total": 415,
   "signals": {
-   "POM 4.1.0": 95,
+   "POM 4.1.0": 96,
    "Wrapper": 310,
    "GH Action": 9
   },
   "pom_models": {
-   "4.1.0": 95
+   "4.1.0": 96
   },
   "runtimes": {
    "4.0.0-rc-5": 144,
@@ -8014,7 +8014,7 @@
    "4.0.5": 1
   },
   "versions": {
-   "4.1.0 (POM model)": 95,
+   "4.1.0 (POM model)": 96,
    "4.0.0-rc-5": 144,
    "4.0.3": 1,
    "4.0.0": 21,
