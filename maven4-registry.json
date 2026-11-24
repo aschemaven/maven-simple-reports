@@ -1,6 +1,6 @@
 {
  "schema_version": 1,
- "updated": "2026-11-24T16:46:21Z",
+ "updated": "2026-11-24T17:56:51Z",
  "reconciliation": {
   "date": "2026-11-24",
   "missed": 1,
@@ -20,9 +20,9 @@
    "renamed_to": "",
    "build": "NONE",
    "build_url": "",
-   "last_checked": "2026-11-24T16:42:31Z",
+   "last_checked": "2026-11-24T17:56:32Z",
    "current_full_name": "0xpasive/epasal-backend-public",
-   "build_checked": "2026-11-24T16:44:22Z",
+   "build_checked": "2026-11-24T17:56:38Z",
    "last_seen": "2026-10-04"
   },
   {
@@ -40,7 +40,7 @@
    "build_url": "",
    "last_checked": "2026-11-24T16:42:38Z",
    "current_full_name": "24DP1SGrig/TaskBattle",
-   "build_checked": "2026-11-24T16:44:27Z",
+   "build_checked": "2026-11-24T17:56:41Z",
    "last_seen": "2026-08-31"
   },
   {
@@ -58,7 +58,7 @@
    "build_url": "",
    "last_checked": "2026-11-24T16:42:39Z",
    "current_full_name": "ANASS-AZYZ/E-comerce",
-   "build_checked": "2026-11-24T16:44:28Z",
+   "build_checked": "2026-11-24T17:56:42Z",
    "last_seen": "2026-11-21"
   },
   {
@@ -1181,7 +1181,7 @@
    "build": "NONE",
    "build_url": "",
    "last_seen": "2026-11-21",
-   "last_checked": "2026-11-24T16:42:10Z",
+   "last_checked": "2026-11-24T17:56:16Z",
    "current_full_name": "JCrete/jcrete2024",
    "build_checked": "2026-11-24T16:45:21Z"
   },
@@ -1487,7 +1487,7 @@
    "renamed_to": "",
    "build": "NONE",
    "build_url": "",
-   "last_checked": "2026-11-24T16:41:59Z",
+   "last_checked": "2026-11-24T17:56:08Z",
    "current_full_name": "Pakisan/jarazzo",
    "build_checked": "2026-11-24T16:45:33Z",
    "last_seen": "2026-10-31"
@@ -1506,7 +1506,7 @@
    "build": "NONE",
    "build_url": "",
    "last_seen": "2026-10-31",
-   "last_checked": "2026-11-24T16:42:02Z",
+   "last_checked": "2026-11-24T17:56:10Z",
    "current_full_name": "Pedro-areis/web-wallet",
    "build_checked": "2026-11-24T16:45:33Z"
   },
@@ -1524,7 +1524,7 @@
    "build": "AMBIGUOUS",
    "build_url": "https://github.com/Pi4J/pi4j/actions",
    "last_seen": "2026-10-31",
-   "last_checked": "2026-11-24T16:42:00Z",
+   "last_checked": "2026-11-24T17:56:08Z",
    "current_full_name": "Pi4J/pi4j",
    "build_checked": "2026-11-24T16:45:33Z",
    "build_workflow": "4 Maven workflows: 3 SUCCESS, 1 FAILURE"
@@ -1542,7 +1542,7 @@
    "renamed_to": "",
    "build": "NONE",
    "build_url": "",
-   "last_checked": "2026-11-24T16:42:02Z",
+   "last_checked": "2026-11-24T17:56:10Z",
    "current_full_name": "PieByter/springboot-healthcare-api",
    "build_checked": "2026-11-24T16:45:36Z",
    "last_seen": "2026-11-06"
@@ -1561,7 +1561,7 @@
    "build": "NONE",
    "build_url": "",
    "last_seen": "2026-11-06",
-   "last_checked": "2026-11-24T16:42:02Z",
+   "last_checked": "2026-11-24T17:56:10Z",
    "current_full_name": "Prionto2405012/PokemonBattle",
    "build_checked": "2026-11-24T16:45:36Z"
   },
@@ -1579,7 +1579,7 @@
    "build": "NONE",
    "build_url": "",
    "last_seen": "2026-11-21",
-   "last_checked": "2026-11-24T16:42:28Z",
+   "last_checked": "2026-11-24T17:56:29Z",
    "current_full_name": "RITHISHM2696/Compilix-AI-Powered-Code-Execution-Platform",
    "build_checked": "2026-11-24T16:45:37Z"
   },
@@ -1596,7 +1596,7 @@
    "renamed_to": "",
    "build": "NONE",
    "build_url": "",
-   "last_checked": "2026-11-24T16:42:03Z",
+   "last_checked": "2026-11-24T17:56:10Z",
    "current_full_name": "RalfNaujokat/xui",
    "build_checked": "2026-11-24T16:45:39Z",
    "last_seen": "2026-10-31"
@@ -1614,7 +1614,7 @@
    "renamed_to": "",
    "build": "NONE",
    "build_url": "",
-   "last_checked": "2026-11-24T16:42:03Z",
+   "last_checked": "2026-11-24T17:56:11Z",
    "current_full_name": "Ranjith-2005289/PeSocial",
    "build_checked": "2026-11-24T16:45:40Z",
    "last_seen": "2026-09-03"
@@ -1632,7 +1632,7 @@
    "renamed_to": "",
    "build": "NONE",
    "build_url": "",
-   "last_checked": "2026-11-24T16:42:04Z",
+   "last_checked": "2026-11-24T17:56:11Z",
    "current_full_name": "RobertMeissner/JavaLearning",
    "build_checked": "2026-11-24T16:45:40Z",
    "last_seen": "2026-08-31"
@@ -1650,7 +1650,7 @@
    "renamed_to": "",
    "build": "NONE",
    "build_url": "",
-   "last_checked": "2026-11-24T16:42:04Z",
+   "last_checked": "2026-11-24T17:56:11Z",
    "current_full_name": "Roman-Anikin/java-explore-with-me",
    "build_checked": "2026-11-24T16:45:41Z",
    "last_seen": "2026-11-06"
@@ -1668,7 +1668,7 @@
    "renamed_to": "",
    "build": "NONE",
    "build_url": "",
-   "last_checked": "2026-11-24T16:42:04Z",
+   "last_checked": "2026-11-24T17:56:11Z",
    "current_full_name": "Roman-Anikin/java-fullstack-games",
    "build_checked": "2026-11-24T16:45:41Z",
    "last_seen": "2026-11-06"
@@ -1686,7 +1686,7 @@
    "renamed_to": "",
    "build": "NONE",
    "build_url": "",
-   "last_checked": "2026-11-24T16:42:04Z",
+   "last_checked": "2026-11-24T17:56:12Z",
    "current_full_name": "Roman-Anikin/java-shareit",
    "build_checked": "2026-11-24T16:45:41Z",
    "last_seen": "2026-11-06"
@@ -1705,7 +1705,7 @@
    "build": "SUCCESS",
    "build_url": "https://github.com/SAP/olingo-jpa-processor-v4/actions/runs/27064804061",
    "last_seen": "2026-11-04",
-   "last_checked": "2026-11-24T16:42:05Z",
+   "last_checked": "2026-11-24T17:56:12Z",
    "current_full_name": "SAP/olingo-jpa-processor-v4",
    "build_checked": "2026-11-24T16:45:41Z",
    "build_workflow": "4 Maven workflows, all agree"
@@ -1723,7 +1723,7 @@
    "renamed_to": "",
    "build": "NONE",
    "build_url": "",
-   "last_checked": "2026-11-24T16:42:05Z",
+   "last_checked": "2026-11-24T17:56:12Z",
    "current_full_name": "SUMIT74184/WolfDire-Central-Infra",
    "last_seen": "2026-11-06",
    "build_checked": "2026-11-24T16:45:41Z"
@@ -1742,7 +1742,7 @@
    "build": "NONE",
    "build_url": "",
    "last_seen": "2026-11-21",
-   "last_checked": "2026-11-24T16:42:05Z",
+   "last_checked": "2026-11-24T17:56:12Z",
    "current_full_name": "SabrinaFurtado/blog_pessoal-server",
    "build_checked": "2026-11-24T16:45:42Z"
   },
@@ -1759,7 +1759,7 @@
    "renamed_to": "",
    "build": "FAILURE",
    "build_url": "https://github.com/SandeebAdhikari/taskflow/actions/runs/27139320137",
-   "last_checked": "2026-11-24T16:42:05Z",
+   "last_checked": "2026-11-24T17:56:12Z",
    "current_full_name": "SandeebAdhikari/taskflow",
    "build_checked": "2026-11-24T16:45:42Z",
    "last_seen": "2026-11-06",
@@ -1779,7 +1779,7 @@
    "build": "NONE",
    "build_url": "",
    "last_seen": "2026-11-06",
-   "last_checked": "2026-11-24T16:42:05Z",
+   "last_checked": "2026-11-24T17:56:13Z",
    "current_full_name": "Shashika12917/it3030-paf-2026-smart-campus",
    "build_checked": "2026-11-24T16:45:42Z"
   },
@@ -1796,7 +1796,7 @@
    "renamed_to": "",
    "build": "NONE",
    "build_url": "",
-   "last_checked": "2026-11-24T16:42:06Z",
+   "last_checked": "2026-11-24T17:56:13Z",
    "current_full_name": "Shegitu/ChatApp",
    "build_checked": "2026-11-24T16:45:42Z",
    "last_seen": "2026-08-31"
@@ -1815,7 +1815,7 @@
    "build": "NONE",
    "build_url": "",
    "last_seen": "2026-11-06",
-   "last_checked": "2026-11-24T16:42:07Z",
+   "last_checked": "2026-11-24T17:56:13Z",
    "current_full_name": "Shegitu/OOP-Projects",
    "build_checked": "2026-11-24T16:45:43Z"
   },
@@ -1833,7 +1833,7 @@
    "build": "NONE",
    "build_url": "",
    "last_seen": "2026-11-21",
-   "last_checked": "2026-11-24T16:42:08Z",
+   "last_checked": "2026-11-24T17:56:14Z",
    "current_full_name": "ShreyPan/Billr",
    "build_checked": "2026-11-24T16:45:43Z"
   },
@@ -1851,7 +1851,7 @@
    "build": "NONE",
    "build_url": "",
    "last_seen": "2026-11-21",
-   "last_checked": "2026-11-24T16:42:08Z",
+   "last_checked": "2026-11-24T17:56:14Z",
    "current_full_name": "Shubhambhagat3226/github-activity-cli",
    "build_checked": "2026-11-24T16:45:44Z"
   },
@@ -1868,7 +1868,7 @@
    "renamed_to": "",
    "build": "SUCCESS",
    "build_url": "https://github.com/Siddd-hrr/QPrint-Extension/actions/runs/23937163742",
-   "last_checked": "2026-11-24T16:42:08Z",
+   "last_checked": "2026-11-24T17:56:14Z",
    "current_full_name": "Siddd-hrr/QPrint-Extension",
    "build_checked": "2026-11-24T16:45:44Z",
    "last_seen": "2026-08-31",
@@ -1888,7 +1888,7 @@
    "build": "NONE",
    "build_url": "",
    "last_seen": "2026-11-21",
-   "last_checked": "2026-11-24T16:42:08Z",
+   "last_checked": "2026-11-24T17:56:14Z",
    "current_full_name": "Siomai0-hi/CafeWeb",
    "build_checked": "2026-11-24T16:45:44Z"
   },
@@ -1906,7 +1906,7 @@
    "build": "SUCCESS",
    "build_url": "https://github.com/Stephen-Agyemang/Zork-v2/actions/runs/31065144656",
    "last_seen": "2026-11-06",
-   "last_checked": "2026-11-24T16:42:08Z",
+   "last_checked": "2026-11-24T17:56:14Z",
    "current_full_name": "Stephen-Agyemang/Zork-v2",
    "build_checked": "2026-11-24T16:45:44Z",
    "build_workflow": "2 Maven workflows, all agree"
@@ -1925,7 +1925,7 @@
    "build": "NONE",
    "build_url": "",
    "last_seen": "2026-11-06",
-   "last_checked": "2026-11-24T16:42:08Z",
+   "last_checked": "2026-11-24T17:56:15Z",
    "current_full_name": "SylvieHoareau/livranoo",
    "build_checked": "2026-11-24T16:45:44Z"
   },
@@ -1942,7 +1942,7 @@
    "renamed_to": "",
    "build": "NONE",
    "build_url": "",
-   "last_checked": "2026-11-24T16:42:09Z",
+   "last_checked": "2026-11-24T17:56:15Z",
    "current_full_name": "Tanmayakaranth/OOAD_Smart-Restaurant-",
    "build_checked": "2026-11-24T16:45:45Z",
    "last_seen": "2026-08-31"
@@ -1960,7 +1960,7 @@
    "renamed_to": "",
    "build": "NONE",
    "build_url": "",
-   "last_checked": "2026-11-24T16:42:09Z",
+   "last_checked": "2026-11-24T17:56:15Z",
    "current_full_name": "TheSphynxoid/Esprit-PIDEV-4SE1-2526-EspritMarket",
    "build_checked": "2026-11-24T16:45:45Z",
    "last_seen": "2026-11-06"
@@ -1979,7 +1979,7 @@
    "build": "FAILURE",
    "build_url": "https://github.com/Thejuampi/training-coach/actions/runs/21439201274",
    "last_seen": "2026-11-06",
-   "last_checked": "2026-11-24T16:42:09Z",
+   "last_checked": "2026-11-24T17:56:15Z",
    "current_full_name": "Thejuampi/training-coach",
    "build_checked": "2026-11-24T16:45:45Z",
    "build_workflow": "CI"
@@ -1998,7 +1998,7 @@
    "build": "NONE",
    "build_url": "",
    "last_seen": "2026-07-17",
-   "last_checked": "2026-11-24T16:42:09Z",
+   "last_checked": "2026-11-24T17:56:15Z",
    "current_full_name": "Thiez703/PointTrack_BE",
    "build_checked": "2026-07-17T08:16:13Z",
    "gone_since": "2026-07-18"
@@ -2017,7 +2017,7 @@
    "build": "NONE",
    "build_url": "",
    "last_seen": "2026-08-25",
-   "last_checked": "2026-11-24T16:42:10Z",
+   "last_checked": "2026-11-24T17:56:16Z",
    "current_full_name": "Thomasramos02/MpFitnessBack",
    "build_checked": "2026-11-24T16:45:45Z"
   },
@@ -2035,7 +2035,7 @@
    "build": "NONE",
    "build_url": "",
    "last_seen": "2026-11-06",
-   "last_checked": "2026-11-24T16:42:10Z",
+   "last_checked": "2026-11-24T17:56:16Z",
    "current_full_name": "Timongcraft/Tgc-OutlineBackup",
    "build_checked": "2026-11-24T16:45:46Z"
   },
@@ -2053,7 +2053,7 @@
    "build": "NONE",
    "build_url": "",
    "last_seen": "2026-11-06",
-   "last_checked": "2026-11-24T16:42:10Z",
+   "last_checked": "2026-11-24T17:56:16Z",
    "current_full_name": "ToanNguyen13025/SnmpMonitoring",
    "build_checked": "2026-11-24T16:45:46Z"
   },
@@ -2071,7 +2071,7 @@
    "build": "NONE",
    "build_url": "",
    "last_seen": "2026-11-06",
-   "last_checked": "2026-11-24T16:42:10Z",
+   "last_checked": "2026-11-24T17:56:16Z",
    "current_full_name": "TokimuneFIN/Elektroniikkakauppa",
    "build_checked": "2026-11-24T16:45:47Z"
   },
@@ -2089,7 +2089,7 @@
    "build": "NONE",
    "build_url": "",
    "last_seen": "2026-07-16",
-   "last_checked": "2026-11-24T16:42:10Z",
+   "last_checked": "2026-11-24T17:56:16Z",
    "current_full_name": "UrieLara/Reservation-API",
    "build_checked": "2026-07-16T17:02:02Z",
    "gone_since": "2026-07-17"
@@ -2107,7 +2107,7 @@
    "renamed_to": "",
    "build": "NONE",
    "build_url": "",
-   "last_checked": "2026-11-24T16:42:10Z",
+   "last_checked": "2026-11-24T17:56:17Z",
    "current_full_name": "Utsav-633/PasswordManager",
    "build_checked": "2026-11-24T16:45:48Z",
    "last_seen": "2026-10-26"
@@ -2125,7 +2125,7 @@
    "renamed_to": "",
    "build": "NONE",
    "build_url": "",
-   "last_checked": "2026-11-24T16:42:11Z",
+   "last_checked": "2026-11-24T17:56:17Z",
    "current_full_name": "VG-Correa/sugflora-api",
    "build_checked": "2026-11-24T16:45:48Z",
    "last_seen": "2026-10-31"
@@ -2144,7 +2144,7 @@
    "build": "SUCCESS",
    "build_url": "https://github.com/brianoliver/spin.build/actions/runs/41049635718",
    "last_seen": "2026-08-09",
-   "last_checked": "2026-11-24T16:42:11Z",
+   "last_checked": "2026-11-24T17:56:17Z",
    "current_full_name": "brianoliver/spin.build",
    "build_checked": "2026-11-24T16:45:49Z",
    "build_workflow": "2 Maven workflows, all agree"
@@ -2163,7 +2163,7 @@
    "build": "NONE",
    "build_url": "",
    "last_seen": "2026-08-16",
-   "last_checked": "2026-11-24T16:42:11Z",
+   "last_checked": "2026-11-24T17:56:17Z",
    "current_full_name": "XLaiHuy/Back-spring-NCKH",
    "build_checked": "2026-08-17T07:36:19Z",
    "gone_since": "2026-08-18"
@@ -2182,7 +2182,7 @@
    "build": "NONE",
    "build_url": "",
    "last_seen": "2026-11-06",
-   "last_checked": "2026-11-24T16:42:11Z",
+   "last_checked": "2026-11-24T17:56:17Z",
    "current_full_name": "XLaiHuy/FullStack-SciencetTificProducts-Mangament",
    "build_checked": "2026-11-24T16:45:49Z"
   },
@@ -2200,7 +2200,7 @@
    "build": "NONE",
    "build_url": "",
    "last_seen": "2026-11-06",
-   "last_checked": "2026-11-24T16:42:12Z",
+   "last_checked": "2026-11-24T17:56:17Z",
    "current_full_name": "XiaoTie123/Dental_POS",
    "build_checked": "2026-11-24T16:45:49Z"
   },
@@ -2218,7 +2218,7 @@
    "build": "NONE",
    "build_url": "",
    "last_seen": "2026-11-21",
-   "last_checked": "2026-11-24T16:42:12Z",
+   "last_checked": "2026-11-24T17:56:17Z",
    "current_full_name": "YaminoJakkaru/java-filmorate",
    "build_checked": "2026-11-24T16:45:51Z"
   },
@@ -2236,7 +2236,7 @@
    "build": "NONE",
    "build_url": "",
    "last_seen": "2026-11-06",
-   "last_checked": "2026-11-24T16:42:12Z",
+   "last_checked": "2026-11-24T17:56:18Z",
    "current_full_name": "ZaHyirrr/NCKH",
    "build_checked": "2026-11-24T16:45:51Z"
   },
@@ -2254,7 +2254,7 @@
    "build": "NONE",
    "build_url": "",
    "last_seen": "2026-11-06",
-   "last_checked": "2026-11-24T16:42:12Z",
+   "last_checked": "2026-11-24T17:56:18Z",
    "current_full_name": "ZaHyirrr/NCKH-new",
    "build_checked": "2026-11-24T16:45:52Z"
   },
@@ -2271,7 +2271,7 @@
    "renamed_to": "",
    "build": "NONE",
    "build_url": "",
-   "last_checked": "2026-11-24T16:42:12Z",
+   "last_checked": "2026-11-24T17:56:18Z",
    "current_full_name": "a114mc/old-a114-klassmaster",
    "build_checked": "2026-10-27T11:34:28Z",
    "last_seen": "2026-08-31",
@@ -2291,7 +2291,7 @@
    "build": "NONE",
    "build_url": "",
    "last_seen": "2026-11-06",
-   "last_checked": "2026-11-24T16:42:12Z",
+   "last_checked": "2026-11-24T17:56:18Z",
    "current_full_name": "aahona-16/UPI_Without_Internet",
    "build_checked": "2026-11-24T16:45:52Z"
   },
@@ -2308,7 +2308,7 @@
    "renamed_to": "",
    "build": "",
    "build_url": "",
-   "last_checked": "2026-11-24T16:42:13Z"
+   "last_checked": "2026-11-24T17:56:18Z"
   },
   {
    "repo": "adaamortiiz/Somax",
@@ -2324,7 +2324,7 @@
    "build": "NONE",
    "build_url": "",
    "last_seen": "2026-11-21",
-   "last_checked": "2026-11-24T16:42:13Z",
+   "last_checked": "2026-11-24T17:56:18Z",
    "current_full_name": "adaamortiiz/Somax",
    "build_checked": "2026-11-24T16:45:52Z"
   },
@@ -2341,7 +2341,7 @@
    "renamed_to": "",
    "build": "NONE",
    "build_url": "",
-   "last_checked": "2026-11-24T16:42:14Z",
+   "last_checked": "2026-11-24T17:56:18Z",
    "current_full_name": "adityasagar1125-lgtm/iwt-demo",
    "last_seen": "2026-10-25",
    "build_checked": "2026-11-24T16:45:53Z"
@@ -2359,7 +2359,7 @@
    "renamed_to": "",
    "build": "NONE",
    "build_url": "",
-   "last_checked": "2026-11-24T16:42:14Z",
+   "last_checked": "2026-11-24T17:56:19Z",
    "current_full_name": "ajavageek/flatten-kotlin-recipe",
    "build_checked": "2026-11-24T16:45:53Z",
    "last_seen": "2026-11-06"
@@ -2378,7 +2378,7 @@
    "build": "NONE",
    "build_url": "",
    "last_seen": "2026-11-06",
-   "last_checked": "2026-11-24T16:42:14Z",
+   "last_checked": "2026-11-24T17:56:19Z",
    "current_full_name": "ajavageek/otel-jvm",
    "build_checked": "2026-11-24T16:45:54Z"
   },
@@ -2396,7 +2396,7 @@
    "build": "NONE",
    "build_url": "",
    "last_seen": "2026-09-03",
-   "last_checked": "2026-11-24T16:42:14Z",
+   "last_checked": "2026-11-24T17:56:19Z",
    "current_full_name": "akannkereuwem1/LatencyLab",
    "build_checked": "2026-11-24T16:45:54Z"
   },
@@ -2413,7 +2413,7 @@
    "renamed_to": "",
    "build": "NONE",
    "build_url": "",
-   "last_checked": "2026-11-24T16:42:16Z",
+   "last_checked": "2026-11-24T17:56:20Z",
    "current_full_name": "akdukaan/DrMap",
    "last_seen": "2026-10-31",
    "build_checked": "2026-11-24T16:45:54Z"
@@ -2431,7 +2431,7 @@
    "renamed_to": "",
    "build": "NONE",
    "build_url": "",
-   "last_checked": "2026-11-24T16:42:18Z",
+   "last_checked": "2026-11-24T17:56:22Z",
    "current_full_name": "akmalaqim74/UI_Automation_Testing",
    "build_checked": "2026-11-24T16:45:55Z",
    "last_seen": "2026-10-31"
@@ -2449,7 +2449,7 @@
    "renamed_to": "",
    "build": "SUCCESS",
    "build_url": "https://github.com/alefHugo03/Projeto_Adega_UMC/actions/runs/27446403818",
-   "last_checked": "2026-11-24T16:42:17Z",
+   "last_checked": "2026-11-24T17:56:21Z",
    "current_full_name": "alefHugo03/Projeto_Adega_UMC",
    "build_checked": "2026-11-24T16:45:55Z",
    "last_seen": "2026-11-06",
@@ -2469,7 +2469,7 @@
    "build": "NONE",
    "build_url": "",
    "last_seen": "2026-11-21",
-   "last_checked": "2026-11-24T16:42:19Z",
+   "last_checked": "2026-11-24T17:56:22Z",
    "current_full_name": "alexdutescu/movies-app",
    "build_checked": "2026-11-24T16:45:55Z"
   },
@@ -2487,7 +2487,7 @@
    "build": "NONE",
    "build_url": "",
    "last_seen": "2026-10-31",
-   "last_checked": "2026-11-24T16:42:19Z",
+   "last_checked": "2026-11-24T17:56:22Z",
    "current_full_name": "amansinha11-dev/SAP-Project",
    "build_checked": "2026-11-24T16:45:55Z"
   },
@@ -2505,7 +2505,7 @@
    "build": "NONE",
    "build_url": "",
    "last_seen": "2026-11-06",
-   "last_checked": "2026-11-24T16:42:19Z",
+   "last_checked": "2026-11-24T17:56:22Z",
    "current_full_name": "amiraz014/Sirius-ing2-hopital",
    "build_checked": "2026-11-24T16:45:56Z"
   },
@@ -2522,7 +2522,7 @@
    "renamed_to": "APcode-Consultoria/aproove",
    "build": "NONE",
    "build_url": "",
-   "last_checked": "2026-11-24T16:42:26Z",
+   "last_checked": "2026-11-24T17:56:27Z",
    "current_full_name": "APcode-Consultoria/aproove",
    "build_checked": "2026-11-24T16:45:56Z",
    "last_seen": "2026-08-11"
@@ -2541,7 +2541,7 @@
    "build": "NONE",
    "build_url": "",
    "last_seen": "2026-11-06",
-   "last_checked": "2026-11-24T16:42:20Z",
+   "last_checked": "2026-11-24T17:56:23Z",
    "current_full_name": "andrushakhudyk/java-training",
    "build_checked": "2026-11-24T16:45:57Z"
   },
@@ -2559,7 +2559,7 @@
    "build": "NONE",
    "build_url": "",
    "last_seen": "2026-11-06",
-   "last_checked": "2026-11-24T16:42:26Z",
+   "last_checked": "2026-11-24T17:56:27Z",
    "current_full_name": "anshulvyasa/Spring-Boot",
    "build_checked": "2026-11-24T16:45:57Z"
   },
@@ -2577,7 +2577,7 @@
    "build": "NONE",
    "build_url": "",
    "last_seen": "2026-11-06",
-   "last_checked": "2026-11-24T16:42:27Z",
+   "last_checked": "2026-11-24T17:56:29Z",
    "current_full_name": "anuskagupta123/Library-Management-System",
    "build_checked": "2026-11-24T16:45:57Z"
   },
@@ -2595,7 +2595,7 @@
    "build": "NONE",
    "build_url": "",
    "last_seen": "2026-11-03",
-   "last_checked": "2026-11-24T16:42:27Z",
+   "last_checked": "2026-11-24T17:56:29Z",
    "current_full_name": "apache/maven-hocon-extension",
    "build_checked": "2026-11-24T16:45:57Z"
   },
@@ -2613,7 +2613,7 @@
    "build": "NONE",
    "build_url": "",
    "last_seen": "2026-11-21",
-   "last_checked": "2026-11-24T16:42:28Z",
+   "last_checked": "2026-11-24T17:56:29Z",
    "current_full_name": "apache/maven-xinclude-extension",
    "build_checked": "2026-11-24T16:45:57Z"
   },
@@ -2631,7 +2631,7 @@
    "build": "AMBIGUOUS",
    "build_url": "https://github.com/apache/plc4x/actions",
    "last_seen": "2026-11-23",
-   "last_checked": "2026-11-24T16:42:28Z",
+   "last_checked": "2026-11-24T17:56:30Z",
    "current_full_name": "apache/plc4x",
    "build_checked": "2026-11-24T16:45:57Z",
    "build_workflow": "5 Maven workflows: 3 SUCCESS, 2 FAILURE"
@@ -2650,7 +2650,7 @@
    "build": "FAILURE",
    "build_url": "https://github.com/apache/plc4x-build-tools/actions/runs/34121912425",
    "last_seen": "2026-11-21",
-   "last_checked": "2026-11-24T16:42:28Z",
+   "last_checked": "2026-11-24T17:56:30Z",
    "current_full_name": "apache/plc4x-build-tools",
    "build_checked": "2026-11-24T16:45:57Z",
    "build_workflow": "Platform compatibility"
@@ -2669,7 +2669,7 @@
    "build": "AMBIGUOUS",
    "build_url": "https://github.com/apache/plc4x-extras/actions",
    "last_seen": "2026-11-14",
-   "last_checked": "2026-11-24T16:42:28Z",
+   "last_checked": "2026-11-24T17:56:30Z",
    "current_full_name": "apache/plc4x-extras",
    "build_checked": "2026-11-24T16:45:57Z",
    "build_workflow": "3 Maven workflows: 2 SUCCESS, 1 FAILURE"
@@ -2688,7 +2688,7 @@
    "build": "NONE",
    "build_url": "",
    "last_seen": "2026-11-21",
-   "last_checked": "2026-11-24T16:42:28Z",
+   "last_checked": "2026-11-24T17:56:30Z",
    "current_full_name": "apetrozzelli/jaus",
    "build_checked": "2026-11-24T16:45:58Z"
   },
@@ -2706,7 +2706,7 @@
    "build": "SUCCESS",
    "build_url": "https://github.com/apetrozzelli/truelayer-pokedex/actions/runs/21284431600",
    "last_seen": "2026-11-21",
-   "last_checked": "2026-11-24T16:42:28Z",
+   "last_checked": "2026-11-24T17:56:30Z",
    "current_full_name": "apetrozzelli/truelayer-pokedex",
    "build_checked": "2026-11-24T16:46:01Z",
    "build_workflow": "Java CI with Maven"
@@ -2725,7 +2725,7 @@
    "build": "NONE",
    "build_url": "",
    "last_seen": "2026-10-31",
-   "last_checked": "2026-11-24T16:42:29Z",
+   "last_checked": "2026-11-24T17:56:30Z",
    "current_full_name": "aschemaven/maven-modular-sources-showcases",
    "build_checked": "2026-11-24T16:46:04Z"
   },
@@ -2742,7 +2742,7 @@
    "renamed_to": "",
    "build": "",
    "build_url": "",
-   "last_checked": "2026-11-24T16:42:29Z"
+   "last_checked": "2026-11-24T17:56:30Z"
   },
   {
    "repo": "athkalia/maven-build-cache-forked-executions",
@@ -2758,7 +2758,7 @@
    "build": "NONE",
    "build_url": "",
    "last_seen": "2026-11-06",
-   "last_checked": "2026-11-24T16:42:30Z",
+   "last_checked": "2026-11-24T17:56:30Z",
    "current_full_name": "athkalia/maven-build-cache-forked-executions",
    "build_checked": "2026-11-24T16:46:04Z"
   },
@@ -2776,7 +2776,7 @@
    "build": "NONE",
    "build_url": "",
    "last_seen": "2026-11-06",
-   "last_checked": "2026-11-24T16:42:30Z",
+   "last_checked": "2026-11-24T17:56:31Z",
    "current_full_name": "attiand/experiments",
    "build_checked": "2026-11-24T16:46:04Z"
   },
@@ -2793,7 +2793,7 @@
    "renamed_to": "",
    "build": "NONE",
    "build_url": "",
-   "last_checked": "2026-11-24T16:42:30Z",
+   "last_checked": "2026-11-24T17:56:31Z",
    "current_full_name": "atulkumar2/distributedsystems",
    "build_checked": "2026-11-24T16:46:04Z",
    "last_seen": "2026-10-31"
@@ -2830,7 +2830,7 @@
    "build": "SUCCESS",
    "build_url": "https://github.com/awnonbhowmik/LogShield/actions/runs/24612514606",
    "last_seen": "2026-11-06",
-   "last_checked": "2026-11-24T16:42:32Z",
+   "last_checked": "2026-11-24T17:56:32Z",
    "current_full_name": "awnonbhowmik/LogShield",
    "build_checked": "2026-11-24T16:46:04Z",
    "build_workflow": "Backend CI"
@@ -2848,7 +2848,7 @@
    "renamed_to": "",
    "build": "NONE",
    "build_url": "",
-   "last_checked": "2026-11-24T16:42:32Z",
+   "last_checked": "2026-11-24T17:56:32Z",
    "current_full_name": "axonivy/branding-images",
    "build_checked": "2026-11-24T16:46:05Z"
   },
@@ -3466,7 +3466,7 @@
    "build_url": "",
    "last_checked": "2026-11-24T16:42:49Z",
    "current_full_name": "conorheffron/weather-data",
-   "build_checked": "2026-11-24T16:44:18Z",
+   "build_checked": "2026-11-24T17:56:35Z",
    "last_seen": "2026-11-06"
   },
   {
@@ -3484,7 +3484,7 @@
    "build_url": "",
    "last_checked": "2026-11-24T16:42:50Z",
    "current_full_name": "cowwoc/styler",
-   "build_checked": "2026-11-24T16:44:19Z",
+   "build_checked": "2026-11-24T17:56:36Z",
    "last_seen": "2026-11-06"
   },
   {
@@ -3503,7 +3503,7 @@
    "last_checked": "2026-11-24T16:42:50Z",
    "current_full_name": "cstamas/MNG-8486",
    "last_seen": "2026-11-06",
-   "build_checked": "2026-11-24T16:44:20Z"
+   "build_checked": "2026-11-24T17:56:37Z"
   },
   {
    "repo": "danalderslade/FinCEN_SAR",
@@ -3520,7 +3520,7 @@
    "build_url": "https://github.com/danalderslade/FinCEN_SAR/actions/runs/23213021166",
    "last_checked": "2026-11-24T16:42:50Z",
    "current_full_name": "danalderslade/FinCEN_SAR",
-   "build_checked": "2026-11-24T16:44:23Z",
+   "build_checked": "2026-11-24T17:56:39Z",
    "last_seen": "2026-08-31",
    "build_workflow": "CI/CD Pipeline"
   },
@@ -3539,7 +3539,7 @@
    "build_url": "https://github.com/danhdev/lms-system/actions/runs/27113011701",
    "last_checked": "2026-11-24T16:42:51Z",
    "current_full_name": "danhdev/lms-system",
-   "build_checked": "2026-11-24T16:44:31Z",
+   "build_checked": "2026-11-24T17:56:45Z",
    "last_seen": "2026-08-31",
    "build_workflow": "Build and Deploy Core LMS application"
   },
@@ -3558,7 +3558,7 @@
    "build_url": "",
    "last_checked": "2026-11-24T16:42:51Z",
    "current_full_name": "danielzayas/danielzayas__okhttp.8e0cc1b3",
-   "build_checked": "2026-11-24T16:44:32Z",
+   "build_checked": "2026-11-24T17:56:45Z",
    "last_seen": "2026-11-06"
   },
   {
@@ -3576,7 +3576,7 @@
    "build_url": "",
    "last_checked": "2026-11-24T16:42:51Z",
    "current_full_name": "danielzayas/square__okhttp.8e0cc1b3",
-   "build_checked": "2026-11-24T16:44:33Z",
+   "build_checked": "2026-11-24T17:56:46Z",
    "last_seen": "2026-11-06"
   },
   {
@@ -3595,7 +3595,7 @@
    "last_seen": "2026-11-24",
    "last_checked": "2026-11-24T16:42:51Z",
    "current_full_name": "danthe1st/maven-repro",
-   "build_checked": "2026-11-24T16:44:33Z"
+   "build_checked": "2026-11-24T17:56:46Z"
   },
   {
    "repo": "darshangm1/Smart-Service-Platform",
@@ -3613,7 +3613,7 @@
    "last_seen": "2026-11-06",
    "last_checked": "2026-11-24T16:42:51Z",
    "current_full_name": "darshangm1/Smart-Service-Platform",
-   "build_checked": "2026-11-24T16:44:35Z",
+   "build_checked": "2026-11-24T17:56:48Z",
    "build_workflow": "CI"
   },
   {
@@ -3632,7 +3632,7 @@
    "last_seen": "2026-11-06",
    "last_checked": "2026-11-24T16:42:51Z",
    "current_full_name": "delanym/MENFORCER-475",
-   "build_checked": "2026-11-24T16:44:35Z"
+   "build_checked": "2026-11-24T17:56:48Z"
   },
   {
    "repo": "devhalos/genesis",
@@ -3650,7 +3650,7 @@
    "last_seen": "2026-10-25",
    "last_checked": "2026-11-24T16:42:53Z",
    "current_full_name": "devhalos/genesis",
-   "build_checked": "2026-11-24T16:44:35Z"
+   "build_checked": "2026-11-24T17:56:48Z"
   },
   {
    "repo": "dhinojosa/nfjs-java-tdd",
@@ -3668,7 +3668,7 @@
    "last_seen": "2026-11-21",
    "last_checked": "2026-11-24T16:42:53Z",
    "current_full_name": "dhinojosa/nfjs-java-tdd",
-   "build_checked": "2026-11-24T16:44:35Z"
+   "build_checked": "2026-11-24T17:56:48Z"
   },
   {
    "repo": "diegri/maven-basic-example",
@@ -3686,7 +3686,7 @@
    "last_seen": "2026-11-24",
    "last_checked": "2026-11-24T16:42:53Z",
    "current_full_name": "diegri/maven-basic-example",
-   "build_checked": "2026-11-24T16:44:36Z"
+   "build_checked": "2026-11-24T17:56:48Z"
   },
   {
    "repo": "dnnnt/Web-Service-REST",
@@ -3723,7 +3723,7 @@
    "last_seen": "2026-11-14",
    "last_checked": "2026-11-24T16:42:53Z",
    "current_full_name": "doggentle/doggentle",
-   "build_checked": "2026-11-24T16:44:36Z"
+   "build_checked": "2026-11-24T17:56:48Z"
   },
   {
    "repo": "dolartand/innowise-user-service",
@@ -3740,7 +3740,7 @@
    "build_url": "https://github.com/dolartand/innowise-user-service/actions/runs/22169872644",
    "last_checked": "2026-11-24T16:42:54Z",
    "current_full_name": "dolartand/innowise-user-service",
-   "build_checked": "2026-11-24T16:44:36Z",
+   "build_checked": "2026-11-24T17:56:49Z",
    "last_seen": "2026-10-25",
    "build_workflow": "User Service CI Pipeline"
   },
@@ -6472,7 +6472,7 @@
    "renamed_to": "",
    "build": "NONE",
    "build_url": "",
-   "last_checked": "2026-11-24T16:42:16Z",
+   "last_checked": "2026-11-24T17:56:20Z",
    "current_full_name": "postlundhall/traningsapp",
    "build_checked": "2026-11-24T16:45:54Z",
    "last_seen": "2026-10-12"
@@ -6653,7 +6653,7 @@
    "build": "NONE",
    "build_url": "",
    "last_seen": "2026-09-23",
-   "last_checked": "2026-11-24T16:41:58Z",
+   "last_checked": "2026-11-24T17:56:07Z",
    "current_full_name": "roskenet/alchemy",
    "build_checked": "2026-09-24T11:05:57Z",
    "gone_since": "2026-09-24"
@@ -6672,7 +6672,7 @@
    "build": "NONE",
    "build_url": "",
    "last_seen": "2026-11-21",
-   "last_checked": "2026-11-24T16:41:59Z",
+   "last_checked": "2026-11-24T17:56:08Z",
    "current_full_name": "ru4nlucas/MeuRitmo",
    "build_checked": "2026-11-24T16:45:59Z"
   },
@@ -6690,7 +6690,7 @@
    "build": "NONE",
    "build_url": "",
    "last_seen": "2026-11-14",
-   "last_checked": "2026-11-24T16:41:59Z",
+   "last_checked": "2026-11-24T17:56:08Z",
    "current_full_name": "saikiran2143/tutorials",
    "build_checked": "2026-11-24T16:45:59Z"
   },
@@ -6708,7 +6708,7 @@
    "build": "NONE",
    "build_url": "",
    "last_seen": "2026-11-06",
-   "last_checked": "2026-11-24T16:41:59Z",
+   "last_checked": "2026-11-24T17:56:08Z",
    "current_full_name": "sairaghavak/spring-boot-crud-sample",
    "build_checked": "2026-11-24T16:45:59Z"
   },
@@ -6725,7 +6725,7 @@
    "renamed_to": "",
    "build": "NONE",
    "build_url": "",
-   "last_checked": "2026-11-24T16:41:59Z",
+   "last_checked": "2026-11-24T17:56:08Z",
    "current_full_name": "schoenked/evangeliumstaucher",
    "build_checked": "2026-11-24T16:46:00Z",
    "last_seen": "2026-08-31"
@@ -6744,7 +6744,7 @@
    "build": "NONE",
    "build_url": "",
    "last_seen": "2026-11-21",
-   "last_checked": "2026-11-24T16:42:13Z",
+   "last_checked": "2026-11-24T17:56:18Z",
    "current_full_name": "scratches/plugin-demo",
    "build_checked": "2026-11-24T16:46:00Z"
   },
@@ -6762,7 +6762,7 @@
    "build": "SUCCESS",
    "build_url": "https://github.com/shahart/heb-bible/actions/runs/44382379584",
    "last_seen": "2026-11-06",
-   "last_checked": "2026-11-24T16:41:59Z",
+   "last_checked": "2026-11-24T17:56:08Z",
    "current_full_name": "shahart/heb-bible",
    "build_checked": "2026-11-24T16:46:00Z",
    "build_workflow": "2 Maven workflows, all agree"
@@ -6781,7 +6781,7 @@
    "build": "NONE",
    "build_url": "",
    "last_seen": "2026-11-06",
-   "last_checked": "2026-11-24T16:42:29Z",
+   "last_checked": "2026-11-24T17:56:30Z",
    "current_full_name": "shivangp0208/apache-maven-guru",
    "build_checked": "2026-11-24T16:46:00Z"
   },
@@ -6799,7 +6799,7 @@
    "build": "NONE",
    "build_url": "",
    "last_seen": "2026-10-31",
-   "last_checked": "2026-11-24T16:41:59Z",
+   "last_checked": "2026-11-24T17:56:08Z",
    "current_full_name": "silviuburceadev/leetcode",
    "build_checked": "2026-11-24T16:46:01Z"
   },
@@ -6817,7 +6817,7 @@
    "build": "NONE",
    "build_url": "",
    "last_seen": "2026-11-14",
-   "last_checked": "2026-11-24T16:42:00Z",
+   "last_checked": "2026-11-24T17:56:08Z",
    "current_full_name": "silviuburceadev/puzzles",
    "build_checked": "2026-11-24T16:46:02Z"
   },
@@ -6835,7 +6835,7 @@
    "build": "NONE",
    "build_url": "",
    "last_seen": "2026-11-21",
-   "last_checked": "2026-11-24T16:42:21Z",
+   "last_checked": "2026-11-24T17:56:24Z",
    "current_full_name": "snyk/cli",
    "build_checked": "2026-11-24T16:46:02Z"
   },
@@ -6853,7 +6853,7 @@
    "build": "NONE",
    "build_url": "",
    "last_seen": "2026-10-31",
-   "last_checked": "2026-11-24T16:42:21Z",
+   "last_checked": "2026-11-24T17:56:24Z",
    "current_full_name": "snyk/snyk-mvn-plugin",
    "build_checked": "2026-11-24T16:46:02Z"
   },
@@ -6871,14 +6871,14 @@
    "build": "NONE",
    "build_url": "",
    "last_seen": "2026-11-06",
-   "last_checked": "2026-11-24T16:42:13Z",
+   "last_checked": "2026-11-24T17:56:18Z",
    "current_full_name": "sophievdl/brp-energy-sat-configurations",
    "build_checked": "2026-11-24T16:46:09Z"
   },
   {
    "repo": "square/okhttp",
    "state": "active",
-   "stars": 47116,
+   "stars": 47117,
    "pushed_at": "2026-11-24",
    "live_signal": "Wrapper",
    "live_version": "4.0.0-rc-7",
@@ -6889,7 +6889,7 @@
    "build": "SUCCESS",
    "build_url": "https://github.com/lysine-dev/okhttp/actions/runs/45343533955",
    "last_seen": "2026-07-16",
-   "last_checked": "2026-11-24T16:42:14Z",
+   "last_checked": "2026-11-24T17:56:19Z",
    "current_full_name": "lysine-dev/okhttp",
    "build_checked": "2026-11-24T16:46:10Z",
    "build_workflow": "2 Maven workflows, all agree"
@@ -6908,7 +6908,7 @@
    "build": "NONE",
    "build_url": "",
    "last_seen": "2026-10-31",
-   "last_checked": "2026-11-24T16:42:15Z",
+   "last_checked": "2026-11-24T17:56:19Z",
    "current_full_name": "sscrock/TastyBites",
    "build_checked": "2026-10-31T11:18:34Z",
    "gone_since": "2026-10-31"
@@ -6926,7 +6926,7 @@
    "renamed_to": "",
    "build": "NONE",
    "build_url": "",
-   "last_checked": "2026-11-24T16:42:15Z",
+   "last_checked": "2026-11-24T17:56:20Z",
    "current_full_name": "ssegifred/leadmanagement",
    "build_checked": "2026-11-24T16:46:10Z",
    "last_seen": "2026-08-31"
@@ -6945,7 +6945,7 @@
    "build": "SUCCESS",
    "build_url": "https://github.com/stefanofornari/nb-ste-plugins/actions/runs/42122690615",
    "last_seen": "2026-11-14",
-   "last_checked": "2026-11-24T16:42:15Z",
+   "last_checked": "2026-11-24T17:56:20Z",
    "current_full_name": "stefanofornari/nb-ste-plugins",
    "build_checked": "2026-11-24T16:46:12Z",
    "build_workflow": "Deploy NetBeans update site to GitHub Pages"
@@ -6964,7 +6964,7 @@
    "build": "NONE",
    "build_url": "",
    "last_seen": "2026-11-14",
-   "last_checked": "2026-11-24T16:42:16Z",
+   "last_checked": "2026-11-24T17:56:20Z",
    "current_full_name": "support-and-care/maven-modular-sources-showcases",
    "build_checked": "2026-11-24T16:46:12Z"
   },
@@ -6982,7 +6982,7 @@
    "build": "NONE",
    "build_url": "",
    "last_seen": "2026-11-06",
-   "last_checked": "2026-11-24T16:42:16Z",
+   "last_checked": "2026-11-24T17:56:20Z",
    "current_full_name": "svenruppert/caldav-testbench",
    "build_checked": "2026-11-24T16:46:15Z"
   },
@@ -6999,7 +6999,7 @@
    "renamed_to": "",
    "build": "NONE",
    "build_url": "",
-   "last_checked": "2026-11-24T16:42:16Z",
+   "last_checked": "2026-11-24T17:56:21Z",
    "current_full_name": "svenruppert/core-vaadin-project-template",
    "build_checked": "2026-11-24T16:46:17Z",
    "last_seen": "2026-08-31"
@@ -7017,7 +7017,7 @@
    "renamed_to": "",
    "build": "NONE",
    "build_url": "",
-   "last_checked": "2026-11-24T16:42:16Z",
+   "last_checked": "2026-11-24T17:56:21Z",
    "current_full_name": "svenruppert/dependencies",
    "build_checked": "2026-11-24T16:46:17Z",
    "last_seen": "2026-08-31"
@@ -7036,7 +7036,7 @@
    "build": "NONE",
    "build_url": "",
    "last_seen": "2026-11-06",
-   "last_checked": "2026-11-24T16:42:17Z",
+   "last_checked": "2026-11-24T17:56:21Z",
    "current_full_name": "svenruppert/eBook-Java-Design-Patterns-Extreme",
    "build_checked": "2026-11-24T16:46:18Z"
   },
@@ -7054,7 +7054,7 @@
    "build": "NONE",
    "build_url": "",
    "last_seen": "2026-11-21",
-   "last_checked": "2026-11-24T16:42:17Z",
+   "last_checked": "2026-11-24T17:56:21Z",
    "current_full_name": "svenruppert/nano-vaadin-jetty",
    "build_checked": "2026-11-24T16:46:18Z"
   },
@@ -7072,7 +7072,7 @@
    "build": "NONE",
    "build_url": "",
    "last_seen": "2026-11-06",
-   "last_checked": "2026-11-24T16:42:17Z",
+   "last_checked": "2026-11-24T17:56:21Z",
    "current_full_name": "svenruppert/proxybuilder",
    "build_checked": "2026-11-24T16:46:18Z"
   },
@@ -7090,9 +7090,9 @@
    "build": "NONE",
    "build_url": "",
    "last_seen": "2026-11-06",
-   "last_checked": "2026-11-24T16:42:17Z",
+   "last_checked": "2026-11-24T17:56:22Z",
    "current_full_name": "svmgarg/flowstate",
-   "build_checked": "2026-11-24T16:44:18Z"
+   "build_checked": "2026-11-24T17:56:35Z"
   },
   {
    "repo": "symentispl/roadrunner",
@@ -7107,9 +7107,9 @@
    "renamed_to": "",
    "build": "SUCCESS",
    "build_url": "https://github.com/symentispl/roadrunner/actions/runs/43702578418",
-   "last_checked": "2026-11-24T16:42:18Z",
+   "last_checked": "2026-11-24T17:56:22Z",
    "current_full_name": "symentispl/roadrunner",
-   "build_checked": "2026-11-24T16:44:18Z",
+   "build_checked": "2026-11-24T17:56:35Z",
    "last_seen": "2026-09-28",
    "build_workflow": "3 Maven workflows, all agree"
   },
@@ -7127,9 +7127,9 @@
    "build": "NONE",
    "build_url": "",
    "last_seen": "2026-11-06",
-   "last_checked": "2026-11-24T16:42:18Z",
+   "last_checked": "2026-11-24T17:56:22Z",
    "current_full_name": "tanmaylohakare/Leetcode-Tracker",
-   "build_checked": "2026-11-24T16:44:18Z"
+   "build_checked": "2026-11-24T17:56:35Z"
   },
   {
    "repo": "thenameisvir/Shop_Sphere",
@@ -7145,9 +7145,9 @@
    "build": "NONE",
    "build_url": "",
    "last_seen": "2026-11-06",
-   "last_checked": "2026-11-24T16:42:19Z",
+   "last_checked": "2026-11-24T17:56:23Z",
    "current_full_name": "thenameisvir/Shop_Sphere",
-   "build_checked": "2026-11-24T16:44:18Z"
+   "build_checked": "2026-11-24T17:56:35Z"
   },
   {
    "repo": "thomcgn/nvg8",
@@ -7163,9 +7163,9 @@
    "build": "NONE",
    "build_url": "",
    "last_seen": "2026-10-26",
-   "last_checked": "2026-11-24T16:42:19Z",
+   "last_checked": "2026-11-24T17:56:23Z",
    "current_full_name": "thomcgn/nvg8",
-   "build_checked": "2026-11-24T16:44:18Z"
+   "build_checked": "2026-11-24T17:56:35Z"
   },
   {
    "repo": "tintwym/novora_backend",
@@ -7180,9 +7180,9 @@
    "renamed_to": "",
    "build": "NONE",
    "build_url": "",
-   "last_checked": "2026-11-24T16:42:20Z",
+   "last_checked": "2026-11-24T17:56:24Z",
    "current_full_name": "tintwym/novora_backend",
-   "build_checked": "2026-11-24T16:44:18Z",
+   "build_checked": "2026-11-24T17:56:35Z",
    "last_seen": "2026-08-31"
   },
   {
@@ -7198,9 +7198,9 @@
    "renamed_to": "",
    "build": "NONE",
    "build_url": "",
-   "last_checked": "2026-11-24T16:42:22Z",
+   "last_checked": "2026-11-24T17:56:25Z",
    "current_full_name": "tisonkun/os-detector",
-   "build_checked": "2026-11-24T16:44:19Z",
+   "build_checked": "2026-11-24T17:56:36Z",
    "last_seen": "2026-10-31"
   },
   {
@@ -7216,9 +7216,9 @@
    "renamed_to": "",
    "build": "NONE",
    "build_url": "",
-   "last_checked": "2026-11-24T16:42:24Z",
+   "last_checked": "2026-11-24T17:56:26Z",
    "current_full_name": "tobese/internet-bank-case-study",
-   "build_checked": "2026-11-24T16:44:20Z",
+   "build_checked": "2026-11-24T17:56:37Z",
    "last_seen": "2026-11-06"
   },
   {
@@ -7235,9 +7235,9 @@
    "build": "NONE",
    "build_url": "",
    "last_seen": "2026-11-21",
-   "last_checked": "2026-11-24T16:42:23Z",
+   "last_checked": "2026-11-24T17:56:25Z",
    "current_full_name": "top-dev-bln/aiproject",
-   "build_checked": "2026-11-24T16:44:21Z"
+   "build_checked": "2026-11-24T17:56:37Z"
   },
   {
    "repo": "training360-trainings/java-build-tools-2024-10-25",
@@ -7253,9 +7253,9 @@
    "build": "NONE",
    "build_url": "",
    "last_seen": "2026-11-06",
-   "last_checked": "2026-11-24T16:42:30Z",
+   "last_checked": "2026-11-24T17:56:31Z",
    "current_full_name": "training360-trainings/java-build-tools-2024-10-25",
-   "build_checked": "2026-11-24T16:44:21Z"
+   "build_checked": "2026-11-24T17:56:37Z"
   },
   {
    "repo": "trayenel/web-server-x",
@@ -7273,7 +7273,7 @@
    "last_seen": "2026-08-25",
    "last_checked": "2026-11-24T16:43:05Z",
    "current_full_name": "trayenel/web-server-x",
-   "build_checked": "2026-11-24T16:44:21Z"
+   "build_checked": "2026-11-24T17:56:37Z"
   },
   {
    "repo": "ursaj/maven-4-bom-template",
@@ -7291,7 +7291,7 @@
    "last_seen": "2026-11-06",
    "last_checked": "2026-11-24T16:43:06Z",
    "current_full_name": "ursaj/maven-4-bom-template",
-   "build_checked": "2026-11-24T16:44:21Z",
+   "build_checked": "2026-11-24T17:56:37Z",
    "build_workflow": "Java CI with Maven"
   },
   {
@@ -7309,7 +7309,7 @@
    "build_url": "",
    "last_checked": "2026-11-24T16:43:06Z",
    "current_full_name": "vRUZIx/Lab-Deploying-to-Render",
-   "build_checked": "2026-11-24T16:44:22Z",
+   "build_checked": "2026-11-24T17:56:38Z",
    "last_seen": "2026-10-25"
   },
   {
@@ -7328,7 +7328,7 @@
    "last_seen": "2026-08-31",
    "last_checked": "2026-11-24T16:43:18Z",
    "current_full_name": "jSentinel-eu/jCustos-community",
-   "build_checked": "2026-11-24T16:44:22Z"
+   "build_checked": "2026-11-24T17:56:38Z"
   },
   {
    "repo": "valkyria-gk/vppps",
@@ -7346,7 +7346,7 @@
    "last_seen": "2026-10-04",
    "last_checked": "2026-11-24T16:43:08Z",
    "current_full_name": "valkyria-gk/vppps",
-   "build_checked": "2026-11-24T16:44:22Z"
+   "build_checked": "2026-11-24T17:56:38Z"
   },
   {
    "repo": "veithen/resolver-proxy-maven-plugin",
@@ -7363,7 +7363,7 @@
    "build_url": "https://github.com/veithen/resolver-proxy-maven-plugin/actions/runs/44121197905",
    "last_checked": "2026-11-24T16:43:09Z",
    "current_full_name": "veithen/resolver-proxy-maven-plugin",
-   "build_checked": "2026-11-24T16:44:22Z",
+   "build_checked": "2026-11-24T17:56:38Z",
    "last_seen": "2026-08-31",
    "build_workflow": "Continuous Integration"
   },
@@ -7382,7 +7382,7 @@
    "build_url": "",
    "last_checked": "2026-11-24T16:43:10Z",
    "current_full_name": "verjithRavi/it3030-paf-2026-smart-campus-WE_202_2.1",
-   "build_checked": "2026-11-24T16:44:23Z",
+   "build_checked": "2026-11-24T17:56:39Z",
    "last_seen": "2026-08-31"
   },
   {
@@ -7401,7 +7401,7 @@
    "last_seen": "2026-10-31",
    "last_checked": "2026-11-24T16:43:11Z",
    "current_full_name": "vishwaksena-tarala/collab_notes",
-   "build_checked": "2026-11-24T16:44:23Z"
+   "build_checked": "2026-11-24T17:56:39Z"
   },
   {
    "repo": "walterJavaArchitect/estagio",
@@ -7419,7 +7419,7 @@
    "last_seen": "2026-11-21",
    "last_checked": "2026-11-24T16:43:13Z",
    "current_full_name": "walterJavaArchitect/estagio",
-   "build_checked": "2026-11-24T16:44:24Z"
+   "build_checked": "2026-11-24T17:56:39Z"
   },
   {
    "repo": "wavi-odt/App-Gest-o-Atividades-Letivas",
@@ -7436,7 +7436,7 @@
    "build_url": "",
    "last_checked": "2026-11-24T16:43:13Z",
    "current_full_name": "wavi-odt/App-Gest-o-Atividades-Letivas",
-   "build_checked": "2026-11-24T16:44:24Z",
+   "build_checked": "2026-11-24T17:56:39Z",
    "last_seen": "2026-10-25"
   },
   {
@@ -7454,7 +7454,7 @@
    "build_url": "",
    "last_checked": "2026-11-24T16:43:13Z",
    "current_full_name": "whysixmift/warehouse-management-system",
-   "build_checked": "2026-11-24T16:44:25Z",
+   "build_checked": "2026-11-24T17:56:40Z",
    "last_seen": "2026-11-06"
   },
   {
@@ -7472,7 +7472,7 @@
    "build_url": "https://github.com/woaibiancheng111/Enterprise-AI-Agent/actions/runs/30260242989",
    "last_checked": "2026-11-24T16:43:14Z",
    "current_full_name": "woaibiancheng111/Enterprise-AI-Agent",
-   "build_checked": "2026-11-24T16:44:25Z",
+   "build_checked": "2026-11-24T17:56:40Z",
    "last_seen": "2026-08-31",
    "build_workflow": "CI"
   },
@@ -7492,7 +7492,7 @@
    "last_seen": "2026-11-06",
    "last_checked": "2026-11-24T16:43:14Z",
    "current_full_name": "xdotli/harbor-datagen",
-   "build_checked": "2026-11-24T16:44:25Z"
+   "build_checked": "2026-11-24T17:56:40Z"
   },
   {
    "repo": "xenoterracide/java-commons",
@@ -7509,7 +7509,7 @@
    "build_url": "",
    "last_checked": "2026-11-24T16:43:16Z",
    "current_full_name": "xenoterracide/java-commons",
-   "build_checked": "2026-11-24T16:44:25Z",
+   "build_checked": "2026-11-24T17:56:40Z",
    "last_seen": "2026-11-06"
   },
   {
@@ -7527,7 +7527,7 @@
    "build_url": "https://github.com/xenoterracide/kalix/actions/runs/44538675196",
    "last_checked": "2026-11-24T16:43:17Z",
    "current_full_name": "xenoterracide/kalix",
-   "build_checked": "2026-11-24T16:44:26Z",
+   "build_checked": "2026-11-24T17:56:41Z",
    "last_seen": "2026-11-06",
    "build_workflow": "build"
   },
@@ -7547,7 +7547,7 @@
    "last_seen": "2026-11-06",
    "last_checked": "2026-11-24T16:43:18Z",
    "current_full_name": "xenoterracide/repro-mvn4-yml",
-   "build_checked": "2026-11-24T16:44:27Z"
+   "build_checked": "2026-11-24T17:56:42Z"
   },
   {
    "repo": "xenoterracide/semver",
@@ -7564,7 +7564,7 @@
    "build_url": "https://github.com/xenoterracide/semver/actions/runs/45314747301",
    "last_checked": "2026-11-24T16:43:17Z",
    "current_full_name": "xenoterracide/semver",
-   "build_checked": "2026-11-24T16:44:27Z",
+   "build_checked": "2026-11-24T17:56:42Z",
    "last_seen": "2026-08-31",
    "build_workflow": "build"
   },
@@ -7583,7 +7583,7 @@
    "build_url": "",
    "last_checked": "2026-11-24T16:43:40Z",
    "current_full_name": "xiaomujin/cq-bot",
-   "build_checked": "2026-11-24T16:44:28Z",
+   "build_checked": "2026-11-24T17:56:42Z",
    "last_seen": "2026-10-31"
   },
   {
@@ -7602,7 +7602,7 @@
    "last_seen": "2026-10-31",
    "last_checked": "2026-11-24T16:43:22Z",
    "current_full_name": "xxCoderforlife/zdeatharcade",
-   "build_checked": "2026-11-24T16:44:28Z"
+   "build_checked": "2026-11-24T17:56:43Z"
   },
   {
    "repo": "yakup-jr/bank_rest",
@@ -7620,7 +7620,7 @@
    "last_seen": "2026-10-25",
    "last_checked": "2026-11-24T16:43:40Z",
    "current_full_name": "yakup-jr/bank_rest",
-   "build_checked": "2026-11-24T16:44:28Z"
+   "build_checked": "2026-11-24T17:56:43Z"
   },
   {
    "repo": "yashsiwacha/Real-Time-Notification-System",
@@ -7637,7 +7637,7 @@
    "build_url": "https://github.com/yashsiwacha/Real-Time-Notification-System/actions/runs/30653368836",
    "last_checked": "2026-11-24T16:43:40Z",
    "current_full_name": "yashsiwacha/Real-Time-Notification-System",
-   "build_checked": "2026-11-24T16:44:28Z",
+   "build_checked": "2026-11-24T17:56:43Z",
    "last_seen": "2026-11-06",
    "build_workflow": "3 Maven workflows, all agree"
   },
@@ -7656,7 +7656,7 @@
    "build_url": "",
    "last_checked": "2026-11-24T16:43:41Z",
    "current_full_name": "yersonluna/gestion-polizas",
-   "build_checked": "2026-11-24T16:44:29Z",
+   "build_checked": "2026-11-24T17:56:43Z",
    "last_seen": "2026-11-13"
   },
   {
@@ -7675,7 +7675,7 @@
    "last_seen": "2026-10-31",
    "last_checked": "2026-11-24T16:43:41Z",
    "current_full_name": "youngledo/godot-java",
-   "build_checked": "2026-11-24T16:44:29Z",
+   "build_checked": "2026-11-24T17:56:43Z",
    "build_workflow": "2 Maven workflows: 1 SUCCESS, 1 FAILURE"
   },
   {
@@ -7806,7 +7806,7 @@
    "lastknown_version": "4.0.0-rc-7",
    "build": "SUCCESS",
    "build_url": "https://github.com/lysine-dev/okhttp/actions/runs/45343533955",
-   "build_checked": "2026-11-24T16:44:20Z",
+   "build_checked": "2026-11-24T17:56:37Z",
    "build_workflow": "2 Maven workflows, all agree"
   },
   {
@@ -7834,7 +7834,7 @@
    "state": "active",
    "first_seen": "2026-07-25",
    "last_seen": "2026-09-21",
-   "last_checked": "2026-11-24T16:42:20Z",
+   "last_checked": "2026-11-24T17:56:24Z",
    "current_full_name": "abby-wheaton/developer_club_internal_finance_software",
    "renamed_to": "",
    "stars": 0,
@@ -7884,7 +7884,7 @@
    "lastknown_version": "4.0.0-rc-5",
    "build": "NONE",
    "build_url": "",
-   "build_checked": "2026-11-24T16:44:29Z"
+   "build_checked": "2026-11-24T17:56:43Z"
   },
   {
    "repo": "dromara/RuoYi-Vue-Plus",
@@ -7903,7 +7903,7 @@
    "lastknown_version": "4.0.0-rc-5",
    "build": "NONE",
    "build_url": "",
-   "build_checked": "2026-11-24T16:44:29Z"
+   "build_checked": "2026-11-24T17:56:43Z"
   },
   {
    "repo": "ehtisham-id/Spring-Boot-HR-ERP",
@@ -7922,7 +7922,7 @@
    "lastknown_version": "4.1.0 (POM model)",
    "build": "NONE",
    "build_url": "",
-   "build_checked": "2026-11-24T16:44:29Z"
+   "build_checked": "2026-11-24T17:56:44Z"
   },
   {
    "repo": "khmarbaise/maven-bug-4.0.0-rc6-bom",
@@ -7948,7 +7948,7 @@
    "state": "active",
    "first_seen": "2026-08-01",
    "last_seen": "2026-11-06",
-   "last_checked": "2026-11-24T16:42:21Z",
+   "last_checked": "2026-11-24T17:56:24Z",
    "current_full_name": "mendirl/prez",
    "renamed_to": "",
    "stars": 0,
@@ -7960,14 +7960,14 @@
    "lastknown_version": "4.0.0-rc-5",
    "build": "NONE",
    "build_url": "",
-   "build_checked": "2026-11-24T16:44:29Z"
+   "build_checked": "2026-11-24T17:56:44Z"
   },
   {
    "repo": "kamga-brice/gestione-unisp",
    "state": "active",
    "first_seen": "2026-08-04",
    "last_seen": "2026-11-06",
-   "last_checked": "2026-11-24T16:42:21Z",
+   "last_checked": "2026-11-24T17:56:24Z",
    "current_full_name": "kamga-brice/gestione-unisp",
    "renamed_to": "",
    "stars": 0,
@@ -7998,7 +7998,7 @@
    "lastknown_version": "4.0.0-rc-2",
    "build": "NONE",
    "build_url": "",
-   "build_checked": "2026-11-24T16:44:20Z"
+   "build_checked": "2026-11-24T17:56:37Z"
   },
   {
    "repo": "pro-spring-boot/pro-spring-boot-4",
@@ -8015,7 +8015,7 @@
    "source": null,
    "build": "NONE",
    "build_url": "",
-   "build_checked": "2026-11-24T16:44:21Z"
+   "build_checked": "2026-11-24T17:56:37Z"
   },
   {
    "repo": "easy-4-java/spring-extension",
@@ -8034,7 +8034,7 @@
    "lastknown_version": "4.0.0-rc-6",
    "build": "SUCCESS",
    "build_url": "https://github.com/easy-4-java/spring-extension/actions/runs/31147594683",
-   "build_checked": "2026-11-24T16:44:22Z",
+   "build_checked": "2026-11-24T17:56:39Z",
    "build_workflow": "CI"
   },
   {
@@ -8054,7 +8054,7 @@
    "lastknown_version": "4.0.0-rc-5",
    "build": "NONE",
    "build_url": "",
-   "build_checked": "2026-11-24T16:44:30Z"
+   "build_checked": "2026-11-24T17:56:44Z"
   },
   {
    "repo": "Balraj-o6/Digital-Gold-Wallet",
@@ -8110,7 +8110,7 @@
    "lastknown_version": "4.1.0 (POM model)",
    "build": "NONE",
    "build_url": "",
-   "build_checked": "2026-11-24T16:44:30Z"
+   "build_checked": "2026-11-24T17:56:44Z"
   },
   {
    "repo": "Periyasamy107/Stackly_Practice",
@@ -8129,7 +8129,7 @@
    "lastknown_version": "4.1.0 (POM model)",
    "build": "NONE",
    "build_url": "",
-   "build_checked": "2026-11-24T16:44:30Z"
+   "build_checked": "2026-11-24T17:56:44Z"
   },
   {
    "repo": "PRL-PRG/r-compile-server",
@@ -8148,7 +8148,7 @@
    "lastknown_version": "4.0.0-rc-6",
    "build": "SUCCESS",
    "build_url": "https://github.com/PRL-PRG/r-compile-server/actions/runs/41644270681",
-   "build_checked": "2026-11-24T16:44:30Z",
+   "build_checked": "2026-11-24T17:56:44Z",
    "build_workflow": "Java CI with Maven"
   },
   {
@@ -8175,7 +8175,7 @@
    "state": "active",
    "first_seen": "2026-08-16",
    "last_seen": "2026-10-31",
-   "last_checked": "2026-11-24T16:42:21Z",
+   "last_checked": "2026-11-24T17:56:25Z",
    "current_full_name": "fp024/spring-project-template",
    "renamed_to": "",
    "stars": 0,
@@ -8187,7 +8187,7 @@
    "lastknown_version": "4.1.0 (POM model)",
    "build": "NONE",
    "build_url": "",
-   "build_checked": "2026-11-24T16:44:30Z"
+   "build_checked": "2026-11-24T17:56:44Z"
   },
   {
    "repo": "tolguner/IsikCampusOS",
@@ -8206,7 +8206,7 @@
    "lastknown_version": "4.0.0-rc-5",
    "build": "NONE",
    "build_url": "",
-   "build_checked": "2026-11-24T16:44:23Z"
+   "build_checked": "2026-11-24T17:56:39Z"
   },
   {
    "repo": "shuaiyinoo/Diting_AI_Api",
@@ -8225,7 +8225,7 @@
    "lastknown_version": "4.0.0",
    "build": "NONE",
    "build_url": "",
-   "build_checked": "2026-11-24T16:44:32Z"
+   "build_checked": "2026-11-24T17:56:45Z"
   },
   {
    "repo": "vikas-prajapatii/job-portal",
@@ -8244,7 +8244,7 @@
    "lastknown_version": "4.0.0-rc-5",
    "build": "NONE",
    "build_url": "",
-   "build_checked": "2026-11-24T16:44:32Z"
+   "build_checked": "2026-11-24T17:56:45Z"
   },
   {
    "repo": "xieemengxin/Cloud-Plus-Soybean",
@@ -8263,14 +8263,14 @@
    "lastknown_version": "4.0.0-rc-5",
    "build": "NONE",
    "build_url": "",
-   "build_checked": "2026-11-24T16:44:32Z"
+   "build_checked": "2026-11-24T17:56:46Z"
   },
   {
    "repo": "evanchooly/cartographer",
    "state": "active",
    "first_seen": "2026-08-19",
    "last_seen": "2026-11-04",
-   "last_checked": "2026-11-24T16:42:23Z",
+   "last_checked": "2026-11-24T17:56:26Z",
    "current_full_name": "evanchooly/cartographer",
    "renamed_to": "",
    "stars": 1,
@@ -8282,7 +8282,7 @@
    "lastknown_version": "4.1.0 (POM model)",
    "build": "SUCCESS",
    "build_url": "https://github.com/evanchooly/cartographer/actions/runs/34917409439",
-   "build_checked": "2026-11-24T16:44:32Z",
+   "build_checked": "2026-11-24T17:56:46Z",
    "build_workflow": "Build Project"
   },
   {
@@ -8290,7 +8290,7 @@
    "state": "active",
    "first_seen": "2026-08-19",
    "last_seen": "2026-08-24",
-   "last_checked": "2026-11-24T16:42:23Z",
+   "last_checked": "2026-11-24T17:56:26Z",
    "current_full_name": "wacsai/spring-ai-lab",
    "renamed_to": "",
    "stars": 0,
@@ -8302,7 +8302,7 @@
    "lastknown_version": "4.1.0 (POM model)",
    "build": "NONE",
    "build_url": "",
-   "build_checked": "2026-11-24T16:44:32Z"
+   "build_checked": "2026-11-24T17:56:46Z"
   },
   {
    "repo": "appsbuildcommunity/school-club-management-system",
@@ -8348,7 +8348,7 @@
    "state": "active",
    "first_seen": "2026-08-20",
    "last_seen": "2026-11-04",
-   "last_checked": "2026-11-24T16:42:24Z",
+   "last_checked": "2026-11-24T17:56:26Z",
    "current_full_name": "easy-4-java/cxf-rt-javassist",
    "renamed_to": "",
    "stars": 0,
@@ -8360,7 +8360,7 @@
    "lastknown_version": "4.1.0 (POM model)",
    "build": "SUCCESS",
    "build_url": "https://github.com/easy-4-java/cxf-rt-javassist/actions/runs/32341390189",
-   "build_checked": "2026-11-24T16:44:24Z",
+   "build_checked": "2026-11-24T17:56:39Z",
    "build_workflow": "CI"
   },
   {
@@ -8380,7 +8380,7 @@
    "lastknown_version": "4.0.5",
    "build": "NONE",
    "build_url": "",
-   "build_checked": "2026-11-24T16:44:33Z"
+   "build_checked": "2026-11-24T17:56:46Z"
   },
   {
    "repo": "EfekaanBengi/internship-management-api",
@@ -8399,14 +8399,14 @@
    "lastknown_version": "4.1.0 (POM model)",
    "build": "NONE",
    "build_url": "",
-   "build_checked": "2026-11-24T16:44:33Z"
+   "build_checked": "2026-11-24T17:56:46Z"
   },
   {
    "repo": "jonesbusy/maven-oci-extension",
    "state": "active",
    "first_seen": "2026-08-23",
    "last_seen": "2026-11-24",
-   "last_checked": "2026-11-24T16:42:24Z",
+   "last_checked": "2026-11-24T17:56:26Z",
    "current_full_name": "jonesbusy/maven-oci-extension",
    "renamed_to": "",
    "stars": 4,
@@ -8418,7 +8418,7 @@
    "lastknown_version": "4.1.0 (POM model)",
    "build": "AMBIGUOUS",
    "build_url": "https://github.com/jonesbusy/maven-oci-extension/actions",
-   "build_checked": "2026-11-24T16:44:33Z",
+   "build_checked": "2026-11-24T17:56:46Z",
    "build_workflow": "2 Maven workflows: 1 SUCCESS, 1 FAILURE"
   },
   {
@@ -8426,7 +8426,7 @@
    "state": "active",
    "first_seen": "2026-08-25",
    "last_seen": "2026-11-06",
-   "last_checked": "2026-11-24T16:42:29Z",
+   "last_checked": "2026-11-24T17:56:30Z",
    "current_full_name": "Thomasramos02/MpFitness",
    "renamed_to": "",
    "stars": 0,
@@ -8438,7 +8438,7 @@
    "lastknown_version": "4.0.0-rc-5",
    "build": "SUCCESS",
    "build_url": "https://github.com/Thomasramos02/MpFitness/actions/runs/32870061440",
-   "build_checked": "2026-11-24T16:44:34Z",
+   "build_checked": "2026-11-24T17:56:47Z",
    "build_workflow": "CI"
   },
   {
@@ -8466,7 +8466,7 @@
    "state": "active",
    "first_seen": "2026-08-26",
    "last_seen": "2026-11-14",
-   "last_checked": "2026-11-24T16:42:24Z",
+   "last_checked": "2026-11-24T17:56:27Z",
    "current_full_name": "easy-4-java/easydoc",
    "renamed_to": "",
    "stars": 60,
@@ -8522,7 +8522,7 @@
    "state": "active",
    "first_seen": "2026-08-28",
    "last_seen": "2026-11-21",
-   "last_checked": "2026-11-24T16:42:00Z",
+   "last_checked": "2026-11-24T17:56:09Z",
    "current_full_name": "moamenhredeen/jlox",
    "renamed_to": "",
    "stars": 0,
@@ -8534,7 +8534,7 @@
    "lastknown_version": "4.0.0-rc-6",
    "build": "FAILURE",
    "build_url": "https://github.com/moamenhredeen/jlox/actions/runs/33136091177",
-   "build_checked": "2026-11-24T16:44:34Z",
+   "build_checked": "2026-11-24T17:56:47Z",
    "build_workflow": "Java ClI with Maven"
   },
   {
@@ -8542,7 +8542,7 @@
    "state": "active",
    "first_seen": "2026-08-28",
    "last_seen": "2026-09-22",
-   "last_checked": "2026-11-24T16:42:31Z",
+   "last_checked": "2026-11-24T17:56:32Z",
    "current_full_name": "huahill/vadmin",
    "renamed_to": "huahill/vadmin",
    "stars": 1,
@@ -8554,7 +8554,7 @@
    "lastknown_version": "4.1.0 (POM model)",
    "build": "SUCCESS",
    "build_url": "https://github.com/huahill/vadmin/actions/runs/44271091348",
-   "build_checked": "2026-11-24T16:44:34Z",
+   "build_checked": "2026-11-24T17:56:47Z",
    "build_workflow": "3 Maven workflows, all agree"
   },
   {
@@ -8562,7 +8562,7 @@
    "state": "active",
    "first_seen": "2026-08-29",
    "last_seen": "2026-08-31",
-   "last_checked": "2026-11-24T16:42:25Z",
+   "last_checked": "2026-11-24T17:56:27Z",
    "current_full_name": "Gyananjay600/autoguard-ai",
    "renamed_to": "",
    "stars": 0,
@@ -8574,14 +8574,14 @@
    "lastknown_version": "4.0.0-rc-5",
    "build": "NONE",
    "build_url": "",
-   "build_checked": "2026-11-24T16:44:34Z"
+   "build_checked": "2026-11-24T17:56:47Z"
   },
   {
    "repo": "Java-Publications/Blog---Vaadin---Calendar-and-CalDav",
    "state": "active",
    "first_seen": "2026-08-29",
    "last_seen": "2026-10-26",
-   "last_checked": "2026-11-24T16:42:26Z",
+   "last_checked": "2026-11-24T17:56:28Z",
    "current_full_name": "Java-Publications/Blog---Vaadin---Calendar-and-CalDav",
    "renamed_to": "",
    "stars": 0,
@@ -8593,14 +8593,14 @@
    "lastknown_version": "4.0.0-rc-5",
    "build": "NONE",
    "build_url": "",
-   "build_checked": "2026-11-24T16:44:36Z"
+   "build_checked": "2026-11-24T17:56:49Z"
   },
   {
    "repo": "Manikant2018/conversation-interaction-service",
    "state": "active",
    "first_seen": "2026-08-29",
    "last_seen": "2026-08-31",
-   "last_checked": "2026-11-24T16:42:31Z",
+   "last_checked": "2026-11-24T17:56:32Z",
    "current_full_name": "Manikant2018/conversation-interaction-service",
    "renamed_to": "",
    "stars": 0,
@@ -8612,7 +8612,7 @@
    "lastknown_version": "4.0.0-rc-5",
    "build": "NONE",
    "build_url": "",
-   "build_checked": "2026-11-24T16:44:36Z"
+   "build_checked": "2026-11-24T17:56:49Z"
   },
   {
    "repo": "Siddd-hrr/Q-Print",
@@ -8950,7 +8950,7 @@
    "state": "active",
    "first_seen": "2026-08-30",
    "last_seen": "2026-09-27",
-   "last_checked": "2026-11-24T16:42:01Z",
+   "last_checked": "2026-11-24T17:56:09Z",
    "current_full_name": "hantsy/spring-ddd-kotlin-example",
    "renamed_to": "",
    "stars": 1,
@@ -8970,7 +8970,7 @@
    "state": "active",
    "first_seen": "2026-08-30",
    "last_seen": "2026-10-31",
-   "last_checked": "2026-11-24T16:42:00Z",
+   "last_checked": "2026-11-24T17:56:09Z",
    "current_full_name": "iamjohnjeremy/gettingstarted",
    "renamed_to": "",
    "stars": 0,
@@ -9047,7 +9047,7 @@
    "state": "active",
    "first_seen": "2026-09-02",
    "last_seen": "2026-11-14",
-   "last_checked": "2026-11-24T16:42:00Z",
+   "last_checked": "2026-11-24T17:56:09Z",
    "current_full_name": "BryanFRD/T-AIA-911-LIL_1",
    "renamed_to": "",
    "stars": 0,
@@ -9064,7 +9064,7 @@
    "state": "active",
    "first_seen": "2026-09-04",
    "last_seen": "2026-11-14",
-   "last_checked": "2026-11-24T16:42:01Z",
+   "last_checked": "2026-11-24T17:56:09Z",
    "current_full_name": "huahill/jfoundry",
    "renamed_to": "",
    "stars": 15,
@@ -9076,7 +9076,7 @@
    "lastknown_version": "4.1.0 (POM model)",
    "build": "AMBIGUOUS",
    "build_url": "https://github.com/huahill/jfoundry/actions",
-   "build_checked": "2026-11-24T16:44:24Z",
+   "build_checked": "2026-11-24T17:56:39Z",
    "build_workflow": "5 Maven workflows: 4 SUCCESS, 1 FAILURE"
   },
   {
@@ -9202,7 +9202,7 @@
    "state": "active",
    "first_seen": "2026-09-14",
    "last_seen": "2026-11-14",
-   "last_checked": "2026-11-24T16:42:01Z",
+   "last_checked": "2026-11-24T17:56:09Z",
    "current_full_name": "youngledo/godot-java-template",
    "renamed_to": "",
    "stars": 0,
@@ -9214,7 +9214,7 @@
    "lastknown_version": "4.1.0 (POM model)",
    "build": "NONE",
    "build_url": "",
-   "build_checked": "2026-11-24T16:44:24Z"
+   "build_checked": "2026-11-24T17:56:39Z"
   },
   {
    "repo": "maxjay/jvmd",
@@ -9241,7 +9241,7 @@
    "state": "active",
    "first_seen": "2026-09-16",
    "last_seen": "2026-11-06",
-   "last_checked": "2026-11-24T16:42:01Z",
+   "last_checked": "2026-11-24T17:56:10Z",
    "current_full_name": "ReedZyd/OpenThoughts-TBLite-images",
    "renamed_to": "",
    "stars": 0,
@@ -9253,7 +9253,7 @@
    "lastknown_version": "4.0.0-rc-4",
    "build": "NONE",
    "build_url": "",
-   "build_checked": "2026-11-24T16:44:21Z"
+   "build_checked": "2026-11-24T17:56:38Z"
   },
   {
    "repo": "Gopakuma/e-commerce",
@@ -9330,7 +9330,7 @@
    "lastknown_version": "4.0.0-rc-7",
    "build": "SUCCESS",
    "build_url": "https://github.com/ottlinger/mailclena/actions/runs/45270468138",
-   "build_checked": "2026-11-24T16:44:25Z",
+   "build_checked": "2026-11-24T17:56:40Z",
    "build_workflow": "3 Maven workflows, all agree"
   },
   {
@@ -9370,7 +9370,7 @@
    "lastknown_version": "4.1.0 (POM model)",
    "build": "SUCCESS",
    "build_url": "https://github.com/edwarddn/joule/actions/runs/43517184737",
-   "build_checked": "2026-11-24T16:44:25Z",
+   "build_checked": "2026-11-24T17:56:41Z",
    "build_workflow": "build"
   },
   {
@@ -9390,7 +9390,7 @@
    "lastknown_version": "4.0.0-rc-7",
    "build": "NONE",
    "build_url": "",
-   "build_checked": "2026-11-24T16:44:25Z"
+   "build_checked": "2026-11-24T17:56:41Z"
   },
   {
    "repo": "Ningchirsty/hotter-ai-platform",
@@ -9468,14 +9468,14 @@
    "lastknown_version": "4.0.0-rc-5",
    "build": "NONE",
    "build_url": "",
-   "build_checked": "2026-11-24T16:44:26Z"
+   "build_checked": "2026-11-24T17:56:41Z"
   },
   {
    "repo": "temporal-rift/read-service",
    "state": "active",
    "first_seen": "2026-10-06",
    "last_seen": "2026-10-31",
-   "last_checked": "2026-11-24T16:42:25Z",
+   "last_checked": "2026-11-24T17:56:27Z",
    "current_full_name": "temporal-rift/read-service",
    "renamed_to": "",
    "stars": 0,
@@ -9515,7 +9515,7 @@
    "state": "active",
    "first_seen": "2026-10-08",
    "last_seen": "2026-11-21",
-   "last_checked": "2026-11-24T16:42:02Z",
+   "last_checked": "2026-11-24T17:56:10Z",
    "current_full_name": "sebi-nvrro/gestion-de-ventas-online",
    "renamed_to": "",
    "stars": 0,
@@ -9532,7 +9532,7 @@
    "state": "active",
    "first_seen": "2026-10-08",
    "last_seen": "2026-10-30",
-   "last_checked": "2026-11-24T16:42:29Z",
+   "last_checked": "2026-11-24T17:56:30Z",
    "current_full_name": "temporal-rift/simulation-workbench",
    "renamed_to": "",
    "stars": 0,
@@ -9552,7 +9552,7 @@
    "state": "active",
    "first_seen": "2026-10-10",
    "last_seen": "2026-11-01",
-   "last_checked": "2026-11-24T16:42:26Z",
+   "last_checked": "2026-11-24T17:56:28Z",
    "current_full_name": "temporal-rift/game-service",
    "renamed_to": "",
    "stars": 0,
@@ -9572,7 +9572,7 @@
    "state": "active",
    "first_seen": "2026-10-10",
    "last_seen": "2026-10-29",
-   "last_checked": "2026-11-24T16:42:27Z",
+   "last_checked": "2026-11-24T17:56:29Z",
    "current_full_name": "temporal-rift/temporal-rift-bom",
    "renamed_to": "",
    "stars": 0,
@@ -9602,7 +9602,7 @@
    "source": null,
    "build": "NONE",
    "build_url": "",
-   "build_checked": "2026-11-24T16:44:19Z"
+   "build_checked": "2026-11-24T17:56:36Z"
   },
   {
    "repo": "lorisdj02/atl-backend",
@@ -9621,7 +9621,7 @@
    "lastknown_version": "4.0.0-rc-5",
    "build": "NONE",
    "build_url": "",
-   "build_checked": "2026-11-24T16:44:24Z"
+   "build_checked": "2026-11-24T17:56:40Z"
   },
   {
    "repo": "cont1nu1ty/guofeng-platform",
@@ -9706,7 +9706,7 @@
    "state": "active",
    "first_seen": "2026-10-17",
    "last_seen": "2026-10-31",
-   "last_checked": "2026-11-24T16:42:17Z",
+   "last_checked": "2026-11-24T17:56:21Z",
    "current_full_name": "Kredwi/NClanPlugin",
    "renamed_to": "",
    "stars": 0,
@@ -9726,7 +9726,7 @@
    "state": "active",
    "first_seen": "2026-10-17",
    "last_seen": "2026-10-31",
-   "last_checked": "2026-11-24T16:42:18Z",
+   "last_checked": "2026-11-24T17:56:22Z",
    "current_full_name": "sebastiencaille/old-stuff",
    "renamed_to": "",
    "stars": 0,
@@ -9785,7 +9785,7 @@
    "state": "active",
    "first_seen": "2026-10-22",
    "last_seen": "2026-11-06",
-   "last_checked": "2026-11-24T16:42:00Z",
+   "last_checked": "2026-11-24T17:56:09Z",
    "current_full_name": "anasibrahimi/portfolio",
    "renamed_to": "",
    "stars": 0,
@@ -9823,7 +9823,7 @@
    "state": "gone",
    "first_seen": "2026-10-24",
    "last_seen": "2026-10-24",
-   "last_checked": "2026-11-24T16:42:04Z",
+   "last_checked": "2026-11-24T17:56:12Z",
    "current_full_name": "ppgabe/overengineered-rps",
    "renamed_to": "",
    "stars": 0,
@@ -9855,7 +9855,7 @@
    "lastknown_version": "4.0.0",
    "build": "NONE",
    "build_url": "",
-   "build_checked": "2026-11-24T16:44:30Z"
+   "build_checked": "2026-11-24T17:56:45Z"
   },
   {
    "repo": "wuzh7/image-admin",
@@ -10292,7 +10292,7 @@
    "lastknown_version": "4.0.0-rc-5",
    "build": "NONE",
    "build_url": "",
-   "build_checked": "2026-11-24T16:44:29Z"
+   "build_checked": "2026-11-24T17:56:44Z"
   },
   {
    "repo": "svenruppert/Blog-Vaadin-Deployment-on-Hetzner",
@@ -10311,7 +10311,7 @@
    "lastknown_version": "4.0.0-rc-5",
    "build": "NONE",
    "build_url": "",
-   "build_checked": "2026-11-24T16:44:30Z"
+   "build_checked": "2026-11-24T17:56:45Z"
   },
   {
    "repo": "tedyoung/jitterticket-act-2",
@@ -10338,7 +10338,7 @@
    "state": "active",
    "first_seen": "2026-10-28",
    "last_seen": "2026-10-31",
-   "last_checked": "2026-11-24T16:42:27Z",
+   "last_checked": "2026-11-24T17:56:29Z",
    "current_full_name": "Activity-Master/Core",
    "renamed_to": "",
    "stars": 0,
@@ -10357,7 +10357,7 @@
    "state": "active",
    "first_seen": "2026-10-28",
    "last_seen": "2026-10-31",
-   "last_checked": "2026-11-24T16:42:27Z",
+   "last_checked": "2026-11-24T17:56:29Z",
    "current_full_name": "GuicedEE/GuicedTelemetry",
    "renamed_to": "",
    "stars": 0,
@@ -10426,7 +10426,7 @@
    "lastknown_version": "4.1.0 (POM model)",
    "build": "NONE",
    "build_url": "",
-   "build_checked": "2026-11-24T16:44:31Z"
+   "build_checked": "2026-11-24T17:56:45Z"
   },
   {
    "repo": "GuicedEE/GuicedInjection",
@@ -10445,7 +10445,7 @@
    "lastknown_version": "4.1.0 (POM model)",
    "build": "NONE",
    "build_url": "",
-   "build_checked": "2026-11-24T16:44:31Z"
+   "build_checked": "2026-11-24T17:56:45Z"
   },
   {
    "repo": "JWebMP/BOM",
@@ -10464,7 +10464,7 @@
    "lastknown_version": "4.1.0 (POM model)",
    "build": "NONE",
    "build_url": "",
-   "build_checked": "2026-11-24T16:44:32Z"
+   "build_checked": "2026-11-24T17:56:46Z"
   },
   {
    "repo": "JWebMP/Bootstrap",
@@ -10483,7 +10483,7 @@
    "lastknown_version": "4.1.0 (POM model)",
    "build": "NONE",
    "build_url": "",
-   "build_checked": "2026-11-24T16:44:35Z"
+   "build_checked": "2026-11-24T17:56:48Z"
   },
   {
    "repo": "JWebMP/FontAwesomePro",
@@ -10585,7 +10585,7 @@
    "state": "active",
    "first_seen": "2026-11-03",
    "last_seen": "2026-11-14",
-   "last_checked": "2026-11-24T16:42:04Z",
+   "last_checked": "2026-11-24T17:56:12Z",
    "current_full_name": "GuicedEE/GuicedCDI",
    "renamed_to": "",
    "stars": 0,
@@ -10604,7 +10604,7 @@
    "state": "active",
    "first_seen": "2026-11-03",
    "last_seen": "2026-11-06",
-   "last_checked": "2026-11-24T16:42:06Z",
+   "last_checked": "2026-11-24T17:56:13Z",
    "current_full_name": "GuicedEE/GuicedKafka",
    "renamed_to": "",
    "stars": 0,
@@ -10623,7 +10623,7 @@
    "state": "active",
    "first_seen": "2026-11-03",
    "last_seen": "2026-11-14",
-   "last_checked": "2026-11-24T16:42:07Z",
+   "last_checked": "2026-11-24T17:56:13Z",
    "current_full_name": "GuicedEE/RestServices",
    "renamed_to": "",
    "stars": 1,
@@ -10642,7 +10642,7 @@
    "state": "active",
    "first_seen": "2026-11-03",
    "last_seen": "2026-11-04",
-   "last_checked": "2026-11-24T16:42:14Z",
+   "last_checked": "2026-11-24T17:56:19Z",
    "current_full_name": "GuicedEE/microprofile-jwt",
    "renamed_to": "",
    "stars": 0,
@@ -10661,7 +10661,7 @@
    "state": "active",
    "first_seen": "2026-11-03",
    "last_seen": "2026-11-24",
-   "last_checked": "2026-11-24T16:42:20Z",
+   "last_checked": "2026-11-24T17:56:24Z",
    "current_full_name": "JWebMP/Angular",
    "renamed_to": "",
    "stars": 1,
@@ -10712,7 +10712,7 @@
    "lastknown_version": "4.1.0 (POM model)",
    "build": "NONE",
    "build_url": "",
-   "build_checked": "2026-11-24T16:44:19Z"
+   "build_checked": "2026-11-24T17:56:36Z"
   },
   {
    "repo": "xenoterracide/base-template",
@@ -10828,7 +10828,7 @@
    "lastknown_version": "4.0.0-rc-7",
    "build": "FAILURE",
    "build_url": "https://github.com/mcc0nnell/jazzerlang/actions/runs/43162115512",
-   "build_checked": "2026-11-24T16:44:33Z",
+   "build_checked": "2026-11-24T17:56:47Z",
    "build_workflow": "Java 21 verification"
   },
   {
@@ -10867,7 +10867,7 @@
    "lastknown_version": "4.0.0-rc-7",
    "build": "NONE",
    "build_url": "",
-   "build_checked": "2026-11-24T16:44:27Z"
+   "build_checked": "2026-11-24T17:56:42Z"
   },
   {
    "repo": "GuicedEE/Website",
@@ -10893,7 +10893,7 @@
    "state": "active",
    "first_seen": "2026-11-24",
    "last_seen": "2026-11-24",
-   "last_checked": "2026-11-24T16:41:59Z",
+   "last_checked": "2026-11-24T17:56:08Z",
    "current_full_name": "JWebMP/TypescriptClient",
    "renamed_to": "",
    "stars": 0,
@@ -10905,7 +10905,7 @@
    "lastknown_version": "4.1.0 (POM model)",
    "build": "SUCCESS",
    "build_url": "https://github.com/JWebMP/TypescriptClient/actions/runs/45256553856",
-   "build_checked": "2026-11-24T16:44:18Z",
+   "build_checked": "2026-11-24T17:56:35Z",
    "build_workflow": "JWebMP Typescript Client"
   }
  ]
